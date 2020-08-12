@@ -1,0 +1,1275 @@
+openapi: "3.0.0"
+info:
+  version: 0.1.1
+  title: Common Mortgage API (Public)
+  description: 
+    This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
+  termsOfService: 'Tbd'
+  contact:
+    email: info@common-api.ch
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: mortgage.common-api.ch
+externalDocs:
+  description: Find out more about SFTI API specifications
+  url: 'https://www.common-api.ch'
+tags:
+  - name: Existing Mortgages
+    description: Operations related with existing mortgages
+  - name: Mortgage Products and Conditions
+    description: Operations for synchronizing general mortgage product information from an FI
+  - name: Mortgage Application
+    description: Operations needed to place an application (dossier) for a new mortgage
+  - name: Mortgage Financing Request
+    description: Operations for handling financing requests for a specific accepted application (dossier)
+  - name: Mortgage Offers
+    description: Operations for handling the binding offers an FI provides
+  - name: Mortgage Order
+    description: Operations for placing a binding order for a chosen offer
+  - name: Mortgage Prolongation
+    description: Operations for handling the common special case of prolonging an existing mortgage
+security:
+  - ApiKeyAuth: []
+  - OAuth2:
+      - read
+      - write
+paths:
+  /mortgages:
+    get:
+      tags: 
+        - Existing Mortgages
+      description: List of mortgages for the authenticated context including the corresponding properties and related mortgages.
+      summary: Return the list of all mortgages for the authenticated context
+      parameters:
+        - in: query
+          name: expiring
+          schema:
+            type: boolean
+          description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering)
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Maximum number of entries to be returned.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Start entry to be returned.
+      responses:
+        '200':
+          description: Paginated list of all mortgages with all related information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ExpiringMortgageList: 
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Mortgage'
+                  _links:
+                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+
+  /mortgages/{mortgageId}:
+    get:
+      tags:
+        - Existing Mortgages
+      description: A specific existing mortgage including the corresponding properties and related mortgages.
+      summary: Return a specific existing mortgage
+      parameters:
+        - name: mortgageId
+          in: path
+          description: ID of a specific existing mortgage
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Mortgage details with the corresponding properties and related mortgages.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Mortgage: 
+                    $ref: '#/components/schemas/Mortgage'
+                  _links:
+                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+
+  /mortgages/products:
+    get:
+      summary: Get a list of all mortgage products
+      description: Get a complete overview of all available mortgage products
+      tags:
+        - Mortgage Products and Conditions
+      parameters:
+        - in: query
+          name: interestRateType
+          schema:
+            type: string
+          description: The type of the interest rates (for filtering)
+        - in: query
+          name: interestBasis
+          schema:
+            type: string
+          description: The basis of the interest (for filtering)
+        - in: query
+          name: durationType
+          schema:
+            type: string
+          description: The type of duration (for filtering)
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Maximum number of entries to be returned.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Start entry to be returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productList: 
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  _links:
+                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+
+  /mortgages/products/{productId}/conditions:
+    get:
+      summary: Get the general conditions for the specified mortgage product
+      description: The standard financial conditions for the product
+      tags:
+        - Mortgage Products and Conditions
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: A product's unique ID
+        - in: query
+          name: duration
+          schema:
+            type: string
+          description: The duration (for filtering)
+        - in: query
+          name: interest
+          schema:
+            type: string
+          description: The interest (for filtering)
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Maximum number of entries to be returned.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Start entry to be returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conditionList: 
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Condition'
+                  _links:
+                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+
+  /mortgages/applications:
+    post:
+      summary: Place a new mortgage application (serves as dossier)
+      description: Place a new application including all necessary information about the property and applicant’s financial situation
+      tags:
+        - Mortgage Application
+      requestBody:
+        description: Static details (requesting party, property object) of the application to be added as a dossier
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '201':
+          description: created
+          headers:
+            location:
+              schema:
+                type: string
+                format: uri
+                description: link to the created resource
+                        
+  /mortgages/applications/{applicationId}:
+    get:
+      summary: Get the details of a specific placed application
+      description: Get the details of a specific placed application
+      tags:
+        - Mortgage Application
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  application:
+                    $ref: '#/components/schemas/Application'
+                  _links:
+                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+    put:
+      summary: Update the application’s details
+      description: Update the application’s details. Note that changing the application's details should not be possible after the application has been accepted by the FI.
+      tags:
+        - Mortgage Application
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+      requestBody:
+        description: Details of the order to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+    delete:
+      summary: Cancel the application and removing it
+      description: Cancel the application and removing it
+      tags:
+        - Mortgage Application
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+  /mortgages/applications/{applicationId}/swissrets:
+    post:
+      summary: Add property details in the SwissRETS standard
+      description: This endpoint allows to upload the real estate property's details as an XML file in the SwissRETS format according to https://swissrets.ch/ 
+      tags:
+        - Mortgage Application
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+      requestBody:
+        description: Details of the real estate property to be added
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: string
+      responses:
+        '201':
+          description: created
+          headers:
+            location:
+              schema:
+                type: string
+                format: uri
+                description: link to the created resource
+    get:
+      summary: Get property details in SwissRETS format
+      description: Get the real estate property's details in SwissRETS format XML according to https://swissrets.ch/
+      tags:
+        - Mortgage Application
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+      responses:
+        '200':
+          description: OK
+          content:
+            application/xml:
+              schema:
+                type: string
+    put:
+      summary: Update the real estate property's details
+      description: This endpoint allows to upload a modified XML file in the SwissRETS format changing the already existing information
+      tags:
+        - Mortgage Application
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+      requestBody:
+        description: Details of the real estate property to be added
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+  /mortgages/applications/{applicationId}/documents:
+    post:
+      summary: Add documents for the specific application
+      description: Add to a specific application’s documents
+      tags:
+        - Mortgage Application
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+      requestBody:
+        description: Details of the document to be added
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                filename:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: created
+          headers:
+            location:
+              schema:
+                type: string
+                format: uri
+                description: link to the created resource
+    get:
+      summary: Get submitted documents for a specifically placed application
+      description: Get a list of documents submitted for a specifically placed application
+      tags:
+        - Mortgage Application
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Maximum number of entries to be returned.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Start entry to be returned.
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    filename: 
+                      type: string
+                    filetype:
+                      type: string
+                    filesize:
+                      type: integer
+                    uploaddate:
+                      $ref: './commonDataModel.yaml#/components/schemas/Date'
+
+  /mortgages/applications/{applicationId}/documents/{documentId}:               
+    delete:
+      summary: Delete a formerly uploaded document
+      description: Deletes a specific document attached to a specific application. Note that deleting documents should not be possible after the application has been accepted by the FI.
+      tags:
+        - Mortgage Application
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application (dossier)
+        - in: path
+          name: documentId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the document
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+  
+  /mortgages/applications/{applicationId}/status:
+    get:
+      summary: Get the current status of the application 
+      description: Get the current status of the application (rejected with reason, accepted, pending with reason)
+      tags:
+        - Mortgage Application
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - accepted
+                      - rejected
+                      - pending
+                  detail:
+                    type: string                  
+  
+  /mortgages/applications/{applicationId}/financing-requests:
+    post:
+      summary: Place a new financing-request for a specific accepted application (dossier)
+      description: Place a new financing request including all necessary information
+      tags:
+        - Mortgage Financing Request
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+      requestBody:
+        description: Specific financing request fo the given application (dossier)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinancingRequest'
+      responses:
+        '201':
+          description: created
+          headers:
+            location:
+              schema:
+                type: string
+                format: uri
+                description: link to the created resource
+
+  /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers:
+    get:
+      summary: List all binding offers for a given financing request
+      description: List all binding offers for a given application
+      tags:
+        - Mortgage Offers
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Maximum number of entries to be returned.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Start entry to be returned.
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+        - in: path
+          name: financingRequestId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the financing request
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offerList: 
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Offer'
+                  _links:
+                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+  
+  /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}:
+    get:
+      summary: Get the details of a specific offer
+      description: Get the details of a specific offer for a specific placed application
+      tags:
+        - Mortgage Offers
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the application request
+        - in: path
+          name: financingRequestId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the financing request
+        - in: path
+          name: offerId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of the offer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offer:
+                    $ref: '#/components/schemas/Offer'
+                  _links:
+                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+  
+  /mortgages/orders:
+    post:
+      summary: Place a new order
+      description: Place a new order referencing a specific offerId and either an existing mortgage id (prolongation) or an application id (new mortgage) including all relevant information
+      tags:
+        - Mortgage Order
+      requestBody:
+        description: Details of the order to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: created
+          headers:
+            location:
+              schema:
+                type: string
+                format: uri
+                description: link to the created resource
+  
+  /mortgages/orders/{orderId}:
+    get:
+      summary: Get the details of a specific placed order
+      description: Get the details of a specific placed order
+      tags:
+        - Mortgage Order
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of an order
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offer:
+                    $ref: '#/components/schemas/Order'
+                  _links:
+                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+  
+  /mortgages/orders/{orderId}/status:
+    get:
+      summary: Get the current status of the order
+      description: Get the current status of the order (rejected with reason, accepted, pending with reason)
+      tags:
+        - Mortgage Order
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: string
+          required: true
+          description: Unique ID of an order
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - accepted
+                      - rejected
+                      - pending
+                  detail:
+                    type: string
+                    
+  /mortgages/{mortgageId}/offers:
+    get:
+      tags:
+        - Mortgage Prolongation
+      description: Get offer framework for the to be extended mortgage.
+      summary: Get all active offers for a specific tranche
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Maximum number of entries to be returned.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Optional parameter for pagination. Start entry to be returned.
+        - name: mortgageId
+          in: path
+          description: ID of a specific expiring mortgage
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Paginated list of all offers for a specific expiring mortgage
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offerList: 
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Offer'
+                  _links:
+                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+  
+  /mortgages/{mortgageId}/offers/{offerId}:
+    get:
+      tags:
+        - Mortgage Prolongation
+      description: Get a specific offer for the to be extended mortgage.
+      summary: Get a specific offer for a specific tranche
+      parameters:
+        - name: mortgageId
+          in: path
+          description: ID of a specific expiring mortgage
+          required: true
+          schema:
+            type: string
+        - name: offerId
+          in: path
+          description: ID of a specific mortgage prolongation offer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Specific offer for a specific expiring mortgage
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offer:
+                    $ref: '#/components/schemas/Offer'
+                  _links:
+                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                
+# -------------------------
+# -------- Models ---------
+# -------------------------
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+
+  schemas:
+    # ---- Property Object ----
+    PropertyObject:
+      description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law
+      type: object
+      required:
+        - propertyObjectId
+        - name
+        - address
+      properties:
+        propertyObjectId:
+          type: string
+        name:
+          type: string
+        objectType:
+          type: string
+          enum:
+          - apartment
+          - house
+          - garage
+          - other
+        #### At the moment we consider only mortgages for self-occupied real estate
+        #usageType:
+        #  type: string
+        address:
+          $ref: './commonDataModel.yaml#/components/schemas/Address'
+        propertyIdentifier:
+          $ref: '#/components/schemas/PropertyIdentifier'
+        luxuryLevel:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+        landArea:
+          type: integer
+        netDwellingArea:
+          type: integer
+        volume:
+          type: object
+          properties:
+            amount: 
+              type: integer
+            standard:
+              type: string
+              #enum:
+              # what standards are considered?
+        buildYear:
+          type: integer
+        lastRenovationYear:
+          type: integer
+        buildingCondition: # Range?
+          type: integer
+        buildingQuality: # Range?
+          type: integer
+        rooms:
+          type: number
+        roomCountingStrategy:
+          type: string
+        bathRooms:
+          type: integer
+        closets:
+          type: integer
+        parkingLots:
+          type: integer
+        undergroundParkingLots:
+          type: integer
+        dedicatedGarages:
+          type: integer
+        minergieStandard:
+          type: string
+          #enum: 
+          # values?
+        valueRelevantServitudes:
+          type: string
+        objectPrice:
+          type: integer
+        purchaseDate:
+          $ref: './commonDataModel.yaml#/components/schemas/Date'
+        remarks:
+          type: string
+    # ---------
+    
+    # ---- Property Identifier ----
+    PropertyIdentifier:
+      description: Property identification (register of real estate)
+      type: object
+      properties:
+        EGRID:
+          type: string
+        EGID:
+          type: string 
+    # ---------
+
+    # ---- Mortgage ----
+    Mortgage:
+      description: All relevant information regarding a specific mortgage
+      type: object
+      required:
+        - mortgageId
+        - product
+        - amountAtExpiry
+        - validFrom
+        - validTo
+        - interestRate
+        - interestRateType
+        - interestBasis
+        - durationType
+        - prolongable
+        - propertyObjects
+        - linkRef
+      properties:
+        mortgageId:
+          type: string
+        product:
+          $ref: '#/components/schemas/Product'
+        amountAtExpiry:
+          $ref: './commonDataModel.yaml#/components/schemas/Amount'
+        amountToday:
+          $ref: './commonDataModel.yaml#/components/schemas/Amount'
+        validFrom:
+          $ref: './commonDataModel.yaml#/components/schemas/Date'
+        validTo:
+          $ref: './commonDataModel.yaml#/components/schemas/Date'
+        interestRate:
+          type: string
+        interestRateType:
+          type: string
+        interestBasis:
+          type: string
+        durationType:
+          type: string
+        prolongable:
+          type: boolean
+        propertyObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyObject'
+        relatedMortgages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Mortgage'
+        linkRef:
+          type: string   
+    # ---------
+    
+    # ---- Mortgage Offer ----
+    Offer:
+      description: All relevant details describing the FI's offer for a mortgage product
+      type: object
+      required:
+        - offerId
+        - financingRequestIdRef
+        - totalAmount
+        - validTo
+        - offerItems
+        - linkRef
+      properties:
+        offerId:
+          type: string
+        financingRequestIdRef:
+          type: string
+        totalAmount:
+          $ref: './commonDataModel.yaml#/components/schemas/Amount'
+        validTo:
+          $ref: './commonDataModel.yaml#/components/schemas/Date'
+        offerItems: 
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferItem'
+        linkRef:
+          type: string
+    # ---------
+
+    # ---- Mortgage Offer Item ----
+    OfferItem:
+      description: All relevant details of a specific item being part of an FI's offer for a mortgage product
+      type: object
+      required:
+        - offerItemId
+        - product
+        - conditions
+      properties:
+        offerItemId:
+          type: string
+        product:
+          $ref: '#/components/schemas/Product'
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+    # ---------
+
+    # ---- Mortgage Product ----
+    Product:
+      description: All details regarding an FI's mortgage product
+      type: object
+      required:
+        - productId
+        - name
+        - interestRateType
+        - interestBasis
+        - durationType
+      properties:
+        productId:
+          type: string
+        name:
+          type: string
+        interestRateType:
+          type: string
+        interestBasis:
+          type: string
+        durationType:
+          type: string
+    # ---------
+
+    # ---- Mortgage Product Condition ----
+    Condition:
+      description: All details regarding the conditions for a specific mortgage product the FI offers
+      type: object
+      required:
+        - conditionId
+        - productIdRef
+        - duration
+        - maturityDate
+        - interest
+        - amountRange
+        - increment
+      properties:
+        conditionId:
+          type: string
+        productIdRef: 
+          type: string
+        duration:
+          type: string
+        maturityDate:
+          $ref: './commonDataModel.yaml#/components/schemas/Date'
+        interest:
+          $ref: '#/components/schemas/Interest'
+        amountRange:
+          $ref: '#/components/schemas/AmountRange'
+        increment:
+          type: integer
+    # ---------
+
+    # ---- Party ----
+    Party:
+      description: Links together the persons building the applicant party
+      type: object
+      required:
+        - personList
+      properties:
+        personList:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/Applicant'
+    # ---------
+
+    # ---- Application ----
+    Application:
+      description: All static application information needed by the FI to create binding offers
+      type: object
+      required:
+        - applicationId
+        - requestingParty
+        - propertyInformation
+      properties:
+        applicationId:
+          type: string
+        requestingParty:
+          $ref: '#/components/schemas/Party'
+        propertyInformation:
+          $ref: '#/components/schemas/PropertyObject'
+    # ---------
+
+    # ---- Financing Request ----
+    FinancingRequest:
+      description: Based on the application, several financing requests can be sent to the FI
+      type: object
+      required:
+        - financingRequestId
+        - applicationIdRef
+        - amount
+      properties:
+        financingRequestId:
+          type: string
+        applicationIdRef:
+          type: string
+        amount:
+          $ref: './commonDataModel.yaml#/components/schemas/Amount'
+        tranches:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: integer
+              amount:
+                $ref: './commonDataModel.yaml#/components/schemas/Amount'
+        usedAssets:
+          type: object
+          properties:
+            amountTotal:
+              type: integer
+            amountPledged:
+              type: integer
+        payOutDate:
+          $ref: './commonDataModel.yaml#/components/schemas/Date'
+        publicCertDate:
+          $ref: './commonDataModel.yaml#/components/schemas/Date'
+    # ---------
+
+    # ---- Applicant ----
+    Applicant:
+      description: Applicant information needed by the FI for creating a binding offer
+      type: object
+      required:
+        - applicantType
+        - applicantDetail
+      properties:
+        applicantType:
+          type: string
+          enum:
+          - individual
+          - legal entity
+        applicantDetail:
+          type: object
+          properties:
+            name:
+              type: string
+              maxLength: 70
+            surName:
+              type: string
+              maxLength: 70
+            address:
+              $ref: './commonDataModel.yaml#/components/schemas/Address'
+            birthDate:
+              $ref: './commonDataModel.yaml#/components/schemas/Date'
+            maritalStatus:
+              type: string
+              enum:
+              - unmarried
+              - married
+              - divorced
+              - widowed
+            matrimonialPropertyScheme:
+              type: string
+              enum:
+              - jointEstate
+              - separateEstate
+              - contributionToJointlyAcquiredProperty
+            jobSituation:
+              type: string
+              enum:
+              - employed
+              - selfEmployed
+              - unemployed
+              - retired
+            nationality:
+              $ref: './commonDataModel.yaml#/components/schemas/Country'
+            USPerson:
+              type: boolean
+            email:
+              type: string
+            applicantLanguage:
+              type: string
+              enum:
+              - de
+              - fr
+              - it
+              - en
+        financialSituation:
+          type: object
+          properties:
+            income:
+              type: array
+              items:
+                type: object
+                properties:
+                  incomeType:
+                    type: string
+                    enum:
+                    - salary
+                    - pension
+                    - alimony
+                    - rent
+                    - other
+                  amount:
+                    $ref: './commonDataModel.yaml#/components/schemas/Amount'
+                  remark:
+                    type: string
+            ######## Special case for applicants running into retirement age: Postponed for the moment
+            #estimatedRetirementIncome:
+            #  $ref: './commonDataModel.yaml#/components/schemas/Amount'
+            liabilities:
+              type: array
+              items:
+                type: object
+                properties:
+                  liabilityType:
+                    type: string
+                    enum:
+                    - leasing
+                    - alimony
+                    - mortgage
+                    - other
+                  amount:
+                    $ref: './commonDataModel.yaml#/components/schemas/Amount'
+                  remark:
+                    type: string
+            assets:
+              type: array
+              items:
+                type: object
+                properties:
+                  assetCategory:
+                    type: string
+                    enum:
+                    - cash
+                    - thirdPillar
+                    - pensionFund
+                    - fungibleInvestments
+                    - other
+                  valuation:
+                    $ref: './commonDataModel.yaml#/components/schemas/Amount'  
+    # ---------
+
+    # ---- Order ----
+    Order:
+      description: All information needed to choose a specific offer and place a binding order. If it is a prolongation, then the mortgageId of the expiring mortgage must be referenced. Otherwise the applicationId of the application for a new mortgage. Note that the prolongation use case can also be handled by the new mortgage use case (special case).
+      type: object
+      required:
+        - offerId
+        - amount
+        - offeredInterest
+      properties:
+        offerId:
+          type: string
+        mortgageId:
+          type: string
+        applicationId:
+          type: string
+        amount:
+          $ref: './commonDataModel.yaml#/components/schemas/Amount'
+        offeredInterest:
+          $ref: '#/components/schemas/Interest'
+        validateOnly:
+          type: boolean
+        status:
+          type: string
+    # ---------
+
+    # ---- AmountRange ----
+    AmountRange:
+      description: Min and max amount with currency
+      type: object
+      required:
+        - currency
+        - minContent
+        - maxContent
+      properties:
+        currency:
+          $ref: './commonDataModel.yaml#/components/schemas/Currency'
+        minContent:
+          description: min amount given with fractional digits, the separator is a dot
+          type: string
+          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+        maxContent:
+          description: max amount given with fractional digits, the separator is a dot
+          type: string
+          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+    # ---------
+
+    # ---- Interest ----
+    Interest:
+      description: The current rate and optionally the referred base
+      type: object
+      required:
+        - currentRate
+      properties:
+        currentRate:
+          type: string
+        base:
+          type: string
+    # ---------
+  
