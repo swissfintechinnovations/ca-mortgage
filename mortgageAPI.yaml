@@ -789,122 +789,122 @@ components:
 
   schemas:
     # ---- Common Data Model v1.2.0
-      # ---- Date Formats
-      Date:
-        type: string
-        format: date
-        example: 2018-04-13
+    # ---- Date Formats
+    Date:
+      type: string
+      format: date
+      example: 2018-04-13
         
-      DateTime:
-        type: string
-        format: date-time
-        example: 2018-04-13T11:11:11Z
-      # --------
-      # ---- Links ----
-      Links:
-        description: links returned in the answer of an API call
-        type: object
-        properties:
-          self:
-            type: string
-          first:
-            type: string
-          previous:
-            type: string
-          next:
-            type: string
-          last:
-            type: string 
-      # ---------
-      # ---- Currency ----
-      Currency:
-        description: ISO 4217 code
-        type: string
-        pattern: '[A-Z]{3}'
-      # ---------
-      # ---- Amount ----
-      Amount:
-        description: amount with currency
-        type: object
-        required:
-          - currency
-          - content
-        properties:
-          currency:
-            $ref: '#/components/schemas/Currency'
-          content:
-            description: amount given with fractional digits, the separator is a dot
-            type: string
-            pattern: '-?\d{1,14}(?:\.\d{1,3})?'
-      # --------
-      # ---- Address compliant to payment address (b.Link & ISO20022)----
-      structuredAddress:
-        title: Structured Address
-        type: object
-        required:
-          - streetName
-          - postCode
-          - townName
-          - country
-        properties:
-          streetName:
+    DateTime:
+      type: string
+      format: date-time
+      example: 2018-04-13T11:11:11Z
+    # --------
+    # ---- Links ----
+    Links:
+      description: links returned in the answer of an API call
+      type: object
+      properties:
+        self:
+          type: string
+        first:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        last:
+          type: string 
+    # ---------
+    # ---- Currency ----
+    Currency:
+      description: ISO 4217 code
+      type: string
+      pattern: '[A-Z]{3}'
+    # ---------
+    # ---- Amount ----
+    Amount:
+      description: amount with currency
+      type: object
+      required:
+        - currency
+        - content
+      properties:
+        currency:
+          $ref: '#/components/schemas/Currency'
+        content:
+          description: amount given with fractional digits, the separator is a dot
+          type: string
+          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+    # --------
+    # ---- Address compliant to payment address (b.Link & ISO20022)----
+    structuredAddress:
+      title: Structured Address
+      type: object
+      required:
+        - streetName
+        - postCode
+        - townName
+        - country
+      properties:
+        streetName:
+          type: string
+          maxLength: 70
+          example: "Rue de la gare"
+        buildingNumber:
+          type: string
+          maxLength: 16
+          example: "24"
+        postCode:
+          type: string
+          maxLength: 16
+          example: "2501"
+        townName:
+          type: string
+          maxLength: 35
+          example: "Biel"
+        country:
+          type: string
+          maxLength: 2
+          example: "CH"
+
+    unstructuredAddress:
+      title: Unstructured Address
+      type: object
+      required:
+        - addressLines
+        - country
+      properties:
+        addressLines:
+          type: array
+          description: max 2 lines of 70 characters
+          maxLength: 2
+          example: ["Robert Schneider SA", "Rue de la gare 24"]
+          items:
             type: string
             maxLength: 70
-            example: "Rue de la gare"
-          buildingNumber:
-            type: string
-            maxLength: 16
-            example: "24"
-          postCode:
-            type: string
-            maxLength: 16
-            example: "2501"
-          townName:
-            type: string
-            maxLength: 35
-            example: "Biel"
-          country:
-            type: string
-            maxLength: 2
-            example: "CH"
+        country:
+          type: string
+          maxLength: 2
+          example: "CH"
 
-      unstructuredAddress:
-        title: Unstructured Address
-        type: object
-        required:
-          - addressLines
-          - country
-        properties:
-          addressLines:
-            type: array
-            description: max 2 lines of 70 characters
-            maxLength: 2
-            example: ["Robert Schneider SA", "Rue de la gare 24"]
-            items:
-              type: string
-              maxLength: 70
-          country:
-            type: string
-            maxLength: 2
-            example: "CH"
-
-      structuredOrUnstructuredAddress:
-        title: Structured or Unstructured Address
-        description: Either structured or unstructered must be set
-        type: object
-        properties:
-          structured:
-            $ref: '#/components/schemas/structuredAddress'
-          unstructured:
-            $ref: '#/components/schemas/unstructuredAddress'
-      # -----------
-      # ---- Country Code ----
-      Country:
-        type: string
-        pattern: '[A-Z]{2}'
-        example: CH
-        description: 2-Letter ISO 3166-2 Country Code
-      # ------------
+    structuredOrUnstructuredAddress:
+      title: Structured or Unstructured Address
+      description: Either structured or unstructered must be set
+      type: object
+      properties:
+        structured:
+          $ref: '#/components/schemas/structuredAddress'
+        unstructured:
+          $ref: '#/components/schemas/unstructuredAddress'
+    # -----------
+    # ---- Country Code ----
+    Country:
+      type: string
+      pattern: '[A-Z]{2}'
+      example: CH
+      description: 2-Letter ISO 3166-2 Country Code
+    # ------------
     # ---- End Common Data Model
 
     # ---- Property Object ----
