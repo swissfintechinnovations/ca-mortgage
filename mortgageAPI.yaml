@@ -71,7 +71,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Mortgage'
                   _links:
-                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                    $ref: '#/components/schemas/Links'
 
   /mortgages/{mortgageId}:
     get:
@@ -97,7 +97,7 @@ paths:
                   Mortgage: 
                     $ref: '#/components/schemas/Mortgage'
                   _links:
-                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                    $ref: '#/components/schemas/Links'
 
   /mortgages/products:
     get:
@@ -144,7 +144,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Product'
                   _links:
-                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                    $ref: '#/components/schemas/Links'
 
   /mortgages/products/{productId}/conditions:
     get:
@@ -192,7 +192,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Condition'
                   _links:
-                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                    $ref: '#/components/schemas/Links'
 
   /mortgages/applications:
     post:
@@ -241,7 +241,7 @@ paths:
                   application:
                     $ref: '#/components/schemas/Application'
                   _links:
-                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                    $ref: '#/components/schemas/Links'
     put:
       summary: Update the application’s details
       description: Update the application’s details. Note that changing the application's details should not be possible after the application has been accepted by the FI.
@@ -444,7 +444,7 @@ paths:
                     filesize:
                       type: integer
                     uploaddate:
-                      $ref: './commonDataModel.yaml#/components/schemas/Date'
+                      $ref: '#/components/schemas/Date'
 
   /mortgages/applications/{applicationId}/documents/{documentId}:               
     delete:
@@ -578,7 +578,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Offer'
                   _links:
-                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                    $ref: '#/components/schemas/Links'
   
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}:
     get:
@@ -616,7 +616,7 @@ paths:
                   offer:
                     $ref: '#/components/schemas/Offer'
                   _links:
-                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                    $ref: '#/components/schemas/Links'
   
   /mortgages/orders:
     post:
@@ -665,7 +665,7 @@ paths:
                   offer:
                     $ref: '#/components/schemas/Order'
                   _links:
-                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                    $ref: '#/components/schemas/Links'
   
   /mortgages/orders/{orderId}/status:
     get:
@@ -733,7 +733,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Offer'
                   _links:
-                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                    $ref: '#/components/schemas/Links'
   
   /mortgages/{mortgageId}/offers/{offerId}:
     get:
@@ -765,7 +765,7 @@ paths:
                   offer:
                     $ref: '#/components/schemas/Offer'
                   _links:
-                    $ref: './commonDataModel.yaml#/components/schemas/Links'
+                    $ref: '#/components/schemas/Links'
                 
 # -------------------------
 # -------- Models ---------
@@ -788,6 +788,125 @@ components:
             write: Grants write access
 
   schemas:
+    # ---- Common Data Model v1.2.0
+      # ---- Date Formats
+      Date:
+        type: string
+        format: date
+        example: 2018-04-13
+        
+      DateTime:
+        type: string
+        format: date-time
+        example: 2018-04-13T11:11:11Z
+      # --------
+      # ---- Links ----
+      Links:
+        description: links returned in the answer of an API call
+        type: object
+        properties:
+          self:
+            type: string
+          first:
+            type: string
+          previous:
+            type: string
+          next:
+            type: string
+          last:
+            type: string 
+      # ---------
+      # ---- Currency ----
+      Currency:
+        description: ISO 4217 code
+        type: string
+        pattern: '[A-Z]{3}'
+      # ---------
+      # ---- Amount ----
+      Amount:
+        description: amount with currency
+        type: object
+        required:
+          - currency
+          - content
+        properties:
+          currency:
+            $ref: '#/components/schemas/Currency'
+          content:
+            description: amount given with fractional digits, the separator is a dot
+            type: string
+            pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+      # --------
+      # ---- Address compliant to payment address (b.Link & ISO20022)----
+      structuredAddress:
+        title: Structured Address
+        type: object
+        required:
+          - streetName
+          - postCode
+          - townName
+          - country
+        properties:
+          streetName:
+            type: string
+            maxLength: 70
+            example: "Rue de la gare"
+          buildingNumber:
+            type: string
+            maxLength: 16
+            example: "24"
+          postCode:
+            type: string
+            maxLength: 16
+            example: "2501"
+          townName:
+            type: string
+            maxLength: 35
+            example: "Biel"
+          country:
+            type: string
+            maxLength: 2
+            example: "CH"
+
+      unstructuredAddress:
+        title: Unstructured Address
+        type: object
+        required:
+          - addressLines
+          - country
+        properties:
+          addressLines:
+            type: array
+            description: max 2 lines of 70 characters
+            maxLength: 2
+            example: ["Robert Schneider SA", "Rue de la gare 24"]
+            items:
+              type: string
+              maxLength: 70
+          country:
+            type: string
+            maxLength: 2
+            example: "CH"
+
+      structuredOrUnstructuredAddress:
+        title: Structured or Unstructured Address
+        description: Either structured or unstructered must be set
+        type: object
+        properties:
+          structured:
+            $ref: '#/components/schemas/structuredAddress'
+          unstructured:
+            $ref: '#/components/schemas/unstructuredAddress'
+      # -----------
+      # ---- Country Code ----
+      Country:
+        type: string
+        pattern: '[A-Z]{2}'
+        example: CH
+        description: 2-Letter ISO 3166-2 Country Code
+      # ------------
+    # ---- End Common Data Model
+
     # ---- Property Object ----
     PropertyObject:
       description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law
@@ -812,7 +931,7 @@ components:
         #usageType:
         #  type: string
         address:
-          $ref: './commonDataModel.yaml#/components/schemas/Address'
+          $ref: '#/components/schemas/structuredAddress'
         propertyIdentifier:
           $ref: '#/components/schemas/PropertyIdentifier'
         luxuryLevel:
@@ -864,7 +983,7 @@ components:
         objectPrice:
           type: integer
         purchaseDate:
-          $ref: './commonDataModel.yaml#/components/schemas/Date'
+          $ref: '#/components/schemas/Date'
         remarks:
           type: string
     # ---------
@@ -903,13 +1022,13 @@ components:
         product:
           $ref: '#/components/schemas/Product'
         amountAtExpiry:
-          $ref: './commonDataModel.yaml#/components/schemas/Amount'
+          $ref: '#/components/schemas/Amount'
         amountToday:
-          $ref: './commonDataModel.yaml#/components/schemas/Amount'
+          $ref: '#/components/schemas/Amount'
         validFrom:
-          $ref: './commonDataModel.yaml#/components/schemas/Date'
+          $ref: '#/components/schemas/Date'
         validTo:
-          $ref: './commonDataModel.yaml#/components/schemas/Date'
+          $ref: '#/components/schemas/Date'
         interestRate:
           type: string
         interestRateType:
@@ -949,9 +1068,9 @@ components:
         financingRequestIdRef:
           type: string
         totalAmount:
-          $ref: './commonDataModel.yaml#/components/schemas/Amount'
+          $ref: '#/components/schemas/Amount'
         validTo:
-          $ref: './commonDataModel.yaml#/components/schemas/Date'
+          $ref: '#/components/schemas/Date'
         offerItems: 
           type: array
           items:
@@ -1022,7 +1141,7 @@ components:
         duration:
           type: string
         maturityDate:
-          $ref: './commonDataModel.yaml#/components/schemas/Date'
+          $ref: '#/components/schemas/Date'
         interest:
           $ref: '#/components/schemas/Interest'
         amountRange:
@@ -1076,7 +1195,7 @@ components:
         applicationIdRef:
           type: string
         amount:
-          $ref: './commonDataModel.yaml#/components/schemas/Amount'
+          $ref: '#/components/schemas/Amount'
         tranches:
           type: array
           items:
@@ -1085,7 +1204,7 @@ components:
               productId:
                 type: integer
               amount:
-                $ref: './commonDataModel.yaml#/components/schemas/Amount'
+                $ref: '#/components/schemas/Amount'
         usedAssets:
           type: object
           properties:
@@ -1094,9 +1213,9 @@ components:
             amountPledged:
               type: integer
         payOutDate:
-          $ref: './commonDataModel.yaml#/components/schemas/Date'
+          $ref: '#/components/schemas/Date'
         publicCertDate:
-          $ref: './commonDataModel.yaml#/components/schemas/Date'
+          $ref: '#/components/schemas/Date'
     # ---------
 
     # ---- Applicant ----
@@ -1122,9 +1241,9 @@ components:
               type: string
               maxLength: 70
             address:
-              $ref: './commonDataModel.yaml#/components/schemas/Address'
+              $ref: '#/components/schemas/structuredAddress'
             birthDate:
-              $ref: './commonDataModel.yaml#/components/schemas/Date'
+              $ref: '#/components/schemas/Date'
             maritalStatus:
               type: string
               enum:
@@ -1146,7 +1265,7 @@ components:
               - unemployed
               - retired
             nationality:
-              $ref: './commonDataModel.yaml#/components/schemas/Country'
+              $ref: '#/components/schemas/Country'
             USPerson:
               type: boolean
             email:
@@ -1175,12 +1294,12 @@ components:
                     - rent
                     - other
                   amount:
-                    $ref: './commonDataModel.yaml#/components/schemas/Amount'
+                    $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
             ######## Special case for applicants running into retirement age: Postponed for the moment
             #estimatedRetirementIncome:
-            #  $ref: './commonDataModel.yaml#/components/schemas/Amount'
+            #  $ref: '#/components/schemas/Amount'
             liabilities:
               type: array
               items:
@@ -1194,7 +1313,7 @@ components:
                     - mortgage
                     - other
                   amount:
-                    $ref: './commonDataModel.yaml#/components/schemas/Amount'
+                    $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
             assets:
@@ -1211,7 +1330,7 @@ components:
                     - fungibleInvestments
                     - other
                   valuation:
-                    $ref: './commonDataModel.yaml#/components/schemas/Amount'  
+                    $ref: '#/components/schemas/Amount'  
     # ---------
 
     # ---- Order ----
@@ -1230,7 +1349,7 @@ components:
         applicationId:
           type: string
         amount:
-          $ref: './commonDataModel.yaml#/components/schemas/Amount'
+          $ref: '#/components/schemas/Amount'
         offeredInterest:
           $ref: '#/components/schemas/Interest'
         validateOnly:
@@ -1249,7 +1368,7 @@ components:
         - maxContent
       properties:
         currency:
-          $ref: './commonDataModel.yaml#/components/schemas/Currency'
+          $ref: '#/components/schemas/Currency'
         minContent:
           description: min amount given with fractional digits, the separator is a dot
           type: string
