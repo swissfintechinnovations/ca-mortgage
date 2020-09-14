@@ -41,7 +41,7 @@ paths:
     get:
       tags: 
         - Existing Mortgages
-      description: List of mortgages for the authenticated context including the corresponding properties and related mortgages.
+      description: List of mortgages for the authenticated context including the corresponding properties and related mortgages, sorted by mortgageId.
       summary: Return the list of all mortgages for the authenticated context
       parameters:
         - in: query
@@ -61,13 +61,13 @@ paths:
           description: Optional parameter for pagination. Start entry to be returned.
       responses:
         '200':
-          description: Paginated list of all mortgages with all related information
+          description: Paginated list of all mortgages with all related information sorted by mortgageId
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  ExpiringMortgageList: 
+                  MortgageList: 
                     type: array
                     items:
                       $ref: '#/components/schemas/Mortgage'
@@ -114,8 +114,6 @@ paths:
                 properties:
                   Mortgage: 
                     $ref: '#/components/schemas/Mortgage'
-                  _links:
-                    $ref: '#/components/schemas/Links'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -136,7 +134,7 @@ paths:
   /mortgages/products:
     get:
       summary: Get a list of all mortgage products
-      description: Get a complete overview of all available mortgage products
+      description: Get a complete overview of all available mortgage products sorted by productId
       tags:
         - Mortgage Products and Conditions
       parameters:
@@ -144,6 +142,11 @@ paths:
           name: interestRateType
           schema:
             type: string
+            enum:
+              - variable
+              - libor
+              - saron
+              - fixed
           description: The type of the interest rates (for filtering)
         - in: query
           name: interestBasis
@@ -153,7 +156,9 @@ paths:
         - in: query
           name: durationType
           schema:
-            type: string
+            type: integer
+            minimum: 1
+            maximum: 20
           description: The type of duration (for filtering)
         - in: query
           name: limit
@@ -167,7 +172,7 @@ paths:
           description: Optional parameter for pagination. Start entry to be returned.
       responses:
         '200':
-          description: OK
+          description: Paginated list of all mortgage products with all related information sorted by productId
           content:
             application/json:
               schema:
@@ -220,19 +225,9 @@ paths:
           schema:
             type: string
           description: The interest (for filtering)
-        - in: query
-          name: limit
-          schema:
-            type: integer
-          description: Optional parameter for pagination. Maximum number of entries to be returned.
-        - in: query
-          name: offset
-          schema:
-            type: integer
-          description: Optional parameter for pagination. Start entry to be returned.
       responses:
         '200':
-          description: OK
+          description: List of conditions related to a specific mortgage product.
           content:
             application/json:
               schema:
@@ -242,8 +237,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Condition'
-                  _links:
-                    $ref: '#/components/schemas/Links'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -260,7 +253,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-
+          
 
   /mortgages/applications:
     post:
@@ -284,6 +277,37 @@ paths:
                 type: string
                 format: uri
                 description: link to the created resource
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+  
+  /mortgages/applications/required-information:
+    get:
+      summary: Get the required property information for the specific FI needed for valuation
+      description: Show the subset of property details required by the FI for valuation
+      tags:
+        - Mortgage Application
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/PropertyObject'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -325,8 +349,6 @@ paths:
                 properties:
                   application:
                     $ref: '#/components/schemas/Application'
-                  _links:
-                    $ref: '#/components/schemas/Links'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -608,21 +630,11 @@ paths:
           $ref: '#/components/responses/standard503'
 
     get:
-      summary: Get submitted documents for a specifically placed application
+      summary: Get a list of submitted documents for a specifically placed application
       description: Get a list of documents submitted for a specifically placed application
       tags:
         - Mortgage Application
       parameters:
-        - in: query
-          name: limit
-          schema:
-            type: integer
-          description: Optional parameter for pagination. Maximum number of entries to be returned.
-        - in: query
-          name: offset
-          schema:
-            type: integer
-          description: Optional parameter for pagination. Start entry to be returned.
         - in: path
           name: applicationId
           schema:
@@ -810,16 +822,6 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - in: query
-          name: limit
-          schema:
-            type: integer
-          description: Optional parameter for pagination. Maximum number of entries to be returned.
-        - in: query
-          name: offset
-          schema:
-            type: integer
-          description: Optional parameter for pagination. Start entry to be returned.
         - in: path
           name: applicationId
           schema:
@@ -844,8 +846,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Offer'
-                  _links:
-                    $ref: '#/components/schemas/Links'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -862,6 +862,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}:
     get:
@@ -898,8 +899,6 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
-                  _links:
-                    $ref: '#/components/schemas/Links'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -916,6 +915,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   
   /mortgages/orders:
     post:
@@ -979,8 +979,6 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Order'
-                  _links:
-                    $ref: '#/components/schemas/Links'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -997,6 +995,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   
   /mortgages/orders/{orderId}/status:
     get:
@@ -1051,16 +1050,6 @@ paths:
       description: Get offer framework for the to be extended mortgage.
       summary: Get all active offers for a specific tranche
       parameters:
-        - in: query
-          name: limit
-          schema:
-            type: integer
-          description: Optional parameter for pagination. Maximum number of entries to be returned.
-        - in: query
-          name: offset
-          schema:
-            type: integer
-          description: Optional parameter for pagination. Start entry to be returned.
         - name: mortgageId
           in: path
           description: ID of a specific expiring mortgage
@@ -1079,8 +1068,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Offer'
-                  _links:
-                    $ref: '#/components/schemas/Links'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1097,6 +1084,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   
   /mortgages/{mortgageId}/offers/{offerId}:
     get:
@@ -1127,8 +1115,6 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
-                  _links:
-                    $ref: '#/components/schemas/Links'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1453,10 +1439,17 @@ components:
           type: string
         interestRateType:
           type: string
+          enum:
+            - variable
+            - libor
+            - saron
+            - fixed
         interestBasis:
           type: string
         durationType:
-          type: string
+          type: integer
+          minimum: 1
+          maximum: 20
         prolongable:
           type: boolean
         propertyObjects:
@@ -1535,10 +1528,17 @@ components:
           type: string
         interestRateType:
           type: string
+          enum:
+            - variable
+            - libor
+            - saron
+            - fixed
         interestBasis:
           type: string
         durationType:
-          type: string
+          type: integer
+          minimum: 1
+          maximum: 20
     # ---------
 
     # ---- Mortgage Product Condition ----
@@ -1808,8 +1808,10 @@ components:
       properties:
         currentRate:
           type: string
+          pattern: '-?\d{1,3}(?:\.\d{1,3})?'
         base:
           type: string
+          pattern: '-?\d{1,3}(?:\.\d{1,3})?'
     # ---------
   # ---- Responses - Standard Errors Common Data Model v1.2.1----
   responses:
