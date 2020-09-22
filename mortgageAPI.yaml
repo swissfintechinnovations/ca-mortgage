@@ -1,10 +1,10 @@
 openapi: "3.0.0"
 info:
-  version: 0.1.2
+  version: 0.1.3
   title: Common Mortgage API (Public)
   description: 
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
-    This specification uses schema definitions from the Common Data Model v1.2.1.
+    This specification uses schema definitions from the Common Data Model v1.2.2.
   termsOfService: 'Tbd'
   contact:
     email: info@common-api.ch
@@ -48,16 +48,19 @@ paths:
           name: expiring
           schema:
             type: boolean
+          example: true
           description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering)
         - in: query
           name: limit
           schema:
             type: integer
+          example: 25
           description: Optional parameter for pagination. Maximum number of entries to be returned.
         - in: query
           name: offset
           schema:
             type: integer
+          example: 26
           description: Optional parameter for pagination. Start entry to be returned.
       responses:
         '200':
@@ -102,6 +105,7 @@ paths:
           in: path
           description: ID of a specific existing mortgage
           required: true
+          example: bankx-mortgage-234434
           schema:
             type: string
       responses:
@@ -142,6 +146,7 @@ paths:
           name: interestRateType
           schema:
             type: string
+            example: saron
             enum:
               - variable
               - libor
@@ -159,16 +164,19 @@ paths:
             type: integer
             minimum: 1
             maximum: 20
+          example: 10
           description: The type of duration (for filtering)
         - in: query
           name: limit
           schema:
             type: integer
+          example: 25
           description: Optional parameter for pagination. Maximum number of entries to be returned.
         - in: query
           name: offset
           schema:
             type: integer
+          example: 26
           description: Optional parameter for pagination. Start entry to be returned.
       responses:
         '200':
@@ -214,6 +222,7 @@ paths:
           schema:
             type: string
           required: true
+          example: bankx-product-234
           description: A product's unique ID
         - in: query
           name: duration
@@ -338,6 +347,7 @@ paths:
           schema:
             type: string
           required: true
+          example: bankx-applicationreq-465234
           description: Unique ID of the application request
       responses:
         '200':
@@ -377,6 +387,7 @@ paths:
           schema:
             type: string
           required: true
+          example: bankx-applicationreq-465234
           description: Unique ID of the application request
       requestBody:
         description: Details of the order to be added
@@ -423,6 +434,7 @@ paths:
           schema:
             type: string
           required: true
+          example: bankx-applicationreq-465234
           description: Unique ID of the application request
       responses:
         '200':
@@ -464,6 +476,7 @@ paths:
           schema:
             type: string
           required: true
+          example: bankx-applicationreq-465234
           description: Unique ID of the application request
       requestBody:
         description: Details of the real estate property to be added
@@ -508,6 +521,7 @@ paths:
           name: applicationId
           schema:
             type: string
+          example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
       responses:
@@ -544,6 +558,7 @@ paths:
           schema:
             type: string
           required: true
+          example: bankx-applicationreq-465234
           description: Unique ID of the application request
       requestBody:
         description: Details of the real estate property to be added
@@ -591,6 +606,7 @@ paths:
           schema:
             type: string
           required: true
+          example: bankx-applicationreq-465234
           description: Unique ID of the application request
       requestBody:
         description: Details of the document to be added
@@ -639,6 +655,7 @@ paths:
           name: applicationId
           schema:
             type: string
+          example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
       responses:
@@ -688,12 +705,14 @@ paths:
           name: applicationId
           schema:
             type: string
+          example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application (dossier)
         - in: path
           name: documentId
           schema:
             type: string
+          example: bankx-application-document-3445
           required: true
           description: Unique ID of the document
       responses:
@@ -734,6 +753,7 @@ paths:
           name: applicationId
           schema:
             type: string
+          example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
       responses:
@@ -750,8 +770,10 @@ paths:
                       - accepted
                       - rejected
                       - pending
+                    example: pending
                   detail:
                     type: string
+                    example: Waiting for details
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -780,6 +802,7 @@ paths:
           name: applicationId
           schema:
             type: string
+          example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
       requestBody:
@@ -826,12 +849,14 @@ paths:
           name: applicationId
           schema:
             type: string
+          example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
         - in: path
           name: financingRequestId
           schema:
             type: string
+          example: bankx-financingreq-35623
           required: true
           description: Unique ID of the financing request
       responses:
@@ -875,18 +900,21 @@ paths:
           name: applicationId
           schema:
             type: string
+          example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
         - in: path
           name: financingRequestId
           schema:
             type: string
+          example: bankx-financingreq-35623
           required: true
           description: Unique ID of the financing request
         - in: path
           name: offerId
           schema:
             type: string
+          example: bankx-offer-35465
           required: true
           description: Unique ID of the offer
       responses:
@@ -967,6 +995,7 @@ paths:
           name: orderId
           schema:
             type: string
+          example: bankx-order-6464
           required: true
           description: Unique ID of an order
       responses:
@@ -1008,6 +1037,7 @@ paths:
           name: orderId
           schema:
             type: string
+          example: bankx-order-6464
           required: true
           description: Unique ID of an order
       responses:
@@ -1024,8 +1054,10 @@ paths:
                       - accepted
                       - rejected
                       - pending
+                    example: pending
                   detail:
                     type: string
+                    example: Waiting for details
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1054,6 +1086,7 @@ paths:
           in: path
           description: ID of a specific expiring mortgage
           required: true
+          example: bankx-mortgage-354663
           schema:
             type: string
       responses:
@@ -1096,12 +1129,14 @@ paths:
         - name: mortgageId
           in: path
           description: ID of a specific expiring mortgage
+          example: bankx-mortgage-354663
           required: true
           schema:
             type: string
         - name: offerId
           in: path
           description: ID of a specific mortgage prolongation offer
+          example: bankx-offer-35465
           required: true
           schema:
             type: string
@@ -1186,6 +1221,7 @@ components:
       description: ISO 4217 code
       type: string
       pattern: '[A-Z]{3}'
+      example: CHF
     # ---------
     # ---- Amount ----
     Amount:
@@ -1201,6 +1237,7 @@ components:
           description: amount given with fractional digits, the separator is a dot
           type: string
           pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          example: 235.45
     # --------
     # ---- Address compliant to payment address (b.Link & ISO20022)----
     structuredAddress:
@@ -1324,10 +1361,13 @@ components:
       properties:
         propertyObjectId:
           type: string
+          example: propertyID-436563
         name:
           type: string
+          example: My Nice Property
         objectType:
           type: string
+          example: house
           enum:
           - apartment
           - house
@@ -1342,6 +1382,7 @@ components:
           $ref: '#/components/schemas/PropertyIdentifier'
         luxuryLevel:
           type: string
+          example: yes
           enum:
           - 'yes'
           - 'no'
@@ -1360,26 +1401,34 @@ components:
               # what standards are considered?
         buildYear:
           type: integer
+          example: 1929
         lastRenovationYear:
           type: integer
+          example: 1980
         buildingCondition: # Range?
           type: integer
         buildingQuality: # Range?
           type: integer
         rooms:
           type: number
+          example: 4
         roomCountingStrategy:
           type: string
         bathRooms:
           type: integer
+          example: 2
         closets:
           type: integer
+          example: 1
         parkingLots:
           type: integer
+          example: 4
         undergroundParkingLots:
           type: integer
+          example: 0
         dedicatedGarages:
           type: integer
+          example: 1
         minergieStandard:
           type: string
           #enum: 
@@ -1388,6 +1437,7 @@ components:
           type: string
         objectPrice:
           type: integer
+          example: 3544344
         purchaseDate:
           $ref: '#/components/schemas/Date'
         remarks:
@@ -1425,6 +1475,7 @@ components:
       properties:
         mortgageId:
           type: string
+          example: bankx-mortgage-354663
         product:
           $ref: '#/components/schemas/Product'
         amountAtExpiry:
@@ -1439,6 +1490,7 @@ components:
           type: string
         interestRateType:
           type: string
+          example: libor
           enum:
             - variable
             - libor
@@ -1448,6 +1500,7 @@ components:
           type: string
         durationType:
           type: integer
+          example: 10
           minimum: 1
           maximum: 20
         prolongable:
@@ -1478,8 +1531,10 @@ components:
       properties:
         offerId:
           type: string
+          example: bankx-offer-35465
         financingRequestIdRef:
           type: string
+          example: bankx-applicationreq-465234
         totalAmount:
           $ref: '#/components/schemas/Amount'
         validTo:
@@ -1503,6 +1558,7 @@ components:
       properties:
         offerItemId:
           type: string
+          example: bankx-offer-35465
         product:
           $ref: '#/components/schemas/Product'
         conditions:
@@ -1524,10 +1580,13 @@ components:
       properties:
         productId:
           type: string
+          example: bankx-product-234
         name:
           type: string
+          example: Nice Mortgage Product Large
         interestRateType:
           type: string
+          example: libor
           enum:
             - variable
             - libor
@@ -1537,6 +1596,7 @@ components:
           type: string
         durationType:
           type: integer
+          example: 10
           minimum: 1
           maximum: 20
     # ---------
@@ -1556,8 +1616,10 @@ components:
       properties:
         conditionId:
           type: string
+          example: bankx-condition-45434
         productIdRef: 
           type: string
+          example: bankx-product-234
         duration:
           type: string
         maturityDate:
@@ -1595,6 +1657,7 @@ components:
       properties:
         applicationId:
           type: string
+          example: bankx-application-46543
         requestingParty:
           $ref: '#/components/schemas/Party'
         propertyInformation:
@@ -1612,8 +1675,10 @@ components:
       properties:
         financingRequestId:
           type: string
+          example: bankx-applicationreq-465234
         applicationIdRef:
           type: string
+          example: bankx-application-46543
         amount:
           $ref: '#/components/schemas/Amount'
         tranches:
@@ -1657,15 +1722,18 @@ components:
             name:
               type: string
               maxLength: 70
+              example: Muster
             surName:
               type: string
               maxLength: 70
+              example: Max
             address:
               $ref: '#/components/schemas/structuredAddress'
             birthDate:
               $ref: '#/components/schemas/Date'
             maritalStatus:
               type: string
+              example: married
               enum:
               - unmarried
               - married
@@ -1673,12 +1741,14 @@ components:
               - widowed
             matrimonialPropertyScheme:
               type: string
+              example: separateEstate
               enum:
               - jointEstate
               - separateEstate
               - contributionToJointlyAcquiredProperty
             jobSituation:
               type: string
+              example: employed
               enum:
               - employed
               - selfEmployed
@@ -1688,10 +1758,13 @@ components:
               $ref: '#/components/schemas/Country'
             USPerson:
               type: boolean
+              example: false
             email:
               type: string
+              example: max.muster@domain.ch
             applicantLanguage:
               type: string
+              example: fr
               enum:
               - de
               - fr
@@ -1707,6 +1780,7 @@ components:
                 properties:
                   incomeType:
                     type: string
+                    example: salary
                     enum:
                     - salary
                     - pension
@@ -1727,6 +1801,7 @@ components:
                 properties:
                   liabilityType:
                     type: string
+                    example: mortgage
                     enum:
                     - leasing
                     - alimony
@@ -1743,6 +1818,7 @@ components:
                 properties:
                   assetCategory:
                     type: string
+                    example: cash
                     enum:
                     - cash
                     - thirdPillar
@@ -1764,16 +1840,20 @@ components:
       properties:
         offerId:
           type: string
+          example: bankx-offer-35465
         mortgageId:
           type: string
+          example: bankx-mortgage-234434
         applicationId:
           type: string
+          example: bankx-application-46543
         amount:
           $ref: '#/components/schemas/Amount'
         offeredInterest:
           $ref: '#/components/schemas/Interest'
         validateOnly:
           type: boolean
+          example: true
         status:
           type: string
     # ---------
@@ -1793,10 +1873,12 @@ components:
           description: min amount given with fractional digits, the separator is a dot
           type: string
           pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          example: 1000000
         maxContent:
           description: max amount given with fractional digits, the separator is a dot
           type: string
           pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          example: 5000000
     # ---------
 
     # ---- Interest ----
@@ -1813,7 +1895,7 @@ components:
           type: string
           pattern: '-?\d{1,3}(?:\.\d{1,3})?'
     # ---------
-  # ---- Responses - Standard Errors Common Data Model v1.2.1----
+  # ---- Responses - Standard Errors Common Data Model v1.2.2----
   responses:
     standard400:
       headers:
@@ -1821,14 +1903,17 @@ components:
           schema:
             type: string
             description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
         Content-Language:
           schema:
             type: string
             description: 'Response language - always en'
+            example: en
         X-Correlation-ID:
           schema:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
       description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
       content:
         application/problem+json:
@@ -1841,14 +1926,17 @@ components:
           schema:
             type: string
             description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json     
         Content-Language:
           schema:
             type: string
             description: 'Response language - always en'
+            example: en
         X-Correlation-ID:
           schema:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
       description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
       content:
         application/problem+json:
@@ -1861,14 +1949,17 @@ components:
           schema:
             type: string
             description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
         Content-Language:
           schema:
             type: string
             description: 'Response language - always en'
+            example: en
         X-Correlation-ID:
           schema:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
       description: Forbidden - The server understood the request but refuses to authorize it. 
       content:
         application/problem+json:
@@ -1881,14 +1972,17 @@ components:
           schema:
             type: string
             description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
         Content-Language:
           schema:
             type: string
             description: 'Response language - always en'
+            example: en
         X-Correlation-ID:
           schema:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
       description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
       content:
         application/problem+json:
@@ -1901,14 +1995,17 @@ components:
           schema:
             type: string
             description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
         Content-Language:
           schema:
             type: string
             description: 'Response language - always en'
+            example: en
         X-Correlation-ID:
           schema:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
       description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
       content:
         application/problem+json:
@@ -1921,14 +2018,17 @@ components:
           schema:
             type: string
             description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
         Content-Language:
           schema:
             type: string
             description: 'Response language - always en'
+            example: en
         X-Correlation-ID:
           schema:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
       description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
@@ -1941,14 +2041,17 @@ components:
           schema:
             type: string
             description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
         Content-Language:
           schema:
             type: string
             description: 'Response language - always en'
+            example: en
         X-Correlation-ID:
           schema:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
       description: Not Implemented - The server does not support the functionality required to fulfill the request.
       content:
         application/problem+json:
@@ -1961,14 +2064,17 @@ components:
           schema:
             type: string
             description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
         Content-Language:
           schema:
             type: string
             description: 'Response language - always en'
+            example: en
         X-Correlation-ID:
           schema:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
       description: Service Unavailable. The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
       content:
         application/problem+json:
