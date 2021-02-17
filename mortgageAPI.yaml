@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 1.0.1
+  version: 1.0.2
   title: Common Mortgage API (Public)
   description: 
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -62,9 +62,9 @@ paths:
             type: integer
           example: 26
           description: Optional parameter for pagination. Start entry to be returned.
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: Paginated list of all mortgages with all related information sorted by mortgageId
@@ -116,9 +116,9 @@ paths:
           example: bankx-mortgage-234434
           schema:
             type: string
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: Mortgage details with the corresponding properties and related mortgages.
@@ -194,9 +194,9 @@ paths:
             type: integer
           example: 26
           description: Optional parameter for pagination. Start entry to be returned.
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: Paginated list of all mortgage products with all related information sorted by productId
@@ -258,9 +258,9 @@ paths:
           schema:
             type: string
           description: The interest (for filtering)
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: List of conditions related to a specific mortgage product.
@@ -310,9 +310,9 @@ paths:
             schema:
               $ref: '#/components/schemas/Application'
       parameters:
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
           description: created
@@ -350,9 +350,9 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -398,9 +398,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -446,9 +446,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the order to be added
         required: true
@@ -501,9 +501,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -551,9 +551,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the real estate property to be added
         required: true
@@ -604,9 +604,9 @@ paths:
           example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -648,9 +648,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the real estate property to be added
         required: true
@@ -704,9 +704,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the document to be added
         required: true
@@ -761,9 +761,9 @@ paths:
           example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -826,9 +826,9 @@ paths:
           example: bankx-application-document-3445
           required: true
           description: Unique ID of the document
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -875,9 +875,9 @@ paths:
           example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -932,9 +932,9 @@ paths:
           example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Specific financing request fo the given application (dossier)
         required: true
@@ -993,9 +993,9 @@ paths:
           example: bankx-financingreq-35623
           required: true
           description: Unique ID of the financing request
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -1059,9 +1059,9 @@ paths:
           example: bankx-offer-35465
           required: true
           description: Unique ID of the offer
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -1109,9 +1109,9 @@ paths:
             schema:
               $ref: '#/components/schemas/Order'
       parameters:
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
           description: created
@@ -1156,9 +1156,9 @@ paths:
           example: bankx-order-6464
           required: true
           description: Unique ID of an order
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -1206,9 +1206,9 @@ paths:
           example: bankx-order-6464
           required: true
           description: Unique ID of an order
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -1263,9 +1263,9 @@ paths:
           example: bankx-mortgage-354663
           schema:
             type: string
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: Paginated list of all offers for a specific expiring mortgage
@@ -1322,9 +1322,9 @@ paths:
           required: true
           schema:
             type: string
-        - $ref: '#/parameters/clientid_in_header' 
-        - $ref: '#/parameters/correlation_in_header'
-        - $ref: '#/parameters/agent_in_header'
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: Specific offer for a specific expiring mortgage
