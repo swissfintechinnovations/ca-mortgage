@@ -68,7 +68,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Mortgage'
                   _links:
-                    $ref: '#/components/schemas/Links'
+                    $ref: '#/components/schemas/linksPagination'
           headers:
             X-Correlation-ID:
               schema:
@@ -190,7 +190,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Product'
                   _links:
-                    $ref: '#/components/schemas/Links'
+                    $ref: '#/components/schemas/linksPagination'
           headers:
             X-Correlation-ID:
               schema:
@@ -1370,8 +1370,8 @@ components:
       format: date-time
       example: 2018-04-13T11:11:11Z
     # --------
-    # ---- Links ----
-    Links:
+    # ---- Links for Pagination----
+    linksPagination:
       description: Links (or cursors) returned in the answer of an API call.
       type: object
       properties:
