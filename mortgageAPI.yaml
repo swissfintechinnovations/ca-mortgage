@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 1.0.2
+  version: 1.0.3
   title: Common Mortgage API (Public)
   description: 
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -50,18 +50,8 @@ paths:
             type: boolean
           example: true
           description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering)
-        - in: query
-          name: limit
-          schema:
-            type: integer
-          example: 25
-          description: Optional parameter for pagination. Maximum number of entries to be returned.
-        - in: query
-          name: offset
-          schema:
-            type: integer
-          example: 26
-          description: Optional parameter for pagination. Start entry to be returned.
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -182,18 +172,8 @@ paths:
             maximum: 20
           example: 10
           description: The type of duration (for filtering)
-        - in: query
-          name: limit
-          schema:
-            type: integer
-          example: 25
-          description: Optional parameter for pagination. Maximum number of entries to be returned.
-        - in: query
-          name: offset
-          schema:
-            type: integer
-          example: 26
-          description: Optional parameter for pagination. Start entry to be returned.
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -1392,19 +1372,29 @@ components:
     # --------
     # ---- Links ----
     Links:
-      description: links returned in the answer of an API call
+      description: Links (or cursors) returned in the answer of an API call.
       type: object
       properties:
         self:
           type: string
+          description: Link / cursor to the current result set (based on the submitted pagination approach)
+          example: /payment-app/api/v1/accounts/accountIDXY/transactions?offset=75&limit=25
         first:
           type: string
+          description: Link / cursor to the first result set (based on the submitted pagination approach)
+          example: /payment-app/api/v1/accounts/accountIDXY/transactions?offset=0&limit=25
         previous:
           type: string
+          description: Link / cursor to the previous result set (based on the submitted pagination approach)
+          example: /payment-app/api/v1/accounts/accountIDXY/transactions?offset=50&limit=25          
         next:
           type: string
+          description: Link / cursor to the next result set (based on the submitted pagination approach)
+          example: /payment-app/api/v1/accounts/accountIDXY/transactions?offset=100&limit=25          
         last:
           type: string 
+          description: Link / cursor to the last result set (based on the submitted pagination approach)
+          example: /payment-app/api/v1/accounts/accountIDXY/transactions?offset=150&limit=25  
     # ---------
     # ---- Currency ----
     Currency:
@@ -2109,6 +2099,32 @@ components:
         type: string
       description: Name and version of the of the Client software
       required: true
+    offset: 
+      name: offset
+      in: query
+      description: Optional parameter for pagination. The number of items to skip before starting to collect the result set.
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 0
+    limit: 
+      name: limit
+      in: query
+      description: Optional parameter for pagination. Maximum number of entries to be returned.
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+    cursor:
+      name: cursor
+      in: query
+      description: Optional parameter for pagination. An opaque string value used for pagination.
+      required: false
+      schema:
+        type: string
+        example: cursorIDxyz
 
   # ---- Responses - Standard Errors Common Data Model v1.2.2----
   responses:
