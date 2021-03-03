@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 1.0.0
+  version: 1.0.2
   title: Common Mortgage API (Public)
   description: 
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -62,6 +62,9 @@ paths:
             type: integer
           example: 26
           description: Optional parameter for pagination. Start entry to be returned.
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: Paginated list of all mortgages with all related information sorted by mortgageId
@@ -76,6 +79,11 @@ paths:
                       $ref: '#/components/schemas/Mortgage'
                   _links:
                     $ref: '#/components/schemas/Links'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -108,6 +116,9 @@ paths:
           example: bankx-mortgage-234434
           schema:
             type: string
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: Mortgage details with the corresponding properties and related mortgages.
@@ -118,6 +129,11 @@ paths:
                 properties:
                   Mortgage: 
                     $ref: '#/components/schemas/Mortgage'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -178,6 +194,9 @@ paths:
             type: integer
           example: 26
           description: Optional parameter for pagination. Start entry to be returned.
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: Paginated list of all mortgage products with all related information sorted by productId
@@ -192,6 +211,11 @@ paths:
                       $ref: '#/components/schemas/Product'
                   _links:
                     $ref: '#/components/schemas/Links'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -234,6 +258,9 @@ paths:
           schema:
             type: string
           description: The interest (for filtering)
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: List of conditions related to a specific mortgage product.
@@ -246,6 +273,11 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Condition'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -277,6 +309,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Application'
+      parameters:
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
           description: created
@@ -286,6 +322,10 @@ paths:
                 type: string
                 format: uri
                 description: link to the created resource
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -309,6 +349,10 @@ paths:
       description: Show the subset of property details required by the FI for valuation
       tags:
         - Mortgage Application
+      parameters:
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -317,6 +361,11 @@ paths:
               schema:
                 type: object
                 $ref: '#/components/schemas/PropertyObject'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -349,6 +398,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -359,6 +411,11 @@ paths:
                 properties:
                   application:
                     $ref: '#/components/schemas/Application'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -389,6 +446,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the order to be added
         required: true
@@ -406,6 +466,11 @@ paths:
                 properties:
                   status:
                     type: string
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -436,6 +501,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -446,6 +514,11 @@ paths:
                 properties:
                   status:
                     type: string
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -478,6 +551,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the real estate property to be added
         required: true
@@ -494,6 +570,10 @@ paths:
                 type: string
                 format: uri
                 description: link to the created resource
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -524,6 +604,9 @@ paths:
           example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -531,6 +614,11 @@ paths:
             application/xml:
               schema:
                 type: string
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -560,6 +648,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the real estate property to be added
         required: true
@@ -577,6 +668,11 @@ paths:
                 properties:
                   status:
                     type: string
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -608,6 +704,9 @@ paths:
           required: true
           example: bankx-applicationreq-465234
           description: Unique ID of the application request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the document to be added
         required: true
@@ -628,6 +727,10 @@ paths:
                 type: string
                 format: uri
                 description: link to the created resource
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -658,6 +761,9 @@ paths:
           example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -676,6 +782,11 @@ paths:
                       type: integer
                     uploaddate:
                       $ref: '#/components/schemas/Date'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -715,6 +826,9 @@ paths:
           example: bankx-application-document-3445
           required: true
           description: Unique ID of the document
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -725,6 +839,11 @@ paths:
                 properties:
                   status:
                     type: string
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -756,6 +875,9 @@ paths:
           example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -774,6 +896,11 @@ paths:
                   detail:
                     type: string
                     example: Waiting for details
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -805,6 +932,9 @@ paths:
           example: bankx-applicationreq-465234
           required: true
           description: Unique ID of the application request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Specific financing request fo the given application (dossier)
         required: true
@@ -821,6 +951,10 @@ paths:
                 type: string
                 format: uri
                 description: link to the created resource
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -859,6 +993,9 @@ paths:
           example: bankx-financingreq-35623
           required: true
           description: Unique ID of the financing request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -871,6 +1008,11 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Offer'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -917,6 +1059,9 @@ paths:
           example: bankx-offer-35465
           required: true
           description: Unique ID of the offer
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -927,6 +1072,11 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -958,6 +1108,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Order'
+      parameters:
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
           description: created
@@ -967,6 +1121,10 @@ paths:
                 type: string
                 format: uri
                 description: link to the created resource
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -998,6 +1156,9 @@ paths:
           example: bankx-order-6464
           required: true
           description: Unique ID of an order
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -1008,6 +1169,11 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Order'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1040,6 +1206,9 @@ paths:
           example: bankx-order-6464
           required: true
           description: Unique ID of an order
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: OK
@@ -1058,6 +1227,11 @@ paths:
                   detail:
                     type: string
                     example: Waiting for details
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1089,6 +1263,9 @@ paths:
           example: bankx-mortgage-354663
           schema:
             type: string
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: Paginated list of all offers for a specific expiring mortgage
@@ -1101,6 +1278,11 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Offer'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1140,6 +1322,9 @@ paths:
           required: true
           schema:
             type: string
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           description: Specific offer for a specific expiring mortgage
@@ -1150,6 +1335,11 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1895,6 +2085,31 @@ components:
           type: string
           pattern: '-?\d{1,3}(?:\.\d{1,3})?'
     # ---------
+
+  # ---- Global Common Header Parameters ----
+  parameters:
+    clientid_in_header:
+      in: header
+      name: X-CorAPI-Client-ID
+      schema:
+        type: string
+      description: 'ID of the client forwarded to the provider. (SCOPE: FI)'
+      required: true
+    correlation_in_header:
+      in: header
+      name: X-Correlation-ID
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+      required: true
+    agent_in_header:
+      in: header
+      name: User-Agent
+      schema:
+        type: string
+      description: Name and version of the of the Client software
+      required: true
+
   # ---- Responses - Standard Errors Common Data Model v1.2.2----
   responses:
     standard400:
