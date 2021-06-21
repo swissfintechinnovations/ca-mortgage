@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 1.0.3
+  version: 1.1.0
   title: Common Mortgage API (Public)
   description: 
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -101,11 +101,12 @@ paths:
       parameters:
         - name: mortgageId
           in: path
-          description: ID of a specific existing mortgage
+          description: Uuid v4 of a specific existing mortgage
           required: true
-          example: bankx-mortgage-234434
+          example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
           schema:
             type: string
+            format: uuid
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -165,7 +166,7 @@ paths:
             type: string
           description: The basis of the interest (for filtering)
         - in: query
-          name: durationType
+          name: duration
           schema:
             type: integer
             minimum: 1
@@ -225,9 +226,10 @@ paths:
           name: productId
           schema:
             type: string
+            format: uuid
           required: true
-          example: bankx-product-234
-          description: A product's unique ID
+          example: a86dd383-055e-471a-a098-682ae5ef8348
+          description: A product's uuid v4
         - in: query
           name: duration
           schema:
@@ -301,7 +303,7 @@ paths:
               schema:
                 type: string
                 format: uri
-                description: link to the created resource
+                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
             X-Correlation-ID:
               schema:
                 type: string
@@ -375,9 +377,10 @@ paths:
           name: applicationId
           schema:
             type: string
+            format: uuid
           required: true
-          example: bankx-applicationreq-465234
-          description: Unique ID of the application request
+          example: 4bf92636-14a0-4511-98e2-acfde576e644
+          description: Uuid v4 of the application request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -423,9 +426,10 @@ paths:
           name: applicationId
           schema:
             type: string
+            format: uuid
           required: true
-          example: bankx-applicationreq-465234
-          description: Unique ID of the application request
+          example: 7f810bcd-e430-4f52-8cdf-ddf7bfbd2903
+          description: Uuid v4 of the application request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -478,9 +482,10 @@ paths:
           name: applicationId
           schema:
             type: string
+            format: uuid
           required: true
-          example: bankx-applicationreq-465234
-          description: Unique ID of the application request
+          example: 25cce7b2-ffb8-4800-88b0-e255ab75a829
+          description: Uuid v4 of the application request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -528,9 +533,10 @@ paths:
           name: applicationId
           schema:
             type: string
+            format: uuid
           required: true
-          example: bankx-applicationreq-465234
-          description: Unique ID of the application request
+          example: a5f2cc2a-e2bf-45f0-a892-bc61dfb5fe02
+          description: Uuid v4 of the application request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -549,7 +555,7 @@ paths:
               schema:
                 type: string
                 format: uri
-                description: link to the created resource
+                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
             X-Correlation-ID:
               schema:
                 type: string
@@ -581,9 +587,10 @@ paths:
           name: applicationId
           schema:
             type: string
-          example: bankx-applicationreq-465234
+            format: uuid
+          example: 4a9aabc4-b893-4f16-a4f4-421a414ea628
           required: true
-          description: Unique ID of the application request
+          description: Uuid v4 of the application request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -626,8 +633,8 @@ paths:
           schema:
             type: string
           required: true
-          example: bankx-applicationreq-465234
-          description: Unique ID of the application request
+          example: 83ad0ba5-d6d1-42d3-ba8d-5ea514799632
+          description: Uuid v4 of the application request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -681,9 +688,10 @@ paths:
           name: applicationId
           schema:
             type: string
+            format: uuid
           required: true
-          example: bankx-applicationreq-465234
-          description: Unique ID of the application request
+          example: 7f648f12-c15f-4930-8380-238da5671c37
+          description: Unique ID (uuid v4) of the application request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -694,19 +702,59 @@ paths:
           multipart/form-data:
             schema:
               type: object
+              required:
+                - documentType
+                - fileContent
+                - name
+                - type
+                - size
               properties:
-                filename:
+                documentType:
+                  type: string
+                  enum:
+                   - proof_of_identity
+                   - tax_declaration
+                   - proof_of_own_funds
+                   - property
+                   - property_flyer
+                   - property_pictures
+                   - proof_of_interest
+                   - other
+                  example: tax_declaration
+                fileContent:
                   type: string
                   format: binary
+                  description: 'The file content.'
+                name:
+                  type: string
+                  description: 'The name of the file without file type extension.'
+                  maxLength: 128
+                  example: 'my-property-flyer'
+                type:
+                  type: string
+                  description: 'The file type.'
+                  maxLength: 64
+                  example: 'application/pdf'
+                size:
+                  type: integer
+                  format: int64
+                  description: 'The file size in bytes.'
+                  example: '21543'
       responses:
         '201':
           description: created
           headers:
+            documentId:
+              schema:
+                type: string
+                format: uuid
+                description: Uuid v4 of the created document defined by FI
+                example: 232af5ca-fca3-4bd4-b91d-23d755d9af0f
             location:
               schema:
                 type: string
                 format: uri
-                description: link to the created resource
+                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
             X-Correlation-ID:
               schema:
                 type: string
@@ -738,9 +786,10 @@ paths:
           name: applicationId
           schema:
             type: string
-          example: bankx-applicationreq-465234
+            format: uuid
+          example: 7f648f12-fd45-4930-6543-456hf5671c37
           required: true
-          description: Unique ID of the application request
+          description: Uuid v4 of the application request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -758,6 +807,10 @@ paths:
                       type: string
                     filetype:
                       type: string
+                    documentId:
+                      type: string
+                      format: uuid
+                      description: Document ID in uuid v4 format
                     filesize:
                       type: integer
                     uploaddate:
@@ -796,16 +849,18 @@ paths:
           name: applicationId
           schema:
             type: string
-          example: bankx-applicationreq-465234
+            format: uuid
+          example: 7f648f12-fd45-4930-6543-456hf5671c37
           required: true
-          description: Unique ID of the application (dossier)
+          description: Uuid v4 of the application (dossier)
         - in: path
           name: documentId
           schema:
             type: string
-          example: bankx-application-document-3445
+            format: uuid
+          example: 7f648f12-c15f-4930-8380-238da5671c37
           required: true
-          description: Unique ID of the document
+          description: Unique ID (uuid v4) of the document
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -852,9 +907,10 @@ paths:
           name: applicationId
           schema:
             type: string
-          example: bankx-applicationreq-465234
+            format: uuid
+          example: 225f92e7-095f-4e06-a036-d3b5947c7e71
           required: true
-          description: Unique ID of the application request
+          description: Uuid v4 of the application request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -909,9 +965,10 @@ paths:
           name: applicationId
           schema:
             type: string
-          example: bankx-applicationreq-465234
+            format: uuid
+          example: 7598b91b-c500-46c3-a196-0ab1610e692c
           required: true
-          description: Unique ID of the application request
+          description: Uuid v4 of the application request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -930,7 +987,7 @@ paths:
               schema:
                 type: string
                 format: uri
-                description: link to the created resource
+                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
             X-Correlation-ID:
               schema:
                 type: string
@@ -952,6 +1009,59 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
+  /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}:
+    get:
+      summary: Get the details of a financing request
+      description: Get a specific financing request based on the financingRequestId
+      tags:
+        - Mortgage FinancingRequest
+      parameters:
+        - in: path
+          name: financingRequestId
+          schema:
+            type: string
+            format: uuid 
+          example: 78d01ce4-a01b-46dd-8d17-5f022d4f46f2
+          required: true
+          description: Uuid ID of the financing request
+        - $ref: '#/components/parameters/clientid_in_header' 
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offerList: 
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FinancingRequest'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+
+
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers:
     get:
       summary: List all binding offers for a given financing request
@@ -963,16 +1073,18 @@ paths:
           name: applicationId
           schema:
             type: string
-          example: bankx-applicationreq-465234
+            format: uuid
+          example: f005bcab-051f-437c-a010-242aa0390add
           required: true
-          description: Unique ID of the application request
+          description: Uuid v4 of the application request
         - in: path
           name: financingRequestId
           schema:
             type: string
-          example: bankx-financingreq-35623
+            format: uuid
+          example: c0c6bcf8-4be7-4c3f-8e5e-cbec6ee95d95
           required: true
-          description: Unique ID of the financing request
+          description: Uuid v4 of the financing request
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -1024,21 +1136,23 @@ paths:
             type: string
           example: bankx-applicationreq-465234
           required: true
-          description: Unique ID of the application request
+          description: Uuid v4 of the application request
         - in: path
           name: financingRequestId
           schema:
             type: string
-          example: bankx-financingreq-35623
+            format: uuid
+          example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
           required: true
-          description: Unique ID of the financing request
+          description: Uuid v4 of the financing request
         - in: path
           name: offerId
           schema:
             type: string
-          example: bankx-offer-35465
+            format: uuid
+          example: c2fee261-053c-4088-8986-11216f0c9be6
           required: true
-          description: Unique ID of the offer
+          description: Uuid v4 of the offer
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -1100,7 +1214,7 @@ paths:
               schema:
                 type: string
                 format: uri
-                description: link to the created resource
+                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
             X-Correlation-ID:
               schema:
                 type: string
@@ -1133,9 +1247,10 @@ paths:
           name: orderId
           schema:
             type: string
-          example: bankx-order-6464
+            format: uuid
+          example: 91d029b3-ee7a-44c3-ac18-cf621cb128a8
           required: true
-          description: Unique ID of an order
+          description: Uuid v4 of an order
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -1183,9 +1298,10 @@ paths:
           name: orderId
           schema:
             type: string
-          example: bankx-order-6464
+            format: uuid
+          example: 8109fc33-8af0-4072-98aa-a7d0c5c896a7
           required: true
-          description: Unique ID of an order
+          description: Uuid v4 of an order
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -1238,11 +1354,12 @@ paths:
       parameters:
         - name: mortgageId
           in: path
-          description: ID of a specific expiring mortgage
+          description: Uuid v4 of a specific expiring mortgage
           required: true
-          example: bankx-mortgage-354663
+          example: 82d2f030-e840-40ea-9bc8-8b6cbc15f7bb
           schema:
             type: string
+            format: uuid
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -1290,18 +1407,20 @@ paths:
       parameters:
         - name: mortgageId
           in: path
-          description: ID of a specific expiring mortgage
-          example: bankx-mortgage-354663
+          description: Uuid v4 of a specific expiring mortgage
+          example: 718934bb-aa8a-4917-a431-b64b844cacc3
           required: true
           schema:
             type: string
+            format: uuid
         - name: offerId
           in: path
-          description: ID of a specific mortgage prolongation offer
-          example: bankx-offer-35465
+          description: Uuid v4 of a specific mortgage prolongation offer
+          example: 46eb482d-1e18-4b93-ae88-da14ad4ac051
           required: true
           schema:
             type: string
+            format: uuid
         - $ref: '#/components/parameters/clientid_in_header' 
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -1378,23 +1497,23 @@ components:
         self:
           type: string
           description: Link / cursor to the current result set (based on the submitted pagination approach)
-          example: /payment-app/api/v1/accounts/accountIDXY/transactions?offset=75&limit=25
+          example: /mortgage-app/api/v1/products?offset=75&limit=25
         first:
           type: string
           description: Link / cursor to the first result set (based on the submitted pagination approach)
-          example: /payment-app/api/v1/accounts/accountIDXY/transactions?offset=0&limit=25
+          example: /mortgage-app/api/v1/products?offset=0&limit=25
         previous:
           type: string
           description: Link / cursor to the previous result set (based on the submitted pagination approach)
-          example: /payment-app/api/v1/accounts/accountIDXY/transactions?offset=50&limit=25          
+          example: /mortgage-app/api/v1/products?offset=50&limit=25          
         next:
           type: string
           description: Link / cursor to the next result set (based on the submitted pagination approach)
-          example: /payment-app/api/v1/accounts/accountIDXY/transactions?offset=100&limit=25          
+          example: /mortgage-app/api/v1/products?offset=100&limit=25          
         last:
           type: string 
           description: Link / cursor to the last result set (based on the submitted pagination approach)
-          example: /payment-app/api/v1/accounts/accountIDXY/transactions?offset=150&limit=25  
+          example: /mortgage-app/api/v1/products?offset=150&limit=25  
     # ---------
     # ---- Currency ----
     Currency:
@@ -1536,88 +1655,252 @@ components:
       type: object
       required:
         - propertyObjectId
-        - name
         - address
       properties:
         propertyObjectId:
           type: string
-          example: propertyID-436563
+          format: uuid
+          description: 'The property object identifier (UUID v4) defined by TPP.'
+          example: '9343dd26-4b54-4808-8978-538f8e869d0e'
         name:
           type: string
+          description: User-defined property name
           example: My Nice Property
-        objectType:
-          type: string
-          example: house
-          enum:
-          - apartment
-          - house
-          - garage
-          - other
-        #### At the moment we consider only mortgages for self-occupied real estate
-        #usageType:
-        #  type: string
         address:
           $ref: '#/components/schemas/structuredAddress'
         propertyIdentifier:
           $ref: '#/components/schemas/PropertyIdentifier'
-        luxuryLevel:
+        propertyConstructionInformation:
+          type: object
+          description: 'The property construction information.'
+          properties:
+            constructionYear:
+              type: integer
+              description: 'construction year'
+              example: 1990
+            renovation:
+              type: boolean
+              description: 'If the property is renovated true, else false.'
+              example: false
+            renovationYear:
+              type: integer
+              description: 'renovation year'
+              example: 1990
+              default: 0
+            minergieStandardType:
+              type: string
+              enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco]
+              description: 'The minergie standard'
+              example: 'minergie-p'
+            constructionQualityType:
+              $ref: '#/components/schemas/PropertyObjectRatingType'
+              description: 'The construction quality.'
+            stateBuildingType:
+              description: 'The state building type.'
+              $ref: '#/components/schemas/PropertyObjectRatingType'
+        classOfProperty:
           type: string
-          example: yes
-          enum:
-          - 'yes'
-          - 'no'
-        landArea:
-          type: integer
-        netDwellingArea:
-          type: integer
-        volume:
+          enum: [main_residence, main_residence_with_use_restriction, second_residence, second_residence_with_use_restriction, rented_property, rented_property_with_use_restriction, other]
+          description: 'The class of property (Main residence, second residence, rented).'
+          example: 'main_residence'
+        ceilingHight:
+          type: string
+          enum: [especially_high, middle, especially_low]
+          description: 'The ceiling hight in the rooms.'
+          example: 'middle'
+        buildingStandardFloorCoverings:
+          type: string
+          enum: [premium, highlevel, basic, lowlevel]
+          description: 'Building standard of the floor coverings.'
+          example: 'basic'
+        buildingStandardKitchen:
+          type: string
+          enum: [premium, highlevel, basic, lowlevel]
+          description: 'Building standard of the kitchen.'
+          example: 'basic'
+        buildingStandardBathroom:
+          type: string
+          enum: [premium, highlevel, basic, lowlevel]
+          description: 'Building standard of the sanitary installations.'
+          example: 'basic' 
+        outsideConstructionZone:
+          type: boolean
+          description: 'If the property is outside of the construction zone.'
+          example: false
+        propertyElements:
+          type: object
+          description: 'The property detail information such as rooms count, parking places.'
+          properties:
+            numberOfRooms:
+              type: number
+              format: double
+              description: 'The number of the rooms.'
+              example: 4.5
+            roomCountType:
+              type: string
+              enum: [kitchen_not_counted, kitchen_half_room, kitchen_full_room]
+              description: 'Reflects the type of the room count type. E.g. if the kitchen counts as full room.'
+              example: kitchen_full_room
+            numberOfFamilyBathrooms:
+              type: integer
+              description: 'Separate shower and bathtub in the bathroom (optional: toilet)'
+              example: 2
+            numberOfBathWC:
+              type: integer
+              description: 'Bath or shower, sink, toilet'
+              example: 2
+            numberOfGuestWC:
+              type: integer
+              description: 'Separate, single toilet with wash basin'
+              example: 2   
+            numberOfExternalParking:
+              type: integer
+              description: 'The number of external parking spaces.'
+              example: 2
+            numberOfSeparateGarages:
+              type: integer
+              description: 'The number of separated garages (covered parking spaces).'
+              example: 2
+            numberOfUndergroundCarParks:
+              type: integer
+              description: 'The number of underground parking places.'
+              example: 2
+        propertyFlatInformation:
+          type: object
+          description: 'The property flat information.'
+          properties:
+            numberOfFlats:
+              type: integer
+              description: 'The number of flats in the building.'
+              example: 10
+            numberOfFloors:
+              type: integer
+              description: 'The number of floors in the building.'
+              example: 4
+            stateApartmentType:
+              $ref: '#/components/schemas/PropertyObjectRatingType'
+            floor:
+              type: integer
+              description: 'The floor of the flat.'
+              example: 2
+            balconyOrTerraceArea:
+              type: integer
+              description: 'The area of the balcony or terrace in quatermeter.'
+              example: 20
+            livingSpace:
+              type: object
+              properties:
+                livingSpaceInSqm:
+                  type: integer
+                  description: 'The area of the living space in quatermeter.'
+                  example: 120
+                measurementStandard:
+                  type: string
+                  enum: [NLA, GFA]
+                  description: 'The measurement standard used to determine the living space (NFA or GFA).'
+                  example: 'NLA'
+            multistorey:
+              type: boolean
+              description: 'If the flat is multistorey true, else false.'
+              example: false
+            otherFeatures:
+              type: array
+              items:
+                type: string
+                enum: [coowned_garden_terrace_room, coowned_indoor_pool, coowned_outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, elevator_in_stairwell, elevator_into_apartment, ventilation_system_without_mingergie, barrier-free_living, automated_building_control]
+                description: 'Additional features and services.'
+                example: 'outdoor_pool'
+            quote:
+              type: integer
+              description: 'The quote of the flat property against the whole building property.'
+              example: 120
+            apartmentType:
+              type: string
+              enum: [garden_flat, floor_flat, roof_flat, attic]
+              description: 'The type of the appartment (floor, garden level, storey).'
+              example: 'floor_flat'
+            locationInTheBuildingRating:
+              $ref: '#/components/schemas/PropertyObjectRatingType'
+        propertyBuildingInformation:
+          type: object
+          description: 'The property building information.'
+          properties:
+            livingSpace:
+              type: object
+              properties:
+                livingSpaceInSqm:
+                  type: integer
+                  description: 'The area of the living space in quatermeter.'
+                  example: 120
+                measurementStandard:
+                  type: string
+                  enum: [nla, gfa]
+                  description: 'The measurement standard used to determine the living space (NFA or GFA).'
+                  example: 'nla'
+            roofFloorExpandable:
+              type: boolean
+              description: 'If the roof floor is expandable true, else false.'
+              example: false
+            volumeIncludingGarage:
+              type: integer
+              description: 'The volume of the house including the garage.'
+              example: 1500
+            landArea:
+              type: integer
+              description: 'The surface area of the land.'
+              example: 2000
+            otherFeatures:
+              type: array
+              items:
+                type: string
+                enum: [ventilation_system_without_mingergie, barrier-free_living, automated_building_control]
+                description: 'Additional features and services.'
+                example: 'outdoor_pool'
+            houseType:
+              type: string
+              enum: [detached_house, semidetached_house, row_house, row_corner_house, terrace_housE]
+              description: 'The type of the house.'
+              example: 'detached_house'
+            normType:
+              type: string
+              enum: [building_insurance, sia116, sia416, other]
+              description: 'The norm type.'
+              example: 'building_insurance'
+        valueRelevantServitudes:
+          type: boolean
+          description: 'If the property has servitudes true, else false.'
+          example: false
+        buildingRight:
           type: object
           properties:
-            amount: 
-              type: integer
-            standard:
-              type: string
-              #enum:
-              # what standards are considered?
-        buildYear:
-          type: integer
-          example: 1929
-        lastRenovationYear:
-          type: integer
-          example: 1980
-        buildingCondition: # Range?
-          type: integer
-        buildingQuality: # Range?
-          type: integer
-        rooms:
-          type: number
-          example: 4
-        roomCountingStrategy:
-          type: string
-        bathRooms:
-          type: integer
-          example: 2
-        closets:
-          type: integer
-          example: 1
-        parkingLots:
-          type: integer
-          example: 4
-        undergroundParkingLots:
-          type: integer
-          example: 0
-        dedicatedGarages:
-          type: integer
-          example: 1
-        minergieStandard:
-          type: string
-          #enum: 
-          # values?
-        valueRelevantServitudes:
-          type: string
+            hasBuildingRight:
+              type: boolean
+              description: 'If the property is built in a building right true, else false.'
+              example: false
+            buildingRightExpiry:
+              $ref: '#/components/schemas/Date'
+              description: 'Date when the building right expires.'
+            buildingRightRent:
+              $ref: '#/components/schemas/Amount'
+              description: 'Yearly payment for the building right.'
+            buildingRightCompensation:
+              $ref: '#/components/schemas/Amount'
+              description: 'Payment received at the building right expiry.'
         objectPrice:
-          type: integer
-          example: 3544344
+          $ref: '#/components/schemas/Amount'
+        estimation:
+          type: object
+          properties:
+            estimationSourceType:
+              type: string
+              example: iazi
+              enum:
+              - iazi
+              - wup
+            amount:
+              $ref: '#/components/schemas/Amount'
+            estimationDate:
+              $ref: '#/components/schemas/Date'
         purchaseDate:
           $ref: '#/components/schemas/Date'
         remarks:
@@ -1655,7 +1938,9 @@ components:
       properties:
         mortgageId:
           type: string
-          example: bankx-mortgage-354663
+          format: uuid
+          example: 206065b9-977b-4d2c-9092-00acf2392346
+          description: Uuid v4 of the specific mortgage
         product:
           $ref: '#/components/schemas/Product'
         amountAtExpiry:
@@ -1711,10 +1996,14 @@ components:
       properties:
         offerId:
           type: string
-          example: bankx-offer-35465
+          format: uuid
+          example: 46eb482d-1e18-4b93-ae88-da14ad4ac051
+          description: Uuid v4 of the specific order
         financingRequestIdRef:
           type: string
-          example: bankx-applicationreq-465234
+          format: uuid
+          example: fd3f2940-c9c9-46e7-8ed6-ab9e90363b2e
+          description: Uuid v4 of a specific financing request
         totalAmount:
           $ref: '#/components/schemas/Amount'
         validTo:
@@ -1755,15 +2044,58 @@ components:
         - productId
         - name
         - interestRateType
-        - interestBasis
-        - durationType
       properties:
         productId:
           type: string
-          example: bankx-product-234
-        name:
-          type: string
-          example: Nice Mortgage Product Large
+          format: uuid
+          description: 'The product identifier (UUID v4).'
+          example: '20460121-6aff-485b-a61d-6056ecd72bd8'
+        names:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+                description: 'Product name description'
+                example: "Fixed rate mortgage"
+              language:
+                type: string
+                description: 'Language of product name'
+                example: fr
+                enum:
+                - de
+                - fr
+                - it
+                - en
+        variations:
+         type: array
+         items:
+            type: object
+            properties:
+              duration:
+                type: integer
+                format: int32
+                description: 'The duration in years.'
+                minimum: 1
+                maximum: 20
+                example: 5
+              rate:
+                type: number
+                format: double
+                description: 'The interest rate.'
+                minimum: 0
+                maximum: 1
+                example: 0.5
+              saronperiod:
+                type: string
+                description: 'The saron period.'
+                example: 03m
+                enum:
+                - 01m
+                - 03m
+                - 06m
+                - 12m
         interestRateType:
           type: string
           example: libor
@@ -1772,14 +2104,7 @@ components:
             - libor
             - saron
             - fixed
-        interestBasis:
-          type: string
-        durationType:
-          type: integer
-          example: 10
-          minimum: 1
-          maximum: 20
-    # ---------
+        # ---------
 
     # ---- Mortgage Product Condition ----
     Condition:
@@ -1796,10 +2121,12 @@ components:
       properties:
         conditionId:
           type: string
-          example: bankx-condition-45434
+          format: uuid
+          example: ef737eb0-c0a7-4f44-bdeb-32ba9bd99327
         productIdRef: 
           type: string
-          example: bankx-product-234
+          format: uuid
+          example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
         duration:
           type: string
         maturityDate:
@@ -1831,17 +2158,33 @@ components:
       description: All static application information needed by the FI to create binding offers
       type: object
       required:
-        - applicationId
+        - mortgageType
         - requestingParty
         - propertyInformation
       properties:
         applicationId:
           type: string
-          example: bankx-application-46543
+          format: uuid
+          description: 'The application identifier (UUID v4) defined by FI.'
+          example: 'f157c4be-106d-4304-972e-091e77b87e1c'
         requestingParty:
           $ref: '#/components/schemas/Party'
         propertyInformation:
           $ref: '#/components/schemas/PropertyObject'
+        mortgageType:
+          type: string
+          description: 'Type of business, Values: buy, replacement.'
+          example: mortgage
+          enum:
+          - buy
+          - replacement
+        replacementType:
+          type: string
+          description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
+          example: 'entire'
+          enum:
+          - entire
+          - partial
     # ---------
 
     # ---- Financing Request ----
@@ -1849,16 +2192,19 @@ components:
       description: Based on the application, several financing requests can be sent to the FI
       type: object
       required:
-        - financingRequestId
         - applicationIdRef
         - amount
       properties:
         financingRequestId:
           type: string
-          example: bankx-applicationreq-465234
+          format: uuid
+          example: 2e1d21c3-0cd5-4354-a9e9-d2eb2c28b780
+          description: Uuid v4 of the financing request defined by FI
         applicationIdRef:
           type: string
-          example: bankx-application-46543
+          format: uuid
+          example: 3c921870-f29c-46ad-9ba5-c8b05e0d88d2
+          description: Uuid v4 of the corresponding application 
         amount:
           $ref: '#/components/schemas/Amount'
         tranches:
@@ -1867,7 +2213,12 @@ components:
             type: object
             properties:
               productId:
-                type: integer
+                type: string
+                format: uuid
+                description: Uuid of the product
+                example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
+              payOutDate:
+                $ref: '#/components/schemas/Date'
               amount:
                 $ref: '#/components/schemas/Amount'
         usedAssets:
@@ -1877,22 +2228,27 @@ components:
               type: integer
             amountPledged:
               type: integer
-        payOutDate:
-          $ref: '#/components/schemas/Date'
         publicCertDate:
           $ref: '#/components/schemas/Date'
     # ---------
 
     # ---- Applicant ----
     Applicant:
-      description: Applicant information needed by the FI for creating a binding offer
+      description: Applicant information needed by the FI for creating a binding offer.
       type: object
       required:
+        - applicantId
         - applicantType
         - applicantDetail
       properties:
+        applicantId:
+          type: string
+          format: uuid
+          description: UUID v4 of the applicant (to be defined by TPP)
+          example: 576f8de3-6b30-4882-a7af-da2132a456cf
         applicantType:
           type: string
+          example: individual
           enum:
           - individual
           - legal entity
@@ -1902,10 +2258,12 @@ components:
             name:
               type: string
               maxLength: 70
+              description: Name of the applicant
               example: Muster
             surName:
               type: string
               maxLength: 70
+              description: Surname of the applicant
               example: Max
             address:
               $ref: '#/components/schemas/structuredAddress'
@@ -1914,11 +2272,13 @@ components:
             maritalStatus:
               type: string
               example: married
+              description: Martial status of the applicant
               enum:
               - unmarried
               - married
               - divorced
               - widowed
+              - registered-partnership
             matrimonialPropertyScheme:
               type: string
               example: separateEstate
@@ -1929,6 +2289,7 @@ components:
             jobSituation:
               type: string
               example: employed
+              description: Job situation of the applicant
               enum:
               - employed
               - selfEmployed
@@ -1938,13 +2299,16 @@ components:
               $ref: '#/components/schemas/Country'
             USPerson:
               type: boolean
+              description: Is the applicant a US person?
               example: false
             email:
               type: string
+              description: Email of the applicant
               example: max.muster@domain.ch
             applicantLanguage:
               type: string
               example: fr
+              description: Preferred contact language of the applicant
               enum:
               - de
               - fr
@@ -1959,21 +2323,11 @@ components:
                 type: object
                 properties:
                   incomeType:
-                    type: string
-                    example: salary
-                    enum:
-                    - salary
-                    - pension
-                    - alimony
-                    - rent
-                    - other
+                    $ref: '#/components/schemas/IncomeType'
                   amount:
                     $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
-            ######## Special case for applicants running into retirement age: Postponed for the moment
-            #estimatedRetirementIncome:
-            #  $ref: '#/components/schemas/Amount'
             liabilities:
               type: array
               items:
@@ -1982,6 +2336,7 @@ components:
                   liabilityType:
                     type: string
                     example: mortgage
+                    description: Liability type
                     enum:
                     - leasing
                     - alimony
@@ -1996,17 +2351,85 @@ components:
               items:
                 type: object
                 properties:
-                  assetCategory:
+                  assetType:
+                    $ref: '#/components/schemas/AssetType'
+                  amount:
+                    $ref: '#/components/schemas/Amount'
+                  remark:
                     type: string
-                    example: cash
-                    enum:
-                    - cash
-                    - thirdPillar
-                    - pensionFund
-                    - fungibleInvestments
-                    - other
-                  valuation:
-                    $ref: '#/components/schemas/Amount'  
+    # ---------
+
+    # ---- Mortgage data types ----
+    PropertyObjectRatingType:
+      type: string
+      enum: [bad, bad-medium, medium, medium-good, good, good-verygood, verygood]
+      description: 'The rating type.'
+      example: 'good'
+
+    CommonID:
+      description: "The unique identifier UUID v4 specified by RFC4122."
+      type: string
+      format: uuid
+      example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6
+
+    AssetType:
+      description: Common set of asset types.
+      type: string
+      example: cash
+      enum:
+        - cash
+        - cash-withdraw
+        - cash-pledge
+        - gift
+        - gift-withdraw
+        - gift-pledge
+        - reservation_deposit
+        - advancement_of_inheritance
+        - advancement_of_inheritance-withdraw
+        - advancement_of_inheritance-pledge
+        - third_pillar
+        - third_pillar-withdraw
+        - third_pillar-pledge
+        - third_party_loan
+        - third_party_loan-withdraw
+        - third_party_loan-pledge
+        - third_pillar-fond
+        - fungible_investments
+        - fungible_investments-withdraw
+        - fungible_investments-pledge
+        - other
+        - vested_benefit
+        - vested_benefit-withdraw
+        - vested_benefit-pledge
+        - life_insurance_3a
+        - life-insurance_3b
+        - life-insurance_3a-fond_withdraw
+        - life-insurance_3a-fond_pledged
+        - life-insurance_3b-fond_withdraw
+        - life-insurance_3a-fond_pledged
+
+    IncomeType:
+      description: Common set of income types.
+        For the enum value self_employment and dividend the 3 years avg is relevant.
+      type: string
+      example: employment_gross
+      enum:
+        - employment_gross
+        - empolyment_net
+        - self_employment
+        - bonus_year-1
+        - bonus_year-2
+        - bonus_year-3
+        - additional_income
+        - child_allowance
+        - asset_consumption_before_retirement
+        - pension_fund_income
+        - ahv-income
+        - further_income_after_retirement
+        - asset_consumption_after_retirement
+        - fixed_expenses
+        - dividend
+      
     # ---------
 
     # ---- Order ----
@@ -2018,24 +2441,38 @@ components:
         - amount
         - offeredInterest
       properties:
+        orderId:
+          type: string
+          format: uuid
+          example: 6faea0b8-26a2-4b17-b10f-8f56fe355f50
+          description: Uuid v4 of the order defined by FI
         offerId:
           type: string
-          example: bankx-offer-35465
+          format: uuid
+          example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
         mortgageId:
           type: string
-          example: bankx-mortgage-234434
+          format: uuid
+          example: ef25ce8b-2fb1-45d9-bae0-6f263241a280
         applicationId:
           type: string
-          example: bankx-application-46543
+          format: uuid
+          example: 59e8c8a6-4d32-4e7b-bcf0-05813029498e
         amount:
           $ref: '#/components/schemas/Amount'
         offeredInterest:
           $ref: '#/components/schemas/Interest'
         validateOnly:
           type: boolean
+          description: The order will not be persistent in the FI backend. 
           example: true
         status:
           type: string
+          enum:
+          - accepted
+          - rejected
+          - pending
+          example: pending
     # ---------
 
     # ---- AmountRange ----
