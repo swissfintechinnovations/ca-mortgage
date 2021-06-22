@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 1.1.0
+  version: 1.1.1
   title: Common Mortgage API (Public)
   description: 
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -1016,6 +1016,14 @@ paths:
       tags:
         - Mortgage FinancingRequest
       parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+            format: uuid 
+          example: 78d01ce4-a01b-46dd-8d17-5f022d4f98h3
+          required: true
+          description: Uuid ID of the application 
         - in: path
           name: financingRequestId
           schema:
