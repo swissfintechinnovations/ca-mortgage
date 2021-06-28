@@ -2136,6 +2136,11 @@ components:
           format: uuid
           description: 'The application identifier (UUID v4) defined by FI.'
           example: 'f157c4be-106d-4304-972e-091e77b87e1c'
+        tppApplicationid:
+          type: string
+          description: 'The application alphanumeric identifier defined by TPP'
+          pattern: '^[a-zA-Z0-9]{6,10}$'
+          example: 'asd23f'
         requestingParty:
           $ref: '#/components/schemas/Party'
         propertyInformation:
@@ -2316,6 +2321,36 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Asset'
+        tppAdvisorDetail:
+          type: object
+          properties:
+            name:
+              type: string
+              maxLength: 70
+              description: Name of the TPP advisor
+              example: Muster
+            surName:
+              type: string
+              maxLength: 70
+              description: Surname of the TPP advisor
+              example: Max
+            email:
+              type: string
+              description: Email of the TPP advisor
+              example: max.muster@domain.ch
+            language:
+              type: string
+              example: fr
+              description: Preferred contact language of the applicant
+              enum:
+                - de
+                - fr
+                - it
+                - en
+            phone:
+              type: string
+              description: phone of the TPP advisor
+              example: '+41443343456'
     # ---------
 
     # ---- Mortgage data types ----
