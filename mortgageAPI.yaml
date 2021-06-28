@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 1.1.2
+  version: 1.1.3
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -160,11 +160,6 @@ paths:
               - saron
               - fixed
           description: The type of the interest rates (for filtering)
-        - in: query
-          name: interestBasis
-          schema:
-            type: string
-          description: The basis of the interest (for filtering)
         - in: query
           name: duration
           schema:
@@ -341,7 +336,6 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 $ref: '#/components/schemas/PropertyObject'
           headers:
             X-Correlation-ID:
@@ -1576,36 +1570,6 @@ components:
           type: string
           maxLength: 2
           example: "CH"
-
-    unstructuredAddress:
-      title: Unstructured Address
-      type: object
-      required:
-        - addressLines
-        - country
-      properties:
-        addressLines:
-          type: array
-          description: max 2 lines of 70 characters
-          maxLength: 2
-          example: ["Robert Schneider SA", "Rue de la gare 24"]
-          items:
-            type: string
-            maxLength: 70
-        country:
-          type: string
-          maxLength: 2
-          example: "CH"
-
-    structuredOrUnstructuredAddress:
-      title: Structured or Unstructured Address
-      description: Either structured or unstructered must be set
-      type: object
-      properties:
-        structured:
-          $ref: '#/components/schemas/structuredAddress'
-        unstructured:
-          $ref: '#/components/schemas/unstructuredAddress'
     # -----------
     # ---- Country Code ----
     Country:
@@ -1702,9 +1666,7 @@ components:
               example: 'minergie-p'
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
-              description: 'The construction quality.'
             stateBuildingType:
-              description: 'The state building type.'
               $ref: '#/components/schemas/PropertyObjectRatingType'
         classOfProperty:
           type: string
@@ -2050,7 +2012,7 @@ components:
       type: object
       required:
         - productId
-        - name
+        - names
         - interestRateType
       properties:
         productId:
@@ -2157,7 +2119,6 @@ components:
         personList:
           type: array
           items:
-            type: object
             $ref: '#/components/schemas/Applicant'
     # ---------
 
@@ -2200,7 +2161,7 @@ components:
       description: Based on the application, several financing requests can be sent to the FI
       type: object
       required:
-        - applicationIdRef
+        - applicationId
         - amount
       properties:
         financingRequestId:
@@ -2208,7 +2169,7 @@ components:
           format: uuid
           example: 2e1d21c3-0cd5-4354-a9e9-d2eb2c28b780
           description: Uuid v4 of the financing request defined by FI
-        applicationIdRef:
+        applicationId:
           type: string
           format: uuid
           example: 3c921870-f29c-46ad-9ba5-c8b05e0d88d2
