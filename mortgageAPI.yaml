@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 1.1.3
+  version: 1.1.4
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -1958,7 +1958,7 @@ components:
       type: object
       required:
         - offerId
-        - financingRequestIdRef
+        - financingRequestId
         - totalAmount
         - validTo
         - offerItems
@@ -1969,7 +1969,7 @@ components:
           format: uuid
           example: 46eb482d-1e18-4b93-ae88-da14ad4ac051
           description: Uuid v4 of the specific order
-        financingRequestIdRef:
+        financingRequestId:
           type: string
           format: uuid
           example: fd3f2940-c9c9-46e7-8ed6-ab9e90363b2e
@@ -2136,7 +2136,7 @@ components:
           format: uuid
           description: 'The application identifier (UUID v4) defined by FI.'
           example: 'f157c4be-106d-4304-972e-091e77b87e1c'
-        tppApplicationid:
+        tppApplicationId:
           type: string
           description: 'The application alphanumeric identifier defined by TPP'
           pattern: '^[a-zA-Z0-9]{6,10}$'
