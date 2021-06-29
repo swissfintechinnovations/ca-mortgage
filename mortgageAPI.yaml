@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 1.1.4
+  version: 1.1.5
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -2159,6 +2159,36 @@ components:
           enum:
           - entire
           - partial
+        tppAdvisorDetail:
+          type: object
+          properties:
+            name:
+              type: string
+              maxLength: 70
+              description: Name of the TPP advisor
+              example: Muster
+            surName:
+              type: string
+              maxLength: 70
+              description: Surname of the TPP advisor
+              example: Max
+            email:
+              type: string
+              description: Email of the TPP advisor
+              example: max.muster@domain.ch
+            language:
+              type: string
+              example: fr
+              description: Preferred contact language of the applicant
+              enum:
+                - de
+                - fr
+                - it
+                - en
+            phone:
+              type: string
+              description: phone of the TPP advisor
+              example: '+41443343456'
     # ---------
 
     # ---- Financing Request ----
@@ -2321,36 +2351,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Asset'
-        tppAdvisorDetail:
-          type: object
-          properties:
-            name:
-              type: string
-              maxLength: 70
-              description: Name of the TPP advisor
-              example: Muster
-            surName:
-              type: string
-              maxLength: 70
-              description: Surname of the TPP advisor
-              example: Max
-            email:
-              type: string
-              description: Email of the TPP advisor
-              example: max.muster@domain.ch
-            language:
-              type: string
-              example: fr
-              description: Preferred contact language of the applicant
-              enum:
-                - de
-                - fr
-                - it
-                - en
-            phone:
-              type: string
-              description: phone of the TPP advisor
-              example: '+41443343456'
     # ---------
 
     # ---- Mortgage data types ----
