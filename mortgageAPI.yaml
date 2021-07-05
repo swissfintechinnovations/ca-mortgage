@@ -1993,7 +1993,6 @@ components:
       required:
         - offerItemId
         - product
-        - conditions
       properties:
         offerItemId:
           type: string
@@ -2006,6 +2005,39 @@ components:
             $ref: '#/components/schemas/Condition'
     # ---------
 
+    # ---- Mortgage Product Variation
+    ProductVariation:
+      description: Product variation details
+      type: object
+      required:
+        - duration
+        - rate
+      properties:
+        duration:
+          type: integer
+          format: int32
+          description: 'The duration in years.'
+          minimum: 1
+          maximum: 20
+          example: 5
+        rate:
+          type: number
+          format: double
+          description: 'The interest rate.'
+          minimum: 0
+          maximum: 1
+          example: 0.5
+        saronperiod:
+          type: string
+          description: 'The saron period.'
+          example: 3m
+          enum:
+            - 1m
+            - 3m
+            - 6m
+            - 12m
+    # ---------
+
     # ---- Mortgage Product ----
     Product:
       description: All details regarding an FI's mortgage product
@@ -2014,6 +2046,7 @@ components:
         - productId
         - names
         - interestRateType
+        - variations
       properties:
         productId:
           type: string
@@ -2041,31 +2074,7 @@ components:
         variations:
          type: array
          items:
-            type: object
-            properties:
-              duration:
-                type: integer
-                format: int32
-                description: 'The duration in years.'
-                minimum: 1
-                maximum: 20
-                example: 5
-              rate:
-                type: number
-                format: double
-                description: 'The interest rate.'
-                minimum: 0
-                maximum: 1
-                example: 0.5
-              saronperiod:
-                type: string
-                description: 'The saron period.'
-                example: 03m
-                enum:
-                - 01m
-                - 03m
-                - 06m
-                - 12m
+            $ref: '#/components/schemas/ProductVariation'
         interestRateType:
           type: string
           example: libor
@@ -2221,6 +2230,8 @@ components:
                 format: uuid
                 description: Uuid of the product
                 example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
+              productVariation:
+                $ref: '#/components/schemas/ProductVariation'
               payOutDate:
                 $ref: '#/components/schemas/Date'
               amount:
