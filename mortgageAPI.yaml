@@ -706,12 +706,38 @@ paths:
                 documentType:
                   type: string
                   enum:
-                   - proof_of_identity
-                   - tax_declaration
-                   - proof_of_own_funds
-                   - property
-                   - property_flyer
-                   - property_pictures
+                   - cash
+                   - gift
+                   - reservation_deposit
+                   - advancement_of_inheritance
+                   - third_pillar
+                   - pension_fund
+                   - third_party_loan
+                   - third_pillar-fond
+                   - fungible_investments
+                   - vested_benefit
+                   - life_insurance_3a
+                   - life-insurance_3b
+                   - tax_statement
+                   - lending_of_third_party_property
+                   - employment
+                   - self_employment
+                   - additional_income
+                   - pension_fund_income
+                   - ahv-income
+                   - fixed_expenses
+                   - dividend
+                   - publicly_notarized_purchase_contract
+                   - draft_purchase_contract
+                   - land_register_extract
+                   - official_estimation
+                   - building_insurance_certificate
+                   - professional_estimation
+                   - real_estate_documentation
+                   - situation_cadastral_plan
+                   - floor_plan
+                   - property_pictures_outside
+                   - property_pictures_inside
                    - proof_of_interest
                    - other
                   example: tax_declaration
@@ -734,6 +760,11 @@ paths:
                   format: int64
                   description: 'The file size in bytes.'
                   example: '21543'
+                applicantId:
+                  type: string
+                  format: uuid
+                  description: UUID v4 of the applicant (existing applicant within the current application)
+                  example: 576f8de3-6b30-4882-a7af-da2132a456cf
       responses:
         '201':
           description: created
@@ -2418,7 +2449,7 @@ components:
       example: employment_gross
       enum:
         - employment_gross
-        - empolyment_net
+        - employment_net
         - self_employment
         - bonus_year-1
         - bonus_year-2
@@ -2437,30 +2468,17 @@ components:
 
     # ---- Order ----
     Order:
-      description: All information needed to choose a specific offer and place a binding order. If it is a prolongation, then the mortgageId of the expiring mortgage must be referenced. Otherwise the applicationId of the application for a new mortgage. Note that the prolongation use case can also be handled by the new mortgage use case (special case).
+      description: All information needed to choose a specific offer and place a binding order.
       type: object
       required:
         - offerId
         - amount
         - offeredInterest
       properties:
-        orderId:
-          type: string
-          format: uuid
-          example: 6faea0b8-26a2-4b17-b10f-8f56fe355f50
-          description: Uuid v4 of the order defined by FI
         offerId:
           type: string
           format: uuid
           example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
-        mortgageId:
-          type: string
-          format: uuid
-          example: ef25ce8b-2fb1-45d9-bae0-6f263241a280
-        applicationId:
-          type: string
-          format: uuid
-          example: 59e8c8a6-4d32-4e7b-bcf0-05813029498e
         amount:
           $ref: '#/components/schemas/Amount'
         offeredInterest:
@@ -2469,13 +2487,6 @@ components:
           type: boolean
           description: The order will not be persistent in the FI backend.
           example: true
-        status:
-          type: string
-          enum:
-          - accepted
-          - rejected
-          - pending
-          example: pending
     # ---------
 
     # ---- AmountRange ----
@@ -2509,11 +2520,19 @@ components:
         - currentRate
       properties:
         currentRate:
-          type: string
-          pattern: '-?\d{1,3}(?:\.\d{1,3})?'
+          type: number
+          format: double
+          description: 'The interest rate.'
+          minimum: 0
+          maximum: 1
+          example: 0.5
         base:
-          type: string
-          pattern: '-?\d{1,3}(?:\.\d{1,3})?'
+          type: number
+          format: double
+          description: 'The interest rate.'
+          minimum: 0
+          maximum: 1
+          example: 0.5
     # ---------
 
   # ---- Global Common Header Parameters ----
