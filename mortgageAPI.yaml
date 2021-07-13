@@ -2522,14 +2522,14 @@ components:
         currentRate:
           type: number
           format: double
-          description: 'The interest rate.'
+          description: 'Interest reate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.Base'
           minimum: 0
           maximum: 1
           example: 0.5
         base:
           type: number
           format: double
-          description: 'The interest rate.'
+          description: 'Base rate uupon margin is applied (e.g. for SARON).'
           minimum: 0
           maximum: 1
           example: 0.5
