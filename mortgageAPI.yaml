@@ -717,7 +717,7 @@ paths:
                    - fungible_investments
                    - vested_benefit
                    - life_insurance_3a
-                   - life-insurance_3b
+                   - life_insurance_3b
                    - tax_statement
                    - lending_of_third_party_property
                    - employment
@@ -739,6 +739,11 @@ paths:
                    - property_pictures_outside
                    - property_pictures_inside
                    - proof_of_interest
+                   - easements_contracts
+                   - owner_association
+                   - contract_for_the_establishment
+                   - mortgage_note
+                   - mortgage_note_erection
                    - other
                   example: tax_declaration
                 fileContent:
@@ -2475,10 +2480,23 @@ components:
         - amount
         - offeredInterest
       properties:
+        orderId:
+          type: string
+          format: uuid
+          example: 6faea0b8-26a2-4b17-b10f-8f56fe355f50
+          description: Uuid v4 of the order defined by FI
         offerId:
           type: string
           format: uuid
           example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
+        mortgageId:
+          type: string
+          format: uuid
+          example: ef25ce8b-2fb1-45d9-bae0-6f263241a280
+        applicationId:
+          type: string
+          format: uuid
+          example: 59e8c8a6-4d32-4e7b-bcf0-05813029498e
         amount:
           $ref: '#/components/schemas/Amount'
         offeredInterest:
