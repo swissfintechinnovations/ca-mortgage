@@ -2013,6 +2013,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OfferItem'
+        offerType:
+          type: string
+          enum:
+            - binding
+            - indicative
+
     # ---------
 
     # ---- Mortgage Offer Item ----
@@ -2034,7 +2040,7 @@ components:
             $ref: '#/components/schemas/Condition'
     # ---------
 
-     # ---- Mortgage Product Variation
+    # ---- Mortgage Product Variation
     ProductVariation:
       description: Product variation details
       type: object
