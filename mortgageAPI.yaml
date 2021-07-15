@@ -1521,7 +1521,6 @@ components:
       type: string
       format: date
       example: 2018-04-13
-
     DateTime:
       type: string
       format: date-time
@@ -1940,7 +1939,6 @@ components:
         - durationType
         - prolongable
         - propertyObjects
-        - linkRef
       properties:
         mortgageId:
           type: string
@@ -1984,8 +1982,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Mortgage'
-        linkRef:
-          type: string
     # ---------
 
     # ---- Mortgage Offer ----
@@ -1998,7 +1994,6 @@ components:
         - totalAmount
         - validTo
         - offerItems
-        - linkRef
       properties:
         offerId:
           type: string
@@ -2018,8 +2013,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OfferItem'
-        linkRef:
-          type: string
     # ---------
 
     # ---- Mortgage Offer Item ----
@@ -2029,7 +2022,6 @@ components:
       required:
         - offerItemId
         - product
-        - conditions
       properties:
         offerItemId:
           type: string
@@ -2042,6 +2034,38 @@ components:
             $ref: '#/components/schemas/Condition'
     # ---------
 
+     # ---- Mortgage Product Variation
+    ProductVariation:
+      description: Product variation details
+      type: object
+      required:
+        - duration
+      properties:
+        duration:
+          type: integer
+          format: int32
+          description: 'The duration in years.'
+          minimum: 1
+          maximum: 20
+          example: 5
+        rate:
+          type: number
+          format: double
+          description: 'The interest rate.'
+          minimum: 0
+          maximum: 1
+          example: 0.5
+        saronperiod:
+          type: string
+          description: 'The saron period.'
+          example: 3m
+          enum:
+            - 1m
+            - 3m
+            - 6m
+            - 12m
+    # ---------
+
     # ---- Mortgage Product ----
     Product:
       description: All details regarding an FI's mortgage product
@@ -2050,6 +2074,7 @@ components:
         - productId
         - names
         - interestRateType
+        - productVariations            
       properties:
         productId:
           type: string
@@ -2074,34 +2099,10 @@ components:
                 - fr
                 - it
                 - en
-        variations:
+        productVariations:
          type: array
          items:
-            type: object
-            properties:
-              duration:
-                type: integer
-                format: int32
-                description: 'The duration in years.'
-                minimum: 1
-                maximum: 20
-                example: 5
-              rate:
-                type: number
-                format: double
-                description: 'The interest rate.'
-                minimum: 0
-                maximum: 1
-                example: 0.5
-              saronperiod:
-                type: string
-                description: 'The saron period.'
-                example: 03m
-                enum:
-                - 01m
-                - 03m
-                - 06m
-                - 12m
+            $ref: '#/components/schemas/ProductVariation'
         interestRateType:
           type: string
           example: libor
@@ -2234,6 +2235,7 @@ components:
       required:
         - applicationId
         - amount
+        - usedAssets
       properties:
         financingRequestId:
           type: string
@@ -2257,6 +2259,8 @@ components:
                 format: uuid
                 description: Uuid of the product
                 example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
+              productVariation:
+                $ref: '#/components/schemas/ProductVariation'                                         
               payOutDate:
                 $ref: '#/components/schemas/Date'
               amount:
@@ -2264,7 +2268,7 @@ components:
         usedAssets:
           type: array
           items:
-              $ref: '#/components/schemas/Asset'
+              $ref: '#/components/schemas/UsedAsset'
         publicCertDate:
           $ref: '#/components/schemas/Date'
     # ---------
@@ -2395,13 +2399,11 @@ components:
       enum: [bad, bad-medium, medium, medium-good, good, good-verygood, verygood]
       description: 'The rating type.'
       example: 'good'
-
     CommonID:
       description: "The unique identifier UUID v4 specified by RFC4122."
       type: string
       format: uuid
       example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-
     AssetType:
       description: Common set of asset types.
       type: string
@@ -2420,7 +2422,6 @@ components:
         - vested_benefit
         - life_insurance_3a
         - life-insurance_3b
-
     AssetUsageType:
       description: Common set of asset usage types.
       type: string
@@ -2429,7 +2430,6 @@ components:
       enum:
         - pledged
         - withdraw
-
     Asset:
       description: Asset information.
       type: object
@@ -2446,7 +2446,26 @@ components:
           $ref: '#/components/schemas/AssetUsageType'
         remark:
           type: string
-
+    UsedAsset:
+      description: Asset used by an applicant.
+      type: object
+      required:
+        - assetType
+        - amount
+        - usageType
+        - applicantId
+      properties:
+        assetType:
+          $ref: '#/components/schemas/AssetType'
+        amount:
+          $ref: '#/components/schemas/Amount'
+        usageType:
+          $ref: '#/components/schemas/AssetUsageType'
+        applicantId:
+          type: string
+          format: uuid
+          description: UUID v4 of the applicant (existing applicant within the current application)
+          example: 576f8de3-6b30-4882-a7af-da2132a456cf
     IncomeType:
       description: Common set of income types.
         For the enum value self_employment and dividend the 3 years avg is relevant.
@@ -2468,7 +2487,6 @@ components:
         - asset_consumption_after_retirement
         - fixed_expenses
         - dividend
-
     # ---------
 
     # ---- Order ----
@@ -2477,8 +2495,6 @@ components:
       type: object
       required:
         - offerId
-        - amount
-        - offeredInterest
       properties:
         orderId:
           type: string
@@ -2497,10 +2513,6 @@ components:
           type: string
           format: uuid
           example: 59e8c8a6-4d32-4e7b-bcf0-05813029498e
-        amount:
-          $ref: '#/components/schemas/Amount'
-        offeredInterest:
-          $ref: '#/components/schemas/Interest'
         validateOnly:
           type: boolean
           description: The order will not be persistent in the FI backend.
@@ -2604,7 +2616,6 @@ components:
       schema:
         type: string
         example: cursorIDxyz
-
   # ---- Responses - Standard Errors Common Data Model v1.2.2----
   responses:
     standard400:
@@ -2629,7 +2640,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard401:
       headers:
         Content-Type:
@@ -2652,7 +2662,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard403:
       headers:
         Content-Type:
@@ -2675,7 +2684,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard404:
       headers:
         Content-Type:
@@ -2698,7 +2706,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard405:
       headers:
         Content-Type:
@@ -2721,7 +2728,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard500:
       headers:
         Content-Type:
@@ -2744,7 +2750,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard501:
       headers:
         Content-Type:
@@ -2767,7 +2772,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard503:
       headers:
         Content-Type:
