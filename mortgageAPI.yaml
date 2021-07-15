@@ -1978,6 +1978,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OfferItem'
+        offerType:
+          type: string
+          enum:
+            - binding
+            - indicative
     # ---------
 
     # ---- Mortgage Offer Item ----
