@@ -706,45 +706,53 @@ paths:
                 documentType:
                   type: string
                   enum:
-                   - cash
-                   - gift
-                   - reservation_deposit
-                   - advancement_of_inheritance
-                   - third_pillar
-                   - pension_fund
-                   - third_party_loan
-                   - third_pillar-fond
-                   - fungible_investments
-                   - vested_benefit
-                   - life_insurance_3a
-                   - life_insurance_3b
-                   - tax_statement
-                   - lending_of_third_party_property
-                   - employment
-                   - self_employment
-                   - additional_income
-                   - pension_fund_income
-                   - ahv-income
-                   - fixed_expenses
-                   - dividend
-                   - publicly_notarized_purchase_contract
-                   - draft_purchase_contract
-                   - land_register_extract
-                   - official_estimation
-                   - building_insurance_certificate
-                   - professional_estimation
-                   - real_estate_documentation
-                   - situation_cadastral_plan
-                   - floor_plan
-                   - property_pictures_outside
-                   - property_pictures_inside
-                   - proof_of_interest
-                   - easements_contracts
-                   - owner_association
-                   - contract_for_the_establishment
-                   - mortgage_note
-                   - mortgage_note_erection
-                   - other
+                    - cash
+                    - gift
+                    - reservation_deposit
+                    - advancement_of_inheritance
+                    - third_pillar
+                    - pension_fund
+                    - third_party_loan
+                    - third_pillar-fond
+                    - fungible_investments
+                    - vested_benefit
+                    - life_insurance_3a
+                    - life_insurance_3b
+                    - tax_statement
+                    - lending_of_third_party_property
+                    - employment
+                    - self_employment
+                    - additional_income
+                    - pension_fund_income
+                    - ahv-income
+                    - fixed_expenses
+                    - dividend
+                    - publicly_notarized_purchase_contract
+                    - draft_purchase_contract
+                    - land_register_extract
+                    - official_estimation
+                    - building_insurance_certificate
+                    - professional_estimation
+                    - real_estate_documentation
+                    - situation_cadastral_plan
+                    - floor_plan
+                    - property_pictures_outside
+                    - property_pictures_inside
+                    - proof_of_interest
+                    - easements_contracts
+                    - owner_association
+                    - contract_for_the_establishment
+                    - mortgage_note
+                    - mortgage_note_erection
+                    - salary_certificate_month
+                    - salary_certificate_year
+                    - consent_form
+                    - debt_information
+                    - divorce_copy
+                    - building_plan
+                    - survey_copy
+                    - cubical_calculation
+                    - other
                   example: tax_declaration
                 fileContent:
                   type: string
@@ -1226,6 +1234,75 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
+  /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}/required-information:
+    get:
+      summary: Get a required infromation for processing specific offer at FI
+      description: Get a required infromation for processing specific offer at FI for a specific placed application
+      tags:
+        - Mortgage Offers
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+          example: bankx-applicationreq-465234
+          required: true
+          description: Uuid v4 of the application request
+        - in: path
+          name: financingRequestId
+          schema:
+            type: string
+            format: uuid
+          example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
+          required: true
+          description: Uuid v4 of the financing request
+        - in: path
+          name: offerId
+          schema:
+            type: string
+            format: uuid
+          example: c2fee261-053c-4088-8986-11216f0c9be6
+          required: true
+          description: Uuid v4 of the offer
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offerId:
+                    type: string
+                    format: uuid
+                  documents:
+                    type: array
+                    items:
+                    $ref: '#/components/schemas/Document'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
 
   /mortgages/orders:
     post:
@@ -1493,6 +1570,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
 
 # -------------------------
 # -------- Models ---------
@@ -1900,8 +1978,8 @@ components:
               type: string
               example: iazi
               enum:
-              - iazi
-              - wup
+                - iazi
+                - wup
             amount:
               $ref: '#/components/schemas/Amount'
             estimationDate:
@@ -2080,7 +2158,7 @@ components:
         - productId
         - names
         - interestRateType
-        - productVariations            
+        - productVariations
       properties:
         productId:
           type: string
@@ -2101,13 +2179,13 @@ components:
                 description: 'Language of product name'
                 example: fr
                 enum:
-                - de
-                - fr
-                - it
-                - en
+                  - de
+                  - fr
+                  - it
+                  - en
         productVariations:
-         type: array
-         items:
+          type: array
+          items:
             $ref: '#/components/schemas/ProductVariation'
         interestRateType:
           type: string
@@ -2193,15 +2271,15 @@ components:
           description: 'Type of business, Values: buy, replacement.'
           example: mortgage
           enum:
-          - buy
-          - replacement
+            - buy
+            - replacement
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
           example: 'entire'
           enum:
-          - entire
-          - partial
+            - entire
+            - partial
         tppAdvisorDetail:
           type: object
           properties:
@@ -2266,7 +2344,7 @@ components:
                 description: Uuid of the product
                 example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
               productVariation:
-                $ref: '#/components/schemas/ProductVariation'                                         
+                $ref: '#/components/schemas/ProductVariation'
               payOutDate:
                 $ref: '#/components/schemas/Date'
               amount:
@@ -2274,7 +2352,7 @@ components:
         usedAssets:
           type: array
           items:
-              $ref: '#/components/schemas/UsedAsset'
+            $ref: '#/components/schemas/UsedAsset'
         publicCertDate:
           $ref: '#/components/schemas/Date'
     # ---------
@@ -2297,8 +2375,8 @@ components:
           type: string
           example: individual
           enum:
-          - individual
-          - legal entity
+            - individual
+            - legal entity
         applicantDetail:
           type: object
           properties:
@@ -2321,27 +2399,27 @@ components:
               example: married
               description: Martial status of the applicant
               enum:
-              - unmarried
-              - married
-              - divorced
-              - widowed
-              - registered-partnership
+                - unmarried
+                - married
+                - divorced
+                - widowed
+                - registered-partnership
             matrimonialPropertyScheme:
               type: string
               example: separateEstate
               enum:
-              - jointEstate
-              - separateEstate
-              - contributionToJointlyAcquiredProperty
+                - jointEstate
+                - separateEstate
+                - contributionToJointlyAcquiredProperty
             jobSituation:
               type: string
               example: employed
               description: Job situation of the applicant
               enum:
-              - employed
-              - selfEmployed
-              - unemployed
-              - retired
+                - employed
+                - selfEmployed
+                - unemployed
+                - retired
             nationality:
               $ref: '#/components/schemas/Country'
             USPerson:
@@ -2357,10 +2435,10 @@ components:
               example: fr
               description: Preferred contact language of the applicant
               enum:
-              - de
-              - fr
-              - it
-              - en
+                - de
+                - fr
+                - it
+                - en
         financialSituation:
           type: object
           properties:
@@ -2385,10 +2463,10 @@ components:
                     example: mortgage
                     description: Liability type
                     enum:
-                    - leasing
-                    - alimony
-                    - mortgage
-                    - other
+                      - leasing
+                      - alimony
+                      - mortgage
+                      - other
                   amount:
                     $ref: '#/components/schemas/Amount'
                   remark:
@@ -2523,6 +2601,81 @@ components:
           type: boolean
           description: The order will not be persistent in the FI backend.
           example: true
+    # ---------
+
+    # ---- Document ----
+    Document:
+      description: All information needed for Document.
+      type: object
+      required:
+        - documentType
+      properties:
+        documentType:
+          type: string
+          enum:
+            - cash
+            - gift
+            - reservation_deposit
+            - advancement_of_inheritance
+            - third_pillar
+            - pension_fund
+            - third_party_loan
+            - third_pillar-fond
+            - fungible_investments
+            - vested_benefit
+            - life_insurance_3a
+            - life_insurance_3b
+            - tax_statement
+            - lending_of_third_party_property
+            - employment
+            - self_employment
+            - additional_income
+            - pension_fund_income
+            - ahv-income
+            - fixed_expenses
+            - dividend
+            - publicly_notarized_purchase_contract
+            - draft_purchase_contract
+            - land_register_extract
+            - official_estimation
+            - building_insurance_certificate
+            - professional_estimation
+            - real_estate_documentation
+            - situation_cadastral_plan
+            - floor_plan
+            - property_pictures_outside
+            - property_pictures_inside
+            - proof_of_interest
+            - easements_contracts
+            - owner_association
+            - contract_for_the_establishment
+            - mortgage_note
+            - mortgage_note_erection
+            - salary_certificate_month
+            - salary_certificate_year
+            - consent_form
+            - debt_information
+            - divorce_copy
+            - building_plan
+            - survey_copy
+            - cubical_calculation
+            - other
+          example: tax_declaration
+        name:
+          type: string
+          description: 'The name of the file without file type extension.'
+          maxLength: 128
+          example: 'my-property-flyer'
+        type:
+          type: string
+          description: 'The file type.'
+          maxLength: 64
+          example: 'application/pdf'
+        comment:
+          type: string
+          description: 'Comment for document'
+          maxLength: 128
+          example: 'needed for last 3 year'
     # ---------
 
     # ---- AmountRange ----
