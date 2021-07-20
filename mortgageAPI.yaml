@@ -1236,8 +1236,8 @@ paths:
 
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}/required-information:
     get:
-      summary: Get a required infromation for processing specific offer at FI
-      description: Get a required infromation for processing specific offer at FI for a specific placed application
+      summary: Get a required information for processing specific offer at FI
+      description: Get a required information for processing specific offer at FI for a specific placed application
       tags:
         - Mortgage Offers
       parameters:
@@ -1245,7 +1245,7 @@ paths:
           name: applicationId
           schema:
             type: string
-          example: bankx-applicationreq-465234
+          example: 1a75e7fc-f3c3-99a9-9268-ec21c405bbc8
           required: true
           description: Uuid v4 of the application request
         - in: path
@@ -1281,7 +1281,7 @@ paths:
                   documents:
                     type: array
                     items:
-                    $ref: '#/components/schemas/Document'
+                      $ref: '#/components/schemas/DocumentType'
           headers:
             X-Correlation-ID:
               schema:
@@ -2571,6 +2571,59 @@ components:
         - asset_consumption_after_retirement
         - fixed_expenses
         - dividend
+    DocumentType:
+      description: All supported document types.
+        For the enum value tax_declaration. Tax declaration is required
+      type: string
+      example: tax_declaration
+      enum:
+        - cash
+        - gift
+        - reservation_deposit
+        - advancement_of_inheritance
+        - third_pillar
+        - pension_fund
+        - third_party_loan
+        - third_pillar-fond
+        - fungible_investments
+        - vested_benefit
+        - life_insurance_3a
+        - life_insurance_3b
+        - tax_statement
+        - lending_of_third_party_property
+        - employment
+        - self_employment
+        - additional_income
+        - pension_fund_income
+        - ahv-income
+        - fixed_expenses
+        - dividend
+        - publicly_notarized_purchase_contract
+        - draft_purchase_contract
+        - land_register_extract
+        - official_estimation
+        - building_insurance_certificate
+        - professional_estimation
+        - real_estate_documentation
+        - situation_cadastral_plan
+        - floor_plan
+        - property_pictures_outside
+        - property_pictures_inside
+        - proof_of_interest
+        - easements_contracts
+        - owner_association
+        - contract_for_the_establishment
+        - mortgage_note
+        - mortgage_note_erection
+        - salary_certificate_month
+        - salary_certificate_year
+        - consent_form
+        - debt_information
+        - divorce_copy
+        - building_plan
+        - survey_copy
+        - cubical_calculation
+        - other
     # ---------
 
     # ---- Order ----
@@ -2601,81 +2654,6 @@ components:
           type: boolean
           description: The order will not be persistent in the FI backend.
           example: true
-    # ---------
-
-    # ---- Document ----
-    Document:
-      description: All information needed for Document.
-      type: object
-      required:
-        - documentType
-      properties:
-        documentType:
-          type: string
-          enum:
-            - cash
-            - gift
-            - reservation_deposit
-            - advancement_of_inheritance
-            - third_pillar
-            - pension_fund
-            - third_party_loan
-            - third_pillar-fond
-            - fungible_investments
-            - vested_benefit
-            - life_insurance_3a
-            - life_insurance_3b
-            - tax_statement
-            - lending_of_third_party_property
-            - employment
-            - self_employment
-            - additional_income
-            - pension_fund_income
-            - ahv-income
-            - fixed_expenses
-            - dividend
-            - publicly_notarized_purchase_contract
-            - draft_purchase_contract
-            - land_register_extract
-            - official_estimation
-            - building_insurance_certificate
-            - professional_estimation
-            - real_estate_documentation
-            - situation_cadastral_plan
-            - floor_plan
-            - property_pictures_outside
-            - property_pictures_inside
-            - proof_of_interest
-            - easements_contracts
-            - owner_association
-            - contract_for_the_establishment
-            - mortgage_note
-            - mortgage_note_erection
-            - salary_certificate_month
-            - salary_certificate_year
-            - consent_form
-            - debt_information
-            - divorce_copy
-            - building_plan
-            - survey_copy
-            - cubical_calculation
-            - other
-          example: tax_declaration
-        name:
-          type: string
-          description: 'The name of the file without file type extension.'
-          maxLength: 128
-          example: 'my-property-flyer'
-        type:
-          type: string
-          description: 'The file type.'
-          maxLength: 64
-          example: 'application/pdf'
-        comment:
-          type: string
-          description: 'Comment for document'
-          maxLength: 128
-          example: 'needed for last 3 year'
     # ---------
 
     # ---- AmountRange ----
