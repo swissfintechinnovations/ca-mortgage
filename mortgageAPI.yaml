@@ -1187,8 +1187,8 @@ paths:
 
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}/required-information:
     get:
-      summary: Get a required information for processing specific offer at FI
-      description: Get a required information for processing specific offer at FI for a specific placed application
+      summary: List all required documents / information for processing specific offer at FI
+      description: List all required documents / information for processing specific offer at FI
       tags:
         - Mortgage Offers
       parameters:
@@ -2261,6 +2261,8 @@ components:
               type: string
               description: phone of the TPP advisor
               example: '+41443343456'
+            address:
+              $ref: '#/components/schemas/structuredAddress'
     # ---------
 
     # ---- Financing Request ----
