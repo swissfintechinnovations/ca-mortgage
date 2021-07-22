@@ -1196,6 +1196,7 @@ paths:
           name: applicationId
           schema:
             type: string
+            format: uuid
           example: 1a75e7fc-f3c3-99a9-9268-ec21c405bbc8
           required: true
           description: Uuid v4 of the application request
