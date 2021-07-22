@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 1.1.5
+  version: 2.0.0
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -704,17 +704,7 @@ paths:
                 - size
               properties:
                 documentType:
-                  type: string
-                  enum:
-                   - proof_of_identity
-                   - tax_declaration
-                   - proof_of_own_funds
-                   - property
-                   - property_flyer
-                   - property_pictures
-                   - proof_of_interest
-                   - other
-                  example: tax_declaration
+                  $ref: '#/components/schemas/DocumentType'
                 fileContent:
                   type: string
                   format: binary
@@ -734,6 +724,11 @@ paths:
                   format: int64
                   description: 'The file size in bytes.'
                   example: '21543'
+                applicantId:
+                  type: string
+                  format: uuid
+                  description: UUID v4 of the applicant (existing applicant within the current application)
+                  example: 576f8de3-6b30-4882-a7af-da2132a456cf
       responses:
         '201':
           description: created
@@ -1190,6 +1185,76 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
+  /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}/required-information:
+    get:
+      summary: List all required documents / information for processing specific offer at FI
+      description: List all required documents / information for processing specific offer at FI
+      tags:
+        - Mortgage Offers
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+            format: uuid
+          example: 1a75e7fc-f3c3-99a9-9268-ec21c405bbc8
+          required: true
+          description: Uuid v4 of the application request
+        - in: path
+          name: financingRequestId
+          schema:
+            type: string
+            format: uuid
+          example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
+          required: true
+          description: Uuid v4 of the financing request
+        - in: path
+          name: offerId
+          schema:
+            type: string
+            format: uuid
+          example: c2fee261-053c-4088-8986-11216f0c9be6
+          required: true
+          description: Uuid v4 of the offer
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offerId:
+                    type: string
+                    format: uuid
+                  documents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DocumentType'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
 
   /mortgages/orders:
     post:
@@ -1458,6 +1523,7 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
+
 # -------------------------
 # -------- Models ---------
 # -------------------------
@@ -1485,7 +1551,6 @@ components:
       type: string
       format: date
       example: 2018-04-13
-
     DateTime:
       type: string
       format: date-time
@@ -1865,8 +1930,8 @@ components:
               type: string
               example: iazi
               enum:
-              - iazi
-              - wup
+                - iazi
+                - wup
             amount:
               $ref: '#/components/schemas/Amount'
             estimationDate:
@@ -1978,6 +2043,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OfferItem'
+        offerType:
+          type: string
+          enum:
+            - binding
+            - indicative
+
     # ---------
 
     # ---- Mortgage Offer Item ----
@@ -2005,7 +2076,6 @@ components:
       type: object
       required:
         - duration
-        - rate
       properties:
         duration:
           type: integer
@@ -2040,7 +2110,7 @@ components:
         - productId
         - names
         - interestRateType
-        - variations
+        - productVariations
       properties:
         productId:
           type: string
@@ -2061,13 +2131,13 @@ components:
                 description: 'Language of product name'
                 example: fr
                 enum:
-                - de
-                - fr
-                - it
-                - en
+                  - de
+                  - fr
+                  - it
+                  - en
         productVariations:
-         type: array
-         items:
+          type: array
+          items:
             $ref: '#/components/schemas/ProductVariation'
         interestRateType:
           type: string
@@ -2153,15 +2223,15 @@ components:
           description: 'Type of business, Values: buy, replacement.'
           example: mortgage
           enum:
-          - buy
-          - replacement
+            - buy
+            - replacement
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
           example: 'entire'
           enum:
-          - entire
-          - partial
+            - entire
+            - partial
         tppAdvisorDetail:
           type: object
           properties:
@@ -2192,6 +2262,8 @@ components:
               type: string
               description: phone of the TPP advisor
               example: '+41443343456'
+            address:
+              $ref: '#/components/schemas/structuredAddress'
     # ---------
 
     # ---- Financing Request ----
@@ -2201,6 +2273,7 @@ components:
       required:
         - applicationId
         - amount
+        - usedAssets
       properties:
         financingRequestId:
           type: string
@@ -2233,7 +2306,7 @@ components:
         usedAssets:
           type: array
           items:
-              $ref: '#/components/schemas/Asset'
+            $ref: '#/components/schemas/UsedAsset'
         publicCertDate:
           $ref: '#/components/schemas/Date'
     # ---------
@@ -2256,8 +2329,8 @@ components:
           type: string
           example: individual
           enum:
-          - individual
-          - legal entity
+            - individual
+            - legal entity
         applicantDetail:
           type: object
           properties:
@@ -2280,27 +2353,27 @@ components:
               example: married
               description: Martial status of the applicant
               enum:
-              - unmarried
-              - married
-              - divorced
-              - widowed
-              - registered-partnership
+                - unmarried
+                - married
+                - divorced
+                - widowed
+                - registered-partnership
             matrimonialPropertyScheme:
               type: string
               example: separateEstate
               enum:
-              - jointEstate
-              - separateEstate
-              - contributionToJointlyAcquiredProperty
+                - jointEstate
+                - separateEstate
+                - contributionToJointlyAcquiredProperty
             jobSituation:
               type: string
               example: employed
               description: Job situation of the applicant
               enum:
-              - employed
-              - selfEmployed
-              - unemployed
-              - retired
+                - employed
+                - selfEmployed
+                - unemployed
+                - retired
             nationality:
               $ref: '#/components/schemas/Country'
             USPerson:
@@ -2316,10 +2389,10 @@ components:
               example: fr
               description: Preferred contact language of the applicant
               enum:
-              - de
-              - fr
-              - it
-              - en
+                - de
+                - fr
+                - it
+                - en
         financialSituation:
           type: object
           properties:
@@ -2344,10 +2417,10 @@ components:
                     example: mortgage
                     description: Liability type
                     enum:
-                    - leasing
-                    - alimony
-                    - mortgage
-                    - other
+                      - leasing
+                      - alimony
+                      - mortgage
+                      - other
                   amount:
                     $ref: '#/components/schemas/Amount'
                   remark:
@@ -2364,13 +2437,11 @@ components:
       enum: [bad, bad-medium, medium, medium-good, good, good-verygood, verygood]
       description: 'The rating type.'
       example: 'good'
-
     CommonID:
       description: "The unique identifier UUID v4 specified by RFC4122."
       type: string
       format: uuid
       example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-
     AssetType:
       description: Common set of asset types.
       type: string
@@ -2389,7 +2460,6 @@ components:
         - vested_benefit
         - life_insurance_3a
         - life-insurance_3b
-
     AssetUsageType:
       description: Common set of asset usage types.
       type: string
@@ -2398,7 +2468,6 @@ components:
       enum:
         - pledged
         - withdraw
-
     Asset:
       description: Asset information.
       type: object
@@ -2415,7 +2484,26 @@ components:
           $ref: '#/components/schemas/AssetUsageType'
         remark:
           type: string
-
+    UsedAsset:
+      description: Asset used by an applicant.
+      type: object
+      required:
+        - assetType
+        - amount
+        - usageType
+        - applicantId
+      properties:
+        assetType:
+          $ref: '#/components/schemas/AssetType'
+        amount:
+          $ref: '#/components/schemas/Amount'
+        usageType:
+          $ref: '#/components/schemas/AssetUsageType'
+        applicantId:
+          type: string
+          format: uuid
+          description: UUID v4 of the applicant (existing applicant within the current application)
+          example: 576f8de3-6b30-4882-a7af-da2132a456cf
     IncomeType:
       description: Common set of income types.
         For the enum value self_employment and dividend the 3 years avg is relevant.
@@ -2423,7 +2511,7 @@ components:
       example: employment_gross
       enum:
         - employment_gross
-        - empolyment_net
+        - employment_net
         - self_employment
         - bonus_year-1
         - bonus_year-2
@@ -2437,17 +2525,67 @@ components:
         - asset_consumption_after_retirement
         - fixed_expenses
         - dividend
-
+    DocumentType:
+      description: All supported document types.
+        For the enum value tax_declaration. Tax declaration is required.
+      type: string
+      example: tax_declaration
+      enum:
+        - cash
+        - gift
+        - reservation_deposit
+        - advancement_of_inheritance
+        - third_pillar
+        - pension_fund
+        - third_party_loan
+        - third_pillar-fond
+        - fungible_investments
+        - vested_benefit
+        - life_insurance_3a
+        - life_insurance_3b
+        - tax_statement
+        - lending_of_third_party_property
+        - employment
+        - self_employment
+        - additional_income
+        - pension_fund_income
+        - ahv-income
+        - fixed_expenses
+        - dividend
+        - publicly_notarized_purchase_contract
+        - draft_purchase_contract
+        - land_register_extract
+        - official_estimation
+        - building_insurance_certificate
+        - professional_estimation
+        - real_estate_documentation
+        - situation_cadastral_plan
+        - floor_plan
+        - property_pictures_outside
+        - property_pictures_inside
+        - proof_of_interest
+        - easements_contracts
+        - owner_association
+        - contract_for_the_establishment
+        - mortgage_note
+        - mortgage_note_erection
+        - salary_certificate_month
+        - salary_certificate_year
+        - consent_form
+        - debt_information
+        - divorce_copy
+        - building_plan
+        - survey_copy
+        - cubical_calculation
+        - other
     # ---------
 
     # ---- Order ----
     Order:
-      description: All information needed to choose a specific offer and place a binding order. If it is a prolongation, then the mortgageId of the expiring mortgage must be referenced. Otherwise the applicationId of the application for a new mortgage. Note that the prolongation use case can also be handled by the new mortgage use case (special case).
+      description: All information needed to choose a specific offer and place a binding order.
       type: object
       required:
         - offerId
-        - amount
-        - offeredInterest
       properties:
         orderId:
           type: string
@@ -2466,21 +2604,10 @@ components:
           type: string
           format: uuid
           example: 59e8c8a6-4d32-4e7b-bcf0-05813029498e
-        amount:
-          $ref: '#/components/schemas/Amount'
-        offeredInterest:
-          $ref: '#/components/schemas/Interest'
         validateOnly:
           type: boolean
           description: The order will not be persistent in the FI backend.
           example: true
-        status:
-          type: string
-          enum:
-          - accepted
-          - rejected
-          - pending
-          example: pending
     # ---------
 
     # ---- AmountRange ----
@@ -2514,13 +2641,19 @@ components:
         - currentRate
       properties:
         currentRate:
-          description: Interest reate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.Base.
-          type: string
-          pattern: '-?\d{1,3}(?:\.\d{1,3})?'
+          type: number
+          format: double
+          description: 'Interest reate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.Base'
+          minimum: 0
+          maximum: 1
+          example: 0.5
         base:
-          description: Base rate uupon margin is applied (e.g. for SARON)
-          type: string
-          pattern: '-?\d{1,3}(?:\.\d{1,3})?'
+          type: number
+          format: double
+          description: 'Base rate uupon margin is applied (e.g. for SARON).'
+          minimum: 0
+          maximum: 1
+          example: 0.5
     # ---------
 
   # ---- Global Common Header Parameters ----
@@ -2574,7 +2707,6 @@ components:
       schema:
         type: string
         example: cursorIDxyz
-
   # ---- Responses - Standard Errors Common Data Model v1.2.2----
   responses:
     standard400:
@@ -2599,7 +2731,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard401:
       headers:
         Content-Type:
@@ -2622,7 +2753,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard403:
       headers:
         Content-Type:
@@ -2645,7 +2775,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard404:
       headers:
         Content-Type:
@@ -2668,7 +2797,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard405:
       headers:
         Content-Type:
@@ -2691,7 +2819,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard500:
       headers:
         Content-Type:
@@ -2714,7 +2841,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard501:
       headers:
         Content-Type:
@@ -2737,7 +2863,6 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-
     standard503:
       headers:
         Content-Type:
