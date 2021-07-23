@@ -1892,7 +1892,7 @@ components:
                 example: 'outdoor_pool'
             houseType:
               type: string
-              enum: [detached_house, semidetached_house, row_house, row_corner_house, terrace_housE]
+              enum: [detached_house, semidetached_house, row_house, row_corner_house, terrace_house]
               description: 'The type of the house.'
               example: 'detached_house'
             normType:
