@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 2.0.0
+  version: 2.0.1
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -1893,7 +1893,7 @@ components:
                 example: 'outdoor_pool'
             houseType:
               type: string
-              enum: [detached_house, semidetached_house, row_house, row_corner_house, terrace_housE]
+              enum: [detached_house, semidetached_house, row_house, row_corner_house, terrace_house]
               description: 'The type of the house.'
               example: 'detached_house'
             normType:
