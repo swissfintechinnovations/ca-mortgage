@@ -1831,9 +1831,9 @@ components:
                   example: 120
                 measurementStandard:
                   type: string
-                  enum: [NLA, GFA]
-                  description: 'The measurement standard used to determine the living space (NFA or GFA).'
-                  example: 'NLA'
+                  enum: [nla, gfa]
+                  description: 'The measurement standard used to determine the living space (nla or gfa).'
+                  example: 'nla'
             multistorey:
               type: boolean
               description: 'If the flat is multistorey true, else false.'
@@ -1870,7 +1870,7 @@ components:
                 measurementStandard:
                   type: string
                   enum: [nla, gfa]
-                  description: 'The measurement standard used to determine the living space (NFA or GFA).'
+                  description: 'The measurement standard used to determine the living space (nla or gfa).'
                   example: 'nla'
             roofFloorExpandable:
               type: boolean
@@ -2061,7 +2061,9 @@ components:
       properties:
         offerItemId:
           type: string
-          example: bankx-offer-35465
+          format: uuid
+          example: d452083f-8316-410d-a609-d49463687329
+          description: Uuid v4 of the specific offer item
         product:
           $ref: '#/components/schemas/Product'
         conditions:
@@ -2474,14 +2476,11 @@ components:
       required:
         - assetType
         - amount
-        - usageType
       properties:
         assetType:
           $ref: '#/components/schemas/AssetType'
         amount:
           $ref: '#/components/schemas/Amount'
-        usageType:
-          $ref: '#/components/schemas/AssetUsageType'
         remark:
           type: string
     UsedAsset:
