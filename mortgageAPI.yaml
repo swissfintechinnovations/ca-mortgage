@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 2.0.1
+  version: 2.0.2
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -1844,7 +1844,7 @@ components:
                 type: string
                 enum: [coowned_garden_terrace_room, coowned_indoor_pool, coowned_outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, elevator_in_stairwell, elevator_into_apartment, ventilation_system_without_mingergie, barrier-free_living, automated_building_control]
                 description: 'Additional features and services.'
-                example: 'outdoor_pool'
+                example: 'coowned_outdoor_pool'
             quote:
               type: integer
               description: 'The quote of the flat property against the whole building property.'
@@ -2223,7 +2223,7 @@ components:
         mortgageType:
           type: string
           description: 'Type of business, Values: buy, replacement.'
-          example: mortgage
+          example: buy
           enum:
             - buy
             - replacement
@@ -2332,7 +2332,7 @@ components:
           example: individual
           enum:
             - individual
-            - legal entity
+            - legal_entity
         applicantDetail:
           type: object
           properties:
@@ -2456,17 +2456,16 @@ components:
         - third_pillar
         - pension_fund
         - third_party_loan
-        - third_pillar-fond
+        - third_pillar_fund
         - fungible_investments
         - other
         - vested_benefit
         - life_insurance_3a
-        - life-insurance_3b
+        - life_insurance_3b
     AssetUsageType:
       description: Common set of asset usage types.
       type: string
       example: pledged
-      nullable: true
       enum:
         - pledged
         - withdraw
@@ -2489,7 +2488,6 @@ components:
       required:
         - assetType
         - amount
-        - usageType
         - applicantId
       properties:
         assetType:
@@ -2519,16 +2517,16 @@ components:
         - child_allowance
         - asset_consumption_before_retirement
         - pension_fund_income
-        - ahv-income
+        - ahv_income
         - further_income_after_retirement
         - asset_consumption_after_retirement
         - fixed_expenses
         - dividend
     DocumentType:
       description: All supported document types.
-        For the enum value tax_declaration. Tax declaration is required.
+        For the enum value tax_statement. Tax statement is required.
       type: string
-      example: tax_declaration
+      example: tax_statement
       enum:
         - cash
         - gift
@@ -2537,7 +2535,7 @@ components:
         - third_pillar
         - pension_fund
         - third_party_loan
-        - third_pillar-fond
+        - third_pillar_fund
         - fungible_investments
         - vested_benefit
         - life_insurance_3a
@@ -2548,7 +2546,7 @@ components:
         - self_employment
         - additional_income
         - pension_fund_income
-        - ahv-income
+        - ahv_income
         - fixed_expenses
         - dividend
         - publicly_notarized_purchase_contract
