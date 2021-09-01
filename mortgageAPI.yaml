@@ -2395,6 +2395,18 @@ components:
                 - fr
                 - it
                 - en
+            gender:
+              type: string
+              enum:
+                - male
+                - female
+                - other
+              example: female
+              description: Gender of the applicant.
+            primaryApplicant:
+              type: boolean
+              description: Is the applicant primary?
+              example: false
         financialSituation:
           type: object
           properties:
