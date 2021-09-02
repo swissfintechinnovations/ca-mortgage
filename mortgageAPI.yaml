@@ -2234,6 +2234,11 @@ components:
           enum:
             - entire
             - partial
+        primaryApplicantId:
+          type: string
+          format: uuid
+          description: applicantId for primary applicant, In case of multiple applicant this field is mandatory
+          example: 576f8de3-6b30-4882-a7af-da2132a456cf
         tppAdvisorDetail:
           type: object
           properties:
@@ -2403,10 +2408,6 @@ components:
                 - other
               example: female
               description: Gender of the applicant.
-            primaryApplicant:
-              type: boolean
-              description: Is the applicant primary?
-              example: false
         financialSituation:
           type: object
           properties:
