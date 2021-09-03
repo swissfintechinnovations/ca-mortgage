@@ -2191,6 +2191,11 @@ components:
       required:
         - personList
       properties:
+        primaryApplicantId:
+          type: string
+          format: uuid
+          description: ApplicantId for primary applicant of the applicant party. In case of multiple applicants this field is mandatory.
+          example: 576f8de3-6b30-4882-a7af-da2132a456cf
         personList:
           type: array
           items:
@@ -2234,11 +2239,6 @@ components:
           enum:
             - entire
             - partial
-        primaryApplicantId:
-          type: string
-          format: uuid
-          description: applicantId for primary applicant, In case of multiple applicant this field is mandatory
-          example: 576f8de3-6b30-4882-a7af-da2132a456cf
         tppAdvisorDetail:
           type: object
           properties:
