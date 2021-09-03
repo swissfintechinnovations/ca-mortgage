@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 2.0.2
+  version: 2.1.0
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -2191,6 +2191,11 @@ components:
       required:
         - personList
       properties:
+        primaryApplicantId:
+          type: string
+          format: uuid
+          description: ApplicantId for primary applicant of the applicant party. In case of multiple applicants this field is mandatory.
+          example: 576f8de3-6b30-4882-a7af-da2132a456cf
         personList:
           type: array
           items:
@@ -2395,6 +2400,14 @@ components:
                 - fr
                 - it
                 - en
+            gender:
+              type: string
+              enum:
+                - male
+                - female
+                - other
+              example: female
+              description: Gender of the applicant.
         financialSituation:
           type: object
           properties:
