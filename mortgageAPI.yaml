@@ -2058,7 +2058,13 @@ components:
       required:
         - offerItemId
         - product
+        - trancheId
       properties:
+        trancheId:
+          type: string
+          format: uuid
+          description: Uuid of the tranche
+          example: 51b017e1-5e59-4b58-a0a0-c638c87db463
         offerItemId:
           type: string
           format: uuid
@@ -2299,6 +2305,11 @@ components:
           items:
             type: object
             properties:
+              trancheId:
+                type: string
+                format: uuid
+                description: Uuid of the tranche
+                example: 51b017e1-5e59-4b58-a0a0-c638c87db463
               productId:
                 type: string
                 format: uuid
@@ -2587,6 +2598,7 @@ components:
         - building_plan
         - survey_copy
         - cubical_calculation
+        - prospect_authorization
         - other
     # ---------
 
