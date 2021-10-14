@@ -804,6 +804,21 @@ paths:
                       type: integer
                     uploaddate:
                       $ref: '#/components/schemas/Date'
+                    statusInfo:
+                      description: 'Document status info'
+                      type: object
+                      required:
+                        - status
+                      properties:
+                        status:
+                          type: string
+                          enum:
+                            - accepted
+                            - rejected
+                            - pending
+                        statusReason:
+                          type: string
+                          description: 'The reason, of current status.'
           headers:
             X-Correlation-ID:
               schema:
