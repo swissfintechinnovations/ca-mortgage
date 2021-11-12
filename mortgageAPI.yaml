@@ -2806,6 +2806,7 @@ components:
         - building_plan
         - survey_copy
         - cubical_calculation
+        - prospect_authorization
         - other
     # ---------
 
