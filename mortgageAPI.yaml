@@ -1264,7 +1264,7 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-  /mortgages/offers/{offerId}/{language}/document:
+  /mortgages/offers/{offerId}/document:
     get:
       summary: Get document for the given offer
       description: Get document for the offer, this can be used by TPP to display offer content
@@ -1279,7 +1279,7 @@ paths:
           example: 8109fc33-8af0-4072-98aa-a7d0c5c896a7
           required: true
           description: Uuid v4 of an offer
-        - in: path
+        - in: query
           name: language
           schema:
             type: string
@@ -2856,16 +2856,18 @@ components:
           type: string
           example: MortgageOffer_WaimerANON_587b23d1-12a8-475a-968b-abee245e3393
           description: Name of the document
-        orderId:
+        parentId:
           type: string
           format: uuid
           example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
-          description: Order Id for given document
-        offerId:
+          description: Id for parentType given document
+        parrentType:
           type: string
-          format: uuid
-          example: 2752ce81-5bf0-4991-79ac-87d6e7fd0c47
-          description: offer Id for given document
+          example: offer
+          enum:
+            - offer
+            - order
+          description: parent object for which this document is generated
         content:
           type: string
           description: base64 Encoded Content
