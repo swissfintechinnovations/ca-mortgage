@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 2.2.0
+  version: 2.3.0
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -1013,6 +1013,70 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
+  /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/required-information:
+    get:
+      summary: List all required documents / information for processing specific Financial request at FI
+      description: List all required documents / information for processing specific Financial request at FI
+        This can be used when NO offer is available from FI
+      tags:
+        - Mortgage Financing Request
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+            format: uuid
+          example: 1a75e7fc-f3c3-99a9-9268-ec21c405bbc8
+          required: true
+          description: Uuid v4 of the application request
+        - in: path
+          name: financingRequestId
+          schema:
+            type: string
+            format: uuid
+          example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
+          required: true
+          description: Uuid v4 of the financing request
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  financingRequestId:
+                    type: string
+                    format: uuid
+                  documents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DocumentType'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}:
     get:
       summary: Get the details of a financing request
@@ -1200,6 +1264,68 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
+  /mortgages/offers/{offerId}/document:
+    get:
+      summary: Get document for the given offer
+      description: Get document for the offer, this can be used by TPP to display offer content
+      tags:
+        - Mortgage Offers
+      parameters:
+        - in: path
+          name: offerId
+          schema:
+            type: string
+            format: uuid
+          example: 8109fc33-8af0-4072-98aa-a7d0c5c896a7
+          required: true
+          description: Uuid v4 of an offer
+        - in: query
+          name: language
+          schema:
+            type: string
+            enum:
+              - de
+              - fr
+              - it
+              - en
+          description: 'Language of Document content'
+          example: fr
+          required: true
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document:
+                    $ref: '#/components/schemas/Document'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}/required-information:
     get:
       summary: List all required documents / information for processing specific offer at FI
@@ -1405,6 +1531,69 @@ paths:
                   detail:
                     type: string
                     example: Waiting for details
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+
+  /mortgages/orders/{orderId}/document:
+    get:
+      summary: Get document for the given order
+      description: Get document for given order, this can be used by TPP to display offer content
+      tags:
+        - Mortgage Order
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: string
+            format: uuid
+          example: 8109fc33-8af0-4072-98aa-a7d0c5c896a7
+          required: true
+          description: Uuid v4 of an order
+        - in: query
+          name: language
+          schema:
+            type: string
+            enum:
+              - de
+              - fr
+              - it
+              - en
+          description: 'Language of Document content'
+          example: fr
+          required: true
+
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document:
+                    $ref: '#/components/schemas/Document'
           headers:
             X-Correlation-ID:
               schema:
@@ -2292,6 +2481,7 @@ components:
               example: '+41443343456'
             address:
               $ref: '#/components/schemas/structuredAddress'
+
     # ---------
 
     # ---- Financing Request ----
@@ -2521,6 +2711,8 @@ components:
           $ref: '#/components/schemas/Amount'
         remark:
           type: string
+        assetProvider:
+          $ref: '#/components/schemas/AssetProvider'
     UsedAsset:
       description: Asset used by an applicant.
       type: object
@@ -2540,6 +2732,8 @@ components:
           format: uuid
           description: UUID v4 of the applicant (existing applicant within the current application)
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
+        assetProvider:
+          $ref: '#/components/schemas/AssetProvider'
     IncomeType:
       description: Common set of income types.
         For the enum value self_employment and dividend the 3 years avg is relevant.
@@ -2613,7 +2807,6 @@ components:
         - building_plan
         - survey_copy
         - cubical_calculation
-        - prospect_authorization
         - other
     # ---------
 
@@ -2645,6 +2838,53 @@ components:
           type: boolean
           description: The order will not be persistent in the FI backend.
           example: true
+        remark:
+          type: string
+          example: All documents verified at TPP
+          description: Remark/comment which can be added by TPP
+
+    # ---------
+
+    # ---- Document ----
+    Document:
+      description: Document containing information for givent document type for given order.
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: MortgageOffer_WaimerANON_587b23d1-12a8-475a-968b-abee245e3393
+          description: Name of the document
+        parentId:
+          type: string
+          format: uuid
+          example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
+          description: Id for parent object of given document
+        content:
+          type: string
+          description: base64 Encoded Content
+          example: JVBERi0xLjQKJeLjz9MKMzEgMCBvYmoKPDwvQnl0ZVJhbmdl
+        contentType:
+          type: string
+          description: Content type
+          example: application/octet-stream
+        createDate:
+          $ref: '#/components/schemas/Date'
+        modifyDate:
+          $ref: '#/components/schemas/Date'
+    # ---------
+    # ---- AssetProvider ----
+    AssetProvider:
+      description: Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type insurance, insurance company name is provided
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: Credit Suisse
+          description: Name of the asset provider
     # ---------
 
     # ---- AmountRange ----
