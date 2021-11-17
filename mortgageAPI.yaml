@@ -1309,6 +1309,7 @@ paths:
               schema:
                 type: string
               description: Reflects the ID (set by the caller) from the request.
+
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1552,7 +1553,7 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-  /mortgages/orders/{orderId}/{language}/document:
+  /mortgages/orders/{orderId}/document:
     get:
       summary: Get document for the given order
       description: Get document for given order, this can be used by TPP to display offer content
@@ -1567,7 +1568,7 @@ paths:
           example: 8109fc33-8af0-4072-98aa-a7d0c5c896a7
           required: true
           description: Uuid v4 of an order
-        - in: path
+        - in: query
           name: language
           schema:
             type: string
@@ -2806,7 +2807,6 @@ components:
         - building_plan
         - survey_copy
         - cubical_calculation
-        - prospect_authorization
         - other
     # ---------
 
@@ -2838,7 +2838,7 @@ components:
           type: boolean
           description: The order will not be persistent in the FI backend.
           example: true
-        remarks:
+        remark:
           type: string
           example: All documents verified at TPP
           description: Remark/comment which can be added by TPP
@@ -2860,14 +2860,7 @@ components:
           type: string
           format: uuid
           example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
-          description: Id for parentType given document
-        parrentType:
-          type: string
-          example: offer
-          enum:
-            - offer
-            - order
-          description: parent object for which this document is generated
+          description: Id for parent object of given document
         content:
           type: string
           description: base64 Encoded Content
@@ -2883,7 +2876,7 @@ components:
     # ---------
     # ---- AssetProvider ----
     AssetProvider:
-      description: Asset provider for each assetBased on the asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type insurance, the contract number and insurance company is good to know. A generic approach could be possible to cover all possible asset types. E.g. the bank account number in case of third pillar or cash in the usage form of pledge.
+      description: Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type insurance, insurance company name is provided
       type: object
       required:
         - name
