@@ -1082,7 +1082,7 @@ paths:
       summary: Get the details of a financing request
       description: Get a specific financing request based on the financingRequestId
       tags:
-        - Mortgage FinancingRequest
+        - Mortgage Financing Request
       parameters:
         - in: path
           name: applicationId
@@ -1847,7 +1847,7 @@ components:
       example: CH
       description: 2-Letter ISO 3166-2 Country Code
     # ------------
-    # ---- Error Response (compliant to SIX b.Link)
+    # ---- Error Response
     commonErrorResponse:
       title: Common Error Response
       type: object
@@ -2058,6 +2058,11 @@ components:
               enum: [garden_flat, floor_flat, roof_flat, attic]
               description: 'The type of the appartment (floor, garden level, storey).'
               example: 'floor_flat'
+            buildingType:
+              type: string
+              enum: [multiple_family_house, terrace_house]
+              description: 'The type of the building (multiple_family_house, terrace_house).'
+              example: 'multiple_family_house'
             locationInTheBuildingRating:
               $ref: '#/components/schemas/PropertyObjectRatingType'
         propertyBuildingInformation:
@@ -2286,8 +2291,6 @@ components:
     ProductVariation:
       description: Product variation details
       type: object
-      required:
-        - duration
       properties:
         duration:
           type: integer
@@ -2322,7 +2325,6 @@ components:
         - productId
         - names
         - interestRateType
-        - productVariations
       properties:
         productId:
           type: string
@@ -2491,7 +2493,6 @@ components:
       required:
         - applicationId
         - amount
-        - usedAssets
       properties:
         financingRequestId:
           type: string
@@ -2743,6 +2744,9 @@ components:
         - employment_gross
         - employment_net
         - self_employment
+        - self_employment_year-1
+        - self_employment_year-2
+        - self_employment_year-3
         - bonus_year-1
         - bonus_year-2
         - bonus_year-3
