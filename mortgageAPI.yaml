@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 2.3.0
+  version: 2.4.0
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
