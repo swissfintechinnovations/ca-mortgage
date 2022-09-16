@@ -1942,6 +1942,11 @@ components:
           enum: [main_residence, main_residence_with_use_restriction, second_residence, second_residence_with_use_restriction, rented_property, rented_property_with_use_restriction, other]
           description: 'The class of property (Main residence, second residence, rented).'
           example: 'main_residence'
+        usageType:
+          type: string
+          enum: enum: [self, let]
+          description: 'The type of usage of the financing property: self, let'
+          example: 'self'
         ceilingHight:
           type: string
           enum: [especially_high, middle, especially_low]
