@@ -1933,6 +1933,11 @@ components:
               enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco]
               description: 'The minergie standard'
               example: 'minergie-p'
+            luxusFlag:
+              type: string
+              enum: [0, 0.5, 1.0]
+              description: 'If the property is luxury'
+              example: '0'
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
             stateBuildingType:
