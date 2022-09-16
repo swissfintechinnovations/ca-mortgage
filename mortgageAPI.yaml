@@ -1928,6 +1928,37 @@ components:
               description: 'renovation year'
               example: 1990
               default: 0
+            propertyRenovations:
+              type: array
+              items:
+                type: object
+                properties:
+                  refurbishmentComponentType:
+                    type: string
+                    enum:
+                      - total
+                      - interior_fittings_kitchen
+                      - interior_fittings_bathroom_sanitary
+                      - interior_fittings_floor_cover
+                      - interior_fittings_remaining
+                      - building_envelope_pitched_roof
+                      - building_envelope_flat_roof
+                      - building_services_heat_production
+                      - building_services_heat_emission
+                      - buildings_services_electrical_ventilation_elevator
+                      - work_on_surroundings
+                      - supporting_structure
+                      - building_envelope_windows
+                      - building_envelope_facade_balcony
+                    description: 'Type of Property Component which has been renovated'
+                    example: 'interior_fittings_floor_cover'
+                  yearOfRenovation:
+                    type: integer
+                    description: 'renovation year'
+                    example: '2015'
+                    default: 0
+                  renovationCost:
+                    $ref: '#/components/schemas/Amount'
             minergieStandardType:
               type: string
               enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco]
