@@ -1959,6 +1959,7 @@ components:
                     default: 0
                   renovationCost:
                     $ref: '#/components/schemas/Amount'
+                    description: 'cost of renovation'
             minergieStandardType:
               type: string
               enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco]
