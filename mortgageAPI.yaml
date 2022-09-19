@@ -2408,6 +2408,11 @@ components:
           format: uuid
           description: ApplicantId for primary applicant of the applicant party. In case of multiple applicants this field is mandatory.
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
+        tppPrimaryApplicantId:
+          type: string
+          pattern: '^[a-zA-Z0-9]{6,10}$'
+          description: 'ApplicantId for the applying party defined by TPP'
+          example: 'asd23f'
         personList:
           type: array
           items:
@@ -2549,6 +2554,11 @@ components:
           format: uuid
           description: UUID v4 of the applicant (to be defined by TPP)
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
+        tppApplicantId:
+          type: string
+          pattern: '^[a-zA-Z0-9]{6,10}$'
+          description: 'ApplicantId defined by TPP'
+          example: 'asd23f'
         applicantType:
           type: string
           example: individual
