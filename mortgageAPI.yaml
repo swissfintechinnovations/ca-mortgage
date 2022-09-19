@@ -2582,6 +2582,8 @@ components:
                 - divorced
                 - widowed
                 - registered-partnership
+                - legally separated
+                - Partnership dissolved
             matrimonialPropertyScheme:
               type: string
               example: separateEstate
