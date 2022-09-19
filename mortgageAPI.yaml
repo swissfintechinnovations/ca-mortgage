@@ -2388,6 +2388,9 @@ components:
           type: string
         maturityDate:
           $ref: '#/components/schemas/Date'
+        startDate
+          $ref: '#/components/schemas/Date'
+          description: 'Start date of the mortgage'
         interest:
           $ref: '#/components/schemas/Interest'
         amountRange:
