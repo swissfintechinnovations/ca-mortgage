@@ -2394,6 +2394,9 @@ components:
           $ref: '#/components/schemas/AmountRange'
         increment:
           type: integer
+        datePriceFixing:
+          $ref: '#/components/schemas/Date'
+          description: 'The date when the price has been fixed'
     # ---------
 
     # ---- Party ----
