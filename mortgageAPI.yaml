@@ -2444,6 +2444,7 @@ components:
           enum:
             - buy
             - replacement
+            - construction_financing
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
