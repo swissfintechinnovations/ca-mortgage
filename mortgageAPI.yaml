@@ -2608,6 +2608,13 @@ components:
               type: string
               description: Email of the applicant
               example: max.muster@domain.ch
+            rating:
+              type: integer
+              description: 'Solvency rating of the applicant e.g. CRIF'
+              example: '420'
+            ratingDate:
+              $ref: '#/components/schemas/Date'
+              description: 'Date of the solvency rating'
             applicantLanguage:
               type: string
               example: fr
