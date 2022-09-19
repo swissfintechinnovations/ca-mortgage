@@ -1962,6 +1962,13 @@ components:
           enum: [premium, highlevel, basic, lowlevel]
           description: 'Building standard of the sanitary installations.'
           example: 'basic'
+        heatProduction:
+          type: array
+          items:
+            type: string
+            enum: [oil, gas, wood, electric, geothermal_probe, district, solar_panel, solar_thermal_collector]
+            description: 'Type of the heat production'
+            example: 'gas'
         outsideConstructionZone:
           type: boolean
           description: 'If the property is outside of the construction zone.'
