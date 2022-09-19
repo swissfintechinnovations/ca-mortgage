@@ -2143,6 +2143,7 @@ components:
                 - wup
             amount:
               $ref: '#/components/schemas/Amount'
+              description: 'Estimated Market value of the property'
             estimationDate:
               $ref: '#/components/schemas/Date'
         purchaseDate:
