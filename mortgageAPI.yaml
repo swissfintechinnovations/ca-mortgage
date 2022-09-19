@@ -2394,6 +2394,22 @@ components:
           $ref: '#/components/schemas/AmountRange'
         increment:
           type: integer
+        incrementType:
+          type: string
+          enum: [direct, indirect]
+        incrementAmount:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount of the periodic increment'
+        incrementStart:
+          $ref: '#/components/schemas/Date'
+          description: 'Start date of increment'
+        incrementPeriodicity:
+          type: string
+          enum: [yearly, quarterly, monthly]
+          description: 'The periodicity the increment is paid'
+        incrementAccountNr:
+          type: string
+          description: 'the account number from which the increment is paid'
     # ---------
 
     # ---- Party ----
