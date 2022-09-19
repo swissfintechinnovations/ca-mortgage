@@ -2097,7 +2097,7 @@ components:
               type: array
               items:
                 type: string
-                enum: [ventilation_system_without_mingergie, barrier-free_living, automated_building_control]
+                enum: [ventilation_system_without_mingergie, barrier-free_living, automated_building_control, indoor_pool, outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, passenger_elevator, freight_elevator]
                 description: 'Additional features and services.'
                 example: 'outdoor_pool'
             houseType:
