@@ -2132,6 +2132,19 @@ components:
               description: 'Payment received at the building right expiry.'
         objectPrice:
           $ref: '#/components/schemas/Amount'
+          description: 'Price paid to buy the property'
+        renovationAmount:
+          $ref: '#/components/schemas/Amount'
+          description: 'Amount needed to pay the planned renovation (Renovationsbetrag)'
+        investmentCost:
+          $ref: '#/components/schemas/Amount'
+          description: 'Total amount needed to pay object price and planned renovation (Total Anlagekosten)'
+        collateralValue:
+          $ref: '#/components/schemas/Amount'
+          description: 'Value of the property as base for the securization applying the lowest value principle (Belehnungsbasis)'
+        limitForLandEncumbrances:
+          $ref: '#/components/schemas/Amount'
+          description: 'The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)'
         estimation:
           type: object
           properties:
