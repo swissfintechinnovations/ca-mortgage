@@ -2608,6 +2608,10 @@ components:
               type: string
               description: Email of the applicant
               example: max.muster@domain.ch
+            phone:
+              type: string
+              description: 'Phone number of the applicant'
+              example: '+41443343456'
             applicantLanguage:
               type: string
               example: fr
