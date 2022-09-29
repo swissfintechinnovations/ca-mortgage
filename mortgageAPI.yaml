@@ -2192,6 +2192,9 @@ components:
           $ref: '#/components/schemas/Amount'
         validFrom:
           $ref: '#/components/schemas/Date'
+        offerDate:
+          $ref: '#/components/schemas/Date'
+          description: 'The date when the offer is made by the FI.'
         validTo:
           $ref: '#/components/schemas/Date'
         interestRate:
@@ -2394,9 +2397,6 @@ components:
           $ref: '#/components/schemas/AmountRange'
         increment:
           type: integer
-        datePriceFixing:
-          $ref: '#/components/schemas/Date'
-          description: 'The date when the price has been fixed'
     # ---------
 
     # ---- Party ----
