@@ -2612,6 +2612,10 @@ components:
               type: integer
               description: 'Solvency rating of the applicant e.g. CRIF'
               example: '420'
+            ratingSourceType:
+              type: string
+              enum: 
+                - CRIF
             ratingDate:
               $ref: '#/components/schemas/Date'
               description: 'Date of the solvency rating'
