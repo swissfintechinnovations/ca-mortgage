@@ -2666,7 +2666,7 @@ components:
                items:
                  type: object
                  required:
-                   - valueAdditionalPropert
+                   - valueAdditionalProperty
                    - propertyTypeAdditionalProperty
                  properties:
                    streetNameAdditionalProperty:
