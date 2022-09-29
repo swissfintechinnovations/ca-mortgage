@@ -2394,22 +2394,22 @@ components:
           $ref: '#/components/schemas/AmountRange'
         increment:
           type: integer
-        incrementType:
+        amortizationType:
           type: string
           enum: [direct, indirect]
-        incrementAmount:
+        amortizationAmount:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount of the periodic increment'
-        incrementStart:
+          description: 'The amount of the periodic amortization'
+        amortizationStart:
           $ref: '#/components/schemas/Date'
-          description: 'Start date of increment'
-        incrementPeriodicity:
+          description: 'Start date of amortization'
+        amortizationPeriodicity:
           type: string
           enum: [yearly, quarterly, monthly]
-          description: 'The periodicity the increment is paid'
-        incrementAccountNr:
+          description: 'The periodicity the amortization is paid'
+        amortizationAccountNr:
           type: string
-          description: 'the account number from which the increment is paid'
+          description: 'the account number from which the amortization is paid'
     # ---------
 
     # ---- Party ----
