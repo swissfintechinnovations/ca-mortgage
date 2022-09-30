@@ -491,7 +491,8 @@ paths:
               schema:
                 type: object
                 properties:
-                  status:
+                  reason:
+                    description: The reason for rejecting an application
                     type: string
           headers:
             X-Correlation-ID:
@@ -2533,6 +2534,11 @@ components:
             $ref: '#/components/schemas/UsedAsset'
         publicCertDate:
           $ref: '#/components/schemas/Date'
+        requestOfferType:
+          type: string
+          enum:
+            - binding
+            - indicative
     # ---------
 
     # ---- Applicant ----
@@ -2838,10 +2844,6 @@ components:
           type: string
           format: uuid
           example: 59e8c8a6-4d32-4e7b-bcf0-05813029498e
-        validateOnly:
-          type: boolean
-          description: The order will not be persistent in the FI backend.
-          example: true
         remark:
           type: string
           example: All documents verified at TPP
