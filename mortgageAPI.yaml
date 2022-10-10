@@ -2149,7 +2149,6 @@ components:
           $ref: '#/components/schemas/Date'
         estimationId
           type: string
-          pattern: '^[a-zA-Z0-9]{6,10}$'
           descpription: 'ID of the property estimation'
           example: 'asd23f'
         remarks:
