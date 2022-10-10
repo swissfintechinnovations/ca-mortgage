@@ -2397,6 +2397,8 @@ components:
         amortizationType:
           type: string
           enum: [direct, indirect]
+          description: 'The type of amortization'
+          example: 'direct'
         amortizationAmount:
           $ref: '#/components/schemas/Amount'
           description: 'The amount of the periodic amortization'
@@ -2407,6 +2409,7 @@ components:
           type: string
           enum: [yearly, quarterly, monthly]
           description: 'The periodicity the amortization is paid'
+          example: 'quarterly'
         amortizationAccountNr:
           type: string
           description: 'the account number from which the amortization is paid'
