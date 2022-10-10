@@ -2666,6 +2666,7 @@ components:
               enum:
                 - home_owner
                 - renter
+              example: 'renter'
     # ---------
 
     # ---- Mortgage data types ----
