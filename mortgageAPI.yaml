@@ -2439,7 +2439,7 @@ components:
           $ref: '#/components/schemas/PropertyObject'
         mortgageType:
           type: string
-          description: 'Type of business, Values: buy, replacement.'
+          description: 'Type of business.'
           example: buy
           enum:
             - buy
