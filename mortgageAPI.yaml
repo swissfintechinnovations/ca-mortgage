@@ -2611,7 +2611,7 @@ components:
             rating:
               type: integer
               description: 'Solvency rating of the applicant e.g. CRIF'
-              example: '420'
+              example: 420
             ratingSourceType:
               type: string
               description: 'Provider of the solvency rating'
