@@ -1936,7 +1936,7 @@ components:
             luxusFlag:
               type: string
               enum: [0, 0.5, 1.0]
-              description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes.'
+              description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes. Proposed Mapping of WuP-Values: 1.0-4.0 => 0 (No) / 4.1-4.5 => 0.5 (Partially) / 4.6-5.0 = >1.0 (Yes).'
               example: '0'
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
