@@ -1950,7 +1950,10 @@ components:
                       - supporting_structure
                       - building_envelope_windows
                       - building_envelope_facade_balcony
-                    description: 'Type of Property Component which has been renovated'
+                      - interior_fittings
+                      - building_envelope
+                      - building_services
+                    description: 'Type of Property Component which has been renovated. Please use consistently either the detailed Component Types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings)'
                     example: 'interior_fittings_floor_cover'
                   yearOfRenovation:
                     type: integer
