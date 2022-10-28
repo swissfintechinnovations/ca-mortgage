@@ -2775,6 +2775,26 @@ components:
               type: string
               description: Email of the applicant
               example: max.muster@domain.ch
+            solvencyRating:
+              description: 'Solvency rating of the applicant e.g. CRIF'
+              type: object
+              required:
+                - ratingValue
+                - ratingSourceType
+              properties:
+                ratingValue:
+                  type: integer
+                  description: ' Solvency rating value'
+                  example: 420
+                ratingSourceType:
+                  type: string
+                  description: 'Provider of the solvency rating'
+                  example: 'crif'
+                  enum: 
+                    - crif
+                ratingDate:
+                  $ref: '#/components/schemas/Date'
+                  description: 'Date of the solvency rating'
             applicantLanguage:
               type: string
               example: fr
