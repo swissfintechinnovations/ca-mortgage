@@ -2622,6 +2622,11 @@ components:
               maxLength: 70
               description: Surname of the TPP advisor
               example: Max
+            nameTpp:
+              type: string
+              maxLength: 70
+              description: 'Firm of the TPP advisor'
+              example: 'Muster Finanz AG'
             email:
               type: string
               description: Email of the TPP advisor
