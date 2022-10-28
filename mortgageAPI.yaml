@@ -2589,11 +2589,11 @@ components:
             - buy
             - replacement
             - construction_financing
-         channelType:
-           type: string
-           enum: [advisor, direct]
-           description: 'The type of the channel the application was generated' 
-           example: 'advisor'
+        channelType:
+          type: string
+          enum: [advisor, direct]
+          description: 'The type of the channel the application was generated' 
+          example: 'advisor'
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
