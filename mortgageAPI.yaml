@@ -1982,6 +1982,11 @@ components:
           enum: [main_residence, main_residence_with_use_restriction, second_residence, second_residence_with_use_restriction, rented_property, rented_property_with_use_restriction, other]
           description: 'The class of property (Main residence, second residence, rented).'
           example: 'main_residence'
+        floorPlan:
+          type: string
+          enum: [efficient, average, inefficient]
+          description: 'The efficiency of the floor plan'
+          example: 'average'
         usageType:
           type: string
           enum: enum: [self, let]
