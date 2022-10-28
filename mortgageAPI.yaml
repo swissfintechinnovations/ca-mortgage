@@ -2887,6 +2887,7 @@ components:
         - vested_benefit
         - life_insurance_3a
         - life_insurance_3b
+        - unpledged_building_plot
     AssetUsageType:
       description: Common set of asset usage types.
       type: string
