@@ -1965,7 +1965,7 @@ components:
                     description: 'cost of renovation'
             minergieStandardType:
               type: string
-              enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco]
+              enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco, minergie-a, minergie-a-eco]
               description: 'The minergie standard'
               example: 'minergie-p'
             luxusFlag:
