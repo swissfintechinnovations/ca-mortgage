@@ -1928,11 +1928,51 @@ components:
               description: 'renovation year'
               example: 1990
               default: 0
+            propertyRenovations:
+              type: array
+              items:
+                type: object
+                properties:
+                  refurbishmentComponentType:
+                    type: string
+                    enum:
+                      - total
+                      - interior_fittings_kitchen
+                      - interior_fittings_bathroom_sanitary
+                      - interior_fittings_floor_cover
+                      - interior_fittings_remaining
+                      - building_envelope_pitched_roof
+                      - building_envelope_flat_roof
+                      - building_services_heat_production
+                      - building_services_heat_emission
+                      - buildings_services_electrical_ventilation_elevator
+                      - work_on_surroundings
+                      - supporting_structure
+                      - building_envelope_windows
+                      - building_envelope_facade_balcony
+                      - interior_fittings
+                      - building_envelope
+                      - building_services
+                    description: 'Type of Property Component which has been renovated. Please use consistently either the detailed Component Types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings)'
+                    example: 'interior_fittings_floor_cover'
+                  yearOfRenovation:
+                    type: integer
+                    description: 'renovation year'
+                    example: '2015'
+                    default: 0
+                  renovationCost:
+                    $ref: '#/components/schemas/Amount'
+                    description: 'cost of renovation'
             minergieStandardType:
               type: string
-              enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco]
+              enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco, minergie-a, minergie-a-eco]
               description: 'The minergie standard'
               example: 'minergie-p'
+            luxusFlag:
+              type: string
+              enum: [0, 0.5, 1.0]
+              description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes. Proposed Mapping of WuP-Values: 1.0-4.0 => 0 (No) / 4.1-4.5 => 0.5 (Partially) / 4.6-5.0 = >1.0 (Yes).'
+              example: '0'
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
             stateBuildingType:
@@ -1947,6 +1987,16 @@ components:
           enum: [efficient, average, inefficient]
           description: 'The efficiency of the floor plan'
           example: 'average'
+        usageType:
+          type: string
+          enum: enum: [self, let]
+          description: 'The type of usage of the financing property: self, let'
+          example: 'self'
+        propertyType:
+          type: string
+          enum: [single_family_house, condominium, vacation_house, vacation_condominium, agricultural_farm, 2or3_family_house, multi_family_house, residential_building_plot, building_plot_other, mixed_property, commercial_condominium, office_building, industrial_building, special_object]
+          description: 'The type of property'
+          example: 'single_familiy_house'
         ceilingHight:
           type: string
           enum: [especially_high, middle, especially_low]
