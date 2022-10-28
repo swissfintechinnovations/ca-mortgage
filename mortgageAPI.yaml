@@ -2583,6 +2583,22 @@ components:
           enum:
             - entire
             - partial
+        replacedTranches:
+          type: array
+          items:
+            type: object
+            properties:
+              replacedTrancheAmount:
+                $ref: '#/components/schemas/Amount'
+                description: 'The amount of the replaced tranche'
+              replacedTrancheExpiry:
+                $ref: '#/components/schemas/Date'
+                description: 'The expiry date of the replaced tranche'
+                example: 2022-05-03
+              replacedTrancheIssuer:
+                type: string
+                description: 'The institute who has issued the replaced tranche'
+                example: 'Credit Suisse'
         tppAdvisorDetail:
           type: object
           properties:
