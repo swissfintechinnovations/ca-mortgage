@@ -2963,6 +2963,11 @@ components:
         - asset_consumption_after_retirement
         - fixed_expenses
         - dividend
+        - leasing_payment
+        - consumer_loan_payment
+        - child_allowance_payment
+        - rental_costs
+        - costs_for_additional_properties
     DocumentType:
       description: All supported document types.
         For the enum value tax_statement. Tax statement is required.
