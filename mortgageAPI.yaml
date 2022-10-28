@@ -2821,6 +2821,9 @@ components:
               type: array
               items:
                 type: object
+                required:
+                  - incomeType
+                  - amount
                 properties:
                   incomeType:
                     $ref: '#/components/schemas/IncomeType'
@@ -2832,6 +2835,9 @@ components:
               type: array
               items:
                 type: object
+                required:
+                  - liabilityType
+                  - amount
                 properties:
                   liabilityType:
                     type: string
