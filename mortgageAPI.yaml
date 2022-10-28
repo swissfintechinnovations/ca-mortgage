@@ -2777,6 +2777,10 @@ components:
               type: string
               description: Email of the applicant
               example: max.muster@domain.ch
+            phone:
+              type: string
+              description: 'Phone number of the applicant'
+              example: '+41443343456'
             solvencyRating:
               description: 'Solvency rating of the applicant e.g. CRIF'
               type: object
