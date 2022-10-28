@@ -2167,6 +2167,11 @@ components:
               type: integer
               description: 'The surface area of the land.'
               example: 2000
+            environmentStandard:
+              type: string
+              enum: [high-level, basic, low-level]
+              description: 'The rating type'
+              example: 'basic'
             otherFeatures:
               type: array
               items:
