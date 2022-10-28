@@ -2044,6 +2044,11 @@ components:
               format: double
               description: 'The number of the rooms.'
               example: 4.5
+            numberOfRoomsInGrannyFlat:
+              type: number
+              format: double
+              description: 'The number of the rooms in the granny flat'
+              example: '2.5'
             roomCountType:
               type: string
               enum: [kitchen_not_counted, kitchen_half_room, kitchen_full_room]
