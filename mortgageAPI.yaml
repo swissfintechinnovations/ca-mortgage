@@ -1989,7 +1989,7 @@ components:
           example: 'average'
         usageType:
           type: string
-          enum: enum: [self, let]
+          enum: [self, let]
           description: 'The type of usage of the financing property: self, let'
           example: 'self'
         propertyType:
@@ -2251,7 +2251,7 @@ components:
           $ref: '#/components/schemas/Date'
         estimationId
           type: string
-          descpription: 'ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.'
+          description: 'ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.'
           example: 'asd23f'
         remarks:
           type: string
