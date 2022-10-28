@@ -2850,6 +2850,12 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Asset'
+            residentialSituation:
+              type: string
+              enum:
+                - home_owner
+                - renter
+              example: 'renter'
     # ---------
 
     # ---- Mortgage data types ----
