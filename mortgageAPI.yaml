@@ -2669,11 +2669,11 @@ components:
                    - valueAdditionalProperty
                    - propertyTypeAdditionalProperty
                  properties:
-                   streetNameAdditionalProperty:
+                   nameAdditionalProperty:
                      type: string
                      maxLength: 70
-                     description: 'Street name of the additional property'
-                     example: 'Holderstrasse 10'
+                     description: 'Name of the additional property'
+                     example: 'Orchard Villa, Holderstrasse 10'
                    valueAdditionalProperty:
                      $ref: '#/components/schemas/Amount'
                      description: 'Value of the additional property'
