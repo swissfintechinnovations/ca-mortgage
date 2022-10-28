@@ -2149,7 +2149,7 @@ components:
           $ref: '#/components/schemas/Date'
         estimationId
           type: string
-          descpription: 'ID of the property estimation'
+          descpription: 'ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.'
           example: 'asd23f'
         remarks:
           type: string
