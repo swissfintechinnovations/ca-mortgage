@@ -2484,7 +2484,7 @@ components:
         - maturityDate
         - interest
         - amountRange
-        - increment
+        - amortization
       properties:
         conditionId:
           type: string
@@ -2502,7 +2502,7 @@ components:
           $ref: '#/components/schemas/Interest'
         amountRange:
           $ref: '#/components/schemas/AmountRange'
-        increment:
+        amortization:
           type: integer
         amortizationType:
           type: string
