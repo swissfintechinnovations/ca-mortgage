@@ -2540,6 +2540,10 @@ components:
           format: uuid
           description: ApplicantId for primary applicant of the applicant party. In case of multiple applicants this field is mandatory.
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
+        fiPrimaryApplicantId:
+          type: string
+          description: 'ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple applicants and if known at the moment of the application.'
+          example: 'asd23f'
         personList:
           type: array
           items:
@@ -2697,6 +2701,10 @@ components:
           format: uuid
           description: UUID v4 of the applicant (to be defined by TPP)
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
+        fiApplicantId:
+          type: string
+          description: 'ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.'
+          example: 'asd23f'
         applicantType:
           type: string
           example: individual
