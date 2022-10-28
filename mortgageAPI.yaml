@@ -39,7 +39,7 @@ security:
       - read
       - write
 paths:
-  /cases:
+  /mortgage-cases:
     get:
       tags:
         - Full Mortgage Cases
@@ -87,7 +87,7 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
           
-  /cases/{caseId}:
+  /mortgage-cases/{caseId}:
     get:
       tags:
         - Full Mortgage Cases
