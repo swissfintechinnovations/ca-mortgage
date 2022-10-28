@@ -2700,7 +2700,7 @@ components:
         - pledged
         - withdraw
     Asset:
-      description: Asset information.
+      description: 'Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.'
       type: object
       required:
         - assetType
@@ -2715,7 +2715,7 @@ components:
         assetProvider:
           $ref: '#/components/schemas/AssetProvider'
     UsedAsset:
-      description: Asset used by an applicant.
+      description: 'Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also be recorded in the array of assets in the financial situation of one applicant.'
       type: object
       required:
         - assetType
