@@ -2236,6 +2236,15 @@ components:
             amount:
               $ref: '#/components/schemas/Amount'
               description: 'Estimated Market value of the property'
+            statisticalPriceRangeMax:
+              $ref: '#/components/schemas/Amount'
+              description: 'Estimated statistical price range maximum'
+            statisticalPriceRangeMin:
+              $ref: '#/components/schemas/Amount'
+              description: 'Estimated statistical price range minimum'
+            yearlyRentalIncome:
+              $ref: '#/components/schemas/Amount'
+              description: 'Estimated rental income per year'
             estimationDate:
               $ref: '#/components/schemas/Date'
         purchaseDate:
