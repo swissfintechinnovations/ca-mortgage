@@ -2500,6 +2500,28 @@ components:
           $ref: '#/components/schemas/AmountRange'
         increment:
           type: integer
+        amortizationType:
+          type: string
+          enum: [direct, indirect]
+          description: 'The type of amortization'
+          example: 'direct'
+        amortizationAmount:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount of the periodic amortization'
+          example: 27400
+        amortizationStart:
+          $ref: '#/components/schemas/Date'
+          description: 'Start date of amortization'
+          example: 2018-04-13
+        amortizationPeriodicity:
+          type: string
+          enum: [yearly, quarterly, monthly]
+          description: 'The periodicity the amortization is paid'
+          example: 'quarterly'
+        amortizationAccountNr:
+          type: string
+          description: 'the account number from which the amortization is paid'
+          example: IE12BOFI90000112345678
     # ---------
 
     # ---- Party ----
