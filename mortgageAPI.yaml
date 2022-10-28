@@ -2120,7 +2120,7 @@ components:
               type: array
               items:
                 type: string
-                enum: [coowned_garden_terrace_room, coowned_indoor_pool, coowned_outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, elevator_in_stairwell, elevator_into_apartment, ventilation_system_without_mingergie, barrier-free_living, automated_building_control]
+                enum: [coowned_garden_terrace_room, coowned_indoor_pool, coowned_outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, elevator_in_stairwell, elevator_into_apartment, ventilation_system_without_mingergie, barrier-free_living, automated_building_control, ventilation_system_without_minergie]
                 description: 'Additional features and services.'
                 example: 'coowned_outdoor_pool'
             quote:
@@ -2176,7 +2176,7 @@ components:
               type: array
               items:
                 type: string
-                enum: [ventilation_system_without_mingergie, barrier-free_living, automated_building_control, indoor_pool, outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, passenger_elevator, freight_elevator]
+                enum: [ventilation_system_without_mingergie, barrier-free_living, automated_building_control, ventilation_system_without_minergie, indoor_pool, outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, passenger_elevator, freight_elevator]
                 description: 'Additional features and services.'
                 example: 'outdoor_pool'
             houseType:
