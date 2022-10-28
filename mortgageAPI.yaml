@@ -2462,6 +2462,7 @@ components:
               replacedTrancheExpiry:
                 $ref: '#/components/schemas/Date'
                 description: 'The expiry date of the replaced tranche'
+                example: 2022-05-03
               replacedTrancheIssuer:
                 type: string
                 description: 'The institute who has issued the replaced tranche'
