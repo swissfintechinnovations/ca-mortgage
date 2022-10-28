@@ -2167,7 +2167,7 @@ components:
               type: integer
               description: 'The volume of the house including the inhouse garage (relevant for WuP).'
               example: 1500
-              volumeIncludingAllGarages:
+            volumeIncludingAllGarages:
               type: integer
               description: 'The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).'
               example: 1620
