@@ -1933,6 +1933,11 @@ components:
               enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco]
               description: 'The minergie standard'
               example: 'minergie-p'
+            BECCStandardType:
+              type: string
+              enum: [none, A, B, C, D, E, F, G]
+              description: 'Energy certificate from Cantons'
+              example: 'B'
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
             stateBuildingType:
