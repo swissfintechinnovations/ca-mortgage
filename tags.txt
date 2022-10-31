@@ -1,0 +1,9 @@
+Tags to indicate a lack of documentation or minor issue. 
+
+(schema: tag - meaning)
+
+missingDescription                  - description for specific field is missing
+moreExpressiveDescription           - the description contains not enough information to explain the purpose or is more or less a duplicate to the summery
+changeType                          - consider other data type -> e.g. use integer instead of string
+default: missingDefaultOrExample    - a default or example field may be added here
+OtherIssue                          - all other issues that do not fit into one of the previous tags
