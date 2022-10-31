@@ -2458,12 +2458,12 @@ components:
               type: string
               maxLength: 70
               description: Name of the TPP advisor
-              example: Muster
+              example: Max
             surName:
               type: string
               maxLength: 70
               description: Surname of the TPP advisor
-              example: Max
+              example: Muster
             email:
               type: string
               description: Email of the TPP advisor
@@ -2562,12 +2562,12 @@ components:
               type: string
               maxLength: 70
               description: Name of the applicant
-              example: Muster
+              example: Max
             surName:
               type: string
               maxLength: 70
               description: Surname of the applicant
-              example: Max
+              example: Muster
             address:
               $ref: '#/components/schemas/structuredAddress'
             birthDate:
