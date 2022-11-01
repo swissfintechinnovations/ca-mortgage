@@ -59,7 +59,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  CaseList:
+                  caseList:
                     type: array
                     items:
                       $ref: '#/components/schemas/MortgageCase'
@@ -3079,7 +3079,7 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Asset'
-             additionalProperties:
+              additionalProperties:
                type: array
                items:
                  type: object
