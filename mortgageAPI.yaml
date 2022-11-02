@@ -43,7 +43,7 @@ paths:
     get:
       tags:
         - Full Mortgage Cases
-      description: List of mortgage cases for the authenticated contiext including the corresponding properties, sorted by caseId
+      description: List of mortgage cases for the authenticated context including the corresponding properties, sorted by caseId
       summary: Return the list of all mortgage cases for the authenticated context
       parameters:
         - $ref: '#/components/parameters/limit'
