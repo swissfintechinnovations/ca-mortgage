@@ -2255,8 +2255,12 @@ components:
               description: 'Estimated rental income per year'
             estimationDate:
               $ref: '#/components/schemas/Date'
-        purchaseDate:
+        transferOfOwnershipDate:
           $ref: '#/components/schemas/Date'
+          description: 'When the property will be fully transfered to the new owner'
+        publicNotarization:
+          $ref: '#/components/schemas/Date'
+          description: 'Date of public notarization'
         estimationId:
           type: string
           description: 'ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.'
