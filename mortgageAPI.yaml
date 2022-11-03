@@ -2242,7 +2242,7 @@ components:
               enum:
                 - iazi
                 - wup
-            amount:
+            marketValue:
               $ref: '#/components/schemas/Amount'
               description: 'Estimated Market value of the property'
             statisticalPriceRangeMax:
