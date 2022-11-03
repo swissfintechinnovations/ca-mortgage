@@ -1859,9 +1859,10 @@ components:
           example:
             This is the general problem description
         detail:
-          type: string
-          example:
-            Detailed problem description with respect to the current request
+          type: array
+          items:
+            type: string
+            example: List of detailed problem description with respect to the current request
         instance:
           type: string
           example:
