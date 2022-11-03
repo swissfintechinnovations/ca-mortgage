@@ -17,6 +17,8 @@ externalDocs:
   description: Find out more about SFTI API specifications
   url: 'https://www.common-api.ch'
 tags:
+  - name: Full Mortgage Cases
+    description: Operatios related to full mortgage cases including the application details
   - name: Existing Mortgages
     description: Operations related with existing mortgages
   - name: Mortgage Products and Conditions
@@ -37,6 +39,104 @@ security:
       - read
       - write
 paths:
+  /mortgage-cases:
+    get:
+      tags:
+        - Full Mortgage Cases
+      description: List of mortgage cases for the authenticated context including the corresponding properties, sorted by caseId
+      summary: Return the list of all mortgage cases for the authenticated context
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
+      responses:
+        '200':
+          description: Paginated list of all mortgage cases with all related information sorted by caseId
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  caseList:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MortgageCase'
+                  _links:
+                    $ref: '#/components/schemas/linksPagination'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+          
+  /mortgage-cases/{caseId}:
+    get:
+      tags:
+        - Full Mortgage Cases
+      description: A specific existing mortgage case including the corresponding properties
+      summary: Return a specific existing mortgage case
+      parameters:
+        - name: caseId
+          in: path
+          description: Uuid v4 of a specific existing mortgage case
+          required: true
+          example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
+      responses:
+        '200':
+          description: Mortgage case details with the corresponding properties.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Case:
+                    $ref: '#/components/schemas/MortgageCase'
+          headers:
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+
   /mortgages:
     get:
       tags:
@@ -2618,6 +2718,123 @@ components:
               $ref: '#/components/schemas/structuredAddress'
 
     # ---------
+
+    # ---- Mortgage Case ----
+    MortgageCase:
+      description: A complete mortgage case including the application details
+      type: object
+      required:
+        - caseId
+        - application
+        - financing
+      properties:
+        caseId:
+          type: string
+          format: uuid
+          example: 2e1d21c3-0cd5-4354-a9e9-d2eb2c28b780
+          description: Uuid v4 of the mortgage case
+        application:
+          $ref: '#/components/schemas/Application'
+        financing:
+          $ref: '#/components/schemas/Financing'
+        remark:
+          type: string
+          example: All documents verified at TPP
+          description: Remark/comment which can be added by TPP
+          
+    Financing:
+      description: Complete financing details of an application
+      type: object
+      required:
+        - amount
+      properties:
+        financingId:
+          type: string
+          format: uuid
+          description: Uuid of the financing
+          example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
+        applicationIdRef:
+          type: string
+          format: uuid
+          description: Uuid of the financing's corresponding application
+          example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
+        amount:
+          $ref: '#/components/schemas/Amount'
+        tranches:
+          type: array
+          items:
+            $ref: '#/components/schemas/FinancingTranche'
+        usedAssets:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsedAsset'
+        offerDate:
+          $ref: '#/components/schemas/Date'
+        publicCertDate:
+          $ref: '#/components/schemas/Date'
+          
+    FinancingTranche:
+      description: Tranche of a financing
+      type: object
+      required:
+        - amount
+        - payoutDate
+        - interest
+        - interestRateType
+      properties:
+        productIdRef:
+          type: string
+          format: uuid
+          description: Uuid of the product
+          example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
+        amount:
+          $ref: '#/components/schemas/Amount'
+        payoutDate:
+          $ref: '#/components/schemas/Date'
+        maturityDate:
+          $ref: '#/components/schemas/Date'
+        duration:
+          type: integer
+          minimum: 1
+          maximum: 20
+        interest: 
+          $ref: '#/components/schemas/Interest'
+        interestRateType:
+          type: string
+          example: libor
+          enum:
+            - variable
+            - libor
+            - saron
+            - fixed
+        saronperiod:
+          type: string
+          description: 'The saron period.'
+          example: 3m
+          enum:
+            - 1m
+            - 3m
+            - 6m
+            - 12m
+        amortizationType:
+          type: string
+          enum: [direct, indirect]
+          description: 'The type of amortization'
+          example: 'direct'
+        amortizationAmount:
+          $ref: '#/components/schemas/Amount'
+        amortizationStart:
+          $ref: '#/components/schemas/Date'
+        amortizationPeriodicity:
+          type: string
+          enum: [yearly, quarterly, monthly]
+          description: 'The periodicity the amortization is paid'
+          example: 'quarterly'
+        amortizationAccountNr:
+          type: string
+          description: 'the account number from which the amortization is paid'
+    
+    # --------
 
     # ---- Financing Request ----
     FinancingRequest:
