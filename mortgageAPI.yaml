@@ -392,17 +392,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'          
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -643,17 +633,7 @@ paths:
               type: string
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -831,23 +811,7 @@ paths:
                   example: 576f8de3-6b30-4882-a7af-da2132a456cf
       responses:
         '201':
-          description: created
-          headers:
-            documentId:
-              schema:
-                type: string
-                format: uuid
-                description: Uuid v4 of the created document defined by FI
-                example: 232af5ca-fca3-4bd4-b91d-23d755d9af0f
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1085,17 +1049,7 @@ paths:
               $ref: '#/components/schemas/FinancingRequest'
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1516,17 +1470,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1947,7 +1891,20 @@ components:
       example: CH
       description: 2-Letter ISO 3166-2 Country Code
     # ------------
-    # ---- Error Response
+    # ---- Response
+    commonResourceCreatedResponse:
+      title: Recource created response
+      description: Uuid v4 of the created resource
+      example: '20460121-6aff-485b-a61d-6056ecd72bd8'
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/CommonID'
+          description: Uuid v4 of the created resource
+          example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
+
     commonErrorResponse:
       title: Common Error Response
       type: object
@@ -1959,9 +1916,10 @@ components:
           example:
             This is the general problem description
         detail:
-          type: string
-          example:
-            Detailed problem description with respect to the current request
+          type: array
+          items:
+            type: string
+            example: List of detailed problem description with respect to the current request
         instance:
           type: string
           example:
@@ -1987,7 +1945,7 @@ components:
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
       example: '/problems/TECHNICAL_ERROR'
-    # ---- End Error Response
+    # ---- End Response
     # ---- End Common Data Model
 
     # ---- Property Object ----
@@ -2341,7 +2299,7 @@ components:
               enum:
                 - iazi
                 - wup
-            amount:
+            marketValue:
               $ref: '#/components/schemas/Amount'
               description: 'Estimated Market value of the property'
             statisticalPriceRangeMax:
@@ -2426,9 +2384,10 @@ components:
           type: string
         durationType:
           type: integer
-          example: 10
-          minimum: 1
-          maximum: 20
+          description: 'The duration in years.'
+          minimum: 0
+          maximum: 25
+          example: 5
         prolongable:
           type: boolean
         propertyObjects:
@@ -2512,10 +2471,9 @@ components:
       properties:
         duration:
           type: integer
-          format: int32
           description: 'The duration in years.'
-          minimum: 1
-          maximum: 20
+          minimum: 0
+          maximum: 25
           example: 5
         rate:
           type: number
@@ -2592,7 +2550,7 @@ components:
         - maturityDate
         - interest
         - amountRange
-        - increment
+        - amortization
       properties:
         conditionId:
           type: string
@@ -2603,14 +2561,18 @@ components:
           format: uuid
           example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
         duration:
-          type: string
+          type: integer
+          description: 'The duration in years.'
+          minimum: 0
+          maximum: 25
+          example: 5
         maturityDate:
           $ref: '#/components/schemas/Date'
         interest:
           $ref: '#/components/schemas/Interest'
         amountRange:
           $ref: '#/components/schemas/AmountRange'
-        increment:
+        amortization:
           type: integer
         amortizationType:
           type: string
@@ -2690,10 +2652,10 @@ components:
             - replacement
             - construction_financing
         channelType:
-          type: string
-          enum: [advisor, direct]
-          description: 'The type of the channel the application was generated' 
-          example: 'advisor'
+           type: string
+           enum: [advisor, direct]
+           description: 'The type of the channel the application was generated' 
+           example: 'advisor'
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
@@ -3050,6 +3012,9 @@ components:
               type: array
               items:
                 type: object
+                required:
+                  - incomeType
+                  - amount
                 properties:
                   incomeType:
                     $ref: '#/components/schemas/IncomeType'
@@ -3057,14 +3022,21 @@ components:
                     $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
+                  incomeProvider:
+                    description: 'Income provider for each income or cost position can be transfered.'
+                    type: string
+                    example: 'Employer AG'
             liabilities:
               type: array
               items:
                 type: object
+                required:
+                  - liabilityType
+                  - amount
                 properties:
                   liabilityType:
                     type: string
-                    example: mortgage
+                    example: 'mortgage'
                     description: Liability type
                     enum:
                       - leasing
@@ -3075,31 +3047,35 @@ components:
                     $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
+                  liabilityProvider:
+                    description: 'Name of the liability provider or creditor.'
+                    type: string
+                    example: 'Leasing Firm AG'
             assets:
               type: array
               items:
                 $ref: '#/components/schemas/Asset'
-              additionalProperties:
-               type: array
-               items:
-                 type: object
-                 required:
-                   - valueAdditionalProperty
-                   - propertyTypeAdditionalProperty
-                 properties:
-                   nameAdditionalProperty:
-                     type: string
-                     maxLength: 70
-                     description: 'Name of the additional property'
-                     example: 'Orchard Villa, Holderstrasse 10'
-                   valueAdditionalProperty:
-                     $ref: '#/components/schemas/Amount'
-                     description: 'Value of the additional property'
-                   propertyTypeAdditionalProperty:
-                     type: string
-                     enum: [single_family_house, condominium, vacation_house, vacation_condominium, agricultural_farm, 2or3_family_house, multi_family_house, residential_building_plot, building_plot_other, mixed_property, commercial_condominium, office_building, industrial_building, special_object]
-                     description: 'The type of the additional property'
-                     example: 'vacation_house'
+            additionalProperties:
+              type: array
+              items:
+                type: object
+                required:
+                  - valueAdditionalProperty
+                  - propertyTypeAdditionalProperty
+                properties:
+                  nameAdditionalProperty:
+                    type: string
+                    maxLength: 70
+                    description: 'Name of the additional property'
+                    example: 'Orchard Villa, Holderstrasse 10'
+                  valueAdditionalProperty:
+                    $ref: '#/components/schemas/Amount'
+                    description: 'Value of the additional property'
+                  propertyTypeAdditionalProperty:
+                    type: string
+                    enum: [single_family_house, condominium, vacation_house, vacation_condominium, agricultural_farm, 2or3_family_house, multi_family_house, residential_building_plot, building_plot_other, mixed_property, commercial_condominium, office_building, industrial_building, special_object]
+                    description: 'The type of the additional property'
+                    example: 'vacation_house'
             residentialSituation:
               type: string
               enum:
@@ -3129,9 +3105,13 @@ components:
         - reservation_deposit
         - advancement_of_inheritance
         - third_pillar
+        - third_pillar_3a
+        - third_pillar_3b
         - pension_fund
         - third_party_loan
         - third_pillar_fund
+        - third_pillar_fund_3b
+        - third_pillar_fund_3a
         - fungible_investments
         - other
         - vested_benefit
@@ -3146,7 +3126,7 @@ components:
         - pledged
         - withdraw
     Asset:
-      description: Asset information.
+      description: 'Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.'
       type: object
       required:
         - assetType
@@ -3165,7 +3145,7 @@ components:
         assetProvider:
           $ref: '#/components/schemas/AssetProvider'
     UsedAsset:
-      description: Asset used by an applicant.
+      description: 'Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also be recorded in the array of assets in the financial situation of one applicant.'
       type: object
       required:
         - assetType
@@ -3443,8 +3423,24 @@ components:
       schema:
         type: string
         example: cursorIDxyz
-  # ---- Responses - Standard Errors Common Data Model v1.2.2----
+  # ---- Responses - Standard----
   responses:
+    standard201:
+      description: created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/commonResourceCreatedResponse'
+      headers:
+        location:
+          schema:
+            type: string
+            format: uri
+            description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
+        X-Correlation-ID:
+          schema:
+            type: string
+          description: Reflects the ID (set by the caller) from the request.
     standard400:
       headers:
         Content-Type:
@@ -3621,4 +3617,4 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-  # ---- End Responses - Standard Errors
+  # ---- End Responses - Standard
