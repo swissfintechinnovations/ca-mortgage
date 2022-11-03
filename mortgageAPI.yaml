@@ -2705,7 +2705,7 @@ components:
             language:
               type: string
               example: fr
-              description: Preferred contact language of the applicant
+              description: Preferred contact language of the TPP advisor
               enum:
                 - de
                 - fr
