@@ -292,17 +292,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'          
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -543,17 +533,7 @@ paths:
               type: string
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -731,23 +711,7 @@ paths:
                   example: 576f8de3-6b30-4882-a7af-da2132a456cf
       responses:
         '201':
-          description: created
-          headers:
-            documentId:
-              schema:
-                type: string
-                format: uuid
-                description: Uuid v4 of the created document defined by FI
-                example: 232af5ca-fca3-4bd4-b91d-23d755d9af0f
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -985,17 +949,7 @@ paths:
               $ref: '#/components/schemas/FinancingRequest'
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1416,17 +1370,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1847,7 +1791,20 @@ components:
       example: CH
       description: 2-Letter ISO 3166-2 Country Code
     # ------------
-    # ---- Error Response
+    # ---- Response
+    commonResourceCreatedResponse:
+      title: Recource created response
+      description: Uuid v4 of the created resource
+      example: '20460121-6aff-485b-a61d-6056ecd72bd8'
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/CommonID'
+          description: Uuid v4 of the created resource
+          example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
+
     commonErrorResponse:
       title: Common Error Response
       type: object
@@ -1888,7 +1845,7 @@ components:
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
       example: '/problems/TECHNICAL_ERROR'
-    # ---- End Error Response
+    # ---- End Response
     # ---- End Common Data Model
 
     # ---- Property Object ----
@@ -2595,10 +2552,10 @@ components:
             - replacement
             - construction_financing
         channelType:
-          type: string
-          enum: [advisor, direct]
-          description: 'The type of the channel the application was generated' 
-          example: 'advisor'
+           type: string
+           enum: [advisor, direct]
+           description: 'The type of the channel the application was generated' 
+           example: 'advisor'
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
@@ -3245,8 +3202,24 @@ components:
       schema:
         type: string
         example: cursorIDxyz
-  # ---- Responses - Standard Errors Common Data Model v1.2.2----
+  # ---- Responses - Standard----
   responses:
+    standard201:
+      description: created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/commonResourceCreatedResponse'
+      headers:
+        location:
+          schema:
+            type: string
+            format: uri
+            description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
+        X-Correlation-ID:
+          schema:
+            type: string
+          description: Reflects the ID (set by the caller) from the request.
     standard400:
       headers:
         Content-Type:
@@ -3423,4 +3396,4 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-  # ---- End Responses - Standard Errors
+  # ---- End Responses - Standard
