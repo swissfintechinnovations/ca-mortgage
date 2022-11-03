@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 2.4.0
+  version: 2.5.0
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -1859,9 +1859,10 @@ components:
           example:
             This is the general problem description
         detail:
-          type: string
-          example:
-            Detailed problem description with respect to the current request
+          type: array
+          items:
+            type: string
+            example: List of detailed problem description with respect to the current request
         instance:
           type: string
           example:
@@ -1989,7 +1990,7 @@ components:
           example: 'average'
         usageType:
           type: string
-          enum: enum: [self, let]
+          enum: [self, let]
           description: 'The type of usage of the financing property: self, let'
           example: 'self'
         propertyType:
@@ -2159,6 +2160,18 @@ components:
               type: boolean
               description: 'If the roof floor is expandable true, else false.'
               example: false
+            volumeIncludingGarage:
+              type: integer
+              description: 'The volume of the house including the garage.'
+              example: 1500
+            volumeIncludingGarageInhouse:
+              type: integer
+              description: 'The volume of the house including the inhouse garage (relevant for WuP).'
+              example: 1500
+            volumeIncludingAllGarages:
+              type: integer
+              description: 'The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).'
+              example: 1620
             landArea:
               type: integer
               description: 'The surface area of the land.'
@@ -2245,9 +2258,9 @@ components:
               $ref: '#/components/schemas/Date'
         purchaseDate:
           $ref: '#/components/schemas/Date'
-        estimationId
+        estimationId:
           type: string
-          descpription: 'ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.'
+          description: 'ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.'
           example: 'asd23f'
         remarks:
           type: string
@@ -2314,9 +2327,10 @@ components:
           type: string
         durationType:
           type: integer
-          example: 10
-          minimum: 1
-          maximum: 20
+          description: 'The duration in years.'
+          minimum: 0
+          maximum: 25
+          example: 5
         prolongable:
           type: boolean
         propertyObjects:
@@ -2400,10 +2414,9 @@ components:
       properties:
         duration:
           type: integer
-          format: int32
           description: 'The duration in years.'
-          minimum: 1
-          maximum: 20
+          minimum: 0
+          maximum: 25
           example: 5
         rate:
           type: number
@@ -2491,7 +2504,11 @@ components:
           format: uuid
           example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
         duration:
-          type: string
+          type: integer
+          description: 'The duration in years.'
+          minimum: 0
+          maximum: 25
+          example: 5
         maturityDate:
           $ref: '#/components/schemas/Date'
         interest:
@@ -2577,11 +2594,11 @@ components:
             - buy
             - replacement
             - construction_financing
-         channelType:
-           type: string
-           enum: [advisor, direct]
-           description: 'The type of the channel the application was generated' 
-           example: 'advisor'
+        channelType:
+          type: string
+          enum: [advisor, direct]
+          description: 'The type of the channel the application was generated' 
+          example: 'advisor'
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
@@ -2773,6 +2790,10 @@ components:
               type: string
               description: Email of the applicant
               example: max.muster@domain.ch
+            phone:
+              type: string
+              description: 'Phone number of the applicant'
+              example: '+41443343456'
             solvencyRating:
               description: 'Solvency rating of the applicant e.g. CRIF'
               type: object
@@ -2846,6 +2867,27 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Asset'
+             additionalProperties:
+               type: array
+               items:
+                 type: object
+                 required:
+                   - valueAdditionalProperty
+                   - propertyTypeAdditionalProperty
+                 properties:
+                   nameAdditionalProperty:
+                     type: string
+                     maxLength: 70
+                     description: 'Name of the additional property'
+                     example: 'Orchard Villa, Holderstrasse 10'
+                   valueAdditionalProperty:
+                     $ref: '#/components/schemas/Amount'
+                     description: 'Value of the additional property'
+                   propertyTypeAdditionalProperty:
+                     type: string
+                     enum: [single_family_house, condominium, vacation_house, vacation_condominium, agricultural_farm, 2or3_family_house, multi_family_house, residential_building_plot, building_plot_other, mixed_property, commercial_condominium, office_building, industrial_building, special_object]
+                     description: 'The type of the additional property'
+                     example: 'vacation_house'
             residentialSituation:
               type: string
               enum:
@@ -2883,6 +2925,7 @@ components:
         - vested_benefit
         - life_insurance_3a
         - life_insurance_3b
+        - unpledged_building_plot
     AssetUsageType:
       description: Common set of asset usage types.
       type: string
@@ -2901,6 +2944,10 @@ components:
           $ref: '#/components/schemas/AssetType'
         amount:
           $ref: '#/components/schemas/Amount'
+          description: 'The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance'
+        insuranceSum:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount of the sum insured in life insurance'
         remark:
           type: string
         assetProvider:
@@ -2950,6 +2997,11 @@ components:
         - asset_consumption_after_retirement
         - fixed_expenses
         - dividend
+        - leasing_payment
+        - consumer_loan_payment
+        - child_allowance_payment
+        - rental_costs
+        - costs_for_additional_properties
     DocumentType:
       description: All supported document types.
         For the enum value tax_statement. Tax statement is required.
