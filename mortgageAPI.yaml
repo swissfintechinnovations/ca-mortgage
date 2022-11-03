@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 2.4.0
+  version: 2.5.0
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
@@ -292,17 +292,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'          
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -543,17 +533,7 @@ paths:
               type: string
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -731,23 +711,7 @@ paths:
                   example: 576f8de3-6b30-4882-a7af-da2132a456cf
       responses:
         '201':
-          description: created
-          headers:
-            documentId:
-              schema:
-                type: string
-                format: uuid
-                description: Uuid v4 of the created document defined by FI
-                example: 232af5ca-fca3-4bd4-b91d-23d755d9af0f
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -985,17 +949,7 @@ paths:
               $ref: '#/components/schemas/FinancingRequest'
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1416,17 +1370,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
-          description: created
-          headers:
-            location:
-              schema:
-                type: string
-                format: uri
-                description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
+          $ref: '#/components/responses/standard201'  
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1847,7 +1791,20 @@ components:
       example: CH
       description: 2-Letter ISO 3166-2 Country Code
     # ------------
-    # ---- Error Response
+    # ---- Response
+    commonResourceCreatedResponse:
+      title: Recource created response
+      description: Uuid v4 of the created resource
+      example: '20460121-6aff-485b-a61d-6056ecd72bd8'
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/CommonID'
+          description: Uuid v4 of the created resource
+          example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
+
     commonErrorResponse:
       title: Common Error Response
       type: object
@@ -1859,9 +1816,10 @@ components:
           example:
             This is the general problem description
         detail:
-          type: string
-          example:
-            Detailed problem description with respect to the current request
+          type: array
+          items:
+            type: string
+            example: List of detailed problem description with respect to the current request
         instance:
           type: string
           example:
@@ -1887,7 +1845,7 @@ components:
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
       example: '/problems/TECHNICAL_ERROR'
-    # ---- End Error Response
+    # ---- End Response
     # ---- End Common Data Model
 
     # ---- Property Object ----
@@ -1928,11 +1886,51 @@ components:
               description: 'renovation year'
               example: 1990
               default: 0
+            propertyRenovations:
+              type: array
+              items:
+                type: object
+                properties:
+                  refurbishmentComponentType:
+                    type: string
+                    enum:
+                      - total
+                      - interior_fittings_kitchen
+                      - interior_fittings_bathroom_sanitary
+                      - interior_fittings_floor_cover
+                      - interior_fittings_remaining
+                      - building_envelope_pitched_roof
+                      - building_envelope_flat_roof
+                      - building_services_heat_production
+                      - building_services_heat_emission
+                      - buildings_services_electrical_ventilation_elevator
+                      - work_on_surroundings
+                      - supporting_structure
+                      - building_envelope_windows
+                      - building_envelope_facade_balcony
+                      - interior_fittings
+                      - building_envelope
+                      - building_services
+                    description: 'Type of Property Component which has been renovated. Please use consistently either the detailed Component Types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings)'
+                    example: 'interior_fittings_floor_cover'
+                  yearOfRenovation:
+                    type: integer
+                    description: 'renovation year'
+                    example: '2015'
+                    default: 0
+                  renovationCost:
+                    $ref: '#/components/schemas/Amount'
+                    description: 'cost of renovation'
             minergieStandardType:
               type: string
-              enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco]
+              enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco, minergie-a, minergie-a-eco]
               description: 'The minergie standard'
               example: 'minergie-p'
+            luxusFlag:
+              type: string
+              enum: [0, 0.5, 1.0]
+              description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes. Proposed Mapping of WuP-Values: 1.0-4.0 => 0 (No) / 4.1-4.5 => 0.5 (Partially) / 4.6-5.0 = >1.0 (Yes).'
+              example: '0'
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
             stateBuildingType:
@@ -1942,6 +1940,21 @@ components:
           enum: [main_residence, main_residence_with_use_restriction, second_residence, second_residence_with_use_restriction, rented_property, rented_property_with_use_restriction, other]
           description: 'The class of property (Main residence, second residence, rented).'
           example: 'main_residence'
+        floorPlan:
+          type: string
+          enum: [efficient, average, inefficient]
+          description: 'The efficiency of the floor plan'
+          example: 'average'
+        usageType:
+          type: string
+          enum: [self, let]
+          description: 'The type of usage of the financing property: self, let'
+          example: 'self'
+        propertyType:
+          type: string
+          enum: [single_family_house, condominium, vacation_house, vacation_condominium, agricultural_farm, 2or3_family_house, multi_family_house, residential_building_plot, building_plot_other, mixed_property, commercial_condominium, office_building, industrial_building, special_object]
+          description: 'The type of property'
+          example: 'single_familiy_house'
         ceilingHight:
           type: string
           enum: [especially_high, middle, especially_low]
@@ -1962,6 +1975,20 @@ components:
           enum: [premium, highlevel, basic, lowlevel]
           description: 'Building standard of the sanitary installations.'
           example: 'basic'
+        heatEmission:
+          type: array
+          items:
+            type: string
+            enum: [floor, radiator, stove, other]
+            description: 'Type of the heat emission'
+            example: 'floor'
+        heatProduction:
+          type: array
+          items:
+            type: string
+            enum: [oil, gas, wood, electric, geothermal_probe, district, solar_panel, solar_thermal_collector]
+            description: 'Type of the heat production'
+            example: 'gas'
         outsideConstructionZone:
           type: boolean
           description: 'If the property is outside of the construction zone.'
@@ -1975,6 +2002,11 @@ components:
               format: double
               description: 'The number of the rooms.'
               example: 4.5
+            numberOfRoomsInGrannyFlat:
+              type: number
+              format: double
+              description: 'The number of the rooms in the granny flat'
+              example: '2.5'
             roomCountType:
               type: string
               enum: [kitchen_not_counted, kitchen_half_room, kitchen_full_room]
@@ -2046,7 +2078,7 @@ components:
               type: array
               items:
                 type: string
-                enum: [coowned_garden_terrace_room, coowned_indoor_pool, coowned_outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, elevator_in_stairwell, elevator_into_apartment, ventilation_system_without_mingergie, barrier-free_living, automated_building_control]
+                enum: [coowned_garden_terrace_room, coowned_indoor_pool, coowned_outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, elevator_in_stairwell, elevator_into_apartment, ventilation_system_without_mingergie, barrier-free_living, automated_building_control, ventilation_system_without_minergie]
                 description: 'Additional features and services.'
                 example: 'coowned_outdoor_pool'
             quote:
@@ -2089,15 +2121,28 @@ components:
               type: integer
               description: 'The volume of the house including the garage.'
               example: 1500
+            volumeIncludingGarageInhouse:
+              type: integer
+              description: 'The volume of the house including the inhouse garage (relevant for WuP).'
+              example: 1500
+            volumeIncludingAllGarages:
+              type: integer
+              description: 'The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).'
+              example: 1620
             landArea:
               type: integer
               description: 'The surface area of the land.'
               example: 2000
+            environmentStandard:
+              type: string
+              enum: [high-level, basic, low-level]
+              description: 'The rating type'
+              example: 'basic'
             otherFeatures:
               type: array
               items:
                 type: string
-                enum: [ventilation_system_without_mingergie, barrier-free_living, automated_building_control]
+                enum: [ventilation_system_without_mingergie, barrier-free_living, automated_building_control, ventilation_system_without_minergie, indoor_pool, outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, passenger_elevator, freight_elevator]
                 description: 'Additional features and services.'
                 example: 'outdoor_pool'
             houseType:
@@ -2132,6 +2177,19 @@ components:
               description: 'Payment received at the building right expiry.'
         objectPrice:
           $ref: '#/components/schemas/Amount'
+          description: 'Price paid to buy the property'
+        renovationAmount:
+          $ref: '#/components/schemas/Amount'
+          description: 'Amount needed to pay the planned renovation (Renovationsbetrag)'
+        investmentCost:
+          $ref: '#/components/schemas/Amount'
+          description: 'Total amount needed to pay object price and planned renovation (Total Anlagekosten)'
+        collateralValue:
+          $ref: '#/components/schemas/Amount'
+          description: 'Value of the property as base for the securization applying the lowest value principle (Belehnungsbasis)'
+        limitForLandEncumbrances:
+          $ref: '#/components/schemas/Amount'
+          description: 'The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)'
         estimation:
           type: object
           properties:
@@ -2141,12 +2199,26 @@ components:
               enum:
                 - iazi
                 - wup
-            amount:
+            marketValue:
               $ref: '#/components/schemas/Amount'
+              description: 'Estimated Market value of the property'
+            statisticalPriceRangeMax:
+              $ref: '#/components/schemas/Amount'
+              description: 'Estimated statistical price range maximum'
+            statisticalPriceRangeMin:
+              $ref: '#/components/schemas/Amount'
+              description: 'Estimated statistical price range minimum'
+            yearlyRentalIncome:
+              $ref: '#/components/schemas/Amount'
+              description: 'Estimated rental income per year'
             estimationDate:
               $ref: '#/components/schemas/Date'
         purchaseDate:
           $ref: '#/components/schemas/Date'
+        estimationId:
+          type: string
+          description: 'ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.'
+          example: 'asd23f'
         remarks:
           type: string
     # ---------
@@ -2192,6 +2264,10 @@ components:
           $ref: '#/components/schemas/Amount'
         validFrom:
           $ref: '#/components/schemas/Date'
+        offerDate:
+          $ref: '#/components/schemas/Date'
+          description: 'The date when the offer is made by the FI. Optional field for use cases where no MortageOffer object is used and therefore the offer date needs to be directly in Mortgage object. '
+          example: 2018-04-05
         validTo:
           $ref: '#/components/schemas/Date'
         interestRate:
@@ -2208,9 +2284,10 @@ components:
           type: string
         durationType:
           type: integer
-          example: 10
-          minimum: 1
-          maximum: 20
+          description: 'The duration in years.'
+          minimum: 0
+          maximum: 25
+          example: 5
         prolongable:
           type: boolean
         propertyObjects:
@@ -2294,10 +2371,9 @@ components:
       properties:
         duration:
           type: integer
-          format: int32
           description: 'The duration in years.'
-          minimum: 1
-          maximum: 20
+          minimum: 0
+          maximum: 25
           example: 5
         rate:
           type: number
@@ -2385,7 +2461,11 @@ components:
           format: uuid
           example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
         duration:
-          type: string
+          type: integer
+          description: 'The duration in years.'
+          minimum: 0
+          maximum: 25
+          example: 5
         maturityDate:
           $ref: '#/components/schemas/Date'
         interest:
@@ -2394,6 +2474,28 @@ components:
           $ref: '#/components/schemas/AmountRange'
         increment:
           type: integer
+        amortizationType:
+          type: string
+          enum: [direct, indirect]
+          description: 'The type of amortization'
+          example: 'direct'
+        amortizationAmount:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount of the periodic amortization'
+          example: 27400
+        amortizationStart:
+          $ref: '#/components/schemas/Date'
+          description: 'Start date of amortization'
+          example: 2018-04-13
+        amortizationPeriodicity:
+          type: string
+          enum: [yearly, quarterly, monthly]
+          description: 'The periodicity the amortization is paid'
+          example: 'quarterly'
+        amortizationAccountNr:
+          type: string
+          description: 'the account number from which the amortization is paid'
+          example: IE12BOFI90000112345678
     # ---------
 
     # ---- Party ----
@@ -2408,6 +2510,10 @@ components:
           format: uuid
           description: ApplicantId for primary applicant of the applicant party. In case of multiple applicants this field is mandatory.
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
+        fiPrimaryApplicantId:
+          type: string
+          description: 'ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple applicants and if known at the moment of the application.'
+          example: 'asd23f'
         personList:
           type: array
           items:
@@ -2439,11 +2545,17 @@ components:
           $ref: '#/components/schemas/PropertyObject'
         mortgageType:
           type: string
-          description: 'Type of business, Values: buy, replacement.'
+          description: 'Type of business.'
           example: buy
           enum:
             - buy
             - replacement
+            - construction_financing
+        channelType:
+           type: string
+           enum: [advisor, direct]
+           description: 'The type of the channel the application was generated' 
+           example: 'advisor'
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
@@ -2451,6 +2563,22 @@ components:
           enum:
             - entire
             - partial
+        replacedTranches:
+          type: array
+          items:
+            type: object
+            properties:
+              replacedTrancheAmount:
+                $ref: '#/components/schemas/Amount'
+                description: 'The amount of the replaced tranche'
+              replacedTrancheExpiry:
+                $ref: '#/components/schemas/Date'
+                description: 'The expiry date of the replaced tranche'
+                example: 2022-05-03
+              replacedTrancheIssuer:
+                type: string
+                description: 'The institute who has issued the replaced tranche'
+                example: 'Credit Suisse'
         tppAdvisorDetail:
           type: object
           properties:
@@ -2464,6 +2592,11 @@ components:
               maxLength: 70
               description: Surname of the TPP advisor
               example: Max
+            nameTpp:
+              type: string
+              maxLength: 70
+              description: 'Firm of the TPP advisor'
+              example: 'Muster Finanz AG'
             email:
               type: string
               description: Email of the TPP advisor
@@ -2549,6 +2682,10 @@ components:
           format: uuid
           description: UUID v4 of the applicant (to be defined by TPP)
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
+        fiApplicantId:
+          type: string
+          description: 'ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.'
+          example: 'asd23f'
         applicantType:
           type: string
           example: individual
@@ -2582,6 +2719,8 @@ components:
                 - divorced
                 - widowed
                 - registered-partnership
+                - legally-separated
+                - partnership-dissolved
             matrimonialPropertyScheme:
               type: string
               example: separateEstate
@@ -2608,6 +2747,30 @@ components:
               type: string
               description: Email of the applicant
               example: max.muster@domain.ch
+            phone:
+              type: string
+              description: 'Phone number of the applicant'
+              example: '+41443343456'
+            solvencyRating:
+              description: 'Solvency rating of the applicant e.g. CRIF'
+              type: object
+              required:
+                - ratingValue
+                - ratingSourceType
+              properties:
+                ratingValue:
+                  type: integer
+                  description: ' Solvency rating value'
+                  example: 420
+                ratingSourceType:
+                  type: string
+                  description: 'Provider of the solvency rating'
+                  example: 'crif'
+                  enum: 
+                    - crif
+                ratingDate:
+                  $ref: '#/components/schemas/Date'
+                  description: 'Date of the solvency rating'
             applicantLanguage:
               type: string
               example: fr
@@ -2632,6 +2795,9 @@ components:
               type: array
               items:
                 type: object
+                required:
+                  - incomeType
+                  - amount
                 properties:
                   incomeType:
                     $ref: '#/components/schemas/IncomeType'
@@ -2639,14 +2805,21 @@ components:
                     $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
+                  incomeProvider:
+                    description: 'Income provider for each income or cost position can be transfered.'
+                    type: string
+                    example: 'Employer AG'
             liabilities:
               type: array
               items:
                 type: object
+                required:
+                  - liabilityType
+                  - amount
                 properties:
                   liabilityType:
                     type: string
-                    example: mortgage
+                    example: 'mortgage'
                     description: Liability type
                     enum:
                       - leasing
@@ -2657,10 +2830,41 @@ components:
                     $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
+                  liabilityProvider:
+                    description: 'Name of the liability provider or creditor.'
+                    type: string
+                    example: 'Leasing Firm AG'
             assets:
               type: array
               items:
                 $ref: '#/components/schemas/Asset'
+            additionalProperties:
+              type: array
+              items:
+                type: object
+                required:
+                  - valueAdditionalProperty
+                  - propertyTypeAdditionalProperty
+                properties:
+                  nameAdditionalProperty:
+                    type: string
+                    maxLength: 70
+                    description: 'Name of the additional property'
+                    example: 'Orchard Villa, Holderstrasse 10'
+                  valueAdditionalProperty:
+                    $ref: '#/components/schemas/Amount'
+                    description: 'Value of the additional property'
+                  propertyTypeAdditionalProperty:
+                    type: string
+                    enum: [single_family_house, condominium, vacation_house, vacation_condominium, agricultural_farm, 2or3_family_house, multi_family_house, residential_building_plot, building_plot_other, mixed_property, commercial_condominium, office_building, industrial_building, special_object]
+                    description: 'The type of the additional property'
+                    example: 'vacation_house'
+            residentialSituation:
+              type: string
+              enum:
+                - home_owner
+                - renter
+              example: 'renter'
     # ---------
 
     # ---- Mortgage data types ----
@@ -2692,6 +2896,7 @@ components:
         - vested_benefit
         - life_insurance_3a
         - life_insurance_3b
+        - unpledged_building_plot
     AssetUsageType:
       description: Common set of asset usage types.
       type: string
@@ -2710,6 +2915,10 @@ components:
           $ref: '#/components/schemas/AssetType'
         amount:
           $ref: '#/components/schemas/Amount'
+          description: 'The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance'
+        insuranceSum:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount of the sum insured in life insurance'
         remark:
           type: string
         assetProvider:
@@ -2759,6 +2968,11 @@ components:
         - asset_consumption_after_retirement
         - fixed_expenses
         - dividend
+        - leasing_payment
+        - consumer_loan_payment
+        - child_allowance_payment
+        - rental_costs
+        - costs_for_additional_properties
     DocumentType:
       description: All supported document types.
         For the enum value tax_statement. Tax statement is required.
@@ -2988,8 +3202,24 @@ components:
       schema:
         type: string
         example: cursorIDxyz
-  # ---- Responses - Standard Errors Common Data Model v1.2.2----
+  # ---- Responses - Standard----
   responses:
+    standard201:
+      description: created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/commonResourceCreatedResponse'
+      headers:
+        location:
+          schema:
+            type: string
+            format: uri
+            description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
+        X-Correlation-ID:
+          schema:
+            type: string
+          description: Reflects the ID (set by the caller) from the request.
     standard400:
       headers:
         Content-Type:
@@ -3166,4 +3396,4 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
-  # ---- End Responses - Standard Errors
+  # ---- End Responses - Standard
