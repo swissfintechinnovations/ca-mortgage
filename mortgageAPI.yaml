@@ -2838,6 +2838,9 @@ components:
               type: array
               items:
                 type: object
+                required:
+                  - incomeType
+                  - amount
                 properties:
                   incomeType:
                     $ref: '#/components/schemas/IncomeType'
@@ -2845,14 +2848,21 @@ components:
                     $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
+                  incomeProvider:
+                    description: 'Income provider for each income or cost position can be transfered.'
+                    type: string
+                    example: 'Employer AG'
             liabilities:
               type: array
               items:
                 type: object
+                required:
+                  - liabilityType
+                  - amount
                 properties:
                   liabilityType:
                     type: string
-                    example: mortgage
+                    example: 'mortgage'
                     description: Liability type
                     enum:
                       - leasing
@@ -2863,6 +2873,10 @@ components:
                     $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
+                  liabilityProvider:
+                    description: 'Name of the liability provider or creditor.'
+                    type: string
+                    example: 'Leasing Firm AG'
             assets:
               type: array
               items:
