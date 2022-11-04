@@ -7,3 +7,6 @@ moreExpressiveDescription           - the description contains not enough inform
 changeType                          - consider other data type -> e.g. use integer instead of string
 default: missingDefaultOrExample    - a default or example field may be added here
 OtherIssue                          - all other issues that do not fit into one of the previous tags
+
+
+TODO: delete file after removing tags from API file
