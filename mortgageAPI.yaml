@@ -2319,8 +2319,12 @@ components:
               description: 'Estimated rental income per year'
             estimationDate:
               $ref: '#/components/schemas/Date'
-        purchaseDate:
+        transferOfOwnershipDate:
           $ref: '#/components/schemas/Date'
+          description: 'When the property will be fully transfered to the new owner'
+        publicNotarization:
+          $ref: '#/components/schemas/Date'
+          description: 'Date of public notarization'
         estimationId:
           type: string
           description: 'ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.'
@@ -3066,6 +3070,12 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Asset'
+            residentialSituation:
+              type: string
+              enum:
+                - home_owner
+                - renter
+              example: 'renter'
             additionalProperties:
               type: array
               items:
@@ -3087,12 +3097,6 @@ components:
                     enum: [single_family_house, condominium, vacation_house, vacation_condominium, agricultural_farm, 2or3_family_house, multi_family_house, residential_building_plot, building_plot_other, mixed_property, commercial_condominium, office_building, industrial_building, special_object]
                     description: 'The type of the additional property'
                     example: 'vacation_house'
-            residentialSituation:
-              type: string
-              enum:
-                - home_owner
-                - renter
-              example: 'renter'
     # ---------
 
     # ---- Mortgage data types ----
