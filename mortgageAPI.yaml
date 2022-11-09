@@ -1,4 +1,4 @@
-openapi: "3.0.0"
+openapi: 3.0.0
 info:
   version: 2.5.0
   title: Common Mortgage API (Public)
@@ -10,12 +10,12 @@ info:
     email: info@common-api.ch
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
   - url: https://mortgage.common-api.ch
 externalDocs:
   description: Find out more about SFTI API specifications
-  url: 'https://www.common-api.ch'
+  url: https://www.common-api.ch
 tags:
   - name: Full Mortgage Cases
     description: Operatios related to full mortgage cases including the application details
@@ -1359,7 +1359,7 @@ paths:
               - it
               - en
             # default: missingDefaultOrExample add default en?
-          description: 'Language of Document content'
+          description: Language of Document content
           example: fr
           required: true
         - $ref: '#/components/parameters/clientid_in_header'
@@ -1913,7 +1913,7 @@ components:
     commonResourceCreatedResponse:
       title: Recource created response
       description: Uuid v4 of the created resource
-      example: '20460121-6aff-485b-a61d-6056ecd72bd8'
+      example: 20460121-6aff-485b-a61d-6056ecd72bd8
       type: object
       required:
         - id
@@ -1962,7 +1962,7 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
-      example: '/problems/TECHNICAL_ERROR'
+      example: /problems/TECHNICAL_ERROR
     # ---- End Response
     # ---- End Common Data Model
 
@@ -2030,19 +2030,26 @@ components:
                       - interior_fittings
                       - building_envelope
                       - building_services
-                    description: 'Type of Property Component which has been renovated. Please use consistently either the detailed Component Types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings)'
-                    example: 'interior_fittings_floor_cover'
+                    description: Type of Property Component which has been renovated. Please use consistently either the detailed Component Types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings)
+                    example: interior_fittings_floor_cover
                   yearOfRenovation:
                     type: integer
-                    description: 'renovation year'
-                    example: '2015'
+                    description: renovation year
+                    example: 2015
                     default: 0
                   renovationCost:
                     $ref: '#/components/schemas/Amount'
-                    description: 'cost of renovation'
+                    description: cost of renovation
             minergieStandardType:
               type: string
-              enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco, minergie-a, minergie-a-eco] # OtherIssue why do you use a list here? instead of -
+              enum: 
+                - none
+                - minergie
+                - minergie-p
+                - minergie-eco
+                - minergie-p-eco
+                - minergie-a
+                - minergie-a-eco # OtherIssue why do you use a list here? instead of - DONE
               description: The minergie standard
               example: minergie-p
             BECCStandardType:
@@ -2129,8 +2136,8 @@ components:
             numberOfRoomsInGrannyFlat:
               type: number
               format: double
-              description: 'The number of the rooms in the granny flat'
-              example: '2.5'
+              description: The number of the rooms in the granny flat
+              example: 2.5
             roomCountType:
               type: string
               enum: [kitchen_not_counted, kitchen_half_room, kitchen_full_room] # OtherIssue why do you use a list here? instead of - 
@@ -2243,11 +2250,11 @@ components:
               example: false
             volumeIncludingGarageInhouse:
               type: integer
-              description: 'The volume of the house including the inhouse garage (relevant for WuP).'
+              description: The volume of the house including the inhouse garage (relevant for WuP).
               example: 1500
             volumeIncludingAllGarages:
               type: integer
-              description: 'The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).'
+              description: The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).
               example: 1620
             landArea:
               type: integer
@@ -2256,15 +2263,15 @@ components:
             environmentStandard:
               type: string
               enum: [high-level, basic, low-level] # OtherIssue why do you use a list here? instead of -
-              description: 'The rating type'
-              example: 'basic'
+              description: The rating type
+              example: basic
             otherFeatures:
               type: array
               items:
                 type: string
                 enum: [barrier-free_living, automated_building_control, ventilation_system_without_minergie, indoor_pool, outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, passenger_elevator, freight_elevator] # OtherIssue why do you use a list here? instead of -
-                description: 'Additional features and services.'
-                example: 'outdoor_pool'
+                description: Additional features and services.
+                example: outdoor_pool
             houseType:
               type: string
               enum: [detached_house, semidetached_house, row_house, row_corner_house, terrace_house] # OtherIssue why do you use a list here? instead of - 
@@ -2297,26 +2304,26 @@ components:
               description: Payment received at the building right expiry.
         objectPrice:
           $ref: '#/components/schemas/Amount'
-          description: 'Price paid to buy the property'
+          description: Price paid to buy the property
         renovationAmount:
           $ref: '#/components/schemas/Amount'
-          description: 'Amount needed to pay the planned renovation (Renovationsbetrag)'
+          description: Amount needed to pay the planned renovation (Renovationsbetrag)
         investmentCost:
           $ref: '#/components/schemas/Amount'
-          description: 'Total amount needed to pay object price and planned renovation (Total Anlagekosten)'
+          description: Total amount needed to pay object price and planned renovation (Total Anlagekosten)
         collateralValue:
           $ref: '#/components/schemas/Amount'
-          description: 'Value of the property as base for the securization applying the lowest value principle (Belehnungsbasis)'
+          description: Value of the property as base for the securization applying the lowest value principle (Belehnungsbasis)
         limitForLandEncumbrances:
           $ref: '#/components/schemas/Amount'
-          description: 'The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)'
+          description: The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)
         estimation:
           type: object
           properties:
             estimationId:
               type: string
-              description: 'ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.'
-              example: 'asd23f'
+              description: ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.
+              example: asd23f
             estimationSourceType:
               type: string
               example: iazi
@@ -2325,24 +2332,24 @@ components:
                 - wup
             marketValue:
               $ref: '#/components/schemas/Amount'
-              description: 'Estimated Market value of the property'
+              description: Estimated Market value of the property
             statisticalPriceRangeMax:
               $ref: '#/components/schemas/Amount'
-              description: 'Estimated statistical price range maximum'
+              description: Estimated statistical price range maximum
             statisticalPriceRangeMin:
               $ref: '#/components/schemas/Amount'
-              description: 'Estimated statistical price range minimum'
+              description: Estimated statistical price range minimum
             yearlyRentalIncome:
               $ref: '#/components/schemas/Amount'
-              description: 'Estimated rental income per year'
+              description: Estimated rental income per year
             estimationDate:
               $ref: '#/components/schemas/Date'
         transferOfOwnershipDate:
           $ref: '#/components/schemas/Date'
-          description: 'When the property will be fully transfered to the new owner'
+          description: When the property will be fully transfered to the new owner
         publicNotarization:
           $ref: '#/components/schemas/Date'
-          description: 'Date of public notarization'
+          description: Date of public notarization
         remarks:
           type: string
     # ---------
@@ -2390,7 +2397,7 @@ components:
           $ref: '#/components/schemas/Date'
         offerDate:
           $ref: '#/components/schemas/Date'
-          description: 'The date when the offer is made by the FI. Optional field for use cases where no MortageOffer object is used and therefore the offer date needs to be directly in Mortgage object. '
+          description: The date when the offer is made by the FI. Optional field for use cases where no MortageOffer object is used and therefore the offer date needs to be directly in Mortgage object.
           example: 2018-04-05
         validTo:
           $ref: '#/components/schemas/Date'
@@ -2408,7 +2415,7 @@ components:
           type: string
         durationType:
           type: integer
-          description: 'The duration in years.'
+          description: The duration in years.
           minimum: 0
           maximum: 25
           example: 5
@@ -2586,7 +2593,7 @@ components:
           example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
         duration:
           type: integer
-          description: 'The duration in years.'
+          description: The duration in years.
           minimum: 0
           maximum: 25
           example: 5
@@ -2601,24 +2608,24 @@ components:
         amortizationType:
           type: string
           enum: [direct, indirect]
-          description: 'The type of amortization'
-          example: 'direct'
+          description: The type of amortization
+          example: direct
         amortizationAmount:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount of the periodic amortization'
+          description: The amount of the periodic amortization
           example: 27400
         amortizationStart:
           $ref: '#/components/schemas/Date'
-          description: 'Start date of amortization'
+          description: Start date of amortization
           example: 2018-04-13
         amortizationPeriodicity:
           type: string
           enum: [yearly, quarterly, monthly]
-          description: 'The periodicity the amortization is paid'
-          example: 'quarterly'
+          description: The periodicity the amortization is paid
+          example: quarterly
         amortizationAccountNr:
           type: string
-          description: 'the account number from which the amortization is paid'
+          description: The account number from which the amortization is paid
           example: IE12BOFI90000112345678
     # ---------
 
@@ -2636,8 +2643,8 @@ components:
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
         fiPrimaryApplicantId:
           type: string
-          description: 'ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple applicants and if known at the moment of the application.'
-          example: 'asd23f'
+          description: ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple applicants and if known at the moment of the application.
+          example: asd23f
         personList:
           type: array
           items:
@@ -2657,19 +2664,19 @@ components:
           type: string
           format: uuid
           description: The application identifier (UUID v4) defined by FI.
-          example: 'f157c4be-106d-4304-972e-091e77b87e1c'
+          example: f157c4be-106d-4304-972e-091e77b87e1c
         tppApplicationId:
           type: string
           description: The application alphanumeric identifier defined by TPP
           pattern: '^[a-zA-Z0-9]{6,10}$'
-          example: 'asd23f'
+          example: asd23f
         requestingParty:
           $ref: '#/components/schemas/Party'
         propertyInformation:
           $ref: '#/components/schemas/PropertyObject'
         mortgageType:
           type: string
-          description: 'Type of business.'
+          description: Type of business.
           example: buy
           enum:
             - buy
@@ -2678,12 +2685,12 @@ components:
         channelType:
            type: string
            enum: [advisor, direct]
-           description: 'The type of the channel the application was generated' 
-           example: 'advisor'
+           description: The type of the channel the application was generated
+           example: advisor
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
-          example: 'entire'
+          example: entire
           enum:
             - entire
             - partial
@@ -2694,15 +2701,15 @@ components:
             properties:
               replacedTrancheAmount:
                 $ref: '#/components/schemas/Amount'
-                description: 'The amount of the replaced tranche'
+                description: The amount of the replaced tranche
               replacedTrancheExpiry:
                 $ref: '#/components/schemas/Date'
-                description: 'The expiry date of the replaced tranche'
+                description: The expiry date of the replaced tranche
                 example: 2022-05-03
               replacedTrancheIssuer:
                 type: string
-                description: 'The institute who has issued the replaced tranche'
-                example: 'Credit Suisse'
+                description: The institute who has issued the replaced tranche
+                example: Credit Suisse
         tppAdvisorDetail:
           type: object
           properties:
@@ -2719,8 +2726,8 @@ components:
             nameTpp:
               type: string
               maxLength: 70
-              description: 'Firm of the TPP advisor'
-              example: 'Muster Finanz AG'
+              description: Firm of the TPP advisor
+              example: Muster Finanz AG
             email:
               type: string
               description: Email of the TPP advisor
@@ -2843,8 +2850,8 @@ components:
         amortizationType:
           type: string
           enum: [direct, indirect]
-          description: 'The type of amortization'
-          example: 'direct'
+          description: The type of amortization
+          example: direct
         amortizationAmount:
           $ref: '#/components/schemas/Amount'
         amortizationStart:
@@ -2852,11 +2859,11 @@ components:
         amortizationPeriodicity:
           type: string
           enum: [yearly, quarterly, monthly]
-          description: 'The periodicity the amortization is paid'
-          example: 'quarterly'
+          description: The periodicity the amortization is paid
+          example: quarterly
         amortizationAccountNr:
           type: string
-          description: 'the account number from which the amortization is paid'
+          description: The account number from which the amortization is paid
     
     # --------
 
@@ -2930,8 +2937,8 @@ components:
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
         fiApplicantId:
           type: string
-          description: 'ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.'
-          example: 'asd23f'
+          description: ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
+          example: asd23f
         applicantType:
           type: string
           example: individual
@@ -2995,10 +3002,10 @@ components:
               example: max.muster@domain.ch
             phone:
               type: string
-              description: 'Phone number of the applicant'
+              description: Phone number of the applicant
               example: '+41443343456'
             solvencyRating:
-              description: 'Solvency rating of the applicant e.g. CRIF'
+              description: Solvency rating of the applicant e.g. CRIF
               type: object
               required:
                 - ratingValue
@@ -3006,17 +3013,17 @@ components:
               properties:
                 ratingValue:
                   type: integer
-                  description: ' Solvency rating value'
+                  description: Solvency rating value
                   example: 420
                 ratingSourceType:
                   type: string
-                  description: 'Provider of the solvency rating'
-                  example: 'crif'
+                  description: Provider of the solvency rating
+                  example: crif
                   enum: 
                     - crif
                 ratingDate:
                   $ref: '#/components/schemas/Date'
-                  description: 'Date of the solvency rating'
+                  description: Date of the solvency rating
             applicantLanguage:
               type: string
               example: fr
@@ -3052,9 +3059,9 @@ components:
                   remark:
                     type: string
                   incomeProvider:
-                    description: 'Income provider for each income or cost position can be transfered.'
+                    description: Income provider for each income or cost position can be transferred.
                     type: string
-                    example: 'Employer AG'
+                    example: Employer AG
             liabilities:
               type: array
               items:
@@ -3065,7 +3072,7 @@ components:
                 properties:
                   liabilityType:
                     type: string
-                    example: 'mortgage'
+                    example: mortgage
                     description: Liability type
                     enum:
                       - leasing
@@ -3077,9 +3084,9 @@ components:
                   remark:
                     type: string
                   liabilityProvider:
-                    description: 'Name of the liability provider or creditor.'
+                    description: Name of the liability provider or creditor.
                     type: string
-                    example: 'Leasing Firm AG'
+                    example: Leasing Firm AG
             assets:
               type: array
               items:
@@ -3089,7 +3096,7 @@ components:
               enum:
                 - home_owner
                 - renter
-              example: 'renter'
+              example: renter
             additionalProperties:
               type: array
               items:
@@ -3101,26 +3108,26 @@ components:
                   nameAdditionalProperty:
                     type: string
                     maxLength: 70
-                    description: 'Name of the additional property'
-                    example: 'Orchard Villa, Holderstrasse 10'
+                    description: Name of the additional property
+                    example: Orchard Villa, Holderstrasse 10
                   valueAdditionalProperty:
                     $ref: '#/components/schemas/Amount'
-                    description: 'Value of the additional property'
+                    description: Value of the additional property
                   propertyTypeAdditionalProperty:
                     type: string
                     enum: [single_family_house, condominium, vacation_house, vacation_condominium, agricultural_farm, 2or3_family_house, multi_family_house, residential_building_plot, building_plot_other, mixed_property, commercial_condominium, office_building, industrial_building, special_object]
-                    description: 'The type of the additional property'
-                    example: 'vacation_house'
+                    description: The type of the additional property
+                    example: vacation_house
     # ---------
 
     # ---- Mortgage data types ----
     PropertyObjectRatingType:
       type: string
       enum: [bad, bad-medium, medium, medium-good, good, good-verygood, verygood]
-      description: 'The rating type.'
-      example: 'good'
+      description: The rating type.
+      example: good
     CommonID:
-      description: "The unique identifier UUID v4 specified by RFC4122."
+      description: The unique identifier UUID v4 specified by RFC4122.
       type: string
       format: uuid
       example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6
@@ -3165,10 +3172,10 @@ components:
           $ref: '#/components/schemas/AssetType'
         amount:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance'
+          description: The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance
         insuranceSum:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount of the sum insured in life insurance'
+          description: The amount of the sum insured in life insurance
         remark:
           type: string
         assetProvider:
