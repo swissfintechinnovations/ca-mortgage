@@ -3167,6 +3167,9 @@ components:
           $ref: '#/components/schemas/AssetType'
         amount:
           $ref: '#/components/schemas/Amount'
+        insuranceSum:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount of the sum insured in life insurance'
         usageType:
           $ref: '#/components/schemas/AssetUsageType'
         applicantId:
