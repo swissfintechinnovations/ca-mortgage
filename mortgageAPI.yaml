@@ -2580,28 +2580,8 @@ components:
           $ref: '#/components/schemas/AmountRange'
         amortization:
           type: integer
-        amortizationType:
-          type: string
-          enum: [direct, indirect]
-          description: 'The type of amortization'
-          example: 'direct'
-        amortizationAmount:
-          $ref: '#/components/schemas/Amount'
-          description: 'The amount of the periodic amortization'
-          example: 27400
-        amortizationStart:
-          $ref: '#/components/schemas/Date'
-          description: 'Start date of amortization'
-          example: 2018-04-13
-        amortizationPeriodicity:
-          type: string
-          enum: [yearly, quarterly, monthly]
-          description: 'The periodicity the amortization is paid'
-          example: 'quarterly'
-        amortizationAccountNr:
-          type: string
-          description: 'the account number from which the amortization is paid'
-          example: IE12BOFI90000112345678
+        amortizations:
+          $ref: '#/components/schemas/Amortizations'
     # ---------
 
     # ---- Party ----
@@ -2766,6 +2746,8 @@ components:
           example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
         amount:
           $ref: '#/components/schemas/Amount'
+        amortizations:
+          $ref: '#/components/schemas/Amortizations'
         tranches:
           type: array
           items:
@@ -2822,24 +2804,8 @@ components:
             - 3m
             - 6m
             - 12m
-        amortizationType:
-          type: string
-          enum: [direct, indirect]
-          description: 'The type of amortization'
-          example: 'direct'
-        amortizationAmount:
-          $ref: '#/components/schemas/Amount'
-        amortizationStart:
-          $ref: '#/components/schemas/Date'
-        amortizationPeriodicity:
-          type: string
-          enum: [yearly, quarterly, monthly]
-          description: 'The periodicity the amortization is paid'
-          example: 'quarterly'
-        amortizationAccountNr:
-          type: string
-          description: 'the account number from which the amortization is paid'
-    
+        amortizations:
+          $ref: '#/components/schemas/Amortizations'
     # --------
 
     # ---- Financing Request ----
@@ -3320,9 +3286,44 @@ components:
         modifyDate:
           $ref: '#/components/schemas/Date'
     # ---------
+    
+    # ---- Amortizations ----
+    Amortizations:
+      description: Information about the amortization on mortgage or on tranche level.
+      type: object
+      properties:
+        amortizationType:
+          type: string
+          enum: 
+            - direct
+            - indirect
+          description: 'The type of amortization'
+          example: 'direct'
+        amortizationAmount:
+          $ref: '#/components/schemas/Amount'
+          description: 'The amount of the periodic amortization'
+          example: 27400
+        amortizationStart:
+          $ref: '#/components/schemas/Date'
+          description: 'Start date of amortization'
+          example: 2018-04-13
+        amortizationPeriodicity:
+          type: string
+          enum:
+            - yearly
+            - quarterly
+            - monthly
+          description: 'The periodicity the amortization is paid'
+          example: 'quarterly'
+        amortizationAccountNr:
+          type: string
+          description: 'the account number from which the amortization is paid'
+          example: IE12BOFI90000112345678
+    # ---------
+    
     # ---- AssetProvider ----
     AssetProvider:
-      description: Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type insurance, insurance company name is provided
+      description: Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an additional security of type insurance, insurance company name is provided
       type: object
       required:
         - name
