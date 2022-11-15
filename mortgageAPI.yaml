@@ -5,7 +5,7 @@ info:
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
     This specification uses schema definitions from the Common Data Model v1.2.2.
-  termsOfService: 'Tbd'
+  termsOfService: Tbd
   contact:
     email: info@common-api.ch
   license:
@@ -2035,7 +2035,7 @@ components:
             luxusFlag:
               type: string
               enum: [0, 0.5, 1.0]
-              description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes. Proposed Mapping of WuP-Values: 1.0-4.0 => 0 (No) / 4.1-4.5 => 0.5 (Partially) / 4.6-5.0 = >1.0 (Yes).'
+              description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes. Proposed Mapping of WuestPartner-Values: 1.0-4.0 => 0 (No) / 4.1-4.5 => 0.5 (Partially) / 4.6-5.0 = >1.0 (Yes).'
               example: '0'
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
@@ -2162,14 +2162,14 @@ components:
               example: 2
             balconyOrTerraceArea:
               type: integer
-              description: 'The area of the balcony or terrace in quatermeter.'
+              description: 'The area of the balcony or terrace in square meter.'
               example: 20
             livingSpace:
               type: object
               properties:
                 livingSpaceInSqm:
                   type: integer
-                  description: 'The area of the living space in quatermeter.'
+                  description: 'The area of the living space in square meter.'
                   example: 120
                 measurementStandard:
                   type: string
@@ -2178,7 +2178,7 @@ components:
                   example: 'nla'
             multistorey:
               type: boolean
-              description: 'If the flat is multistorey true, else false.'
+              description: 'If the flat is multilevel true, else false.'
               example: false
             otherFeatures:
               type: array
@@ -2212,7 +2212,7 @@ components:
               properties:
                 livingSpaceInSqm:
                   type: integer
-                  description: 'The area of the living space in quatermeter.'
+                  description: 'The area of the living space in square meter.'
                   example: 120
                 measurementStandard:
                   type: string
@@ -2225,7 +2225,7 @@ components:
               example: false
             volumeIncludingGarageInhouse:
               type: integer
-              description: 'The volume of the house including the inhouse garage (relevant for WuP).'
+              description: 'The volume of the house including the inhouse garage (relevant for WuestPartner).'
               example: 1500
             volumeIncludingAllGarages:
               type: integer
@@ -2304,7 +2304,7 @@ components:
               example: iazi
               enum:
                 - iazi
-                - wup
+                - WuestPartner
             marketValue:
               $ref: '#/components/schemas/Amount'
               description: 'Estimated Market value of the property'
@@ -2329,7 +2329,7 @@ components:
           type: string
     # ---------
 
-    # ---- Property Identifier ----
+    # ---- Property Identifier ---- ## swiss specific properties -> use abstract object?
     PropertyIdentifier:
       description: Property identification (register of real estate)
       type: object
