@@ -12,10 +12,13 @@ TL;DR here are your style rules:
 - dicts/lists with dash style
 - only necessary quotes, if you have to use them use single quotes
 - use references for items repeating more than 2 times
-- note order of tags (nice to have) 
+- note order of fields (nice to have) 
 --- 
 
-APIs are defined according to the [OpenAPI Specification (OAS)](https://swagger.io/specification/). OAS specifies OpenAPI documents in either YAML or JSON style. SFTI APIs follows the YAML style. Besides the general Schema (c.f. [Swagger documentation](https://swagger.io/specification/#schema)) we make some additional conventions for reasons of consistency.  
+**Best practice yaml syntax**  
+APIs are defined according to the [OpenAPI Specification (OAS)](https://swagger.io/specification/). OAS specifies OpenAPI documents in either YAML or JSON style. SFTI APIs follows the YAML style. Besides the general Schema (c.f. [Swagger documentation](https://swagger.io/specification/#schema)) we make some additional conventions for reasons of consistency.
+
+**Dicts/lists with dash style**   
 Use just one item per line for any kind of lists and dictionaries to achieve a better readability. For example, 
 ```
 enum: [a, b, c]
@@ -27,9 +30,15 @@ enum:
     - b
     - c
 ``` 
+
+**Quotes**  
 Furthermore, use strings without quotes whenever possible, i.e., use `key: value string` instead of `key: 'value string'`. If quotes can not be omitted we use single quotes to fit strings together, for example `key: 'This value : requires quotes'`.
 
+**References**  
 If parameters or other blocks of the API is used multiple times, you may consider use references to reuse code. As a rule of thumb, we recommend using references from a 3 times occurrence onwards to improve code maintainability and uniformity. 
+
+**Field order**  
+See Nice to Have section.
 
 
 
@@ -38,17 +47,22 @@ If parameters or other blocks of the API is used multiple times, you may conside
 ---
 TL;DR here are your style rules:
 - inline documentation
-- 
+- summary describes more general as the description field and **no duplicates**
+- summary without point at the ending, description with
+- use as many fields as useful
 --- 
 
+**Inline documentation**  
 In general, we use the approach to document with inline descriptive strings. 
 For this purpose, the _description_ field can be used.
 As far as useful, every field should contain a description with a short, non-redundant statement of purpose.  
 
+**Summary & description**  
 Use summary tags to summarize an endpoint's task. Summary should be written bullet-point like and with no point at the end of the sentence.
 The overall description should provide more details of the task than the summary. The description contains a few sentences ending with a point.
 Other description tags like parameter descriptions may end with or without point.  
 
+**Fields**  
 In addition, parameter fields should also provide an _example_ field, and a _default_ OR _required_ field if applicable.
 Be aware that the _required_ keyword overwrites default fields, since the parameter must be set by the user.
 All those fields should be used extensively.
