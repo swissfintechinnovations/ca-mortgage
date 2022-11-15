@@ -5,7 +5,7 @@ info:
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
     This specification uses schema definitions from the Common Data Model v1.2.2.
-  termsOfService: 'Tbd'
+  termsOfService: Tbd
   contact:
     email: info@common-api.ch
   license:

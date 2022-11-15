@@ -5,6 +5,16 @@ Wiki:
 [Summary Slides]
 
 ## General Remarks and Style Guide
+
+---
+TL;DR here are your style rules:
+- best practice yaml syntax
+- dicts/lists with dash style
+- only necessary quotes, if you have to use them use single quotes
+- use references for items repeating more than 2 times
+- note order of tags (nice to have) 
+--- 
+
 APIs are defined according to the [OpenAPI Specification (OAS)](https://swagger.io/specification/). OAS specifies OpenAPI documents in either YAML or JSON style. SFTI APIs follows the YAML style. Besides the general Schema (c.f. [Swagger documentation](https://swagger.io/specification/#schema)) we make some additional conventions for reasons of consistency.  
 Use just one item per line for any kind of lists and dictionaries to achieve a better readability. For example, 
 ```
@@ -17,7 +27,7 @@ enum:
     - b
     - c
 ``` 
-Futhermore, use strings without quotes whenever possible, i.e. use `key: value string` instead of `key: 'value string'`. If quotes can not omited we use single quotes to fit strings together, for example `key: 'This value : requires quotes'`.
+Furthermore, use strings without quotes whenever possible, i.e., use `key: value string` instead of `key: 'value string'`. If quotes can not be omitted we use single quotes to fit strings together, for example `key: 'This value : requires quotes'`.
 
 If parameters or other blocks of the API is used multiple times, you may consider use references to reuse code. As a rule of thumb, we recommend using references from a 3 times occurrence onwards to improve code maintainability and uniformity. 
 
@@ -25,8 +35,14 @@ If parameters or other blocks of the API is used multiple times, you may conside
 
 ## How to Document? Our Documentation Guide
 
+---
+TL;DR here are your style rules:
+- inline documentation
+- 
+--- 
+
 In general, we use the approach to document with inline descriptive strings. 
-For this purpose the _description_ field can be used.
+For this purpose, the _description_ field can be used.
 As far as useful, every field should contain a description with a short, non-redundant statement of purpose.  
 
 Use summary tags to summarize an endpoint's task. Summary should be written bullet-point like and with no point at the end of the sentence.
@@ -34,22 +50,22 @@ The overall description should provide more details of the task than the summary
 Other description tags like parameter descriptions may end with or without point.  
 
 In addition, parameter fields should also provide an _example_ field, and a _default_ OR _required_ field if applicable.
-Be aware that the _required_ keyword overwrites default fields since the parameter must be set by the user.
+Be aware that the _required_ keyword overwrites default fields, since the parameter must be set by the user.
 All those fields should be used extensively.
 
 
 
 Optional Feature:  
-Automated documentation creating tools like Swagger UI support basic markdown for description fields. Unfortunately, online swagger UI (see [here](https://www.common-api.ch/index.php/de/resources-de/swagger-files#/)) does _not_ support this feature. Nevertheless, it my be helpful to use markdown to highlight different or important details.
+Automated documentation creating tools like Swagger UI support basic markdown for description fields. Unfortunately, online swagger UI (see [here](https://www.common-api.ch/index.php/de/resources-de/swagger-files#/)) does _not_ support this feature. Nevertheless, it may be helpful to use markdown to highlight different or important details.
 Markdown should be used as follows.
 - for now, use markdown as it seems fit
 - tbd
 
 ## Nice to Have
 
-From now on, we highly suggest to implement a order of fields. That means all fields are order by a specific rule and will always occur in this way. Omitted fields will be ignored and the order will preserved without those.  
-1. The _summary_ field is always before the _description_ field since the summary gives an overall description.
-2. For parameters we will use the following order:
+From now on, we highly suggest implementing an order of fields. That means all fields are ordered by a specific rule and will always occur in this way. Omitted fields will be ignored and the order will preserve without those.  
+1. The _summary_ field is always before the _description_ field, since the summary gives an overall description.
+2. For parameters, we will use the following order:
 ```
 parameters:
   - in: path
@@ -68,7 +84,7 @@ parameters:
 
 
 ## Example
-In this section we provide a schematic example that contains a full and well defined API according to this style and documentation guide.
+In this section, we provide a schematic example that contains a full and well-defined API according to this style and documentation guide.
 ```
 openapi: "3.0.0"
 info:
