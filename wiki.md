@@ -17,6 +17,7 @@ TL;DR here are your style rules:
 
 **Best practice yaml syntax**  
 APIs are defined according to the [OpenAPI Specification (OAS)](https://swagger.io/specification/). OAS specifies OpenAPI documents in either YAML or JSON style. SFTI APIs follows the YAML style. Besides the general Schema (c.f. [Swagger documentation](https://swagger.io/specification/#schema)) we make some additional conventions for reasons of consistency.
+Further information regarding general implementation guidelines can be found in your internal [confluence page](https://c-a-p-s.atlassian.net/wiki/spaces/PUB/pages/2586312790/Implementation+Guidlines).
 
 **Dicts/lists with dash style**   
 Use just one item per line for any kind of lists and dictionaries to achieve a better readability. For example, 
