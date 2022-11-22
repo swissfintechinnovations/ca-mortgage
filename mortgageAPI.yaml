@@ -7,6 +7,7 @@ info:
     This specification uses schema definitions from the Common Data Model v1.2.2.
   termsOfService: Tbd
   contact:
+    url: common-api.ch
     email: info@common-api.ch
   license:
     name: Apache 2.0
@@ -378,7 +379,7 @@ paths:
           $ref: '#/components/responses/standard503'
 
 
-  /mortgages/applications:
+  /mortgages/applications: # OtherIssue why does this endpoint have no applicationId path parameter while /mortgages/applications/{applicationId}/swissrets does?
     post:
       summary: Place a new mortgage application (serves as dossier)
       description: Place a new application including all necessary information about the property and applicant’s financial situation. **Note that in the case where the FI needs additional information on the property, the error response 400 must contain the minimum required JSON object (PropertyObject) as detail**.
@@ -506,7 +507,7 @@ paths:
           $ref: '#/components/responses/standard503'
 
     put:
-      summary: Update the application’s details $ # OtherIssue change hypen?
+      summary: Update the application’s details # OtherIssue change hypen?
       description: Update the application’s details. Note that changing the application's details should not be possible after the application has been accepted by the FI. # OtherIssue change hypen?
       tags:
         - Mortgage Application
@@ -533,7 +534,7 @@ paths:
         '200':
           description: OK # moreExpressiveDescription
           content:
-            application/json:
+            application/json: # OtherIssue use '#/components/schemas/Application' ref
               schema:
                 type: object
                 properties:
@@ -635,11 +636,11 @@ paths:
         required: true
         content:
           application/xml:
-            schema:
+            schema: # OtherIssue fix example and why xml not json
               type: string
       responses:
         '201':
-          $ref: '#/components/responses/standard201'  
+          $ref: '#/components/responses/standard201'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
