@@ -3116,7 +3116,7 @@ components:
           description: 'The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance'
         insuranceSum:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount of the sum insured in life insurance'
+          description: The amount of the sum insured in life insurance
         remark:
           type: string
         assetProvider:
@@ -3133,6 +3133,9 @@ components:
           $ref: '#/components/schemas/AssetType'
         amount:
           $ref: '#/components/schemas/Amount'
+        insuranceSum:
+          $ref: '#/components/schemas/Amount'
+          description: The amount of the sum insured in life insurance
         usageType:
           $ref: '#/components/schemas/AssetUsageType'
         applicantId:
