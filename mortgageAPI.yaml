@@ -1,24 +1,24 @@
-openapi: "3.0.0"
+openapi: 3.0.0
 info:
-  version: 3.0.1
+  version: 3.1.0
   title: Common Mortgage API (Public)
   description:
     This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
     This specification uses schema definitions from the Common Data Model v1.2.2.
-  termsOfService: 'Tbd'
+  termsOfService: Tbd
   contact:
     email: info@common-api.ch
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
   - url: https://mortgage.common-api.ch
 externalDocs:
   description: Find out more about SFTI API specifications
-  url: 'https://www.common-api.ch'
+  url: https://www.common-api.ch
 tags:
   - name: Full Mortgage Cases
-    description: Operatios related to full mortgage cases including the application details
+    description: Operations related to full mortgage cases including the application details
   - name: Existing Mortgages
     description: Operations related with existing mortgages
   - name: Mortgage Products and Conditions
@@ -259,6 +259,7 @@ paths:
               - libor
               - saron
               - fixed
+            default: missingDefaultOrExample
           description: The type of the interest rates (for filtering)
         - in: query
           name: duration
@@ -329,11 +330,13 @@ paths:
           name: duration
           schema:
             type: string
+            default: missingDefaultOrExample
           description: The duration (for filtering)
         - in: query
           name: interest
           schema:
             type: string
+            example: missingDefaultOrExample
           description: The interest (for filtering)
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
@@ -501,7 +504,7 @@ paths:
           $ref: '#/components/responses/standard503'
 
     put:
-      summary: Update the application’s details
+      summary: Update the application’s details $ 
       description: Update the application’s details. Note that changing the application's details should not be possible after the application has been accepted by the FI.
       tags:
         - Mortgage Application
@@ -526,7 +529,7 @@ paths:
               $ref: '#/components/schemas/Application'
       responses:
         '200':
-          description: OK
+          description: OK 
           content:
             application/json:
               schema:
@@ -558,7 +561,7 @@ paths:
 
     delete:
       summary: Cancel the application and removing it
-      description: Cancel the application and removing it
+      description: Cancel the application and removing it 
       tags:
         - Mortgage Application
       parameters:
@@ -755,7 +758,7 @@ paths:
   /mortgages/applications/{applicationId}/documents:
     post:
       summary: Add documents for the specific application
-      description: Add to a specific application’s documents
+      description: Add to a specific application’s documents 
       tags:
         - Mortgage Application
       parameters:
@@ -789,22 +792,22 @@ paths:
                 fileContent:
                   type: string
                   format: binary
-                  description: 'The file content.'
+                  description: The file content.
                 name:
                   type: string
-                  description: 'The name of the file without file type extension.'
+                  description: The name of the file without file type extension.
                   maxLength: 128
-                  example: 'my-property-flyer'
+                  example: my-property-flyer
                 type:
                   type: string
-                  description: 'The file type.'
+                  description: The file type.
                   maxLength: 64
-                  example: 'application/pdf'
+                  example: application/pdf
                 size:
                   type: integer
                   format: int64
-                  description: 'The file size in bytes.'
-                  example: '21543'
+                  description: The file size in bytes.
+                  example: 21543
                 applicantId:
                   type: string
                   format: uuid
@@ -859,21 +862,27 @@ paths:
                   properties:
                     filename:
                       type: string
+                      example: missingDefaultOrExample
                     filetype:
                       type: string
+                      example: missingDefaultOrExample
                     documentId:
                       type: string
                       format: uuid
+                      example: missingDefaultOrExample
                       description: Document ID in uuid v4 format
                     filesize:
                       type: integer
+                      example: missingDefaultOrExample
+
                     uploaddate:
                       $ref: '#/components/schemas/Date'
                     statusInfo:
-                      description: 'Document status info'
+                      description: Document status info
                       type: object
                       required:
                         - status
+                      example: missingDefaultOrExample
                       properties:
                         status:
                           type: string
@@ -881,9 +890,11 @@ paths:
                             - accepted
                             - rejected
                             - pending
+                          default: missingDefaultOrExample
                         statusReason:
                           type: string
-                          description: 'The reason, of current status.'
+                          example: missingDefaultOrExample
+                          description: The reason, of current status.
           headers:
             X-Correlation-ID:
               schema:
@@ -997,10 +1008,11 @@ paths:
                       - accepted
                       - rejected
                       - pending
-                    example: pending
+                    example: pending 
                   detail:
                     type: string
-                    example: Waiting for details
+                    example: Waiting for details 
+                    description: missingDescription
           headers:
             X-Correlation-ID:
               schema:
@@ -1072,7 +1084,7 @@ paths:
     get:
       summary: List all required documents / information for processing specific Financial request at FI
       description: List all required documents / information for processing specific Financial request at FI
-        This can be used when NO offer is available from FI
+        This can be used when NO offer is available from FI 
       tags:
         - Mortgage Financing Request
       parameters:
@@ -1097,7 +1109,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          description: OK 
           content:
             application/json:
               schema:
@@ -1160,7 +1172,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          description: OK 
           content:
             application/json:
               schema:
@@ -1289,7 +1301,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          description: OK 
           content:
             application/json:
               schema:
@@ -1343,7 +1355,7 @@ paths:
               - fr
               - it
               - en
-          description: 'Language of Document content'
+          description: Language of Document content
           example: fr
           required: true
         - $ref: '#/components/parameters/clientid_in_header'
@@ -1509,7 +1521,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          description: OK 
           content:
             application/json:
               schema:
@@ -1560,7 +1572,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          description: OK 
           content:
             application/json:
               schema:
@@ -1572,7 +1584,7 @@ paths:
                       - accepted
                       - rejected
                       - pending
-                    example: pending
+                    example: pending 
                   detail:
                     type: string
                     example: Waiting for details
@@ -1622,7 +1634,7 @@ paths:
               - fr
               - it
               - en
-          description: 'Language of Document content'
+          description: Language of Document content
           example: fr
           required: true
 
@@ -1631,7 +1643,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          description: OK 
           content:
             application/json:
               schema:
@@ -1867,23 +1879,23 @@ components:
         streetName:
           type: string
           maxLength: 70
-          example: "Rue de la gare"
+          example: Rue de la gare
         buildingNumber:
-          type: string
-          maxLength: 16
-          example: "24"
+          type: string 
+          maxLength: 16 
+          example: 24
         postCode:
-          type: string
+          type: string 
           maxLength: 16
-          example: "2501"
+          example: 2501
         townName:
           type: string
           maxLength: 35
-          example: "Biel"
+          example: Biel
         country:
           type: string
           maxLength: 2
-          example: "CH"
+          example: CH
     # -----------
     # ---- Country Code ----
     Country:
@@ -1894,9 +1906,9 @@ components:
     # ------------
     # ---- Response
     commonResourceCreatedResponse:
-      title: Recource created response
+      title: Resource created response
       description: Uuid v4 of the created resource
-      example: '20460121-6aff-485b-a61d-6056ecd72bd8'
+      example: 20460121-6aff-485b-a61d-6056ecd72bd8
       type: object
       required:
         - id
@@ -1945,7 +1957,7 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
-      example: '/problems/TECHNICAL_ERROR'
+      example: /problems/TECHNICAL_ERROR
     # ---- End Response
     # ---- End Common Data Model
 
@@ -1960,8 +1972,8 @@ components:
         propertyObjectId:
           type: string
           format: uuid
-          description: 'The property object identifier (UUID v4) defined by TPP.'
-          example: '9343dd26-4b54-4808-8978-538f8e869d0e'
+          description: The property object identifier (UUID v4) defined by TPP.
+          example: 9343dd26-4b54-4808-8978-538f8e869d0e
         name:
           type: string
           description: User-defined property name
@@ -1972,19 +1984,19 @@ components:
           $ref: '#/components/schemas/PropertyIdentifier'
         propertyConstructionInformation:
           type: object
-          description: 'The property construction information.'
+          description: The property construction information.
           properties:
             constructionYear:
               type: integer
-              description: 'construction year'
+              description: construction year
               example: 1990
             renovation:
               type: boolean
-              description: 'If the property is renovated true, else false.'
+              description: If the property is renovated true, else false.
               example: false
             renovationYear:
               type: integer
-              description: 'renovation year'
+              description: renovation year
               example: 1990
               default: 0
             propertyRenovations:
@@ -2012,111 +2024,185 @@ components:
                       - interior_fittings
                       - building_envelope
                       - building_services
-                    description: 'Type of Property Component which has been renovated. Please use consistently either the detailed Component Types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings)'
-                    example: 'interior_fittings_floor_cover'
+                    description: Type of Property Component which has been renovated. Please use consistently either the detailed Component Types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings)
+                    example: interior_fittings_floor_cover
                   yearOfRenovation:
                     type: integer
-                    description: 'renovation year'
-                    example: '2015'
+                    description: renovation year
+                    example: 2015
                     default: 0
                   renovationCost:
                     $ref: '#/components/schemas/Amount'
-                    description: 'cost of renovation'
+                    description: cost of renovation
             minergieStandardType:
               type: string
-              enum: [none, minergie, minergie-p, minergie-eco, minergie-p-eco, minergie-a, minergie-a-eco]
-              description: 'The minergie standard'
-              example: 'minergie-p'
+              enum: 
+                - none
+                - minergie
+                - minergie-p
+                - minergie-eco
+                - minergie-p-eco
+                - minergie-a
+                - minergie-a-eco 
+              description: The minergie standard
+              example: minergie-p
             BECCStandardType:
               type: string
-              enum: [none, A, B, C, D, E, F, G]
-              description: 'Energy certificate from Cantons'
-              example: 'B'
+              enum: 
+                - none
+                - A
+                - B
+                - C
+                - D
+                - E
+                - F
+                - G
+              description: Energy certificate from Cantons 
+              example: B
             luxusFlag:
               type: string
-              enum: [0, 0.5, 1.0]
+              enum: 
+                - 0
+                - 0.5
+                - 1.0
               description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes. Proposed Mapping of WuP-Values: 1.0-4.0 => 0 (No) / 4.1-4.5 => 0.5 (Partially) / 4.6-5.0 = >1.0 (Yes).'
-              example: '0'
+              example: 0
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
             stateBuildingType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
         classOfProperty:
           type: string
-          enum: [main_residence, main_residence_with_use_restriction, second_residence, second_residence_with_use_restriction, rented_property, rented_property_with_use_restriction, other]
-          description: 'The class of property (Main residence, second residence, rented).'
-          example: 'main_residence'
+          enum: 
+            - main_residence
+            - main_residence_with_use_restriction
+            - second_residence
+            - second_residence_with_use_restriction
+            - rented_property
+            - rented_property_with_use_restriction
+            - other  
+          description: The class of property (Main residence, second residence, rented).
+          example: main_residence
         floorPlan:
           type: string
-          enum: [efficient, average, inefficient]
-          description: 'The efficiency of the floor plan'
-          example: 'average'
+          enum: 
+            - efficient
+            - average
+            - inefficient
+          description: The efficiency of the floor plan
+          example: average
         usageType:
           type: string
-          enum: [self, let]
+          enum: 
+            - self
+            - let  
           description: 'The type of usage of the financing property: self, let'
-          example: 'self'
+          example: self
         propertyType:
           type: string
-          enum: [single_family_house, condominium, vacation_house, vacation_condominium, agricultural_farm, 2or3_family_house, multi_family_house, residential_building_plot, building_plot_other, mixed_property, commercial_condominium, office_building, industrial_building, special_object]
-          description: 'The type of property'
-          example: 'single_familiy_house'
+          enum: 
+            - single_family_house
+            - condominium
+            - vacation_house
+            - vacation_condominium
+            - agricultural_farm
+            - 2or3_family_house
+            - multi_family_house
+            - residential_building_plot
+            - building_plot_other
+            - mixed_property
+            - commercial_condominium
+            - office_building
+            - industrial_building
+            - special_object  
+          description: The type of property
+          example: single_family_house
         ceilingHight:
           type: string
-          enum: [especially_high, middle, especially_low]
-          description: 'The ceiling hight in the rooms.'
-          example: 'middle'
+          enum: 
+            - especially_high
+            - middle
+            - especially_low   
+          description: The ceiling hight in the rooms.
+          example: middle
         buildingStandardFloorCoverings:
           type: string
-          enum: [premium, highlevel, basic, lowlevel]
-          description: 'Building standard of the floor coverings.'
-          example: 'basic'
+          enum: 
+            - premium
+            - highlevel
+            - basic
+            - lowlevel   
+          description: Building standard of the floor coverings.
+          example: basic
         buildingStandardKitchen:
           type: string
-          enum: [premium, highlevel, basic, lowlevel]
-          description: 'Building standard of the kitchen.'
-          example: 'basic'
+          enum: 
+            - premium
+            - highlevel
+            - basic
+            - lowlevel   
+          description: Building standard of the kitchen.
+          example: basic
         buildingStandardBathroom:
           type: string
-          enum: [premium, highlevel, basic, lowlevel]
-          description: 'Building standard of the sanitary installations.'
-          example: 'basic'
+          enum: 
+            - premium
+            - highlevel
+            - basic
+            - lowlevel  
+          description: Building standard of the sanitary installations.
+          example: basic
         heatEmission:
           type: array
           items:
             type: string
-            enum: [floor, radiator, stove, other]
-            description: 'Type of the heat emission'
-            example: 'floor'
+            enum: 
+              - floor
+              - radiator
+              - stove
+              - other  
+            description: Type of the heat emission
+            example: floor
         heatProduction:
           type: array
           items:
             type: string
-            enum: [oil, gas, wood, electric, geothermal_probe, district, solar_panel, solar_thermal_collector]
-            description: 'Type of the heat production'
-            example: 'gas'
+            enum: 
+              - oil
+              - gas
+              - wood
+              - electric
+              - geothermal_probe
+              - district
+              - solar_panel
+              - solar_thermal_collector  
+            description: Type of the heat production
+            example: gas
         outsideConstructionZone:
           type: boolean
-          description: 'If the property is outside of the construction zone.'
+          description: If the property is outside of the construction zone.
           example: false
         propertyElements:
           type: object
-          description: 'The property detail information such as rooms count, parking places.'
+          description: The property detail information such as rooms count, parking places.
           properties:
             numberOfRooms:
               type: number
               format: double
-              description: 'The number of the rooms.'
+              description: The number of the rooms.
               example: 4.5
             numberOfRoomsInGrannyFlat:
               type: number
               format: double
-              description: 'The number of the rooms in the granny flat'
-              example: '2.5'
+              description: The number of the rooms in the granny flat
+              example: 2.5
             roomCountType:
               type: string
-              enum: [kitchen_not_counted, kitchen_half_room, kitchen_full_room]
-              description: 'Reflects the type of the room count type. E.g. if the kitchen counts as full room.'
+              enum: 
+                - kitchen_not_counted
+                - kitchen_half_room
+                - kitchen_full_room   
+              description: Reflects the type of the room count type. E.g. if the kitchen counts as full room.
               example: kitchen_full_room
             numberOfFamilyBathrooms:
               type: integer
@@ -2124,181 +2210,228 @@ components:
               example: 2
             numberOfBathWC:
               type: integer
-              description: 'Bath or shower, sink, toilet'
+              description: Bath or shower, sink, toilet
               example: 2
             numberOfGuestWC:
               type: integer
-              description: 'Separate, single toilet with wash basin'
+              description: Separate, single toilet with wash basin
               example: 2
             numberOfExternalParking:
               type: integer
-              description: 'The number of external parking spaces.'
+              description: The number of external parking spaces.
               example: 2
             numberOfSeparateGarages:
               type: integer
-              description: 'The number of separated garages (covered parking spaces).'
+              description: The number of separated garages (covered parking spaces).
               example: 2
             numberOfUndergroundCarParks:
               type: integer
-              description: 'The number of underground parking places.'
+              description: The number of underground parking places.
               example: 2
         propertyFlatInformation:
           type: object
-          description: 'The property flat information.'
+          description: The property flat information.
           properties:
             numberOfFlats:
               type: integer
-              description: 'The number of flats in the building.'
+              description: The number of flats in the building.
               example: 10
             numberOfFloors:
               type: integer
-              description: 'The number of floors in the building.'
+              description: The number of floors in the building.
               example: 4
             stateApartmentType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
             floor:
               type: integer
-              description: 'The floor of the flat.'
+              description: The floor of the flat.
               example: 2
             balconyOrTerraceArea:
               type: integer
-              description: 'The area of the balcony or terrace in quatermeter.'
+              description: The area of the balcony or terrace in quatermeter.
               example: 20
             livingSpace:
               type: object
               properties:
                 livingSpaceInSqm:
                   type: integer
-                  description: 'The area of the living space in quatermeter.'
+                  description: The area of the living space in quatermeter.
                   example: 120
                 measurementStandard:
                   type: string
-                  enum: [nla, gfa]
-                  description: 'The measurement standard used to determine the living space (nla or gfa).'
-                  example: 'nla'
+                  enum: 
+                    - nla
+                    - gfa   
+                  description: The measurement standard used to determine the living space (nla or gfa).
+                  example: nla
             multistorey:
               type: boolean
-              description: 'If the flat is multistorey true, else false.'
+              description: If the flat is multistorey true, else false.
               example: false
             otherFeatures:
               type: array
               items:
                 type: string
-                enum: [coowned_garden_terrace_room, coowned_indoor_pool, coowned_outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, elevator_in_stairwell, elevator_into_apartment, barrier-free_living, automated_building_control, ventilation_system_without_minergie]
-                description: 'Additional features and services.'
-                example: 'coowned_outdoor_pool'
+                enum: 
+                  - coowned_garden_terrace_room
+                  - coowned_indoor_pool
+                  - coowned_outdoor_pool
+                  - whirlpool_sauna
+                  - heated_conservatory
+                  - unheated_conservatory
+                  - security_system
+                  - chimney
+                  - elevator_in_stairwell
+                  - elevator_into_apartment
+                  - barrier-free_living
+                  - automated_building_control
+                  - ventilation_system_without_minergie  
+                description: Additional features and services.
+                example: coowned_outdoor_pool
             quote:
               type: integer
-              description: 'The quote of the flat property against the whole building property.'
+              description: The quote of the flat property against the whole building property.
               example: 120
             apartmentType:
               type: string
-              enum: [garden_flat, floor_flat, roof_flat, attic]
-              description: 'The type of the appartment (floor, garden level, storey).'
-              example: 'floor_flat'
+              enum: 
+                - garden_flat
+                - floor_flat
+                - roof_flat
+                - attic   
+              description: The type of the apartment (floor, garden level, storey).
+              example: floor_flat
             buildingType:
               type: string
-              enum: [multiple_family_house, terrace_house]
-              description: 'The type of the building (multiple_family_house, terrace_house).'
-              example: 'multiple_family_house'
+              enum: 
+                - multiple_family_house
+                - terrace_house   
+              description: The type of the building (multiple_family_house, terrace_house).
+              example: multiple_family_house
             locationInTheBuildingRating:
               $ref: '#/components/schemas/PropertyObjectRatingType'
         propertyBuildingInformation:
           type: object
-          description: 'The property building information.'
+          description: The property building information.
           properties:
             livingSpace:
               type: object
               properties:
                 livingSpaceInSqm:
                   type: integer
-                  description: 'The area of the living space in quatermeter.'
+                  description: The area of the living space in quatermeter.
                   example: 120
                 measurementStandard:
                   type: string
-                  enum: [nla, gfa]
-                  description: 'The measurement standard used to determine the living space (nla or gfa).'
-                  example: 'nla'
+                  enum: 
+                    - nla
+                    - gfa   
+                  description: The measurement standard used to determine the living space (nla or gfa).
+                  example: nla
             roofFloorExpandable:
               type: boolean
-              description: 'If the roof floor is expandable true, else false.'
+              description: If the roof floor is expandable true, else false.
               example: false
             volumeIncludingGarageInhouse:
               type: integer
-              description: 'The volume of the house including the inhouse garage (relevant for WuP).'
+              description: The volume of the house including the inhouse garage (relevant for WuP).
               example: 1500
             volumeIncludingAllGarages:
               type: integer
-              description: 'The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).'
+              description: The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).
               example: 1620
             landArea:
               type: integer
-              description: 'The surface area of the land.'
+              description: The surface area of the land.
               example: 2000
             environmentStandard:
               type: string
-              enum: [high-level, basic, low-level]
-              description: 'The rating type'
-              example: 'basic'
+              enum: 
+                - high-level
+                - basic
+                - low-level  
+              description: The rating type
+              example: basic
             otherFeatures:
               type: array
               items:
                 type: string
-                enum: [barrier-free_living, automated_building_control, ventilation_system_without_minergie, indoor_pool, outdoor_pool, whirlpool_sauna, heated_conservatory, unheated_conservatory, security_system, chimney, passenger_elevator, freight_elevator]
-                description: 'Additional features and services.'
-                example: 'outdoor_pool'
+                enum: 
+                  - barrier-free_living
+                  - automated_building_control
+                  - ventilation_system_without_minergie
+                  - indoor_pool
+                  - outdoor_pool
+                  - whirlpool_sauna
+                  - heated_conservatory
+                  - unheated_conservatory
+                  - security_system
+                  - chimney
+                  - passenger_elevator
+                  - freight_elevator  
+                description: Additional features and services.
+                example: outdoor_pool
             houseType:
               type: string
-              enum: [detached_house, semidetached_house, row_house, row_corner_house, terrace_house]
-              description: 'The type of the house.'
-              example: 'detached_house'
+              enum: 
+                - detached_house
+                - semidetached_house
+                - row_house
+                - row_corner_house
+                - terrace_house   
+              description: The type of the house.
+              example: detached_house
             normType:
               type: string
-              enum: [building_insurance, sia116, sia416, other]
-              description: 'The norm type.'
-              example: 'building_insurance'
+              enum: 
+                - building_insurance
+                - sia116
+                - sia416
+                - other  
+              description: The norm type.
+              example: building_insurance
         valueRelevantServitudes:
           type: boolean
-          description: 'If the property has servitudes true, else false.'
+          description: If the property has servitudes true, else false.
           example: false
         buildingRight:
           type: object
           properties:
             hasBuildingRight:
               type: boolean
-              description: 'If the property is built in a building right true, else false.'
+              description: If the property is built in a building right true, else false.
               example: false
             buildingRightExpiry:
               $ref: '#/components/schemas/Date'
-              description: 'Date when the building right expires.'
+              description: Date when the building right expires.
             buildingRightRent:
               $ref: '#/components/schemas/Amount'
-              description: 'Yearly payment for the building right.'
+              description: Yearly payment for the building right.
             buildingRightCompensation:
               $ref: '#/components/schemas/Amount'
-              description: 'Payment received at the building right expiry.'
+              description: Payment received at the building right expiry.
         objectPrice:
           $ref: '#/components/schemas/Amount'
-          description: 'Price paid to buy the property'
+          description: Price paid to buy the property
         renovationAmount:
           $ref: '#/components/schemas/Amount'
-          description: 'Amount needed to pay the planned renovation (Renovationsbetrag)'
+          description: Amount needed to pay the planned renovation (Renovationsbetrag)
         investmentCost:
           $ref: '#/components/schemas/Amount'
-          description: 'Total amount needed to pay object price and planned renovation (Total Anlagekosten)'
+          description: Total amount needed to pay object price and planned renovation (Total Anlagekosten)
         collateralValue:
           $ref: '#/components/schemas/Amount'
-          description: 'Value of the property as base for the securization applying the lowest value principle (Belehnungsbasis)'
+          description: Value of the property as base for the securization applying the lowest value principle (Belehnungsbasis)
         limitForLandEncumbrances:
           $ref: '#/components/schemas/Amount'
-          description: 'The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)'
+          description: The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)
         estimation:
           type: object
           properties:
             estimationId:
               type: string
-              description: 'ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.'
-              example: 'asd23f'
+              description: ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.
+              example: asd23f
             estimationSourceType:
               type: string
               example: iazi
@@ -2307,24 +2440,24 @@ components:
                 - wup
             marketValue:
               $ref: '#/components/schemas/Amount'
-              description: 'Estimated Market value of the property'
+              description: Estimated Market value of the property
             statisticalPriceRangeMax:
               $ref: '#/components/schemas/Amount'
-              description: 'Estimated statistical price range maximum'
+              description: Estimated statistical price range maximum
             statisticalPriceRangeMin:
               $ref: '#/components/schemas/Amount'
-              description: 'Estimated statistical price range minimum'
+              description: Estimated statistical price range minimum
             yearlyRentalIncome:
               $ref: '#/components/schemas/Amount'
-              description: 'Estimated rental income per year'
+              description: Estimated rental income per year
             estimationDate:
               $ref: '#/components/schemas/Date'
         transferOfOwnershipDate:
           $ref: '#/components/schemas/Date'
-          description: 'When the property will be fully transfered to the new owner'
+          description: When the property will be fully transfered to the new owner
         publicNotarization:
           $ref: '#/components/schemas/Date'
-          description: 'Date of public notarization'
+          description: Date of public notarization
         remarks:
           type: string
     # ---------
@@ -2372,7 +2505,7 @@ components:
           $ref: '#/components/schemas/Date'
         offerDate:
           $ref: '#/components/schemas/Date'
-          description: 'The date when the offer is made by the FI. Optional field for use cases where no MortageOffer object is used and therefore the offer date needs to be directly in Mortgage object. '
+          description: The date when the offer is made by the FI. Optional field for use cases where no MortgageOffer object is used and therefore the offer date needs to be directly in Mortgage object.
           example: 2018-04-05
         validTo:
           $ref: '#/components/schemas/Date'
@@ -2390,7 +2523,7 @@ components:
           type: string
         durationType:
           type: integer
-          description: 'The duration in years.'
+          description: The duration in years.
           minimum: 0
           maximum: 25
           example: 5
@@ -2477,20 +2610,20 @@ components:
       properties:
         duration:
           type: integer
-          description: 'The duration in years.'
+          description: The duration in years.
           minimum: 0
           maximum: 25
           example: 5
         rate:
           type: number
           format: double
-          description: 'The interest rate.'
+          description: The interest rate.
           minimum: 0
           maximum: 1
           example: 0.5
         saronperiod:
           type: string
-          description: 'The saron period.'
+          description: The saron period.
           example: 3m
           enum:
             - 1m
@@ -2511,8 +2644,8 @@ components:
         productId:
           type: string
           format: uuid
-          description: 'The product identifier (UUID v4).'
-          example: '20460121-6aff-485b-a61d-6056ecd72bd8'
+          description: The product identifier (UUID v4).
+          example: 20460121-6aff-485b-a61d-6056ecd72bd8
         names:
           type: array
           items:
@@ -2520,11 +2653,11 @@ components:
             properties:
               description:
                 type: string
-                description: 'Product name description'
-                example: "Fixed rate mortgage"
+                description: Product name description
+                example: Fixed rate mortgage
               language:
                 type: string
-                description: 'Language of product name'
+                description: Language of product name
                 example: fr
                 enum:
                   - de
@@ -2568,7 +2701,7 @@ components:
           example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
         duration:
           type: integer
-          description: 'The duration in years.'
+          description: The duration in years.
           minimum: 0
           maximum: 25
           example: 5
@@ -2598,8 +2731,8 @@ components:
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
         fiPrimaryApplicantId:
           type: string
-          description: 'ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple applicants and if known at the moment of the application.'
-          example: 'asd23f'
+          description: ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple applicants and if known at the moment of the application.
+          example: asd23f
         personList:
           type: array
           items:
@@ -2618,20 +2751,20 @@ components:
         applicationId:
           type: string
           format: uuid
-          description: 'The application identifier (UUID v4) defined by FI.'
-          example: 'f157c4be-106d-4304-972e-091e77b87e1c'
+          description: The application identifier (UUID v4) defined by FI.
+          example: f157c4be-106d-4304-972e-091e77b87e1c
         tppApplicationId:
           type: string
-          description: 'The application alphanumeric identifier defined by TPP'
+          description: The application alphanumeric identifier defined by TPP
           pattern: '^[a-zA-Z0-9]{6,10}$'
-          example: 'asd23f'
+          example: asd23f
         requestingParty:
           $ref: '#/components/schemas/Party'
         propertyInformation:
           $ref: '#/components/schemas/PropertyObject'
         mortgageType:
           type: string
-          description: 'Type of business.'
+          description: Type of business.
           example: buy
           enum:
             - buy
@@ -2639,13 +2772,15 @@ components:
             - construction_financing
         channelType:
            type: string
-           enum: [advisor, direct]
-           description: 'The type of the channel the application was generated' 
-           example: 'advisor'
+           enum: 
+            - advisor
+            - direct
+           description: The type of the channel the application was generated
+           example: advisor
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
-          example: 'entire'
+          example: entire
           enum:
             - entire
             - partial
@@ -2656,15 +2791,15 @@ components:
             properties:
               replacedTrancheAmount:
                 $ref: '#/components/schemas/Amount'
-                description: 'The amount of the replaced tranche'
+                description: The amount of the replaced tranche
               replacedTrancheExpiry:
                 $ref: '#/components/schemas/Date'
-                description: 'The expiry date of the replaced tranche'
+                description: The expiry date of the replaced tranche
                 example: 2022-05-03
               replacedTrancheIssuer:
                 type: string
-                description: 'The institute who has issued the replaced tranche'
-                example: 'Credit Suisse'
+                description: The institute who has issued the replaced tranche
+                example: Credit Suisse
         tppAdvisorDetail:
           type: object
           properties:
@@ -2681,8 +2816,8 @@ components:
             nameTpp:
               type: string
               maxLength: 70
-              description: 'Firm of the TPP advisor'
-              example: 'Muster Finanz AG'
+              description: Firm of the TPP advisor
+              example: Muster Finanz AG
             email:
               type: string
               description: Email of the TPP advisor
@@ -2797,7 +2932,7 @@ components:
             - fixed
         saronperiod:
           type: string
-          description: 'The saron period.'
+          description: The saron period.
           example: 3m
           enum:
             - 1m
@@ -2878,8 +3013,8 @@ components:
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
         fiApplicantId:
           type: string
-          description: 'ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.'
-          example: 'asd23f'
+          description: ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
+          example: asd23f
         applicantType:
           type: string
           example: individual
@@ -2943,10 +3078,10 @@ components:
               example: max.muster@domain.ch
             phone:
               type: string
-              description: 'Phone number of the applicant'
+              description: Phone number of the applicant
               example: '+41443343456'
             solvencyRating:
-              description: 'Solvency rating of the applicant e.g. CRIF'
+              description: Solvency rating of the applicant e.g. CRIF
               type: object
               required:
                 - ratingValue
@@ -2954,17 +3089,17 @@ components:
               properties:
                 ratingValue:
                   type: integer
-                  description: ' Solvency rating value'
+                  description: Solvency rating value
                   example: 420
                 ratingSourceType:
                   type: string
-                  description: 'Provider of the solvency rating'
-                  example: 'crif'
+                  description: Provider of the solvency rating
+                  example: crif
                   enum: 
                     - crif
                 ratingDate:
                   $ref: '#/components/schemas/Date'
-                  description: 'Date of the solvency rating'
+                  description: Date of the solvency rating
             applicantLanguage:
               type: string
               example: fr
@@ -3000,9 +3135,9 @@ components:
                   remark:
                     type: string
                   incomeProvider:
-                    description: 'Income provider for each income or cost position can be transfered.'
+                    description: Income provider for each income or cost position can be transferred.
                     type: string
-                    example: 'Employer AG'
+                    example: Employer AG
             liabilities:
               type: array
               items:
@@ -3013,7 +3148,7 @@ components:
                 properties:
                   liabilityType:
                     type: string
-                    example: 'mortgage'
+                    example: mortgage
                     description: Liability type
                     enum:
                       - leasing
@@ -3025,9 +3160,9 @@ components:
                   remark:
                     type: string
                   liabilityProvider:
-                    description: 'Name of the liability provider or creditor.'
+                    description: Name of the liability provider or creditor.
                     type: string
-                    example: 'Leasing Firm AG'
+                    example: Leasing Firm AG
             assets:
               type: array
               items:
@@ -3037,7 +3172,7 @@ components:
               enum:
                 - home_owner
                 - renter
-              example: 'renter'
+              example: renter
             additionalProperties:
               type: array
               items:
@@ -3049,26 +3184,47 @@ components:
                   nameAdditionalProperty:
                     type: string
                     maxLength: 70
-                    description: 'Name of the additional property'
-                    example: 'Orchard Villa, Holderstrasse 10'
+                    description: Name of the additional property
+                    example: Orchard Villa, Holderstrasse 10
                   valueAdditionalProperty:
                     $ref: '#/components/schemas/Amount'
-                    description: 'Value of the additional property'
+                    description: Value of the additional property
                   propertyTypeAdditionalProperty:
                     type: string
-                    enum: [single_family_house, condominium, vacation_house, vacation_condominium, agricultural_farm, 2or3_family_house, multi_family_house, residential_building_plot, building_plot_other, mixed_property, commercial_condominium, office_building, industrial_building, special_object]
-                    description: 'The type of the additional property'
-                    example: 'vacation_house'
+                    enum: 
+                      - single_family_house
+                      - condominium
+                      - vacation_house,
+                      - vacation_condominium
+                      - agricultural_farm
+                      - 2or3_family_house
+                      - multi_family_house
+                      - residential_building_plot
+                      - building_plot_other
+                      - mixed_property
+                      - commercial_condominium
+                      - office_building
+                      - industrial_building
+                      - special_object
+                    description: The type of the additional property
+                    example: vacation_house
     # ---------
 
     # ---- Mortgage data types ----
     PropertyObjectRatingType:
       type: string
-      enum: [bad, bad-medium, medium, medium-good, good, good-verygood, verygood]
-      description: 'The rating type.'
-      example: 'good'
+      enum: 
+        - bad
+        - bad-medium
+        - medium
+        - medium-good
+        - good
+        - good-verygood
+        - verygood
+      description: The rating type.
+      example: good
     CommonID:
-      description: "The unique identifier UUID v4 specified by RFC4122."
+      description: The unique identifier UUID v4 specified by RFC4122.
       type: string
       format: uuid
       example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6
@@ -3113,7 +3269,7 @@ components:
           $ref: '#/components/schemas/AssetType'
         amount:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance'
+          description: The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance
         insuranceSum:
           $ref: '#/components/schemas/Amount'
           description: The amount of the sum insured in life insurance
@@ -3262,7 +3418,7 @@ components:
 
     # ---- Document ----
     Document:
-      description: Document containing information for givent document type for given order.
+      description: Document containing information for given document type for given order.
       type: object
       required:
         - name
@@ -3326,7 +3482,7 @@ components:
     
     # ---- AssetProvider ----
     AssetProvider:
-      description: Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an additional security of type insurance, insurance company name is provided
+      description: Asset provider for each asset, additional information must be transferred. E.g. in case the applicant owns an additional security of type insurance, insurance company name is provided
       type: object
       required:
         - name
@@ -3370,14 +3526,14 @@ components:
         currentRate:
           type: number
           format: double
-          description: 'Interest reate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.Base'
+          description: Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.Base
           minimum: 0
           maximum: 1
           example: 0.5
         base:
           type: number
           format: double
-          description: 'Base rate uupon margin is applied (e.g. for SARON).'
+          description: Base rate upon margin is applied (e.g. for SARON).
           minimum: 0
           maximum: 1
           example: 0.5
@@ -3457,12 +3613,12 @@ components:
         Content-Type:
           schema:
             type: string
-            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            description: application/problem+json; charset=utf-8 according to RFC7807
             example: application/problem+json
         Content-Language:
           schema:
             type: string
-            description: 'Response language - always en'
+            description: Response language - always en
             example: en
         X-Correlation-ID:
           schema:
@@ -3479,12 +3635,12 @@ components:
         Content-Type:
           schema:
             type: string
-            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            description: application/problem+json; charset=utf-8 according to RFC7807
             example: application/problem+json
         Content-Language:
           schema:
             type: string
-            description: 'Response language - always en'
+            description: Response language - always en
             example: en
         X-Correlation-ID:
           schema:
@@ -3501,12 +3657,12 @@ components:
         Content-Type:
           schema:
             type: string
-            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            description: application/problem+json; charset=utf-8 according to RFC7807
             example: application/problem+json
         Content-Language:
           schema:
             type: string
-            description: 'Response language - always en'
+            description: Response language - always en
             example: en
         X-Correlation-ID:
           schema:
@@ -3523,12 +3679,12 @@ components:
         Content-Type:
           schema:
             type: string
-            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            description: application/problem+json; charset=utf-8 according to RFC7807
             example: application/problem+json
         Content-Language:
           schema:
             type: string
-            description: 'Response language - always en'
+            description: Response language - always en
             example: en
         X-Correlation-ID:
           schema:
@@ -3545,12 +3701,12 @@ components:
         Content-Type:
           schema:
             type: string
-            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            description: application/problem+json; charset=utf-8 according to RFC7807
             example: application/problem+json
         Content-Language:
           schema:
             type: string
-            description: 'Response language - always en'
+            description: Response language - always en
             example: en
         X-Correlation-ID:
           schema:
@@ -3567,12 +3723,12 @@ components:
         Content-Type:
           schema:
             type: string
-            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            description: application/problem+json; charset=utf-8 according to RFC7807
             example: application/problem+json
         Content-Language:
           schema:
             type: string
-            description: 'Response language - always en'
+            description: Response language - always en
             example: en
         X-Correlation-ID:
           schema:
@@ -3589,12 +3745,12 @@ components:
         Content-Type:
           schema:
             type: string
-            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            description: application/problem+json; charset=utf-8 according to RFC7807
             example: application/problem+json
         Content-Language:
           schema:
             type: string
-            description: 'Response language - always en'
+            description: Response language - always en
             example: en
         X-Correlation-ID:
           schema:
@@ -3611,12 +3767,12 @@ components:
         Content-Type:
           schema:
             type: string
-            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            description: application/problem+json; charset=utf-8 according to RFC7807
             example: application/problem+json
         Content-Language:
           schema:
             type: string
-            description: 'Response language - always en'
+            description: Response language - always en
             example: en
         X-Correlation-ID:
           schema:
