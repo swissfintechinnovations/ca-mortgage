@@ -3057,6 +3057,7 @@ components:
                 - jointEstate
                 - separateEstate
                 - contributionToJointlyAcquiredProperty
+                - none
             jobSituation:
               type: string
               example: employed
