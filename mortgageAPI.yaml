@@ -2083,6 +2083,13 @@ components:
             - other  
           description: The class of property (Main residence, second residence, rented).
           example: main_residence
+        matrimonialPropertyScheme:
+          type: string
+          example: separateEstate
+          enum:
+            - jointEstate
+            - separateEstate
+            - contributionToJointlyAcquiredProperty
         floorPlan:
           type: string
           enum: 
@@ -3050,13 +3057,13 @@ components:
                 - registered-partnership
                 - legally-separated
                 - partnership-dissolved
-            matrimonialPropertyScheme:
+            PropertyOwner:
               type: string
-              example: separateEstate
+              example: 'yes'
               enum:
-                - jointEstate
-                - separateEstate
-                - contributionToJointlyAcquiredProperty
+                - yes
+                - no
+              description: Is the applicant owner of the financed property? Yes/No
             jobSituation:
               type: string
               example: employed
