@@ -459,7 +459,7 @@ paths:
   /mortgages/applications/{applicationId}:
     get:
       summary: Get the details of a specific placed application
-      description: Get the details of a specific placed application # moreExpressiveDescription duplicate
+      description: Information that was previously shared can be retrieved.
       tags:
         - Mortgage Application
       parameters:
@@ -564,7 +564,7 @@ paths:
 
     delete:
       summary: Cancel the application and removing it
-      description: Cancel the application and removing it # moreExpressiveDescription duplicate
+      description: The request to delete a previously shared application.
       tags:
         - Mortgage Application
       parameters:
@@ -761,7 +761,7 @@ paths:
   /mortgages/applications/{applicationId}/documents:
     post:
       summary: Add documents for the specific application
-      description: Add to a specific application’s documents # moreExpressiveDescription duplicate
+      description: Documents can be assigned to a specific application ID.
       tags:
         - Mortgage Application
       parameters:
@@ -818,7 +818,7 @@ paths:
                   example: 576f8de3-6b30-4882-a7af-da2132a456cf
       responses:
         '201':
-          $ref: '#/components/responses/standard201'  
+          $ref: '#/components/responses/standard201'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -838,7 +838,7 @@ paths:
 
     get:
       summary: Get a list of submitted documents for a specifically placed application
-      description: Get a list of documents submitted for a specifically placed application # moreExpressiveDescription duplicate
+      description: All documents that have been shared against the Application ID can be retrieved here.
       tags:
         - Mortgage Application
       parameters:
@@ -877,7 +877,7 @@ paths:
                     filesize:
                       type: integer
                       example: missingDefaultOrExample
-                      description: missingDescription
+                      description: The file size in bytes.
                     uploaddate:
                       $ref: '#/components/schemas/Date'
                     statusInfo:
@@ -894,7 +894,7 @@ paths:
                             - rejected
                             - pending
                           default: missingDefaultOrExample
-                          description: missingDescription
+                          description: Get the current status of the application
                         statusReason:
                           type: string
                           example: missingDefaultOrExample
@@ -983,7 +983,7 @@ paths:
   /mortgages/applications/{applicationId}/status:
     get:
       summary: Get the current status of the application
-      description: Get the current status of the application (rejected with reason, accepted, pending with reason) # moreExpressiveDescription duplicate
+      description: Get the current status of the application (rejected with reason, accepted, pending with reason)
       tags:
         - Mortgage Application
       parameters:
@@ -1016,7 +1016,7 @@ paths:
                   detail:
                     type: string
                     example: Waiting for details # OtherIssue better use default?
-                    description: missingDescription
+                    description: Additional information that can be shared with the status.
           headers:
             X-Correlation-ID:
               schema:
@@ -1066,7 +1066,7 @@ paths:
               $ref: '#/components/schemas/FinancingRequest'
       responses:
         '201':
-          $ref: '#/components/responses/standard201'  
+          $ref: '#/components/responses/standard201'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1087,8 +1087,8 @@ paths:
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/required-information:
     get:
       summary: List all required documents / information for processing specific Financial request at FI
-      description: List all required documents / information for processing specific Financial request at FI
-        This can be used when NO offer is available from FI # moreExpressiveDescription duplicate
+      description: 'All required documents for a specific FinancingRequestId can be retrieved herewith.'
+
       tags:
         - Mortgage Financing Request
       parameters:
@@ -1212,7 +1212,7 @@ paths:
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers:
     get:
       summary: List all binding offers for a given financing request
-      description: List all binding offers for a given application # moreExpressiveDescription duplicate
+      description: Lists the offers for a transferred application and the corresponding financing request.
       tags:
         - Mortgage Offers
       parameters:
@@ -1401,7 +1401,7 @@ paths:
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}/required-information:
     get:
       summary: List all required documents / information for processing specific offer at FI
-      description: List all required documents / information for processing specific offer at FI # moreExpressiveDescription duplicate
+      description: Lists the required documents for the previously submitted case. Thus, the TPP knows which documents are needed for the later check.
       tags:
         - Mortgage Offers
       parameters:
@@ -1488,7 +1488,7 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
-          $ref: '#/components/responses/standard201'  
+          $ref: '#/components/responses/standard201'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1560,7 +1560,7 @@ paths:
   /mortgages/orders/{orderId}/status:
     get:
       summary: Get the current status of the order
-      description: Get the current status of the order (rejected with reason, accepted, pending with reason) # moreExpressiveDescription duplicate
+      description: Returns the current status of the order. An order can be in accepted rejected or pending status. In addition, further details regarding the status can be transferred.
       tags:
         - Mortgage Order
       parameters:
