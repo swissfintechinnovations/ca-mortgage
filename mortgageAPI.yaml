@@ -3,7 +3,7 @@ info:
   version: 3.3.0
   title: Common Mortgage API (Public)
   description: >
-    This specification defines a common mortgage API for mortgages as used in Switzerland. 
+    This specification defines a common mortgage API for mortgages as used in Switzerland.
     The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
     This specification uses schema definitions from the Common Data Model v1.2.2.
   termsOfService: Tbd
@@ -34,11 +34,13 @@ tags:
     description: Operations for placing a binding order for a chosen offer
   - name: Mortgage Prolongation
     description: Operations for handling the common special case of prolonging an existing mortgage
+
 security:
   - ApiKeyAuth: []
   - OAuth2:
       - read
       - write
+
 paths:
   /mortgage-cases:
     get:
@@ -85,7 +87,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-          
+
   /mortgage-cases/{caseId}:
     get:
       tags:
@@ -1028,7 +1030,6 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers:
     get:
       summary: List all binding offers for a given financing request
@@ -1532,7 +1533,7 @@ components:
     Currency:
       description: ISO 4217 code
       type: string
-      pattern: '[A-Z]{3}'
+      pattern: ^[A-Z]{3}$
       example: CHF
 
     # ---- Amount ----
@@ -1548,7 +1549,7 @@ components:
         content:
           description: amount given with fractional digits, the separator is a dot
           type: string
-          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          pattern: ^-?\d{1,14}(?:\.\d{1,3})?$
           example: 235.45
 
     # ---- Address compliant to payment address (b.Link & ISO20022)----
@@ -1585,7 +1586,7 @@ components:
     # ---- Country Code ----
     Country:
       type: string
-      pattern: '[A-Z]{2}'
+      pattern: ^[A-Z]{2}$
       example: CH
       description: 2-Letter ISO 3166-2 Country Code
 
@@ -2421,7 +2422,7 @@ components:
         tppApplicationId:
           type: string
           description: The application alphanumeric identifier defined by TPP
-          pattern: '^[a-zA-Z0-9]{6,10}$'
+          pattern: ^[a-zA-Z0-9]{6,10}$
           example: asd23f
         requestingParty:
           $ref: '#/components/schemas/Party'
@@ -2436,12 +2437,12 @@ components:
             - replacement
             - construction_financing
         channelType:
-           type: string
-           enum: 
+          type: string
+          enum:
             - advisor
             - direct
-           description: The type of the channel the application was generated
-           example: advisor
+          description: The type of the channel the application was generated
+          example: advisor
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
@@ -3126,15 +3127,15 @@ components:
           enum: 
             - direct
             - indirect
-          description: 'The type of amortization'
-          example: 'direct'
+          description: The type of amortization
+          example: direct
         amortizationAmount:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount of the periodic amortization'
+          description: The amount of the periodic amortization
           example: 27400
         amortizationStart:
           $ref: '#/components/schemas/Date'
-          description: 'Start date of amortization'
+          description: Start date of amortization
           example: 2018-04-13
         amortizationPeriodicity:
           type: string
@@ -3142,11 +3143,11 @@ components:
             - yearly
             - quarterly
             - monthly
-          description: 'The periodicity the amortization is paid'
-          example: 'quarterly'
+          description: The periodicity the amortization is paid
+          example: quarterly
         amortizationAccountNr:
           type: string
-          description: 'the account number from which the amortization is paid'
+          description: The account number from which the amortization is paid
           example: IE12BOFI90000112345678
     
     AssetProvider:
@@ -3173,12 +3174,12 @@ components:
         minContent:
           description: min amount given with fractional digits, the separator is a dot
           type: string
-          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          pattern: ^-?\d{1,14}(?:\.\d{1,3})?$
           example: 1000000
         maxContent:
           description: max amount given with fractional digits, the separator is a dot
           type: string
-          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          pattern: ^-?\d{1,14}(?:\.\d{1,3})?$
           example: 5000000
 
     Interest:
@@ -3371,7 +3372,7 @@ components:
         type: string
 
     Content-Type:
-      description: 'application/problem+json; charset=utf-8 according to RFC7807'
+      description: application/problem+json; charset=utf-8 according to RFC7807
       schema:
         type: string
 
