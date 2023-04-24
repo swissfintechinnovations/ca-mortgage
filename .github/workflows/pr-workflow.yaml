@@ -2,12 +2,12 @@ name: PR Lint
 
 on:
   push:
-  pull_request:
-    types:
-      - opened
-      - edited
-      - reopened
-      - synchronize
+  # pull_request:
+  #   types:
+  #     - opened
+  #     - edited
+  #     - reopened
+  #     - synchronize
 
 jobs:
   pr-yaml-lint:
