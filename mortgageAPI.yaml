@@ -1286,7 +1286,7 @@ paths:
     get:
       summary: Get the current status of the order
       description: >
-        Returns the current status of the order. An order can be in accepted rejected or pending status. 
+        Returns the current status of the order. An order can be in accepted rejected or pending status.
         In addition, further details regarding the status can be transferred.
       tags:
         - Mortgage Order
