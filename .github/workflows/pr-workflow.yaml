@@ -1,8 +1,9 @@
 name: PR Lint
 
 on:
+  push:
   pull_request:
-    types: 
+    types:
       - opened
       - edited
       - reopened
