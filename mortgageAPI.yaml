@@ -805,7 +805,7 @@ paths:
     delete:
       summary: Delete a formerly uploaded document
       description: >
-        Deletes a specific document attached to a specific application. 
+        Deletes a specific document attached to a specific application.
         Note that deleting documents should not be possible after the application has been accepted by the FI.
       tags:
         - Mortgage Application
@@ -1156,7 +1156,7 @@ paths:
     get:
       summary: List all required documents / information for processing specific offer at FI
       description: >
-        Lists the required documents for the previously submitted case. 
+        Lists the required documents for the previously submitted case.
         Thus, the TPP knows which documents are needed for the later check.
       tags:
         - Mortgage Offers
@@ -1206,7 +1206,7 @@ paths:
     post:
       summary: Place a new order
       description: >
-        Place a new order referencing a specific offerId and either an existing mortgage id (prolongation) 
+        Place a new order referencing a specific offerId and either an existing mortgage id (prolongation)
         or an application id (new mortgage) including all relevant information.
       tags:
         - Mortgage Order
@@ -2967,7 +2967,8 @@ components:
           $ref: '#/components/schemas/AssetProvider'
 
     IncomeType:
-      description: Common set of income types.
+      description: >
+        Common set of income types.
         For the enum value self_employment and dividend the 3 years avg is relevant.
       type: string
       example: employment_gross
@@ -2997,7 +2998,8 @@ components:
         - costs_for_additional_properties
 
     DocumentType:
-      description: All supported document types.
+      description: >
+        All supported document types.
         For the enum value tax_statement. Tax statement is required.
       type: string
       example: tax_statement
