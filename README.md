@@ -1,5 +1,9 @@
 ![ca-mortgage](https://user-images.githubusercontent.com/116151702/236231740-68b1595a-3cf7-4c5c-9623-3e014d827436.png)
 
 ---
+[![GitHub release](https://img.shields.io/github/release/swissfintechinnovations/ca-mortgage)](https://github.com/swissfintechinnovations/ca-mortgage/releases/)
+![GitHub checks](https://img.shields.io/github/checks-status/swissfintechinnovations/ca-mortgage/main)
+![Swagger Validator](https://img.shields.io/swagger/valid/3.0?specUrl=https%3A%2F%2Fraw.githubusercontent.com%2FOAI%2FOpenAPI-Specification%2Fmaster%2Fexamples%2Fv2.0%2Fjson%2Fpetstore-expanded.json)
+[![GitHub license](https://img.shields.io/github/license/swissfintechinnovations/ca-mortgage)](https://github.com/swissfintechinnovations/ca-mortgage/blob/main/LICENSE)
 
 This is the official SFTI repo for the mortgage API. Documentations may be found in the [Wiki](https://github.com/swissfintechinnovations/ca-mortgage/wiki).
