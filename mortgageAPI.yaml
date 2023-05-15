@@ -3,7 +3,7 @@ info:
   version: 3.3.0
   title: Common Mortgage API (Public)
   description: >
-    This specification defines a common mortgage API for mortgages as used in Switzerland. 
+    This specification defines a common mortgage API for mortgages as used in Switzerland.
     The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
     This specification uses schema definitions from the Common Data Model v1.2.2.
   termsOfService: Tbd
@@ -34,11 +34,13 @@ tags:
     description: Operations for placing a binding order for a chosen offer
   - name: Mortgage Prolongation
     description: Operations for handling the common special case of prolonging an existing mortgage
+
 security:
   - ApiKeyAuth: []
   - OAuth2:
       - read
       - write
+
 paths:
   /mortgage-cases:
     get:
@@ -85,7 +87,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-          
+
   /mortgage-cases/{caseId}:
     get:
       tags:
@@ -178,7 +180,6 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-
 
   /mortgages/{mortgageId}:
     get:
@@ -279,7 +280,6 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/products/{productId}/conditions:
     get:
       summary: Get the general conditions for the specified mortgage product
@@ -328,7 +328,6 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-
 
   /mortgages/applications:
     post:
@@ -405,7 +404,6 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-
 
   /mortgages/applications/{applicationId}:
     get:
@@ -535,7 +533,6 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-
 
   /mortgages/applications/{applicationId}/swissrets:
     post:
@@ -804,12 +801,11 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/applications/{applicationId}/documents/{documentId}:
     delete:
       summary: Delete a formerly uploaded document
       description: >
-        Deletes a specific document attached to a specific application. 
+        Deletes a specific document attached to a specific application.
         Note that deleting documents should not be possible after the application has been accepted by the FI.
       tags:
         - Mortgage Application
@@ -877,7 +873,7 @@ paths:
                       - accepted
                       - rejected
                       - pending
-                    example: pending 
+                    example: pending
                   detail:
                     type: string
                     example: Waiting for details
@@ -954,7 +950,7 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
-          description: OK 
+          description: OK
           content:
             application/json:
               schema:
@@ -1028,7 +1024,6 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers:
     get:
       summary: List all binding offers for a given financing request
@@ -1073,7 +1068,6 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}:
     get:
       summary: Get the details of a specific offer
@@ -1092,7 +1086,7 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
-          description: OK. 
+          description: OK.
           content:
             application/json:
               schema:
@@ -1162,7 +1156,7 @@ paths:
     get:
       summary: List all required documents / information for processing specific offer at FI
       description: >
-        Lists the required documents for the previously submitted case. 
+        Lists the required documents for the previously submitted case.
         Thus, the TPP knows which documents are needed for the later check.
       tags:
         - Mortgage Offers
@@ -1212,7 +1206,7 @@ paths:
     post:
       summary: Place a new order
       description: >
-        Place a new order referencing a specific offerId and either an existing mortgage id (prolongation) 
+        Place a new order referencing a specific offerId and either an existing mortgage id (prolongation)
         or an application id (new mortgage) including all relevant information.
       tags:
         - Mortgage Order
@@ -1263,7 +1257,7 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
-          description: OK. 
+          description: OK.
           content:
             application/json:
               schema:
@@ -1288,12 +1282,11 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/orders/{orderId}/status:
     get:
       summary: Get the current status of the order
       description: >
-        Returns the current status of the order. An order can be in accepted rejected or pending status. 
+        Returns the current status of the order. An order can be in accepted rejected or pending status.
         In addition, further details regarding the status can be transferred.
       tags:
         - Mortgage Order
@@ -1307,7 +1300,7 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
-          description: OK. 
+          description: OK.
           content:
             application/json:
               schema:
@@ -1319,7 +1312,7 @@ paths:
                       - accepted
                       - rejected
                       - pending
-                    example: pending 
+                    example: pending
                   detail:
                     type: string
                     example: Waiting for details
@@ -1357,7 +1350,7 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
-          description: OK. 
+          description: OK.
           content:
             application/json:
               schema:
@@ -1425,7 +1418,6 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/{mortgageId}/offers/{offerId}:
     get:
       tags:
@@ -1467,7 +1459,6 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-
 
 # -------------------------
 # -------- Models ---------
@@ -1532,7 +1523,7 @@ components:
     Currency:
       description: ISO 4217 code
       type: string
-      pattern: '[A-Z]{3}'
+      pattern: '^[A-Z]{3}$'
       example: CHF
 
     # ---- Amount ----
@@ -1548,7 +1539,7 @@ components:
         content:
           description: amount given with fractional digits, the separator is a dot
           type: string
-          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
           example: 235.45
 
     # ---- Address compliant to payment address (b.Link & ISO20022)----
@@ -1566,11 +1557,11 @@ components:
           maxLength: 70
           example: Rue de la gare
         buildingNumber:
-          type: string 
-          maxLength: 16 
+          type: string
+          maxLength: 16
           example: 24
         postCode:
-          type: string 
+          type: string
           maxLength: 16
           example: 2501
         townName:
@@ -1585,7 +1576,7 @@ components:
     # ---- Country Code ----
     Country:
       type: string
-      pattern: '[A-Z]{2}'
+      pattern: '^[A-Z]{2}$'
       example: CH
       description: 2-Letter ISO 3166-2 Country Code
 
@@ -1611,8 +1602,7 @@ components:
           $ref: '#/components/schemas/commonErrorType'
         title:
           type: string
-          example:
-            This is the general problem description
+          example: This is the general problem description
         detail:
           type: array
           items:
@@ -1620,8 +1610,7 @@ components:
             example: List of detailed problem description with respect to the current request
         instance:
           type: string
-          example:
-            path/to/corresponding/resource
+          example: path/to/corresponding/resource
 
     commonErrorType:
       title: Common Error Type
@@ -1727,12 +1716,12 @@ components:
                 - minergie-eco
                 - minergie-p-eco
                 - minergie-a
-                - minergie-a-eco 
+                - minergie-a-eco
               description: The minergie standard
               example: minergie-p
             BECCStandardType:
               type: string
-              enum: 
+              enum:
                 - none
                 - A
                 - B
@@ -1741,11 +1730,11 @@ components:
                 - E
                 - F
                 - G
-              description: Energy certificate from Cantons 
+              description: Energy certificate from Cantons
               example: B
             luxusFlag:
               type: string
-              enum: 
+              enum:
                 - 0
                 - 0.5
                 - 1.0
@@ -1757,19 +1746,19 @@ components:
               $ref: '#/components/schemas/PropertyObjectRatingType'
         classOfProperty:
           type: string
-          enum: 
+          enum:
             - main_residence
             - main_residence_with_use_restriction
             - second_residence
             - second_residence_with_use_restriction
             - rented_property
             - rented_property_with_use_restriction
-            - other  
+            - other
           description: The class of property (Main residence, second residence, rented).
           example: main_residence
         floorPlan:
           type: string
-          enum: 
+          enum:
             - efficient
             - average
             - inefficient
@@ -1777,14 +1766,14 @@ components:
           example: average
         usageType:
           type: string
-          enum: 
+          enum:
             - self
-            - let  
+            - let
           description: 'The type of usage of the financing property: self, let'
           example: self
         propertyType:
           type: string
-          enum: 
+          enum:
             - single_family_house
             - condominium
             - vacation_house
@@ -1798,60 +1787,60 @@ components:
             - commercial_condominium
             - office_building
             - industrial_building
-            - special_object  
+            - special_object
           description: The type of property
           example: single_family_house
         ceilingHight:
           type: string
-          enum: 
+          enum:
             - especially_high
             - middle
-            - especially_low   
+            - especially_low
           description: The ceiling hight in the rooms.
           example: middle
         buildingStandardFloorCoverings:
           type: string
-          enum: 
+          enum:
             - premium
             - highlevel
             - basic
-            - lowlevel   
+            - lowlevel
           description: Building standard of the floor coverings.
           example: basic
         buildingStandardKitchen:
           type: string
-          enum: 
+          enum:
             - premium
             - highlevel
             - basic
-            - lowlevel   
+            - lowlevel
           description: Building standard of the kitchen.
           example: basic
         buildingStandardBathroom:
           type: string
-          enum: 
+          enum:
             - premium
             - highlevel
             - basic
-            - lowlevel  
+            - lowlevel
           description: Building standard of the sanitary installations.
           example: basic
         heatEmission:
           type: array
           items:
             type: string
-            enum: 
+            enum:
               - floor
               - radiator
               - stove
-              - other  
+              - other
             description: Type of the heat emission
             example: floor
         heatProduction:
           type: array
           items:
             type: string
-            enum: 
+            enum:
               - oil
               - gas
               - wood
@@ -1859,7 +1848,7 @@ components:
               - geothermal_probe
               - district
               - solar_panel
-              - solar_thermal_collector  
+              - solar_thermal_collector
             description: Type of the heat production
             example: gas
         outsideConstructionZone:
@@ -1882,10 +1871,10 @@ components:
               example: 2.5
             roomCountType:
               type: string
-              enum: 
+              enum:
                 - kitchen_not_counted
                 - kitchen_half_room
-                - kitchen_full_room   
+                - kitchen_full_room
               description: Reflects the type of the room count type. E.g. if the kitchen counts as full room.
               example: kitchen_full_room
             numberOfFamilyBathrooms:
@@ -1943,9 +1932,9 @@ components:
                   example: 120
                 measurementStandard:
                   type: string
-                  enum: 
+                  enum:
                     - nla
-                    - gfa   
+                    - gfa
                   description: The measurement standard used to determine the living space (nla or gfa).
                   example: nla
             multistorey:
@@ -1956,7 +1945,7 @@ components:
               type: array
               items:
                 type: string
-                enum: 
+                enum:
                   - coowned_garden_terrace_room
                   - coowned_indoor_pool
                   - coowned_outdoor_pool
@@ -1969,7 +1958,7 @@ components:
                   - elevator_into_apartment
                   - barrier-free_living
                   - automated_building_control
-                  - ventilation_system_without_minergie  
+                  - ventilation_system_without_minergie
                 description: Additional features and services.
                 example: coowned_outdoor_pool
             quote:
@@ -1978,18 +1967,18 @@ components:
               example: 120
             apartmentType:
               type: string
-              enum: 
+              enum:
                 - garden_flat
                 - floor_flat
                 - roof_flat
-                - attic   
+                - attic
               description: The type of the apartment (floor, garden level, storey).
               example: floor_flat
             buildingType:
               type: string
-              enum: 
+              enum:
                 - multiple_family_house
-                - terrace_house   
+                - terrace_house
               description: The type of the building (multiple_family_house, terrace_house).
               example: multiple_family_house
             locationInTheBuildingRating:
@@ -2007,9 +1996,9 @@ components:
                   example: 120
                 measurementStandard:
                   type: string
-                  enum: 
+                  enum:
                     - nla
-                    - gfa   
+                    - gfa
                   description: The measurement standard used to determine the living space (nla or gfa).
                   example: nla
             roofFloorExpandable:
@@ -2030,17 +2019,17 @@ components:
               example: 2000
             environmentStandard:
               type: string
-              enum: 
+              enum:
                 - high-level
                 - basic
-                - low-level  
+                - low-level
               description: The rating type
               example: basic
             otherFeatures:
               type: array
               items:
                 type: string
-                enum: 
+                enum:
                   - barrier-free_living
                   - automated_building_control
                   - ventilation_system_without_minergie
@@ -2052,26 +2041,26 @@ components:
                   - security_system
                   - chimney
                   - passenger_elevator
-                  - freight_elevator  
+                  - freight_elevator
                 description: Additional features and services.
                 example: outdoor_pool
             houseType:
               type: string
-              enum: 
+              enum:
                 - detached_house
                 - semidetached_house
                 - row_house
                 - row_corner_house
-                - terrace_house   
+                - terrace_house
               description: The type of the house.
               example: detached_house
             normType:
               type: string
-              enum: 
+              enum:
                 - building_insurance
                 - sia116
                 - sia416
-                - other  
+                - other
               description: The norm type.
               example: building_insurance
         valueRelevantServitudes:
@@ -2436,12 +2425,12 @@ components:
             - replacement
             - construction_financing
         channelType:
-           type: string
-           enum: 
+          type: string
+          enum:
             - advisor
             - direct
-           description: The type of the channel the application was generated
-           example: advisor
+          description: The type of the channel the application was generated
+          example: advisor
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
@@ -2524,7 +2513,7 @@ components:
           type: string
           example: All documents verified at TPP
           description: Remark/comment which can be added by TPP
-          
+
     Financing:
       description: Complete financing details of an application
       type: object
@@ -2563,7 +2552,7 @@ components:
           $ref: '#/components/schemas/Date'
         publicCertDate:
           $ref: '#/components/schemas/Date'
-          
+
     FinancingTranche:
       description: Tranche of a financing
       type: object
@@ -2766,7 +2755,7 @@ components:
                   type: string
                   description: Provider of the solvency rating
                   example: crif
-                  enum: 
+                  enum:
                     - crif
                 ratingDate:
                   $ref: '#/components/schemas/Date'
@@ -2862,7 +2851,7 @@ components:
                     description: Value of the additional property
                   propertyTypeAdditionalProperty:
                     type: string
-                    enum: 
+                    enum:
                       - single_family_house
                       - condominium
                       - vacation_house,
@@ -2883,7 +2872,7 @@ components:
     # ---- Mortgage data types ----
     PropertyObjectRatingType:
       type: string
-      enum: 
+      enum:
         - bad
         - bad-medium
         - medium
@@ -2893,13 +2882,13 @@ components:
         - verygood
       description: The rating type.
       example: good
-    
+
     CommonID:
       description: The unique identifier UUID v4 specified by RFC4122.
       type: string
       format: uuid
       example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-    
+
     AssetType:
       description: Common set of asset types.
       type: string
@@ -2923,7 +2912,7 @@ components:
         - life_insurance_3a
         - life_insurance_3b
         - unpledged_building_plot
-    
+
     AssetUsageType:
       description: Common set of asset usage types.
       type: string
@@ -2931,7 +2920,7 @@ components:
       enum:
         - pledged
         - withdraw
-    
+
     Asset:
       description: 'Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.'
       type: object
@@ -2951,7 +2940,7 @@ components:
           type: string
         assetProvider:
           $ref: '#/components/schemas/AssetProvider'
-    
+
     UsedAsset:
       description: 'Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also be recorded in the array of assets in the financial situation of one applicant.'
       type: object
@@ -2976,9 +2965,10 @@ components:
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
         assetProvider:
           $ref: '#/components/schemas/AssetProvider'
-    
+
     IncomeType:
-      description: Common set of income types.
+      description: >
+        Common set of income types.
         For the enum value self_employment and dividend the 3 years avg is relevant.
       type: string
       example: employment_gross
@@ -3006,9 +2996,10 @@ components:
         - child_allowance_payment
         - rental_costs
         - costs_for_additional_properties
-    
+
     DocumentType:
-      description: All supported document types.
+      description: >
+        All supported document types.
         For the enum value tax_statement. Tax statement is required.
       type: string
       example: tax_statement
@@ -3123,18 +3114,18 @@ components:
       properties:
         amortizationType:
           type: string
-          enum: 
+          enum:
             - direct
             - indirect
-          description: 'The type of amortization'
-          example: 'direct'
+          description: The type of amortization
+          example: direct
         amortizationAmount:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount of the periodic amortization'
+          description: The amount of the periodic amortization
           example: 27400
         amortizationStart:
           $ref: '#/components/schemas/Date'
-          description: 'Start date of amortization'
+          description: Start date of amortization
           example: 2018-04-13
         amortizationPeriodicity:
           type: string
@@ -3142,13 +3133,13 @@ components:
             - yearly
             - quarterly
             - monthly
-          description: 'The periodicity the amortization is paid'
-          example: 'quarterly'
+          description: The periodicity the amortization is paid
+          example: quarterly
         amortizationAccountNr:
           type: string
-          description: 'the account number from which the amortization is paid'
+          description: The account number from which the amortization is paid
           example: IE12BOFI90000112345678
-    
+
     AssetProvider:
       description: Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type insurance, insurance company name is provided
       type: object
@@ -3173,12 +3164,12 @@ components:
         minContent:
           description: min amount given with fractional digits, the separator is a dot
           type: string
-          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
           example: 1000000
         maxContent:
           description: max amount given with fractional digits, the separator is a dot
           type: string
-          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
           example: 5000000
 
     Interest:
@@ -3263,7 +3254,7 @@ components:
         type: string
         format: uuid
         example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
-      
+
     path_offerId:
       name: Offer ID
       in: path
@@ -3273,7 +3264,7 @@ components:
         type: string
         format: uuid
         example: c2fee261-053c-4088-8986-11216f0c9be6
-      
+
     path_orderId:
       name: Order ID
       in: path
@@ -3338,8 +3329,8 @@ components:
       schema:
         type: string
         example: cursorIDxyz
-      
-    duration: 
+
+    duration:
       name: duration
       in: query
       description: The type of duration (for filtering)
@@ -3371,7 +3362,7 @@ components:
         type: string
 
     Content-Type:
-      description: 'application/problem+json; charset=utf-8 according to RFC7807'
+      description: application/problem+json; charset=utf-8 according to RFC7807
       schema:
         type: string
 
@@ -3441,7 +3432,7 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: Forbidden - The server understood the request but refuses to authorize it. 
+      description: Forbidden - The server understood the request but refuses to authorize it.
       content:
         application/problem+json:
           schema:
