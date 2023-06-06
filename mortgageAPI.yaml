@@ -3196,7 +3196,7 @@ components:
   # ---- Global Common Header Parameters ----
   parameters:
     path_caseId:
-      name: Case ID
+      name: caseId
       in: path
       description: Uuid v4 of a specific existing mortgage case
       required: true
@@ -3206,7 +3206,7 @@ components:
         example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
 
     path_mortgageId:
-      name: Mortgage ID
+      name: mortgageId
       in: path
       description: Uuid v4 of a specific existing mortgage
       required: true
@@ -3216,7 +3216,7 @@ components:
         example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
 
     path_productId:
-      name: Product ID
+      name: productId
       in: path
       description: A product's uuid v4
       required: true
@@ -3226,7 +3226,7 @@ components:
         example: a86dd383-055e-471a-a098-682ae5ef8348
 
     path_applicationId:
-      name: Application ID
+      name: applicationId
       in: path
       description: Uuid v4 of the application request
       required: true
@@ -3236,7 +3236,7 @@ components:
         example: 4bf92636-14a0-4511-98e2-acfde576e644
 
     path_documentId:
-      name: Document ID
+      name: documentId
       in: path
       description: Unique ID (uuid v4) of the document
       required: true
@@ -3246,7 +3246,7 @@ components:
         example: 7f648f12-c15f-4930-8380-238da5671c37
 
     path_financingRequestId:
-      name: Financing Request ID
+      name: financingRequestId
       in: path
       description: Uuid v4 of the financing request
       required: true
@@ -3256,7 +3256,7 @@ components:
         example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
 
     path_offerId:
-      name: Offer ID
+      name: offerId
       in: path
       description: Uuid v4 of the offer
       required: true
@@ -3266,7 +3266,7 @@ components:
         example: c2fee261-053c-4088-8986-11216f0c9be6
 
     path_orderId:
-      name: Order ID
+      name: orderId
       in: path
       description: Uuid v4 of an order
       required: true
@@ -3276,24 +3276,24 @@ components:
         example: 91d029b3-ee7a-44c3-ac18-cf621cb128a8
 
     clientid_in_header:
-      in: header
       name: X-CorAPI-Client-ID
+      in: header
       schema:
         type: string
       description: 'ID of the client forwarded to the provider. (SCOPE: FI)'
       required: true
 
     correlation_in_header:
-      in: header
       name: X-Correlation-ID
+      in: header
       schema:
         type: string
       description: Unique ID (defined by the caller) which will be reflected back in the response.
       required: true
 
     agent_in_header:
-      in: header
       name: User-Agent
+      in: header
       schema:
         type: string
       description: Name and version of the of the Client software
