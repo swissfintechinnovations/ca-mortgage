@@ -1,9 +1,10 @@
 openapi: 3.0.0
 info:
-  version: 3.2.0
+  version: 3.3.0
   title: Common Mortgage API (Public)
-  description:
-    This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
+  description: >
+    This specification defines a common mortgage API for mortgages as used in Switzerland.
+    The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
     This specification uses schema definitions from the Common Data Model v1.2.2.
   termsOfService: Tbd
   contact:
@@ -33,18 +34,20 @@ tags:
     description: Operations for placing a binding order for a chosen offer
   - name: Mortgage Prolongation
     description: Operations for handling the common special case of prolonging an existing mortgage
+
 security:
   - ApiKeyAuth: []
   - OAuth2:
       - read
       - write
+
 paths:
   /mortgage-cases:
     get:
       tags:
         - Full Mortgage Cases
-      description: List of mortgage cases for the authenticated context including the corresponding properties, sorted by caseId
       summary: Return the list of all mortgage cases for the authenticated context
+      description: List of mortgage cases for the authenticated context including the corresponding properties, sorted by caseId.
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
@@ -53,7 +56,10 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: Paginated list of all mortgage cases with all related information sorted by caseId
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: Paginated list of all mortgage cases with all related information sorted by caseId.
           content:
             application/json:
               schema:
@@ -65,11 +71,6 @@ paths:
                       $ref: '#/components/schemas/MortgageCase'
                   _links:
                     $ref: '#/components/schemas/linksPagination'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -86,27 +87,23 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-          
+
   /mortgage-cases/{caseId}:
     get:
       tags:
         - Full Mortgage Cases
-      description: A specific existing mortgage case including the corresponding properties
       summary: Return a specific existing mortgage case
+      description: A specific existing mortgage case including the corresponding properties.
       parameters:
-        - name: caseId
-          in: path
-          description: Uuid v4 of a specific existing mortgage case
-          required: true
-          example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
-          schema:
-            type: string
-            format: uuid
+        - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
           description: Mortgage case details with the corresponding properties.
           content:
             application/json:
@@ -115,11 +112,6 @@ paths:
                 properties:
                   Case:
                     $ref: '#/components/schemas/MortgageCase'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -141,15 +133,15 @@ paths:
     get:
       tags:
         - Existing Mortgages
-      description: List of mortgages for the authenticated context including the corresponding properties and related mortgages, sorted by mortgageId.
       summary: Return the list of all mortgages for the authenticated context
+      description: List of mortgages for the authenticated context including the corresponding properties and related mortgages, sorted by mortgageId.
       parameters:
         - in: query
           name: expiring
           schema:
             type: boolean
           example: true
-          description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering)
+          description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering).
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/clientid_in_header'
@@ -157,7 +149,10 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: Paginated list of all mortgages with all related information sorted by mortgageId
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: Paginated list of all mortgages with all related information sorted by mortgageId.
           content:
             application/json:
               schema:
@@ -169,11 +164,6 @@ paths:
                       $ref: '#/components/schemas/Mortgage'
                   _links:
                     $ref: '#/components/schemas/linksPagination'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -191,27 +181,22 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/{mortgageId}:
     get:
       tags:
         - Existing Mortgages
-      description: A specific existing mortgage including the corresponding properties and related mortgages.
       summary: Return a specific existing mortgage
+      description: A specific existing mortgage including the corresponding properties and related mortgages.
       parameters:
-        - name: mortgageId
-          in: path
-          description: Uuid v4 of a specific existing mortgage
-          required: true
-          example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
-          schema:
-            type: string
-            format: uuid
+        - $ref: '#/components/parameters/path_mortgageId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
           description: Mortgage details with the corresponding properties and related mortgages.
           content:
             application/json:
@@ -220,11 +205,6 @@ paths:
                 properties:
                   Mortgage:
                     $ref: '#/components/schemas/Mortgage'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -245,7 +225,7 @@ paths:
   /mortgages/products:
     get:
       summary: Get a list of all mortgage products
-      description: Get a complete overview of all available mortgage products sorted by productId
+      description: Get a complete overview of all available mortgage products sorted by productId.
       tags:
         - Mortgage Products and Conditions
       parameters:
@@ -259,15 +239,8 @@ paths:
               - libor
               - saron
               - fixed
-          description: The type of the interest rates (for filtering)
-        - in: query
-          name: duration
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 20
-          example: 10
-          description: The type of duration (for filtering)
+          description: The type of the interest rates (for filtering).
+        - $ref: '#/components/parameters/duration'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/clientid_in_header'
@@ -275,7 +248,10 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: Paginated list of all mortgage products with all related information sorted by productId
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: Paginated list of all mortgage products with all related information sorted by productId.
           content:
             application/json:
               schema:
@@ -287,11 +263,6 @@ paths:
                       $ref: '#/components/schemas/Product'
                   _links:
                     $ref: '#/components/schemas/linksPagination'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -309,37 +280,28 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/products/{productId}/conditions:
     get:
       summary: Get the general conditions for the specified mortgage product
-      description: The standard financial conditions for the product
+      description: The standard financial conditions for the product.
       tags:
         - Mortgage Products and Conditions
       parameters:
-        - in: path
-          name: productId
-          schema:
-            type: string
-            format: uuid
-          required: true
-          example: a86dd383-055e-471a-a098-682ae5ef8348
-          description: A product's uuid v4
-        - in: query
-          name: duration
-          schema:
-            type: string
-          description: The duration (for filtering)
+        - $ref: '#/components/parameters/path_productId'
+        - $ref: '#/components/parameters/limit'
         - in: query
           name: interest
           schema:
             type: string
-          description: The interest (for filtering)
+          description: The interest (for filtering).
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
           description: List of conditions related to a specific mortgage product.
           content:
             application/json:
@@ -350,11 +312,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Condition'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -372,24 +329,25 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/applications:
     post:
       summary: Place a new mortgage application (serves as dossier)
-      description: Place a new application including all necessary information about the property and applicant’s financial situation. **Note that in the case where the FI needs additional information on the property, the error response 400 must contain the minimum required JSON object (PropertyObject) as detail**.
+      description: |
+        Place a new application including all necessary information about the property and applicant's financial situation.  
+        **Note that in the case where the FI needs additional information on the property, the error response 400 must contain the minimum required JSON object (PropertyObject) as detail**.
       tags:
         - Mortgage Application
+      parameters:
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
-        description: Static details (requesting party, property object) of the application to be added as a dossier
+        description: Static details (requesting party, property object) of the application to be added as a dossier.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Application'
-      parameters:
-        - $ref: '#/components/parameters/clientid_in_header'
-        - $ref: '#/components/parameters/correlation_in_header'
-        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
           $ref: '#/components/responses/standard201'
@@ -413,7 +371,7 @@ paths:
   /mortgages/applications/required-information:
     get:
       summary: Get the required property information for the specific FI needed for valuation
-      description: Show the subset of property details required by the FI for valuation
+      description: Show the subset of property details required by the FI for valuation.
       tags:
         - Mortgage Application
       parameters:
@@ -422,16 +380,14 @@ paths:
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyObject'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -449,28 +405,23 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/applications/{applicationId}:
     get:
       summary: Get the details of a specific placed application
-      description: Get the details of a specific placed application
+      description: Get the details of a specific placed application.
       tags:
         - Mortgage Application
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          required: true
-          example: 4bf92636-14a0-4511-98e2-acfde576e644
-          description: Uuid v4 of the application request
+        - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -478,11 +429,6 @@ paths:
                 properties:
                   application:
                     $ref: '#/components/schemas/Application'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -502,23 +448,16 @@ paths:
 
     put:
       summary: Update the application's details
-      description: Update the application’s details. Note that changing the application's details should not be possible after the application has been accepted by the FI.
+      description: Update the application's details. Note that changing the application's details should not be possible after the application has been accepted by the FI.
       tags:
         - Mortgage Application
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          required: true
-          example: 7f810bcd-e430-4f52-8cdf-ddf7bfbd2903
-          description: Uuid v4 of the application request
+        - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       requestBody:
-        description: Details of the order to be added
+        description: Details of the order to be added.
         required: true
         content:
           application/json:
@@ -526,7 +465,10 @@ paths:
               $ref: '#/components/schemas/Application'
       responses:
         '200':
-          description: OK 
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -534,11 +476,6 @@ paths:
                 properties:
                   status:
                     type: string
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -562,33 +499,24 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          required: true
-          example: 25cce7b2-ffb8-4800-88b0-e255ab75a829
-          description: Uuid v4 of the application request
+        - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
                 type: object
                 properties:
                   reason:
-                    description: The reason for rejecting an application
+                    description: The reason for rejecting an application.
                     type: string
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -606,27 +534,19 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/applications/{applicationId}/swissrets:
     post:
       summary: Add property details in the SwissRETS standard
-      description: This endpoint allows to upload the real estate property's details as an XML file in the SwissRETS format according to https://swissrets.ch/
+      description: This endpoint allows to upload the real estate property's details as an XML file in the SwissRETS format according to https://swissrets.ch/.
       tags:
         - Mortgage Application
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          required: true
-          example: a5f2cc2a-e2bf-45f0-a892-bc61dfb5fe02
-          description: Uuid v4 of the application request
+        - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       requestBody:
-        description: Details of the real estate property to be added
+        description: Details of the real estate property to be added.
         required: true
         content:
           application/xml:
@@ -654,33 +574,24 @@ paths:
 
     get:
       summary: Get property details in SwissRETS format
-      description: Get the real estate property's details in SwissRETS format XML according to https://swissrets.ch/
+      description: Get the real estate property's details in SwissRETS format XML according to https://swissrets.ch/.
       tags:
         - Mortgage Application
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          example: 4a9aabc4-b893-4f16-a4f4-421a414ea628
-          required: true
-          description: Uuid v4 of the application request
+        - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/xml:
               schema:
                 type: string
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -699,22 +610,16 @@ paths:
           $ref: '#/components/responses/standard503'
     put:
       summary: Update the real estate property's details
-      description: This endpoint allows to upload a modified XML file in the SwissRETS format changing the already existing information
+      description: This endpoint allows to upload a modified XML file in the SwissRETS format changing the already existing information.
       tags:
         - Mortgage Application
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-          required: true
-          example: 83ad0ba5-d6d1-42d3-ba8d-5ea514799632
-          description: Uuid v4 of the application request
+        - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       requestBody:
-        description: Details of the real estate property to be added
+        description: Details of the real estate property to be added.
         required: true
         content:
           application/xml:
@@ -722,7 +627,10 @@ paths:
               type: string
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -730,11 +638,6 @@ paths:
                 properties:
                   status:
                     type: string
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -759,19 +662,12 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          required: true
-          example: 7f648f12-c15f-4930-8380-238da5671c37
-          description: Unique ID (uuid v4) of the application request
+        - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       requestBody:
-        description: Details of the document to be added
+        description: Details of the document to be added.
         required: true
         content:
           multipart/form-data:
@@ -808,7 +704,7 @@ paths:
                 applicantId:
                   type: string
                   format: uuid
-                  description: UUID v4 of the applicant (existing applicant within the current application)
+                  description: UUID v4 of the applicant (existing applicant within the current application).
                   example: 576f8de3-6b30-4882-a7af-da2132a456cf
       responses:
         '201':
@@ -836,20 +732,16 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          example: 7f648f12-fd45-4930-6543-456hf5671c37
-          required: true
-          description: Uuid v4 of the application request
+        - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -867,7 +759,7 @@ paths:
                       type: string
                       format: uuid
                       example: 7f648f12-fd45-4930-6543-456hf5671c37
-                      description: Document ID in uuid v4 format
+                      description: Document ID in uuid v4 format.
                     filesize:
                       type: integer
                       example: 1024
@@ -875,7 +767,7 @@ paths:
                     uploaddate:
                       $ref: '#/components/schemas/Date'
                     statusInfo:
-                      description: Document status info
+                      description: Document status info.
                       type: object
                       required:
                         - status
@@ -887,16 +779,11 @@ paths:
                             - rejected
                             - pending
                           default: pending
-                          description: Get the current status of the application
+                          description: Get the current status of the application.
                         statusReason:
                           type: string
                           example: Additional information that can be shared with the status.
                           description: The reason, of current status.
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -914,36 +801,26 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/applications/{applicationId}/documents/{documentId}:
     delete:
       summary: Delete a formerly uploaded document
-      description: Deletes a specific document attached to a specific application. Note that deleting documents should not be possible after the application has been accepted by the FI.
+      description: >
+        Deletes a specific document attached to a specific application.
+        Note that deleting documents should not be possible after the application has been accepted by the FI.
       tags:
         - Mortgage Application
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          example: 7f648f12-fd45-4930-6543-456hf5671c37
-          required: true
-          description: Uuid v4 of the application (dossier)
-        - in: path
-          name: documentId
-          schema:
-            type: string
-            format: uuid
-          example: 7f648f12-c15f-4930-8380-238da5671c37
-          required: true
-          description: Unique ID (uuid v4) of the document
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_documentId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -951,11 +828,6 @@ paths:
                 properties:
                   status:
                     type: string
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -976,24 +848,20 @@ paths:
   /mortgages/applications/{applicationId}/status:
     get:
       summary: Get the current status of the application
-      description: Get the current status of the application (rejected with reason, accepted, pending with reason)
+      description: Get the current status of the application (rejected with reason, accepted, pending with reason).
       tags:
         - Mortgage Application
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          example: 225f92e7-095f-4e06-a036-d3b5947c7e71
-          required: true
-          description: Uuid v4 of the application request
+        - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -1005,16 +873,11 @@ paths:
                       - accepted
                       - rejected
                       - pending
-                    example: pending 
+                    example: pending
                   detail:
                     type: string
                     example: Waiting for details
                     description: Additional information that can be shared with the status.
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1035,23 +898,16 @@ paths:
   /mortgages/applications/{applicationId}/financing-requests:
     post:
       summary: Place a new financing-request for a specific accepted application (dossier)
-      description: Place a new financing request including all necessary information
+      description: Place a new financing request including all necessary information.
       tags:
         - Mortgage Financing Request
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          example: 7598b91b-c500-46c3-a196-0ab1610e692c
-          required: true
-          description: Uuid v4 of the application request
+        - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       requestBody:
-        description: Specific financing request fo the given application (dossier)
+        description: Specific financing request fo the given application (dossier).
         required: true
         content:
           application/json:
@@ -1081,32 +937,20 @@ paths:
     get:
       summary: List all required documents / information for processing specific Financial request at FI
       description: All required documents for a specific FinancingRequestId can be retrieved herewith.
-
       tags:
         - Mortgage Financing Request
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          example: 1a75e7fc-f3c3-99a9-9268-ec21c405bbc8
-          required: true
-          description: Uuid v4 of the application request
-        - in: path
-          name: financingRequestId
-          schema:
-            type: string
-            format: uuid
-          example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
-          required: true
-          description: Uuid v4 of the financing request
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_financingRequestId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK 
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK
           content:
             application/json:
               schema:
@@ -1119,11 +963,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/DocumentType'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1144,32 +983,21 @@ paths:
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}:
     get:
       summary: Get the details of a financing request
-      description: Get a specific financing request based on the financingRequestId
+      description: Get a specific financing request based on the financingRequestId.
       tags:
         - Mortgage Financing Request
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          example: 78d01ce4-a01b-46dd-8d17-5f022d4f98h3
-          required: true
-          description: Uuid ID of the application
-        - in: path
-          name: financingRequestId
-          schema:
-            type: string
-            format: uuid
-          example: 78d01ce4-a01b-46dd-8d17-5f022d4f46f2
-          required: true
-          description: Uuid ID of the financing request
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_financingRequestId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK 
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -1179,11 +1007,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/FinancingRequest'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1201,7 +1024,6 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers:
     get:
       summary: List all binding offers for a given financing request
@@ -1209,28 +1031,17 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          example: f005bcab-051f-437c-a010-242aa0390add
-          required: true
-          description: Uuid v4 of the application request
-        - in: path
-          name: financingRequestId
-          schema:
-            type: string
-            format: uuid
-          example: c0c6bcf8-4be7-4c3f-8e5e-cbec6ee95d95
-          required: true
-          description: Uuid v4 of the financing request
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_financingRequestId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -1240,11 +1051,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Offer'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1262,43 +1068,25 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}:
     get:
       summary: Get the details of a specific offer
-      description: Get the details of a specific offer for a specific placed application
+      description: Get the details of a specific offer for a specific placed application.
       tags:
         - Mortgage Offers
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-          example: bankx-applicationreq-465234
-          required: true
-          description: Uuid v4 of the application request
-        - in: path
-          name: financingRequestId
-          schema:
-            type: string
-            format: uuid
-          example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
-          required: true
-          description: Uuid v4 of the financing request
-        - in: path
-          name: offerId
-          schema:
-            type: string
-            format: uuid
-          example: c2fee261-053c-4088-8986-11216f0c9be6
-          required: true
-          description: Uuid v4 of the offer
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_financingRequestId'
+        - $ref: '#/components/parameters/path_offerId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK 
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -1306,11 +1094,6 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1331,36 +1114,21 @@ paths:
   /mortgages/offers/{offerId}/document:
     get:
       summary: Get document for the given offer
-      description: Get document for the offer, this can be used by TPP to display offer content
+      description: Get document for the offer, this can be used by TPP to display offer content.
       tags:
         - Mortgage Offers
       parameters:
-        - in: path
-          name: offerId
-          schema:
-            type: string
-            format: uuid
-          example: 8109fc33-8af0-4072-98aa-a7d0c5c896a7
-          required: true
-          description: Uuid v4 of an offer
-        - in: query
-          name: language
-          schema:
-            type: string
-            enum:
-              - de
-              - fr
-              - it
-              - en
-          description: Language of Document content
-          example: fr
-          required: true
+        - $ref: '#/components/parameters/path_offerId'
+        - $ref: '#/components/parameters/language'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -1368,12 +1136,6 @@ paths:
                 properties:
                   document:
                     $ref: '#/components/schemas/Document'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
-
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1393,40 +1155,24 @@ paths:
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}/required-information:
     get:
       summary: List all required documents / information for processing specific offer at FI
-      description: Lists the required documents for the previously submitted case. Thus, the TPP knows which documents are needed for the later check.
+      description: >
+        Lists the required documents for the previously submitted case.
+        Thus, the TPP knows which documents are needed for the later check.
       tags:
         - Mortgage Offers
       parameters:
-        - in: path
-          name: applicationId
-          schema:
-            type: string
-            format: uuid
-          example: 1a75e7fc-f3c3-99a9-9268-ec21c405bbc8
-          required: true
-          description: Uuid v4 of the application request
-        - in: path
-          name: financingRequestId
-          schema:
-            type: string
-            format: uuid
-          example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
-          required: true
-          description: Uuid v4 of the financing request
-        - in: path
-          name: offerId
-          schema:
-            type: string
-            format: uuid
-          example: c2fee261-053c-4088-8986-11216f0c9be6
-          required: true
-          description: Uuid v4 of the offer
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_financingRequestId'
+        - $ref: '#/components/parameters/path_offerId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -1439,11 +1185,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/DocumentType'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1464,20 +1205,22 @@ paths:
   /mortgages/orders:
     post:
       summary: Place a new order
-      description: Place a new order referencing a specific offerId and either an existing mortgage id (prolongation) or an application id (new mortgage) including all relevant information
+      description: >
+        Place a new order referencing a specific offerId and either an existing mortgage id (prolongation)
+        or an application id (new mortgage) including all relevant information.
       tags:
         - Mortgage Order
+      parameters:
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
-        description: Details of the order to be added
+        description: Details of the order to be added.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Order'
-      parameters:
-        - $ref: '#/components/parameters/clientid_in_header'
-        - $ref: '#/components/parameters/correlation_in_header'
-        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '201':
           $ref: '#/components/responses/standard201'
@@ -1501,24 +1244,20 @@ paths:
   /mortgages/orders/{orderId}:
     get:
       summary: Get the details of a specific placed order
-      description: Get the details of a specific placed order
+      description: Get the details of a specific placed order.
       tags:
         - Mortgage Order
       parameters:
-        - in: path
-          name: orderId
-          schema:
-            type: string
-            format: uuid
-          example: 91d029b3-ee7a-44c3-ac18-cf621cb128a8
-          required: true
-          description: Uuid v4 of an order
+        - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK 
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -1526,11 +1265,6 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Order'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1548,28 +1282,25 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/orders/{orderId}/status:
     get:
       summary: Get the current status of the order
-      description: Returns the current status of the order. An order can be in accepted rejected or pending status. In addition, further details regarding the status can be transferred.
+      description: >
+        Returns the current status of the order. An order can be in accepted rejected or pending status.
+        In addition, further details regarding the status can be transferred.
       tags:
         - Mortgage Order
       parameters:
-        - in: path
-          name: orderId
-          schema:
-            type: string
-            format: uuid
-          example: 8109fc33-8af0-4072-98aa-a7d0c5c896a7
-          required: true
-          description: Uuid v4 of an order
+        - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK 
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -1581,15 +1312,10 @@ paths:
                       - accepted
                       - rejected
                       - pending
-                    example: pending 
+                    example: pending
                   detail:
                     type: string
                     example: Waiting for details
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1610,37 +1336,21 @@ paths:
   /mortgages/orders/{orderId}/document:
     get:
       summary: Get document for the given order
-      description: Get document for given order, this can be used by TPP to display offer content
+      description: Get document for given order, this can be used by TPP to display offer content.
       tags:
         - Mortgage Order
       parameters:
-        - in: path
-          name: orderId
-          schema:
-            type: string
-            format: uuid
-          example: 8109fc33-8af0-4072-98aa-a7d0c5c896a7
-          required: true
-          description: Uuid v4 of an order
-        - in: query
-          name: language
-          schema:
-            type: string
-            enum:
-              - de
-              - fr
-              - it
-              - en
-          description: Language of Document content
-          example: fr
-          required: true
-
+        - $ref: '#/components/parameters/path_orderId'
+        - $ref: '#/components/parameters/language'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: OK 
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
           content:
             application/json:
               schema:
@@ -1648,11 +1358,6 @@ paths:
                 properties:
                   document:
                     $ref: '#/components/schemas/Document'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1674,23 +1379,19 @@ paths:
     get:
       tags:
         - Mortgage Prolongation
-      description: Get offer framework for the to be extended mortgage.
       summary: Get all active offers for a specific tranche
+      description: Get offer framework for the to be extended mortgage.
       parameters:
-        - name: mortgageId
-          in: path
-          description: Uuid v4 of a specific expiring mortgage
-          required: true
-          example: 82d2f030-e840-40ea-9bc8-8b6cbc15f7bb
-          schema:
-            type: string
-            format: uuid
+        - $ref: '#/components/parameters/path_mortgageId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: Paginated list of all offers for a specific expiring mortgage
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: Paginated list of all offers for a specific expiring mortgage.
           content:
             application/json:
               schema:
@@ -1700,11 +1401,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Offer'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1722,36 +1418,24 @@ paths:
         '503':
           $ref: '#/components/responses/standard503'
 
-
   /mortgages/{mortgageId}/offers/{offerId}:
     get:
       tags:
         - Mortgage Prolongation
-      description: Get a specific offer for the to be extended mortgage.
       summary: Get a specific offer for a specific tranche
+      description: Get a specific offer for the to be extended mortgage.
       parameters:
-        - name: mortgageId
-          in: path
-          description: Uuid v4 of a specific expiring mortgage
-          example: 718934bb-aa8a-4917-a431-b64b844cacc3
-          required: true
-          schema:
-            type: string
-            format: uuid
-        - name: offerId
-          in: path
-          description: Uuid v4 of a specific mortgage prolongation offer
-          example: 46eb482d-1e18-4b93-ae88-da14ad4ac051
-          required: true
-          schema:
-            type: string
-            format: uuid
+        - $ref: '#/components/parameters/path_mortgageId'
+        - $ref: '#/components/parameters/path_offerId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
-          description: Specific offer for a specific expiring mortgage
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: Specific offer for a specific expiring mortgage.
           content:
             application/json:
               schema:
@@ -1759,11 +1443,6 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
-          headers:
-            X-Correlation-ID:
-              schema:
-                type: string
-              description: Reflects the ID (set by the caller) from the request.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1780,7 +1459,6 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-
 
 # -------------------------
 # -------- Models ---------
@@ -1809,11 +1487,12 @@ components:
       type: string
       format: date
       example: 2018-04-13
+
     DateTime:
       type: string
       format: date-time
       example: 2018-04-13T11:11:11Z
-    # --------
+
     # ---- Links for Pagination----
     linksPagination:
       description: Links (or cursors) returned in the answer of an API call.
@@ -1839,14 +1518,14 @@ components:
           type: string
           description: Link / cursor to the last result set (based on the submitted pagination approach)
           example: /mortgage-app/api/v1/products?offset=150&limit=25
-    # ---------
+
     # ---- Currency ----
     Currency:
       description: ISO 4217 code
       type: string
-      pattern: '[A-Z]{3}'
+      pattern: '^[A-Z]{3}$'
       example: CHF
-    # ---------
+
     # ---- Amount ----
     Amount:
       description: amount with currency
@@ -1860,9 +1539,9 @@ components:
         content:
           description: amount given with fractional digits, the separator is a dot
           type: string
-          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
           example: 235.45
-    # --------
+
     # ---- Address compliant to payment address (b.Link & ISO20022)----
     structuredAddress:
       title: Structured Address
@@ -1878,11 +1557,11 @@ components:
           maxLength: 70
           example: Rue de la gare
         buildingNumber:
-          type: string 
-          maxLength: 16 
+          type: string
+          maxLength: 16
           example: 24
         postCode:
-          type: string 
+          type: string
           maxLength: 16
           example: 2501
         townName:
@@ -1893,14 +1572,14 @@ components:
           type: string
           maxLength: 2
           example: CH
-    # -----------
+
     # ---- Country Code ----
     Country:
       type: string
-      pattern: '[A-Z]{2}'
+      pattern: '^[A-Z]{2}$'
       example: CH
       description: 2-Letter ISO 3166-2 Country Code
-    # ------------
+
     # ---- Response
     commonResourceCreatedResponse:
       title: Recource created response
@@ -1923,8 +1602,7 @@ components:
           $ref: '#/components/schemas/commonErrorType'
         title:
           type: string
-          example:
-            This is the general problem description
+          example: This is the general problem description
         detail:
           type: array
           items:
@@ -1932,8 +1610,7 @@ components:
             example: List of detailed problem description with respect to the current request
         instance:
           type: string
-          example:
-            path/to/corresponding/resource
+          example: path/to/corresponding/resource
 
     commonErrorType:
       title: Common Error Type
@@ -1958,7 +1635,6 @@ components:
     # ---- End Response
     # ---- End Common Data Model
 
-    # ---- Property Object ----
     PropertyObject:
       description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law
       type: object
@@ -2040,12 +1716,12 @@ components:
                 - minergie-eco
                 - minergie-p-eco
                 - minergie-a
-                - minergie-a-eco 
+                - minergie-a-eco
               description: The minergie standard
               example: minergie-p
             BECCStandardType:
               type: string
-              enum: 
+              enum:
                 - none
                 - A
                 - B
@@ -2054,11 +1730,11 @@ components:
                 - E
                 - F
                 - G
-              description: Energy certificate from Cantons 
+              description: Energy certificate from Cantons
               example: B
             luxusFlag:
               type: string
-              enum: 
+              enum:
                 - 0
                 - 0.5
                 - 1.0
@@ -2070,14 +1746,14 @@ components:
               $ref: '#/components/schemas/PropertyObjectRatingType'
         classOfProperty:
           type: string
-          enum: 
+          enum:
             - main_residence
             - main_residence_with_use_restriction
             - second_residence
             - second_residence_with_use_restriction
             - rented_property
             - rented_property_with_use_restriction
-            - other  
+            - other
           description: The class of property (Main residence, second residence, rented).
           example: main_residence
         matrimonialPropertyScheme:
@@ -2089,7 +1765,7 @@ components:
             - contributionToJointlyAcquiredProperty
         floorPlan:
           type: string
-          enum: 
+          enum:
             - efficient
             - average
             - inefficient
@@ -2097,14 +1773,14 @@ components:
           example: average
         usageType:
           type: string
-          enum: 
+          enum:
             - self
-            - let  
+            - let
           description: 'The type of usage of the financing property: self, let'
           example: self
         propertyType:
           type: string
-          enum: 
+          enum:
             - single_family_house
             - condominium
             - vacation_house
@@ -2118,60 +1794,60 @@ components:
             - commercial_condominium
             - office_building
             - industrial_building
-            - special_object  
+            - special_object
           description: The type of property
           example: single_family_house
         ceilingHight:
           type: string
-          enum: 
+          enum:
             - especially_high
             - middle
-            - especially_low   
+            - especially_low
           description: The ceiling hight in the rooms.
           example: middle
         buildingStandardFloorCoverings:
           type: string
-          enum: 
+          enum:
             - premium
             - highlevel
             - basic
-            - lowlevel   
+            - lowlevel
           description: Building standard of the floor coverings.
           example: basic
         buildingStandardKitchen:
           type: string
-          enum: 
+          enum:
             - premium
             - highlevel
             - basic
-            - lowlevel   
+            - lowlevel
           description: Building standard of the kitchen.
           example: basic
         buildingStandardBathroom:
           type: string
-          enum: 
+          enum:
             - premium
             - highlevel
             - basic
-            - lowlevel  
+            - lowlevel
           description: Building standard of the sanitary installations.
           example: basic
         heatEmission:
           type: array
           items:
             type: string
-            enum: 
+            enum:
               - floor
               - radiator
               - stove
-              - other  
+              - other
             description: Type of the heat emission
             example: floor
         heatProduction:
           type: array
           items:
             type: string
-            enum: 
+            enum:
               - oil
               - gas
               - wood
@@ -2179,7 +1855,7 @@ components:
               - geothermal_probe
               - district
               - solar_panel
-              - solar_thermal_collector  
+              - solar_thermal_collector
             description: Type of the heat production
             example: gas
         outsideConstructionZone:
@@ -2202,10 +1878,10 @@ components:
               example: 2.5
             roomCountType:
               type: string
-              enum: 
+              enum:
                 - kitchen_not_counted
                 - kitchen_half_room
-                - kitchen_full_room   
+                - kitchen_full_room
               description: Reflects the type of the room count type. E.g. if the kitchen counts as full room.
               example: kitchen_full_room
             numberOfFamilyBathrooms:
@@ -2263,9 +1939,9 @@ components:
                   example: 120
                 measurementStandard:
                   type: string
-                  enum: 
+                  enum:
                     - nla
-                    - gfa   
+                    - gfa
                   description: The measurement standard used to determine the living space (nla or gfa).
                   example: nla
             multistorey:
@@ -2276,7 +1952,7 @@ components:
               type: array
               items:
                 type: string
-                enum: 
+                enum:
                   - coowned_garden_terrace_room
                   - coowned_indoor_pool
                   - coowned_outdoor_pool
@@ -2289,7 +1965,7 @@ components:
                   - elevator_into_apartment
                   - barrier-free_living
                   - automated_building_control
-                  - ventilation_system_without_minergie  
+                  - ventilation_system_without_minergie
                 description: Additional features and services.
                 example: coowned_outdoor_pool
             quote:
@@ -2298,18 +1974,18 @@ components:
               example: 120
             apartmentType:
               type: string
-              enum: 
+              enum:
                 - garden_flat
                 - floor_flat
                 - roof_flat
-                - attic   
+                - attic
               description: The type of the apartment (floor, garden level, storey).
               example: floor_flat
             buildingType:
               type: string
-              enum: 
+              enum:
                 - multiple_family_house
-                - terrace_house   
+                - terrace_house
               description: The type of the building (multiple_family_house, terrace_house).
               example: multiple_family_house
             locationInTheBuildingRating:
@@ -2327,9 +2003,9 @@ components:
                   example: 120
                 measurementStandard:
                   type: string
-                  enum: 
+                  enum:
                     - nla
-                    - gfa   
+                    - gfa
                   description: The measurement standard used to determine the living space (nla or gfa).
                   example: nla
             roofFloorExpandable:
@@ -2350,17 +2026,17 @@ components:
               example: 2000
             environmentStandard:
               type: string
-              enum: 
+              enum:
                 - high-level
                 - basic
-                - low-level  
+                - low-level
               description: The rating type
               example: basic
             otherFeatures:
               type: array
               items:
                 type: string
-                enum: 
+                enum:
                   - barrier-free_living
                   - automated_building_control
                   - ventilation_system_without_minergie
@@ -2372,26 +2048,26 @@ components:
                   - security_system
                   - chimney
                   - passenger_elevator
-                  - freight_elevator  
+                  - freight_elevator
                 description: Additional features and services.
                 example: outdoor_pool
             houseType:
               type: string
-              enum: 
+              enum:
                 - detached_house
                 - semidetached_house
                 - row_house
                 - row_corner_house
-                - terrace_house   
+                - terrace_house
               description: The type of the house.
               example: detached_house
             normType:
               type: string
-              enum: 
+              enum:
                 - building_insurance
                 - sia116
                 - sia416
-                - other  
+                - other
               description: The norm type.
               example: building_insurance
         valueRelevantServitudes:
@@ -2464,9 +2140,7 @@ components:
           description: Date of public notarization
         remarks:
           type: string
-    # ---------
 
-    # ---- Property Identifier ----
     PropertyIdentifier:
       description: Property identification (register of real estate)
       type: object
@@ -2475,9 +2149,7 @@ components:
           type: string
         EGID:
           type: string
-    # ---------
 
-    # ---- Mortgage ----
     Mortgage:
       description: All relevant information regarding a specific mortgage
       type: object
@@ -2541,9 +2213,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Mortgage'
-    # ---------
 
-    # ---- Mortgage Offer ----
     Offer:
       description: All relevant details describing the FI's offer for a mortgage product
       type: object
@@ -2578,9 +2248,6 @@ components:
             - binding
             - indicative
 
-    # ---------
-
-    # ---- Mortgage Offer Item ----
     OfferItem:
       description: All relevant details of a specific item being part of an FI's offer for a mortgage product
       type: object
@@ -2605,9 +2272,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Condition'
-    # ---------
 
-    # ---- Mortgage Product Variation
     ProductVariation:
       description: Product variation details
       type: object
@@ -2634,9 +2299,7 @@ components:
             - 3m
             - 6m
             - 12m
-    # ---------
 
-    # ---- Mortgage Product ----
     Product:
       description: All details regarding an FI's mortgage product
       type: object
@@ -2680,9 +2343,7 @@ components:
             - libor
             - saron
             - fixed
-        # ---------
 
-    # ---- Mortgage Product Condition ----
     Condition:
       description: All details regarding the conditions for a specific mortgage product the FI offers
       type: object
@@ -2719,9 +2380,7 @@ components:
           type: integer
         amortizations:
           $ref: '#/components/schemas/Amortizations'
-    # ---------
 
-    # ---- Party ----
     Party:
       description: Links together the persons building the applicant party
       type: object
@@ -2741,9 +2400,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Applicant'
-    # ---------
 
-    # ---- Application ----
     Application:
       description: All static application information needed by the FI to create binding offers
       type: object
@@ -2775,12 +2432,12 @@ components:
             - replacement
             - construction_financing
         channelType:
-           type: string
-           enum: 
+          type: string
+          enum:
             - advisor
             - direct
-           description: The type of the channel the application was generated
-           example: advisor
+          description: The type of the channel the application was generated
+          example: advisor
         replacementType:
           type: string
           description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
@@ -2842,9 +2499,6 @@ components:
             address:
               $ref: '#/components/schemas/structuredAddress'
 
-    # ---------
-
-    # ---- Mortgage Case ----
     MortgageCase:
       description: A complete mortgage case including the application details
       type: object
@@ -2866,7 +2520,7 @@ components:
           type: string
           example: All documents verified at TPP
           description: Remark/comment which can be added by TPP
-          
+
     Financing:
       description: Complete financing details of an application
       type: object
@@ -2905,7 +2559,7 @@ components:
           $ref: '#/components/schemas/Date'
         publicCertDate:
           $ref: '#/components/schemas/Date'
-          
+
     FinancingTranche:
       description: Tranche of a financing
       type: object
@@ -2951,9 +2605,7 @@ components:
             - 12m
         amortizations:
           $ref: '#/components/schemas/Amortizations'
-    # --------
 
-    # ---- Financing Request ----
     FinancingRequest:
       description: Based on the application, several financing requests can be sent to the FI
       type: object
@@ -3011,9 +2663,7 @@ components:
           enum:
             - binding
             - indicative
-    # ---------
 
-    # ---- Applicant ----
     Applicant:
       description: Applicant information needed by the FI for creating a binding offer.
       type: object
@@ -3111,7 +2761,7 @@ components:
                   type: string
                   description: Provider of the solvency rating
                   example: crif
-                  enum: 
+                  enum:
                     - crif
                 ratingDate:
                   $ref: '#/components/schemas/Date'
@@ -3207,7 +2857,7 @@ components:
                     description: Value of the additional property
                   propertyTypeAdditionalProperty:
                     type: string
-                    enum: 
+                    enum:
                       - single_family_house
                       - condominium
                       - vacation_house,
@@ -3224,12 +2874,11 @@ components:
                       - special_object
                     description: The type of the additional property
                     example: vacation_house
-    # ---------
 
     # ---- Mortgage data types ----
     PropertyObjectRatingType:
       type: string
-      enum: 
+      enum:
         - bad
         - bad-medium
         - medium
@@ -3239,11 +2888,13 @@ components:
         - verygood
       description: The rating type.
       example: good
+
     CommonID:
       description: The unique identifier UUID v4 specified by RFC4122.
       type: string
       format: uuid
       example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6
+
     AssetType:
       description: Common set of asset types.
       type: string
@@ -3267,6 +2918,7 @@ components:
         - life_insurance_3a
         - life_insurance_3b
         - unpledged_building_plot
+
     AssetUsageType:
       description: Common set of asset usage types.
       type: string
@@ -3274,6 +2926,7 @@ components:
       enum:
         - pledged
         - withdraw
+
     Asset:
       description: 'Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.'
       type: object
@@ -3293,6 +2946,7 @@ components:
           type: string
         assetProvider:
           $ref: '#/components/schemas/AssetProvider'
+
     UsedAsset:
       description: 'Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also be recorded in the array of assets in the financial situation of one applicant.'
       type: object
@@ -3317,8 +2971,10 @@ components:
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
         assetProvider:
           $ref: '#/components/schemas/AssetProvider'
+
     IncomeType:
-      description: Common set of income types.
+      description: >
+        Common set of income types.
         For the enum value self_employment and dividend the 3 years avg is relevant.
       type: string
       example: employment_gross
@@ -3346,8 +3002,10 @@ components:
         - child_allowance_payment
         - rental_costs
         - costs_for_additional_properties
+
     DocumentType:
-      description: All supported document types.
+      description: >
+        All supported document types.
         For the enum value tax_statement. Tax statement is required.
       type: string
       example: tax_statement
@@ -3399,9 +3057,7 @@ components:
         - survey_copy
         - cubical_calculation
         - other
-    # ---------
 
-    # ---- Order ----
     Order:
       description: All information needed to choose a specific offer and place a binding order.
       type: object
@@ -3430,9 +3086,6 @@ components:
           example: All documents verified at TPP
           description: Remark/comment which can be added by TPP
 
-    # ---------
-
-    # ---- Document ----
     Document:
       description: Document containing information for givent document type for given order.
       type: object
@@ -3460,27 +3113,25 @@ components:
           $ref: '#/components/schemas/Date'
         modifyDate:
           $ref: '#/components/schemas/Date'
-    # ---------
-    
-    # ---- Amortizations ----
+
     Amortizations:
       description: Information about the amortization on mortgage or on tranche level.
       type: object
       properties:
         amortizationType:
           type: string
-          enum: 
+          enum:
             - direct
             - indirect
-          description: 'The type of amortization'
-          example: 'direct'
+          description: The type of amortization
+          example: direct
         amortizationAmount:
           $ref: '#/components/schemas/Amount'
-          description: 'The amount of the periodic amortization'
+          description: The amount of the periodic amortization
           example: 27400
         amortizationStart:
           $ref: '#/components/schemas/Date'
-          description: 'Start date of amortization'
+          description: Start date of amortization
           example: 2018-04-13
         amortizationPeriodicity:
           type: string
@@ -3488,15 +3139,13 @@ components:
             - yearly
             - quarterly
             - monthly
-          description: 'The periodicity the amortization is paid'
-          example: 'quarterly'
+          description: The periodicity the amortization is paid
+          example: quarterly
         amortizationAccountNr:
           type: string
-          description: 'the account number from which the amortization is paid'
+          description: The account number from which the amortization is paid
           example: IE12BOFI90000112345678
-    # ---------
-    
-    # ---- AssetProvider ----
+
     AssetProvider:
       description: Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type insurance, insurance company name is provided
       type: object
@@ -3507,9 +3156,7 @@ components:
           type: string
           example: Credit Suisse
           description: Name of the asset provider
-    # ---------
 
-    # ---- AmountRange ----
     AmountRange:
       description: Min and max amount with currency
       type: object
@@ -3523,16 +3170,14 @@ components:
         minContent:
           description: min amount given with fractional digits, the separator is a dot
           type: string
-          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
           example: 1000000
         maxContent:
           description: max amount given with fractional digits, the separator is a dot
           type: string
-          pattern: '-?\d{1,14}(?:\.\d{1,3})?'
+          pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
           example: 5000000
-    # ---------
 
-    # ---- Interest ----
     Interest:
       description: The current rate and optionally the referred base
       type: object
@@ -3553,31 +3198,113 @@ components:
           minimum: 0
           maximum: 1
           example: 0.5
-    # ---------
 
   # ---- Global Common Header Parameters ----
   parameters:
+    path_caseId:
+      name: caseId
+      in: path
+      description: Uuid v4 of a specific existing mortgage case
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
+
+    path_mortgageId:
+      name: mortgageId
+      in: path
+      description: Uuid v4 of a specific existing mortgage
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
+
+    path_productId:
+      name: productId
+      in: path
+      description: A product's uuid v4
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: a86dd383-055e-471a-a098-682ae5ef8348
+
+    path_applicationId:
+      name: applicationId
+      in: path
+      description: Uuid v4 of the application request
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 4bf92636-14a0-4511-98e2-acfde576e644
+
+    path_documentId:
+      name: documentId
+      in: path
+      description: Unique ID (uuid v4) of the document
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 7f648f12-c15f-4930-8380-238da5671c37
+
+    path_financingRequestId:
+      name: financingRequestId
+      in: path
+      description: Uuid v4 of the financing request
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
+
+    path_offerId:
+      name: offerId
+      in: path
+      description: Uuid v4 of the offer
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: c2fee261-053c-4088-8986-11216f0c9be6
+
+    path_orderId:
+      name: orderId
+      in: path
+      description: Uuid v4 of an order
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 91d029b3-ee7a-44c3-ac18-cf621cb128a8
+
     clientid_in_header:
-      in: header
       name: X-CorAPI-Client-ID
+      in: header
       schema:
         type: string
       description: 'ID of the client forwarded to the provider. (SCOPE: FI)'
       required: true
+
     correlation_in_header:
-      in: header
       name: X-Correlation-ID
+      in: header
       schema:
         type: string
       description: Unique ID (defined by the caller) which will be reflected back in the response.
       required: true
+
     agent_in_header:
-      in: header
       name: User-Agent
+      in: header
       schema:
         type: string
       description: Name and version of the of the Client software
       required: true
+
     offset:
       name: offset
       in: query
@@ -3588,6 +3315,7 @@ components:
         format: int32
         example: 25
         minimum: 0
+
     limit:
       name: limit
       in: query
@@ -3598,6 +3326,7 @@ components:
         format: int32
         example: 25
         minimum: 1
+
     cursor:
       name: cursor
       in: query
@@ -3606,6 +3335,54 @@ components:
       schema:
         type: string
         example: cursorIDxyz
+
+    duration:
+      name: duration
+      in: query
+      description: The type of duration (for filtering)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 20
+        example: 10
+
+    language:
+      name: language
+      in: query
+      description: Language of Document content
+      required: true
+      schema:
+        type: string
+        enum:
+          - de
+          - fr
+          - it
+          - en
+        example: fr
+
+  # --- Response Headers - used by Standard Responses ---
+  headers:
+    Content-Language:
+      description: Response language - always en
+      schema:
+        type: string
+
+    Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807
+      schema:
+        type: string
+
+    Location:
+      description: Location (submissionId) of the submitted message. Add /status for the status report.
+      schema:
+        type: string
+
+    X-Correlation-ID:
+      description: Client defined ID from request to correlates HTTP requests between a client and server
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+
   # ---- Responses - Standard----
   responses:
     standard201:
@@ -3624,178 +3401,114 @@ components:
           schema:
             type: string
           description: Reflects the ID (set by the caller) from the request.
+
     standard400:
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
+          $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/X-Correlation-ID'
       description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
+
     standard401:
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
+          $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/X-Correlation-ID'
       description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
+
     standard403:
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
+          $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/X-Correlation-ID'
       description: Forbidden - The server understood the request but refuses to authorize it.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
+
     standard404:
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
+          $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/X-Correlation-ID'
       description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
+
     standard405:
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
+          $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/X-Correlation-ID'
       description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
+
     standard500:
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
+          $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/X-Correlation-ID'
       description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
+
     standard501:
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
+          $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/X-Correlation-ID'
       description: Not Implemented - The server does not support the functionality required to fulfill the request.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/commonErrorResponse'
+
     standard503:
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
+          $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-      description: Service Unavailable. The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+          $ref: '#/components/headers/X-Correlation-ID'
+      description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
       content:
         application/problem+json:
           schema:
