@@ -1644,13 +1644,8 @@ components:
       properties:
         propertyObjectId:
           type: string
-          format: uuid
-          description: The property object identifier (UUID v4) defined by TPP.
+          description: The property object identifier defined by TPP.
           example: 9343dd26-4b54-4808-8978-538f8e869d0e
-        externalId:
-          description: A vendor-specific identifier of the property
-          type: string
-          example: 7788996655-44
         name:
           type: string
           description: User-defined property name
