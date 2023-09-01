@@ -1647,6 +1647,10 @@ components:
           format: uuid
           description: The property object identifier (UUID v4) defined by TPP.
           example: 9343dd26-4b54-4808-8978-538f8e869d0e
+        externalId:
+          description: A vendor-specific identifier of the property
+          type: string
+          example: 7788996655-44
         name:
           type: string
           description: User-defined property name
@@ -2139,6 +2143,11 @@ components:
           description: Date of public notarization
         remarks:
           type: string
+        propertyLinks:
+          description: A list of links to external resources related to the property
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
 
     PropertyIdentifier:
       description: Property identification (register of real estate)
@@ -2497,6 +2506,43 @@ components:
               example: '+41443343456'
             address:
               $ref: '#/components/schemas/structuredAddress'
+        seller:
+          description: Information about the person or agency selling the property, in case it is applicable and known
+          type: object
+          required:
+            - name
+          properties:
+            sellerType:
+              description: Specifies if the seller is a private person, a company or an agency
+              type: string
+              enum:
+                - PRIVATE
+                - COMPANY
+                - AGENCY
+              example: AGENCY
+            name:
+              description: The name of the seller
+              type: string
+              maxLength: 140
+              example: "Real Estate Agency GmbH"
+            contactPerson:
+              description: The person to contact in case the seller is an agency or a company
+              type: string
+              maxLength: 140
+              example: Max Muster
+            phone:
+              description: The number on which the seller can be reached
+              type: string
+              minLength: 4
+              maxLength: 13
+              example: +41443343456
+            email:
+              description: The email address on which the seller can be contacted
+              type: string
+              format: email
+              minLength: 5
+              example: max.muster@example.com
+
 
     MortgageCase:
       description: A complete mortgage case including the application details
@@ -3198,6 +3244,27 @@ components:
           minimum: 0
           maximum: 1
           example: 0.5
+
+    Link:
+      description: Object containing a link to an external resource and its description
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          description: The URL pointing to the resource
+          type: string
+          format: uri
+          minLength: 2
+          example: http://www.example.com/property.png
+        name:
+          description: The name of the resource
+          type: string
+          example: Property image
+        description:
+          description: A description of the resource
+          type: string
+          example: The image shows the aerial view of the property
 
   # ---- Global Common Header Parameters ----
   parameters:
