@@ -2516,20 +2516,29 @@ components:
               description: Specifies if the seller is a private person, a company or an agency
               type: string
               enum:
-                - PRIVATE
-                - COMPANY
-                - AGENCY
-              example: AGENCY
+                - private
+                - company
+                - agency
+              example: agency
             name:
               description: The name of the seller
               type: string
               maxLength: 140
-              example: "Real Estate Agency GmbH"
+              example: "Real Estate Agency AG"
             contactPerson:
               description: The person to contact in case the seller is an agency or a company
               type: string
               maxLength: 140
               example: Max Muster
+            language:
+              description: Preferred contact language of the seller
+              type: string
+              example: fr
+              enum:
+                - de
+                - fr
+                - it
+                - en
             phone:
               description: The number on which the seller can be reached
               type: string
@@ -2541,7 +2550,9 @@ components:
               type: string
               format: email
               minLength: 5
-              example: max.muster@example.com
+              example: max.muster@domain.ch
+            address:
+              $ref: '#/components/schemas/structuredAddress'
 
 
     MortgageCase:
@@ -3266,7 +3277,17 @@ components:
           type: string
           example: The image shows the aerial view of the property
 
-  # ---- Global Common Header Parameters ----
+    Language:
+      description: Communication language
+      type: string
+      enum:
+        - de
+        - fr
+        - it
+        - en
+      example: fr
+
+      # ---- Global Common Header Parameters ----
   parameters:
     path_caseId:
       name: caseId
@@ -3412,20 +3433,6 @@ components:
         minimum: 1
         maximum: 20
         example: 10
-
-    language:
-      name: language
-      in: query
-      description: Language of Document content
-      required: true
-      schema:
-        type: string
-        enum:
-          - de
-          - fr
-          - it
-          - en
-        example: fr
 
   # --- Response Headers - used by Standard Responses ---
   headers:
