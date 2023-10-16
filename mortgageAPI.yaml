@@ -2139,6 +2139,11 @@ components:
           description: Date of public notarization
         remarks:
           type: string
+        propertyLinks:
+          description: A list of links to external resources related to the property
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
 
     PropertyIdentifier:
       description: Property identification (register of real estate)
@@ -3246,6 +3251,27 @@ components:
           minimum: 0
           maximum: 1
           example: 0.5
+
+    Link:
+      description: Object containing a link to an external resource and its description
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          description: The URL pointing to the resource
+          type: string
+          format: uri
+          minLength: 2
+          example: http://www.example.com/property.png
+        name:
+          description: The name of the resource
+          type: string
+          example: Property image
+        description:
+          description: A description of the resource
+          type: string
+          example: The image shows the aerial view of the property
 
   # ---- Global Common Header Parameters ----
   parameters:
