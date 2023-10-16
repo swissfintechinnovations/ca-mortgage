@@ -2138,6 +2138,11 @@ components:
           description: Date of public notarization
         remarks:
           type: string
+        propertyLinks:
+          description: A list of links to external resources related to the property
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
 
     PropertyIdentifier:
       description: Property identification (register of real estate)
@@ -2496,6 +2501,54 @@ components:
               example: '+41443343456'
             address:
               $ref: '#/components/schemas/structuredAddress'
+
+    Advertiser:
+      description: Information about the person or agency selling the property, in case it is applicable and known
+      type: object
+      required:
+        - name
+      properties:
+        advertiserType:
+          description: Specifies if the advertiser is a private person, a company or an agency
+          type: string
+          enum:
+            - private
+            - company
+            - agency
+          example: agency
+        name:
+          description: The name of the advertiser
+          type: string
+          maxLength: 140
+          example: Real Estate Agency AG
+        contactPerson:
+          description: The person to contact in case the advertiser is an agency or a company
+          type: string
+          maxLength: 140
+          example: Max Muster
+        language:
+          description: Preferred contact language of the advertiser
+          type: string
+          example: fr
+          enum:
+            - de
+            - fr
+            - it
+            - en
+        phone:
+          description: The number on which the advertiser can be reached
+          type: string
+          minLength: 4
+          maxLength: 13
+          example: +41443343456
+        email:
+          description: The email address on which the advertiser can be contacted
+          type: string
+          format: email
+          minLength: 5
+          example: max.muster@domain.ch
+        address:
+          $ref: '#/components/schemas/structuredAddress'
 
     MortgageCase:
       description: A complete mortgage case including the application details
@@ -3197,6 +3250,27 @@ components:
           minimum: 0
           maximum: 1
           example: 0.5
+
+    Link:
+      description: Object containing a link to an external resource and its description
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          description: The URL pointing to the resource
+          type: string
+          format: uri
+          minLength: 2
+          example: http://www.example.com/property.png
+        name:
+          description: The name of the resource
+          type: string
+          example: Property image
+        description:
+          description: A description of the resource
+          type: string
+          example: The image shows the aerial view of the property
 
   # ---- Global Common Header Parameters ----
   parameters:
