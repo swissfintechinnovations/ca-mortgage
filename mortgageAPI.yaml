@@ -1540,7 +1540,7 @@ components:
           description: amount given with fractional digits, the separator is a dot
           type: string
           pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
-          example: 235.45
+          example: `235.45`
 
     # ---- Address compliant to payment address (b.Link & ISO20022)----
     structuredAddress:
@@ -1559,11 +1559,11 @@ components:
         buildingNumber:
           type: string
           maxLength: 16
-          example: 24
+          example: 24A
         postCode:
           type: string
           maxLength: 16
-          example: 2501
+          example: CH-2501
         townName:
           type: string
           maxLength: 35
@@ -1734,9 +1734,9 @@ components:
             luxusFlag:
               type: string
               enum:
-                - 0
-                - 0.5
-                - 1.0
+                - `0
+                - `0.5
+                - `1.0
               description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes. Proposed Mapping of WuP-Values: 1.0-4.0 => 0 (No) / 4.1-4.5 => 0.5 (Partially) / 4.6-5.0 = >1.0 (Yes).'
               example: 0
             constructionQualityType:
@@ -2138,6 +2138,7 @@ components:
           description: Date of public notarization
         remarks:
           type: string
+          example: We need an example for such a remark
         propertyLinks:
           description: A list of links to external resources related to the property
           type: array
@@ -2150,8 +2151,10 @@ components:
       properties:
         EGRID:
           type: string
+          example: CH480928387782
         EGID:
           type: string
+          example: `191092250`
 
     Mortgage:
       description: All relevant information regarding a specific mortgage
@@ -2852,6 +2855,7 @@ components:
                     $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
+                    example: We need an example for such a remark
                   incomeProvider:
                     description: Income provider for each income or cost position can be transferred.
                     type: string
@@ -2877,6 +2881,7 @@ components:
                     $ref: '#/components/schemas/Amount'
                   remark:
                     type: string
+                    example: We need an example for such a remark
                   liabilityProvider:
                     description: Name of the liability provider or creditor.
                     type: string
@@ -2912,7 +2917,7 @@ components:
                     enum:
                       - single_family_house
                       - condominium
-                      - vacation_house,
+                      - vacation_house
                       - vacation_condominium
                       - agricultural_farm
                       - 2or3_family_house
