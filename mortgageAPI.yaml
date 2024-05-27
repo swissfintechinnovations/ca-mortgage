@@ -476,6 +476,7 @@ paths:
                 properties:
                   status:
                     type: string
+                    exmaple: we need an example
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -517,6 +518,7 @@ paths:
                   reason:
                     description: The reason for rejecting an application.
                     type: string
+                    exmaple: We need an exmaple
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -638,6 +640,7 @@ paths:
                 properties:
                   status:
                     type: string
+                    example: we need an exmaple
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -774,6 +777,7 @@ paths:
                       properties:
                         status:
                           type: string
+                          example: pending
                           enum:
                             - accepted
                             - rejected
@@ -828,6 +832,7 @@ paths:
                 properties:
                   status:
                     type: string
+                    example: we need an example
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -959,6 +964,7 @@ paths:
                   financingRequestId:
                     type: string
                     format: uuid
+                    example: 550e8400-e29b-41d4-a716-446655440000
                   documents:
                     type: array
                     items:
@@ -1181,6 +1187,7 @@ paths:
                   offerId:
                     type: string
                     format: uuid
+                    example: 550e8400-e29b-41d4-a716-446655440000
                   documents:
                     type: array
                     items:
@@ -2253,6 +2260,7 @@ components:
             $ref: '#/components/schemas/OfferItem'
         offerType:
           type: string
+          exmaple: binding
           enum:
             - binding
             - indicative
@@ -2547,7 +2555,7 @@ components:
           type: string
           minLength: 4
           maxLength: 13
-          example: +41443343456
+          example: '+41443343456'
         email:
           description: The email address on which the advertiser can be contacted
           type: string
@@ -2719,6 +2727,7 @@ components:
           $ref: '#/components/schemas/Date'
         requestOfferType:
           type: string
+          example: binding  
           enum:
             - binding
             - indicative
