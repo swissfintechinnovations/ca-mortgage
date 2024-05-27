@@ -476,7 +476,7 @@ paths:
                 properties:
                   status:
                     type: string
-                    exmaple: we need an example
+                    example: we need an example
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -518,7 +518,7 @@ paths:
                   reason:
                     description: The reason for rejecting an application.
                     type: string
-                    exmaple: We need an exmaple
+                    example: We need an example
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -2260,7 +2260,7 @@ components:
             $ref: '#/components/schemas/OfferItem'
         offerType:
           type: string
-          exmaple: binding
+          example: binding
           enum:
             - binding
             - indicative
