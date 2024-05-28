@@ -3420,7 +3420,6 @@ components:
         example: 25
         minimum: 1
 
-#
     cursor:
       name: cursor
       in: query
@@ -3428,8 +3427,7 @@ components:
       required: false
       schema:
         type: string
-        example: cursorIDxyz
-#        
+        example: cursorIDxyz      
 
     duration:
       name: duration
