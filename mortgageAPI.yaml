@@ -1591,7 +1591,7 @@ components:
     commonResourceCreatedResponse:
       title: Recource created response
       description: Uuid v4 of the created resource
-      example: 20460121-6aff-485b-a61d-6056ecd72bd8
+      example: id: 20460121-6aff-485b-a61d-6056ecd72bd8
       type: object
       required:
         - id
@@ -3420,6 +3420,7 @@ components:
         example: 25
         minimum: 1
 
+#
     cursor:
       name: cursor
       in: query
@@ -3428,6 +3429,7 @@ components:
       schema:
         type: string
         example: cursorIDxyz
+#        
 
     duration:
       name: duration
