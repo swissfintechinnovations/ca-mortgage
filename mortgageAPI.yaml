@@ -1591,7 +1591,7 @@ components:
     commonResourceCreatedResponse:
       title: Recource created response
       description: Uuid v4 of the created resource
-      example: id: 20460121-6aff-485b-a61d-6056ecd72bd8
+      example: 20460121-6aff-485b-a61d-6056ecd72bd8
       type: object
       required:
         - id
