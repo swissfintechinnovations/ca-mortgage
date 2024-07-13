@@ -334,7 +334,9 @@ paths:
       summary: Place a new mortgage application (serves as dossier)
       description: |
         Place a new application including all necessary information about the property and applicant's financial situation.
-        **Note that in the case where the FI needs additional information on the property, the error response 400 must contain the minimum required JSON object (PropertyObject) as detail**.
+
+        **Note that in the case where the FI needs additional information on the property, the error response 400 must contain
+        the minimum required JSON object (PropertyObject) as detail**.
       tags:
         - Mortgage Application
       parameters:
@@ -448,7 +450,9 @@ paths:
 
     put:
       summary: Update the application's details
-      description: Update the application's details. Note that changing the application's details should not be possible after the application has been accepted by the FI.
+      description: >
+        Update the application's details. Note that changing the application's details should not be possible after the application
+        has been accepted by the FI.
       tags:
         - Mortgage Application
       parameters:
@@ -537,7 +541,8 @@ paths:
   /mortgages/applications/{applicationId}/swissrets:
     post:
       summary: Add property details in the SwissRETS standard
-      description: This endpoint allows to upload the real estate property's details as an XML file in the SwissRETS format according to https://swissrets.ch/.
+      description: >
+        This endpoint allows to upload the real estate property's details as an XML file in the SwissRETS format according to https://swissrets.ch/.
       tags:
         - Mortgage Application
       parameters:
@@ -1636,7 +1641,9 @@ components:
     # ---- End Common Data Model
 
     PropertyObject:
-      description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law
+      description: >
+        The representation of a real estate object, real estate register id (propertyIdentifier) is optional
+        until otherwise required by law.
       type: object
       required:
         - propertyObjectId
@@ -1696,7 +1703,9 @@ components:
                       - interior_fittings
                       - building_envelope
                       - building_services
-                    description: Type of Property Component which has been renovated. Please use consistently either the detailed Component Types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings)
+                    description: >
+                      Type of Property Component which has been renovated. Please use consistently either the detailed Component types
+                      (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings).
                     example: interior_fittings_floor_cover
                   yearOfRenovation:
                     type: integer
@@ -1737,7 +1746,16 @@ components:
                 - 0
                 - 0.5
                 - 1.0
-              description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes. Proposed Mapping of WuP-Values: 1.0-4.0 => 0 (No) / 4.1-4.5 => 0.5 (Partially) / 4.6-5.0 = >1.0 (Yes).'
+              description: |
+                Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not:
+                - 0 = No
+                - 0.5 = Partially
+                - 1 = Yes
+                
+                Proposed Mapping of WuP-Values:
+                - 1.0-4.0 => 0 (No)
+                - 4.1-4.5 => 0.5 (Partially)
+                - 4.6-5.0 => 1.0 (Yes)
               example: 0
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
@@ -2108,7 +2126,9 @@ components:
           properties:
             estimationId:
               type: string
-              description: ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.
+              description: >
+                ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external
+                estimation tool.
               example: asd23f
             estimationSourceType:
               type: string
@@ -2184,7 +2204,9 @@ components:
           $ref: '#/components/schemas/Date'
         offerDate:
           $ref: '#/components/schemas/Date'
-          description: The date when the offer is made by the FI. Optional field for use cases where no MortageOffer object is used and therefore the offer date needs to be directly in Mortgage object.
+          description: >
+            The date when the offer is made by the FI. Optional field for use cases where no MortageOffer object is used and
+            therefore the offer date needs to be directly in Mortgage object.
           example: 2018-04-05
         validTo:
           $ref: '#/components/schemas/Date'
@@ -2397,7 +2419,9 @@ components:
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
         fiPrimaryApplicantId:
           type: string
-          description: ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple applicants and if known at the moment of the application.
+          description: >
+            ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple
+            applicants and if known at the moment of the application.
           example: asd23f
         personList:
           type: array
@@ -2730,7 +2754,9 @@ components:
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
         fiApplicantId:
           type: string
-          description: ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
+          description: >
+            ApplicantId of the applicant party defined by the financial institute,
+            only applicable if known at the moment of the application.
           example: asd23f
         applicantType:
           type: string
@@ -2980,7 +3006,8 @@ components:
         - withdraw
 
     Asset:
-      description: 'Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.'
+      description: >
+        Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.
       type: object
       required:
         - assetType
@@ -2990,7 +3017,9 @@ components:
           $ref: '#/components/schemas/AssetType'
         amount:
           $ref: '#/components/schemas/Amount'
-          description: The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance
+          description: >
+            The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund,
+            surrender value in life insurance
         insuranceSum:
           $ref: '#/components/schemas/Amount'
           description: The amount of the sum insured in life insurance
@@ -3000,7 +3029,9 @@ components:
           $ref: '#/components/schemas/AssetProvider'
 
     UsedAsset:
-      description: 'Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also be recorded in the array of assets in the financial situation of one applicant.'
+      description: >
+        Asset used by an applicant: Array of all assets which will be used for the financial request. At least,
+        all of these used assets must also be recorded in the array of assets in the financial situation of one applicant.
       type: object
       required:
         - assetType
@@ -3199,7 +3230,9 @@ components:
           example: IE12BOFI90000112345678
 
     AssetProvider:
-      description: Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type insurance, insurance company name is provided
+      description: >
+        Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type
+        insurance, insurance company name is provided
       type: object
       required:
         - name
@@ -3239,7 +3272,9 @@ components:
         currentRate:
           type: number
           format: double
-          description: Interest reate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.Base
+          description: >
+            Interest reate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show
+            the margin above interest.
           minimum: 0
           maximum: 1
           example: 0.5
@@ -3468,7 +3503,9 @@ components:
           schema:
             type: string
             format: uri
-            description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
+            description: >
+              In the location header of the response you will find the URI of the newly created resource.
+              With a GET call to this address you can retrieve a representation of the new product.
         X-Correlation-ID:
           schema:
             type: string
@@ -3482,7 +3519,9 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
+      description: >
+        Bad Request - The server cannot or will not process the request due to something that is perceived to be
+        a client error as malformed request syntax.
       content:
         application/problem+json:
           schema:
@@ -3524,7 +3563,9 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+      description: >
+        Not Found - The origin server did not find a current representation for the target resource or
+        is not willing to disclose that one exists.
       content:
         application/problem+json:
           schema:
@@ -3538,7 +3579,9 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+      description: >
+        Method Not Allowed - The method received in the request-line is known by the origin server
+        but not supported by the target resource.
       content:
         application/problem+json:
           schema:
