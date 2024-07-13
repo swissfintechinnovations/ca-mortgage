@@ -1751,7 +1751,7 @@ components:
                 - 0 = No
                 - 0.5 = Partially
                 - 1 = Yes
-                
+
                 Proposed Mapping of WuP-Values:
                 - 1.0-4.0 => 0 (No)
                 - 4.1-4.5 => 0.5 (Partially)
@@ -1786,7 +1786,8 @@ components:
           enum:
             - self
             - let
-          description: 'The type of usage of the financing property: self, let'
+          description: >
+            The type of usage of the financing property: self, let
           example: self
         propertyType:
           type: string
@@ -1902,7 +1903,8 @@ components:
               example: kitchen_full_room
             numberOfFamilyBathrooms:
               type: integer
-              description: 'Separate shower and bathtub in the bathroom (optional: toilet)'
+              description: >
+                Separate shower and bathtub in the bathroom (optional: toilet)
               example: 2
             numberOfBathWC:
               type: integer
@@ -2467,7 +2469,8 @@ components:
           example: advisor
         replacementType:
           type: string
-          description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
+          description: >
+            NOT required when mortgage type is BUY, Values: entire, partial.
           example: entire
           enum:
             - entire
@@ -3394,7 +3397,8 @@ components:
       in: header
       schema:
         type: string
-      description: 'ID of the client forwarded to the provider. (SCOPE: FI)'
+      description: >
+        ID of the client forwarded to the provider. (SCOPE: FI)
       required: true
 
     correlation_in_header:
