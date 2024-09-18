@@ -2411,7 +2411,7 @@ components:
           example: ef737eb0-c0a7-4f44-bdeb-32ba9bd99327
         productIdRef:
           type: string
-          decsription: Reference to prodcut ID.
+          description: Reference to prodcut ID.
           format: uuid
           example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
         duration:
@@ -2499,7 +2499,7 @@ components:
             - entire
             - partial
         replacedTranches:
-          descriptop: Tranche to be replaced.
+          descripton: Tranche to be replaced.
           type: array
           items:
             type: object
