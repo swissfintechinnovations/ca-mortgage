@@ -3401,7 +3401,7 @@ components:
       required: true
       schema:
         type: string
-      description: ID of the client forwarded to the provider. (SCOPE: FI).
+      description: ID of the client forwarded to the provider.
       
     correlation_in_header:
       in: header
