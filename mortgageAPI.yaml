@@ -2501,6 +2501,7 @@ components:
                 description: The institute who has issued the replaced tranche.
                 example: Credit Suisse
         tppAdvisorDetail:
+          description: personal information if the advisor of the tpp. 
           type: object
           properties:
             name:
@@ -2562,7 +2563,7 @@ components:
           maxLength: 140
           example: Max Muster
         language:
-          description: Preferred contact language of the advertiser
+          description: Preferred contact language of the advertiser.
           type: string
           example: fr
           enum:
@@ -2634,11 +2635,13 @@ components:
         amortizations:
           $ref: '#/components/schemas/Amortizations'
         tranches:
+          description: mortgage tranches.
           type: array
           items:
             $ref: '#/components/schemas/FinancingTranche'
         usedAssets:
           type: array
+          description: used assets.
           items:
             $ref: '#/components/schemas/UsedAsset'
         offerDate:
@@ -2668,6 +2671,7 @@ components:
           $ref: '#/components/schemas/Date'
         duration:
           type: integer
+          description: duratin of the mortgage in years.
           example: 2
           minimum: 1
           maximum: 20
@@ -2675,6 +2679,7 @@ components:
           $ref: '#/components/schemas/Interest'
         interestRateType:
           type: string
+          description: type of intererest rate.
           example: libor
           enum:
             - variable
@@ -2719,6 +2724,7 @@ components:
           description: The purpose of the increase.
           example: renovation of the kitchen
         tranches:
+          description: a mortgage amount is distributed in one or more tranches.
           type: array
           items:
             type: object
@@ -2740,12 +2746,14 @@ components:
               amount:
                 $ref: '#/components/schemas/Amount'
         usedAssets:
+          description: Assets being used for the financing request.
           type: array
           items:
             $ref: '#/components/schemas/UsedAsset'
         publicCertDate:
           $ref: '#/components/schemas/Date'
         requestOfferType:
+          description: Ding dong die Hex ist tot.
           type: string
           example: binding  
           enum:
@@ -2763,19 +2771,21 @@ components:
         applicantId:
           type: string
           format: uuid
-          description: UUID v4 of the applicant (to be defined by TPP)
+          description: UUID v4 of the applicant (to be defined by TPP).
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
         fiApplicantId:
           type: string
           description: ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
           example: asd23f
         applicantType:
+          description: type of applicant.
           type: string
           example: individual
           enum:
             - individual
             - legal_entity
         applicantDetail:
+          description: personal information regarding the applicant.
           type: object
           properties:
             name:
@@ -3204,7 +3214,7 @@ components:
           example: JVBERi0xLjQKJeLjz9MKMzEgMCBvYmoKPDwvQnl0ZVJhbmdl
         contentType:
           type: string
-          description: Content type
+          description: Content type.
           example: application/octet-stream
         createDate:
           $ref: '#/components/schemas/Date'
@@ -3270,7 +3280,7 @@ components:
           pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
           example: '1000000'
         maxContent:
-          description: max amount given with fractional digits, the separator is a dot
+          description: max amount given with fractional digits, the separator is a dot.
           type: string
           pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
           example: '5000000'
