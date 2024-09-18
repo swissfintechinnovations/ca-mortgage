@@ -3484,8 +3484,8 @@ components:
       schema:
         type: string
       description: Name and version of the of the Client software.
-        
- securitySchemes:
+
+  securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
