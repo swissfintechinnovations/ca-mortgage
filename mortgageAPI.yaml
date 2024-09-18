@@ -3019,7 +3019,7 @@ components:
         - withdraw
 
     Asset:
-      description: Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.
+      description: 'Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.'
       type: object
       required:
         - assetType
