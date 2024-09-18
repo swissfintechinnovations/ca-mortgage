@@ -1553,9 +1553,9 @@ components:
 
     # ---- Address compliant to payment address (b.Link & ISO20022)----
     StructuredAddress:
+      description: structured address.
       title: Structured Address
       type: object
-      descripton: structured address.
       required:
         - streetName
         - postCode
@@ -1598,7 +1598,7 @@ components:
     # ---- Response
     CommonResourceCreatedResponse:
       title: Recource created response
-      description: Uuid v4 of the created resource
+      description: Uuid v4 of the created resource.
       example: 20460121-6aff-485b-a61d-6056ecd72bd8
       type: object
       required:
@@ -1606,11 +1606,12 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/CommonID'
-          description: Uuid v4 of the created resource
+          description: Uuid v4 of the created resource.
           example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
 
     CommonErrorResponse:
       title: Common Error Response
+      description: ...
       type: object
       properties:
         type:
@@ -1620,6 +1621,7 @@ components:
           example: This is the general problem description
           description: ..
         detail:
+          description: ..
           type: array
           items:
             type: string
@@ -1779,7 +1781,7 @@ components:
             - efficient
             - average
             - inefficient
-          description: The efficiency of the floor plan
+          description: The efficiency of the floor plan.
           example: average
         usageType:
           type: string
@@ -1854,6 +1856,7 @@ components:
           description: Type of the heat emission.
           example: floor
         heatProduction:
+          description: the way heat is generated within the building. 
           type: array
           items:
             type: string
@@ -2158,6 +2161,7 @@ components:
           description: Date of public notarization
         remarks:
           type: string
+          descriptin: remark regarding the erstimation. 
           example: We need an example for such a remark
         propertyLinks:
           description: A list of links to external resources related to the property.
@@ -2172,7 +2176,7 @@ components:
         EGRID:
           type: string
           example: CH480928387782
-          description: identifier of land a property is build on 
+          description: identifier of land a property is built on. 
         EGID:
           type: string
           example: '191092250'
@@ -2252,7 +2256,7 @@ components:
            $ref: '#/components/schemas/Mortgage'
 
     Offer:
-      description: All relevant details describing the FI's offer for a mortgage product
+      description: All relevant details describing the FI's offer for a mortgage product.
       type: object
       required:
         - offerId
@@ -2265,12 +2269,12 @@ components:
           type: string
           format: uuid
           example: 46eb482d-1e18-4b93-ae88-da14ad4ac051
-          description: Uuid v4 of the specific order
+          description: Uuid v4 of the specific order.
         financingRequestId:
           type: string
           format: uuid
           example: fd3f2940-c9c9-46e7-8ed6-ab9e90363b2e
-          description: Uuid v4 of a specific financing request
+          description: Uuid v4 of a specific financing request.
         totalAmount:
           $ref: '#/components/schemas/Amount'
         validTo:
@@ -2287,7 +2291,7 @@ components:
             - indicative
 
     OfferItem:
-      description: All relevant details of a specific item being part of an FI's offer for a mortgage product
+      description: All relevant details of a specific item being part of an FI's offer for a mortgage product.
       type: object
       required:
         - offerItemId
