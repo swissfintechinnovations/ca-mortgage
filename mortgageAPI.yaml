@@ -1746,9 +1746,9 @@ components:
             luxusFlag:
               type: string
               enum:
-                - 0
-                - 0.5
-                - 1.0
+                - '0'
+                - '0.5'
+                - '1.0'
               description: |
                 Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not:
                 - 0 = No
