@@ -140,8 +140,8 @@ paths:
           name: expiring
           schema:
             type: boolean
-          example: true
           description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering).
+          example: true
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/clientid_in_header'
@@ -163,7 +163,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Mortgage'
                   _links:
-                    $ref: '#/components/schemas/linksPagination'
+                    $ref: '#/components/schemas/LinksPagination'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -230,7 +230,7 @@ paths:
         - Mortgage Products and Conditions
       parameters:
         - in: query
-          name: interestRateType
+          name: InterestRateType
           schema:
             type: string
             example: saron
@@ -262,7 +262,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Product'
                   _links:
-                    $ref: '#/components/schemas/linksPagination'
+                    $ref: '#/components/schemas/LinksPagination'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1494,7 +1494,7 @@ components:
       type: string
       format: date
       example: 2018-04-13
-      descriptio: Date format.
+      description: Date format.
 
     DateTime:
       type: string
@@ -1609,12 +1609,12 @@ components:
           description: Uuid v4 of the created resource
           example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
 
-    commonErrorResponse:
+    CommonErrorResponse:
       title: Common Error Response
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/commonErrorType'
+          $ref: '#/components/schemas/CommonErrorType'
         title:
           type: string
           example: This is the general problem description
@@ -1669,7 +1669,7 @@ components:
           description: User-defined property name.
           example: My Nice Property
         address:
-          $ref: '#/components/schemas/structuredAddress'
+          $ref: '#/components/schemas/StructuredAddress'
         propertyIdentifier:
           $ref: '#/components/schemas/PropertyIdentifier'
         propertyConstructionInformation:
@@ -1872,8 +1872,8 @@ components:
               - solar_thermal_collector
               - block_type_thermal_power_station
               - block_type_thermal_power_station_bio
-          description: Type of the heat production.
-          example: gas
+            description: Type of the heat production.
+            example: gas
         outsideConstructionZone:
           type: boolean
           description: If the property is outside of the construction zone.
@@ -2092,7 +2092,7 @@ components:
           example: false
         buildingRight:
           type: object
-          descrption: if a property is in building right, the buyer owner buy the property, not the ground the property is built on.
+          description: if a property is in building right, the buyer owner buy the property, not the ground the property is built on.
           properties:
             hasBuildingRight:
               type: boolean
@@ -2536,7 +2536,7 @@ components:
               description: phone of the TPP advisor
               example: '+41443343456'
             address:
-              $ref: '#/components/schemas/structuredAddress'
+              $ref: '#/components/schemas/StructuredAddress'
 
     Advertiser:
       description: Information about the person or agency selling the property, in case it is applicable and known
@@ -2790,7 +2790,7 @@ components:
               description: Surname of the applicant
               example: Muster
             address:
-              $ref: '#/components/schemas/structuredAddress'
+              $ref: '#/components/schemas/StructuredAddress'
             birthDate:
               $ref: '#/components/schemas/Date'
             maritalStatus:
@@ -3401,7 +3401,7 @@ components:
       required: true
       schema:
         type: string
-      description: 'ID of the client forwarded to the provider. (SCOPE: FI)'
+      description: ID of the client forwarded to the provider. (SCOPE: FI).
       
     correlation_in_header:
       in: header
@@ -3504,7 +3504,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/commonResourceCreatedResponse'
+            $ref: '#/components/schemas/CommonResourceCreatedResponse'
       headers:
         location:
           schema:
