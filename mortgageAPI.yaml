@@ -19,21 +19,21 @@ externalDocs:
   url: https://www.common-api.ch
 tags:
   - name: Full Mortgage Cases
-    description: Operatios related to full mortgage cases including the application details
+    description: Operatios related to full mortgage cases including the application details.
   - name: Existing Mortgages
-    description: Operations related with existing mortgages
+    description: Operations related with existing mortgages.
   - name: Mortgage Products and Conditions
-    description: Operations for synchronizing general mortgage product information from an FI
+    description: Operations for synchronizing general mortgage product information from an FI.
   - name: Mortgage Application
-    description: Operations needed to place an application (dossier) for a new mortgage
+    description: Operations needed to place an application (dossier) for a new mortgage.
   - name: Mortgage Financing Request
-    description: Operations for handling financing requests for a specific accepted application (dossier)
+    description: Operations for handling financing requests for a specific accepted application (dossier).
   - name: Mortgage Offers
-    description: Operations for handling the binding offers an FI provides
+    description: Operations for handling the binding offers an FI provides.
   - name: Mortgage Order
-    description: Operations for placing a binding order for a chosen offer
+    description: Operations for placing a binding order for a chosen offer.
   - name: Mortgage Prolongation
-    description: Operations for handling the common special case of prolonging an existing mortgage
+    description: Operations for handling the common special case of prolonging an existing mortgage.
 
 security:
   - ApiKeyAuth: []
@@ -3295,39 +3295,39 @@ components:
   # ---- Global Common Header Parameters ----
   parameters:
     path_caseId:
-      name: caseId
       in: path
-      description: Uuid v4 of a specific existing mortgage case
+      name: caseId
       required: true
       schema:
         type: string
         format: uuid
-        example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
+        example: bcb5d762-8d28-43a2-9398-393b2e8d56ba$
+      description: Uuid v4 of a specific existing mortgage case.
 
     path_mortgageId:
-      name: mortgageId
       in: path
-      description: Uuid v4 of a specific existing mortgage
+      name: mortgageId
       required: true
       schema:
         type: string
         format: uuid
         example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
+      description: Uuid v4 of a specific existing mortgage.
 
     path_productId:
-      name: productId
       in: path
-      description: A product's uuid v4
+      name: productId
       required: true
       schema:
         type: string
         format: uuid
         example: a86dd383-055e-471a-a098-682ae5ef8348
+      description: A product's uuid v4.
 
     path_applicationId:
       name: applicationId
       in: path
-      description: Uuid v4 of the application request
+      description: Uuid v4 of the application request.
       required: true
       schema:
         type: string
@@ -3335,114 +3335,113 @@ components:
         example: 4bf92636-14a0-4511-98e2-acfde576e644
 
     path_documentId:
-      name: documentId
       in: path
-      description: Unique ID (uuid v4) of the document
+      name: documentId
       required: true
       schema:
         type: string
         format: uuid
         example: 7f648f12-c15f-4930-8380-238da5671c37
+      description: Unique ID (uuid v4) of the document.
 
     path_financingRequestId:
-      name: financingRequestId
       in: path
-      description: Uuid v4 of the financing request
+      name: financingRequestId
       required: true
       schema:
         type: string
         format: uuid
         example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
+      description: Uuid v4 of the financing request.
 
     path_offerId:
-      name: offerId
       in: path
-      description: Uuid v4 of the offer
+      name: offerId
       required: true
       schema:
         type: string
         format: uuid
         example: c2fee261-053c-4088-8986-11216f0c9be6
+      description: Uuid v4 of the offer.
 
     path_orderId:
-      name: orderId
       in: path
-      description: Uuid v4 of an order
+      name: orderId
       required: true
       schema:
         type: string
         format: uuid
         example: 91d029b3-ee7a-44c3-ac18-cf621cb128a8
+      description: Uuid v4 of an order.
 
     clientid_in_header:
-      name: X-CorAPI-Client-ID
       in: header
+      name: X-CorAPI-Client-ID
+      required: true
       schema:
         type: string
-      description: 'ID of the client forwarded to the provider. (SCOPE: FI)'
-      required: true
-
+      description: 'ID of the client forwarded to the provider. (SCOPE: FI)'.
+      
     correlation_in_header:
-      name: X-Correlation-ID
       in: header
+      name: X-Correlation-ID
+      required: true
       schema:
         type: string
       description: Unique ID (defined by the caller) which will be reflected back in the response.
-      required: true
-
+      
     agent_in_header:
-      name: User-Agent
       in: header
+      name: User-Agent
+      required: true
       schema:
         type: string
-      description: Name and version of the of the Client software
-      required: true
-
+      description: Name and version of the of the Client software.
+      
     offset:
-      name: offset
       in: query
-      description: Optional parameter for pagination. The number of items to skip before starting to collect the result set.
+      name: offset
       required: false
       schema:
         type: integer
         format: int32
         example: 25
         minimum: 0
+      description: Optional parameter for pagination. The number of items to skip before starting to collect the result set.
 
     limit:
-      name: limit
       in: query
-      description: Optional parameter for pagination. Maximum number of entries to be returned.
+      name: limit
       required: false
       schema:
         type: integer
         format: int32
         example: 25
         minimum: 1
-
+      description: Optional parameter for pagination. Maximum number of entries to be returned.
+      
     cursor:
-      name: cursor
       in: query
-      description: Optional parameter for pagination. An opaque string value used for pagination.
+      name: cursor
       required: false
       schema:
         type: string
-        example: cursorIDxyz      
+        example: cursorIDxyz     
+      description: Optional parameter for pagination. An opaque string value used for pagination.
 
     duration:
-      name: duration
       in: query
-      description: The type of duration (for filtering)
+      name: duration
       schema:
         type: integer
         minimum: 1
         maximum: 20
         example: 10
+      description: The type of duration (for filtering).
 
     language:
-      name: language
       in: query
-      description: Language of Document content
+      name: language
       required: true
       schema:
         type: string
@@ -3452,6 +3451,7 @@ components:
           - it
           - en
         example: fr
+      description: Language of Document content.
 
   # --- Response Headers - used by Standard Responses ---
   headers:
