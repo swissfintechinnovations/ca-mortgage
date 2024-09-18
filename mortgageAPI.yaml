@@ -2247,9 +2247,9 @@ components:
             $ref: '#/components/schemas/PropertyObject'
         relatedMortgages:
           type: array
-          description:..
+          description: ..
           items:
-          $ref: '#/components/schemas/Mortgage'
+           $ref: '#/components/schemas/Mortgage'
 
     Offer:
       description: All relevant details describing the FI's offer for a mortgage product
