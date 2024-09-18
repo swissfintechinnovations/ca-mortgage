@@ -2161,7 +2161,7 @@ components:
           description: Date of public notarization
         remarks:
           type: string
-          descriptin: remark regarding the erstimation. 
+          description: remark regarding the erstimation. 
           example: We need an example for such a remark
         propertyLinks:
           description: A list of links to external resources related to the property.
@@ -2280,11 +2280,13 @@ components:
         validTo:
           $ref: '#/components/schemas/Date'
         offerItems:
+          description: ..
           type: array
           items:
             $ref: '#/components/schemas/OfferItem'
         offerType:
           type: string
+          description: type of offer (binding or indicative).
           example: binding
           enum:
             - binding
@@ -2301,22 +2303,23 @@ components:
         trancheId:
           type: string
           format: uuid
-          description: Uuid of the tranche
+          description: Uuid of the tranche.
           example: 51b017e1-5e59-4b58-a0a0-c638c87db463
         offerItemId:
           type: string
           format: uuid
           example: d452083f-8316-410d-a609-d49463687329
-          description: Uuid v4 of the specific offer item
+          description: Uuid v4 of the specific offer item.
         product:
           $ref: '#/components/schemas/Product'
         conditions:
+          description: ..
           type: array
           items:
             $ref: '#/components/schemas/Condition'
 
     ProductVariation:
-      description: Product variation details
+      description: Product variation details.
       type: object
       properties:
         duration:
@@ -2343,7 +2346,7 @@ components:
             - 12m
 
     Product:
-      description: All details regarding an FI's mortgage product
+      description: All details regarding an FI's mortgage product.
       type: object
       required:
         - productId
@@ -2357,6 +2360,7 @@ components:
           example: 20460121-6aff-485b-a61d-6056ecd72bd8
         names:
           type: array
+          description: name of mortgage product.
           items:
             type: object
             properties:
@@ -2375,10 +2379,12 @@ components:
                   - en
         productVariations:
           type: array
+          description: ..
           items:
             $ref: '#/components/schemas/ProductVariation'
         interestRateType:
           type: string
+          description: type of interest rate. 
           example: libor
           enum:
             - variable
@@ -2399,11 +2405,13 @@ components:
         - amortization
       properties:
         conditionId:
+          description: ID of condition. 
           type: string
           format: uuid
           example: ef737eb0-c0a7-4f44-bdeb-32ba9bd99327
         productIdRef:
           type: string
+          decsription: Reference to prodcut ID.
           format: uuid
           example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
         duration:
@@ -2419,6 +2427,7 @@ components:
         amountRange:
           $ref: '#/components/schemas/AmountRange'
         amortization:
+          description: the amount of repayment.
           type: integer
           example: 1000
         amortizations:
@@ -2440,6 +2449,7 @@ components:
           description: ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple applicants and if known at the moment of the application.
           example: asd23f
         personList:
+          description: ..
           type: array
           items:
             $ref: '#/components/schemas/Applicant'
@@ -2489,6 +2499,7 @@ components:
             - entire
             - partial
         replacedTranches:
+          descriptop: Tranche to be replaced.
           type: array
           items:
             type: object
