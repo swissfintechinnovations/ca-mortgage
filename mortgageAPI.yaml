@@ -1494,48 +1494,50 @@ components:
       type: string
       format: date
       example: 2018-04-13
+      descriptio: Date format.
 
     DateTime:
       type: string
       format: date-time
       example: 2018-04-13T11:11:11Z
+      description: DateTime format.
 
     # ---- Links for Pagination----
-    linksPagination:
+    LinksPagination:
       description: Links (or cursors) returned in the answer of an API call.
       type: object
       properties:
         self:
           type: string
-          description: Link / cursor to the current result set (based on the submitted pagination approach)
+          description: Link / cursor to the current result set (based on the submitted pagination approach).
           example: /mortgage-app/api/v1/products?offset=75&limit=25
         first:
           type: string
-          description: Link / cursor to the first result set (based on the submitted pagination approach)
+          description: Link / cursor to the first result set (based on the submitted pagination approach).
           example: /mortgage-app/api/v1/products?offset=0&limit=25
         previous:
           type: string
-          description: Link / cursor to the previous result set (based on the submitted pagination approach)
+          description: Link / cursor to the previous result set (based on the submitted pagination approach).
           example: /mortgage-app/api/v1/products?offset=50&limit=25
         next:
           type: string
-          description: Link / cursor to the next result set (based on the submitted pagination approach)
+          description: Link / cursor to the next result set (based on the submitted pagination approach).
           example: /mortgage-app/api/v1/products?offset=100&limit=25
         last:
           type: string
-          description: Link / cursor to the last result set (based on the submitted pagination approach)
+          description: Link / cursor to the last result set (based on the submitted pagination approach).
           example: /mortgage-app/api/v1/products?offset=150&limit=25
 
     # ---- Currency ----
     Currency:
-      description: ISO 4217 code
+      description: ISO 4217 code.
       type: string
       pattern: '^[A-Z]{3}$'
       example: CHF
 
     # ---- Amount ----
     Amount:
-      description: amount with currency
+      description: amount with currency.
       type: object
       required:
         - currency
@@ -1544,13 +1546,13 @@ components:
         currency:
           $ref: '#/components/schemas/Currency'
         content:
-          description: amount given with fractional digits, the separator is a dot
+          description: amount given with fractional digits, the separator is a dot.
           type: string
           pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
           example: '235.45'
 
     # ---- Address compliant to payment address (b.Link & ISO20022)----
-    structuredAddress:
+    StructuredAddress:
       title: Structured Address
       type: object
       required:
@@ -1563,32 +1565,38 @@ components:
           type: string
           maxLength: 70
           example: Rue de la gare
+          description: Name of street.
         buildingNumber:
           type: string
           maxLength: 16
           example: 24A
+          description: number of building.
         postCode:
           type: string
           maxLength: 16
           example: CH-2501
+          descritption: zip code.
         townName:
           type: string
           maxLength: 35
           example: Biel
+          description: you guesssed it, the name of the town.
         country:
           type: string
           maxLength: 2
           example: CH
+          descrption: a political area, sorrunded by borders, very often a natural border such as a river or a mountain.
+      descriton: structured address.
 
     # ---- Country Code ----
     Country:
       type: string
       pattern: '^[A-Z]{2}$'
       example: CH
-      description: 2-Letter ISO 3166-2 Country Code
+      description: 2-Letter ISO 3166-2 Country Code.
 
     # ---- Response
-    commonResourceCreatedResponse:
+    CommonResourceCreatedResponse:
       title: Recource created response
       description: Uuid v4 of the created resource
       example: 20460121-6aff-485b-a61d-6056ecd72bd8
@@ -1610,16 +1618,19 @@ components:
         title:
           type: string
           example: This is the general problem description
+          description: ..
         detail:
           type: array
           items:
             type: string
             example: List of detailed problem description with respect to the current request
+            description: ..
         instance:
           type: string
           example: path/to/corresponding/resource
+          description: ..
 
-    commonErrorType:
+    CommonErrorType:
       title: Common Error Type
       description: Error Types for commonErrorResponse.
       type: string
@@ -1643,7 +1654,7 @@ components:
     # ---- End Common Data Model
 
     PropertyObject:
-      description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law
+      description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law.
       type: object
       required:
         - propertyObjectId
@@ -1655,7 +1666,7 @@ components:
           example: 9343dd26-4b54-4808-8978-538f8e869d0e
         name:
           type: string
-          description: User-defined property name
+          description: User-defined property name.
           example: My Nice Property
         address:
           $ref: '#/components/schemas/structuredAddress'
@@ -1667,7 +1678,7 @@ components:
           properties:
             constructionYear:
               type: integer
-              description: construction year
+              description: construction year.
               example: 1990
             renovation:
               type: boolean
@@ -1675,7 +1686,7 @@ components:
               example: false
             renovationYear:
               type: integer
-              description: renovation year
+              description: renovation year.
               example: 1990
               default: 0
             propertyRenovations:
@@ -1703,7 +1714,7 @@ components:
                       - interior_fittings
                       - building_envelope
                       - building_services
-                    description: Type of Property Component which has been renovated. Please use consistently either the detailed Component Types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings)
+                    description: Type of Property Component which has been renovated. Please use consistently either the detailed Component Types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings).
                     example: interior_fittings_floor_cover
                   yearOfRenovation:
                     type: integer
@@ -1744,7 +1755,7 @@ components:
                 - '0'
                 - '0.5'
                 - '1.0'
-              description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes. Proposed Mapping of WuP-Values: 1.0-4.0 => 0 (No) / 4.1-4.5 => 0.5 (Partially) / 4.6-5.0 = >1.0 (Yes).'
+              description: 'Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not: 0 = No, 0.5 = Partially, 1 = Yes. Proposed Mapping of WuP-Values: 1.0-4.0 => 0 (No) / 4.1-4.5 => 0.5 (Partially) / 4.6-5.0 = >1.0 (Yes).'.
               example: 0
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
@@ -1775,7 +1786,7 @@ components:
           enum:
             - self
             - let
-          description: 'The type of usage of the financing property: self, let'
+          description: 'The type of usage of the financing property: self, let'.
           example: self
         propertyType:
           type: string
@@ -1794,7 +1805,7 @@ components:
             - office_building
             - industrial_building
             - special_object
-          description: The type of property
+          description: The type of property.
           example: single_family_house
         ceilingHight:
           type: string
@@ -1840,8 +1851,8 @@ components:
               - radiator
               - stove
               - other
-            description: Type of the heat emission
-            example: floor
+          description: Type of the heat emission.
+          example: floor
         heatProduction:
           type: array
           items:
@@ -1861,8 +1872,8 @@ components:
               - solar_thermal_collector
               - block_type_thermal_power_station
               - block_type_thermal_power_station_bio
-            description: Type of the heat production
-            example: gas
+          description: Type of the heat production.
+          example: gas
         outsideConstructionZone:
           type: boolean
           description: If the property is outside of the construction zone.
@@ -2081,6 +2092,7 @@ components:
           example: false
         buildingRight:
           type: object
+          descrption: if a property is in building right, the buyer owner buy the property, not the ground the property is built on.
           properties:
             hasBuildingRight:
               type: boolean
@@ -2112,6 +2124,7 @@ components:
           description: The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)
         estimation:
           type: object
+          description: the estimation of the value of a property.
           properties:
             estimationId:
               type: string
@@ -2125,13 +2138,13 @@ components:
                 - wup
             marketValue:
               $ref: '#/components/schemas/Amount'
-              description: Estimated Market value of the property
+              description: Estimated Market value of the property.
             statisticalPriceRangeMax:
               $ref: '#/components/schemas/Amount'
-              description: Estimated statistical price range maximum
+              description: Estimated statistical price range maximum.
             statisticalPriceRangeMin:
               $ref: '#/components/schemas/Amount'
-              description: Estimated statistical price range minimum
+              description: Estimated statistical price range minimum.
             yearlyRentalIncome:
               $ref: '#/components/schemas/Amount'
               description: Estimated rental income per year
@@ -2139,7 +2152,7 @@ components:
               $ref: '#/components/schemas/Date'
         transferOfOwnershipDate:
           $ref: '#/components/schemas/Date'
-          description: When the property will be fully transfered to the new owner
+          description: When the property will be fully transfered to the new owner.
         publicNotarization:
           $ref: '#/components/schemas/Date'
           description: Date of public notarization
@@ -2147,24 +2160,26 @@ components:
           type: string
           example: We need an example for such a remark
         propertyLinks:
-          description: A list of links to external resources related to the property
+          description: A list of links to external resources related to the property.
           type: array
           items:
             $ref: '#/components/schemas/Link'
 
     PropertyIdentifier:
-      description: Property identification (register of real estate)
+      description: Property identification (register of real estate).
       type: object
       properties:
         EGRID:
           type: string
           example: CH480928387782
+          description: identifier of land a property is build on 
         EGID:
           type: string
           example: '191092250'
+          description: identifiert of the property.
 
     Mortgage:
-      description: All relevant information regarding a specific mortgage
+      description: All relevant information regarding a specific mortgage.
       type: object
       required:
         - mortgageId
@@ -2183,7 +2198,7 @@ components:
           type: string
           format: uuid
           example: 206065b9-977b-4d2c-9092-00acf2392346
-          description: Uuid v4 of the specific mortgage
+          description: Uuid v4 of the specific mortgage.
         product:
           $ref: '#/components/schemas/Product'
         amountAtExpiry:
@@ -2200,9 +2215,11 @@ components:
           $ref: '#/components/schemas/Date'
         interestRate:
           type: string
+          description: interest rate to be paid by debtor.
           example: '1.4'
         interestRateType:
           type: string
+          description: type of interest rate.
           example: libor
           enum:
             - variable
@@ -2211,6 +2228,7 @@ components:
             - fixed
         interestBasis:
           type: string
+          description: we need a description.
           example: We need an example
         durationType:
           type: integer
@@ -2219,14 +2237,17 @@ components:
           maximum: 25
           example: 5
         prolongable:
+          description: tells if a mortgage is prolongable or not. 
           type: boolean
           example: 0
         propertyObjects:
           type: array
+          description: ..
           items:
             $ref: '#/components/schemas/PropertyObject'
         relatedMortgages:
           type: array
+          description:..
           items:
             $ref: '#/components/schemas/Mortgage'
 
@@ -3325,14 +3346,14 @@ components:
       description: A product's uuid v4.
 
     path_applicationId:
-      name: applicationId
       in: path
-      description: Uuid v4 of the application request.
+      name: applicationId
       required: true
       schema:
         type: string
         format: uuid
         example: 4bf92636-14a0-4511-98e2-acfde576e644
+      description: Uuid v4 of the application request.
 
     path_documentId:
       in: path
