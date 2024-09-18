@@ -70,7 +70,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/MortgageCase'
                   _links:
-                    $ref: '#/components/schemas/linksPagination'
+                    $ref: '#/components/schemas/LinksPagination'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -230,7 +230,7 @@ paths:
         - Mortgage Products and Conditions
       parameters:
         - in: query
-          name: InterestRateType
+          name: interestRateType
           schema:
             type: string
             example: saron
@@ -1555,6 +1555,7 @@ components:
     StructuredAddress:
       title: Structured Address
       type: object
+      descripton: structured address.
       required:
         - streetName
         - postCode
@@ -1574,8 +1575,8 @@ components:
         postCode:
           type: string
           maxLength: 16
+          description: zip code.
           example: CH-2501
-          descritption: zip code.
         townName:
           type: string
           maxLength: 35
@@ -1585,8 +1586,7 @@ components:
           type: string
           maxLength: 2
           example: CH
-          descrption: a political area, sorrunded by borders, very often a natural border such as a river or a mountain.
-      descriton: structured address.
+          description: a political area, sorrunded by borders, very often a natural border such as a river or a mountain.
 
     # ---- Country Code ----
     Country:
@@ -3528,7 +3528,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
 
     standard401:
       headers:
@@ -3542,7 +3542,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
 
     standard403:
       headers:
@@ -3556,7 +3556,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
 
     standard404:
       headers:
@@ -3570,7 +3570,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
 
     standard405:
       headers:
@@ -3584,7 +3584,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
 
     standard500:
       headers:
@@ -3598,7 +3598,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
 
     standard501:
       headers:
@@ -3612,7 +3612,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
 
     standard503:
       headers:
@@ -3626,5 +3626,5 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
   # ---- End Responses - Standard
