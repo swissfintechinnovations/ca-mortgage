@@ -11,7 +11,7 @@ info:
     email: info@common-api.ch
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
   - url: https://mortgage.common-api.ch
 externalDocs:
@@ -230,7 +230,7 @@ paths:
         - Mortgage Products and Conditions
       parameters:
         - in: query
-          name: interestRateType
+          name: interest_rate_type
           schema:
             type: string
             example: saron
@@ -1471,22 +1471,6 @@ paths:
 # -------- Models ---------
 # -------------------------
 components:
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: X-API-Key
-
-    OAuth2:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: https://example.com/oauth/authorize
-          tokenUrl: https://example.com/oauth/token
-          scopes:
-            read: Grants read access
-            write: Grants write access
-
   schemas:
     # ---- Common Data Model v1.2.0
     # ---- Date Formats
@@ -1599,7 +1583,6 @@ components:
     CommonResourceCreatedResponse:
       title: Recource created response
       description: Uuid v4 of the created resource.
-      example: 20460121-6aff-485b-a61d-6056ecd72bd8
       type: object
       required:
         - id
@@ -1607,8 +1590,7 @@ components:
         id:
           $ref: '#/components/schemas/CommonID'
           description: Uuid v4 of the created resource.
-          example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
-
+    
     CommonErrorResponse:
       title: Common Error Response
       description: ...
@@ -1853,8 +1835,8 @@ components:
               - radiator
               - stove
               - other
-          description: Type of the heat emission.
-          example: floor
+            description: Type of the heat emission.
+            example: floor
         heatProduction:
           description: the way heat is generated within the building. 
           type: array
@@ -2499,7 +2481,7 @@ components:
             - entire
             - partial
         replacedTranches:
-          descripton: Tranche to be replaced.
+          description: Tranche to be replaced.
           type: array
           items:
             type: object
@@ -3423,31 +3405,7 @@ components:
         format: uuid
         example: 91d029b3-ee7a-44c3-ac18-cf621cb128a8
       description: Uuid v4 of an order.
-
-    clientid_in_header:
-      in: header
-      name: X-CorAPI-Client-ID
-      required: true
-      schema:
-        type: string
-      description: ID of the client forwarded to the provider.
-      
-    correlation_in_header:
-      in: header
-      name: X-Correlation-ID
-      required: true
-      schema:
-        type: string
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
-      
-    agent_in_header:
-      in: header
-      name: User-Agent
-      required: true
-      schema:
-        type: string
-      description: Name and version of the of the Client software.
-      
+   
     offset:
       in: query
       name: offset
@@ -3503,28 +3461,45 @@ components:
         example: fr
       description: Language of Document content.
 
-  # --- Response Headers - used by Standard Responses ---
-  headers:
-    Content-Language:
-      description: Response language - always en
+    clientid_in_header:
+      in: header
+      name: X-CorAPI-Client-ID
+      required: true
       schema:
         type: string
+      description: ID of the client forwarded to the provider.
+      
+    correlation_in_header:
+      in: header
+      name: X-Correlation-ID
+      required: true
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+      
+    agent_in_header:
+      in: header
+      name: User-Agent
+      required: true
+      schema:
+        type: string
+      description: Name and version of the of the Client software.
+        
+ securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
 
-    Content-Type:
-      description: application/problem+json; charset=utf-8 according to RFC7807
-      schema:
-        type: string
-
-    Location:
-      description: Location (submissionId) of the submitted message. Add /status for the status report.
-      schema:
-        type: string
-
-    X-Correlation-ID:
-      description: Client defined ID from request to correlates HTTP requests between a client and server
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
 
   # ---- Responses - Standard----
   responses:
@@ -3657,3 +3632,26 @@ components:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
   # ---- End Responses - Standard
+
+  # --- Response Headers - used by Standard Responses ---
+  headers:
+    Content-Language:
+      description: Response language - always en
+      schema:
+        type: string
+
+    Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807
+      schema:
+        type: string
+
+    Location:
+      description: Location (submissionId) of the submitted message. Add /status for the status report.
+      schema:
+        type: string
+
+    X-Correlation-ID:
+      description: Client defined ID from request to correlates HTTP requests between a client and server
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
