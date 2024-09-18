@@ -2358,7 +2358,7 @@ components:
             properties:
               description:
                 type: string
-                description: Product name description
+                description: Product name description.
                 example: Fixed rate mortgage
               language:
                 type: string
@@ -2383,7 +2383,7 @@ components:
             - fixed
 
     Condition:
-      description: All details regarding the conditions for a specific mortgage product the FI offers
+      description: All details regarding the conditions for a specific mortgage product the FI offers.
       type: object
       required:
         - conditionId
@@ -2421,7 +2421,7 @@ components:
           $ref: '#/components/schemas/Amortizations'
 
     Party:
-      description: Links together the persons building the applicant party
+      description: Links together the persons building the applicant party.
       type: object
       required:
         - personList
@@ -2441,7 +2441,7 @@ components:
             $ref: '#/components/schemas/Applicant'
 
     Application:
-      description: All static application information needed by the FI to create binding offers
+      description: All static application information needed by the FI to create binding offers.
       type: object
       required:
         - mortgageType
@@ -2455,7 +2455,7 @@ components:
           example: f157c4be-106d-4304-972e-091e77b87e1c
         tppApplicationId:
           type: string
-          description: The application alphanumeric identifier defined by TPP
+          description: The application alphanumeric identifier defined by TPP.
           pattern: '^[a-zA-Z0-9]{6,10}$'
           example: asd23f
         requestingParty:
@@ -2475,7 +2475,7 @@ components:
           enum:
             - advisor
             - direct
-          description: The type of the channel the application was generated
+          description: The type of the channel the application was generated.
           example: advisor
         replacementType:
           type: string
@@ -2491,14 +2491,14 @@ components:
             properties:
               replacedTrancheAmount:
                 $ref: '#/components/schemas/Amount'
-                description: The amount of the replaced tranche
+                description: The amount of the replaced tranche.
               replacedTrancheExpiry:
                 $ref: '#/components/schemas/Date'
-                description: The expiry date of the replaced tranche
+                description: The expiry date of the replaced tranche.
                 example: 2022-05-03
               replacedTrancheIssuer:
                 type: string
-                description: The institute who has issued the replaced tranche
+                description: The institute who has issued the replaced tranche.
                 example: Credit Suisse
         tppAdvisorDetail:
           type: object
@@ -2506,26 +2506,26 @@ components:
             name:
               type: string
               maxLength: 70
-              description: Name of the TPP advisor
+              description: Name of the TPP advisor.
               example: Max
             surName:
               type: string
               maxLength: 70
-              description: Surname of the TPP advisor
+              description: Surname of the TPP advisor.
               example: Muster
             nameTpp:
               type: string
               maxLength: 70
-              description: Firm of the TPP advisor
+              description: Firm of the TPP advisor.
               example: Muster Finanz AG
             email:
               type: string
-              description: Email of the TPP advisor
+              description: Email of the TPP advisor.
               example: max.muster@domain.ch
             language:
               type: string
               example: fr
-              description: Preferred contact language of the TPP advisor
+              description: Preferred contact language of the TPP advisor.
               enum:
                 - de
                 - fr
@@ -2533,19 +2533,19 @@ components:
                 - en
             phone:
               type: string
-              description: phone of the TPP advisor
+              description: phone of the TPP advisor.
               example: '+41443343456'
             address:
               $ref: '#/components/schemas/StructuredAddress'
 
     Advertiser:
-      description: Information about the person or agency selling the property, in case it is applicable and known
+      description: Information about the person or agency selling the property, in case it is applicable and known.
       type: object
       required:
         - name
       properties:
         advertiserType:
-          description: Specifies if the advertiser is a private person, a company or an agency
+          description: Specifies if the advertiser is a private person, a company or an agency.
           type: string
           enum:
             - private
@@ -2553,12 +2553,11 @@ components:
             - agency
           example: agency
         name:
-          description: The name of the advertiser
-          type: string
+          description: The name of the advertiser.
           maxLength: 140
           example: Real Estate Agency AG
         contactPerson:
-          description: The person to contact in case the advertiser is an agency or a company
+          description: The person to contact in case the advertiser is an agency or a company.
           type: string
           maxLength: 140
           example: Max Muster
@@ -2572,13 +2571,13 @@ components:
             - it
             - en
         phone:
-          description: The number on which the advertiser can be reached
+          description: The number on which the advertiser can be reached.
           type: string
           minLength: 4
           maxLength: 13
           example: '+41443343456'
         email:
-          description: The email address on which the advertiser can be contacted
+          description: The email address on which the advertiser can be contacted.
           type: string
           format: email
           minLength: 5
@@ -2587,7 +2586,7 @@ components:
           $ref: '#/components/schemas/structuredAddress'
 
     MortgageCase:
-      description: A complete mortgage case including the application details
+      description: A complete mortgage case including the application details.
       type: object
       required:
         - caseId
@@ -2598,7 +2597,7 @@ components:
           type: string
           format: uuid
           example: 2e1d21c3-0cd5-4354-a9e9-d2eb2c28b780
-          description: Uuid v4 of the mortgage case
+          description: Uuid v4 of the mortgage case.
         application:
           $ref: '#/components/schemas/Application'
         financing:
@@ -2606,10 +2605,10 @@ components:
         remark:
           type: string
           example: All documents verified at TPP
-          description: Remark/comment which can be added by TPP
+          description: Remark/comment which can be added by TPP.
 
     Financing:
-      description: Complete financing details of an application
+      description: Complete financing details of an application.
       type: object
       required:
         - amount
@@ -2617,12 +2616,12 @@ components:
         financingId:
           type: string
           format: uuid
-          description: Uuid of the financing
+          description: Uuid of the financing.
           example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
         applicationIdRef:
           type: string
           format: uuid
-          description: Uuid of the financing's corresponding application
+          description: Uuid of the financing's corresponding application.
           example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
         amount:
           $ref: '#/components/schemas/Amount'
@@ -2648,7 +2647,7 @@ components:
           $ref: '#/components/schemas/Date'
 
     FinancingTranche:
-      description: Tranche of a financing
+      description: Tranche of a financing.
       type: object
       required:
         - amount
@@ -2659,7 +2658,7 @@ components:
         productIdRef:
           type: string
           format: uuid
-          description: Uuid of the product
+          description: Uuid of the product.
           example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
         amount:
           $ref: '#/components/schemas/Amount'
@@ -2695,7 +2694,7 @@ components:
           $ref: '#/components/schemas/Amortizations'
 
     FinancingRequest:
-      description: Based on the application, several financing requests can be sent to the FI
+      description: Based on the application, several financing requests can be sent to the FI.
       type: object
       required:
         - applicationId
@@ -2705,12 +2704,12 @@ components:
           type: string
           format: uuid
           example: 2e1d21c3-0cd5-4354-a9e9-d2eb2c28b780
-          description: Uuid v4 of the financing request defined by FI
+          description: Uuid v4 of the financing request defined by FI.
         applicationId:
           type: string
           format: uuid
           example: 3c921870-f29c-46ad-9ba5-c8b05e0d88d2
-          description: Uuid v4 of the corresponding application
+          description: Uuid v4 of the corresponding application.
         amount:
           $ref: '#/components/schemas/Amount'
         increaseAmount:
@@ -2732,7 +2731,7 @@ components:
               productId:
                 type: string
                 format: uuid
-                description: Uuid of the product
+                description: Uuid of the product.
                 example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
               productVariation:
                 $ref: '#/components/schemas/ProductVariation'
@@ -2782,7 +2781,7 @@ components:
             name:
               type: string
               maxLength: 70
-              description: Name of the applicant
+              description: Name of the applicant.
               example: Max
             surName:
               type: string
@@ -2796,7 +2795,7 @@ components:
             maritalStatus:
               type: string
               example: married
-              description: Martial status of the applicant
+              description: Martial status of the applicant.
               enum:
                 - unmarried
                 - married
@@ -2816,7 +2815,7 @@ components:
             jobSituation:
               type: string
               example: employed
-              description: Job situation of the applicant
+              description: Job situation of the applicant.
               enum:
                 - employed
                 - selfEmployed
@@ -2826,15 +2825,15 @@ components:
               $ref: '#/components/schemas/Country'
             USPerson:
               type: boolean
-              description: Is the applicant a US person?
+              description: Is the applicant a US person.
               example: false
             email:
               type: string
-              description: Email of the applicant
+              description: Email of the applicant.
               example: max.muster@domain.ch
             phone:
               type: string
-              description: Phone number of the applicant
+              description: Phone number of the applicant.
               example: '+41443343456'
             solvencyRating:
               description: Solvency rating of the applicant e.g. CRIF
@@ -2849,17 +2848,17 @@ components:
                   example: 420
                 ratingSourceType:
                   type: string
-                  description: Provider of the solvency rating
+                  description: Provider of the solvency rating.
                   example: crif
                   enum:
                     - crif
                 ratingDate:
                   $ref: '#/components/schemas/Date'
-                  description: Date of the solvency rating
+                  description: Date of the solvency rating.
             applicantLanguage:
               type: string
               example: fr
-              description: Preferred contact language of the applicant
+              description: Preferred contact language of the applicant.
               enum:
                 - de
                 - fr
@@ -2942,11 +2941,11 @@ components:
                   nameAdditionalProperty:
                     type: string
                     maxLength: 70
-                    description: Name of the additional property
+                    description: Name of the additional property.
                     example: Orchard Villa, Holderstrasse 10
                   valueAdditionalProperty:
                     $ref: '#/components/schemas/Amount'
-                    description: Value of the additional property
+                    description: Value of the additional property.
                   propertyTypeAdditionalProperty:
                     type: string
                     enum:
@@ -2964,7 +2963,7 @@ components:
                       - office_building
                       - industrial_building
                       - special_object
-                    description: The type of the additional property
+                    description: The type of the additional property.
                     example: vacation_house
 
     # ---- Mortgage data types ----
@@ -3020,7 +3019,7 @@ components:
         - withdraw
 
     Asset:
-      description: 'Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.'
+      description: Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.
       type: object
       required:
         - assetType
@@ -3030,7 +3029,7 @@ components:
           $ref: '#/components/schemas/AssetType'
         amount:
           $ref: '#/components/schemas/Amount'
-          description: The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance
+          description: The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance.
         insuranceSum:
           $ref: '#/components/schemas/Amount'
           description: The amount of the sum insured in life insurance
@@ -3041,7 +3040,7 @@ components:
           $ref: '#/components/schemas/AssetProvider'
 
     UsedAsset:
-      description: 'Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also be recorded in the array of assets in the financial situation of one applicant.'
+      description: Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also be recorded in the array of assets in the financial situation of one applicant.
       type: object
       required:
         - assetType
@@ -3054,13 +3053,13 @@ components:
           $ref: '#/components/schemas/Amount'
         insuranceSum:
           $ref: '#/components/schemas/Amount'
-          description: The amount of the sum insured in life insurance
+          description: The amount of the sum insured in life insurance.
         usageType:
           $ref: '#/components/schemas/AssetUsageType'
         applicantId:
           type: string
           format: uuid
-          description: UUID v4 of the applicant (existing applicant within the current application)
+          description: UUID v4 of the applicant (existing applicant within the current application).
           example: 576f8de3-6b30-4882-a7af-da2132a456cf
         assetProvider:
           $ref: '#/components/schemas/AssetProvider'
@@ -3240,7 +3239,7 @@ components:
           example: IE12BOFI90000112345678
 
     AssetProvider:
-      description: Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type insurance, insurance company name is provided
+      description: Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type insurance, insurance company name is provided.
       type: object
       required:
         - name
@@ -3280,7 +3279,7 @@ components:
         currentRate:
           type: number
           format: double
-          description: Interest reate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.Base
+          description: Interest reate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.Base.
           minimum: 0
           maximum: 1
           example: 0.5
@@ -3293,7 +3292,7 @@ components:
           example: 0.5
 
     Link:
-      description: Object containing a link to an external resource and its description
+      description: Object containing a link to an external resource and its description.
       type: object
       required:
         - url
