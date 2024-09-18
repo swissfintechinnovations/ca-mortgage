@@ -17,9 +17,10 @@ servers:
 externalDocs:
   description: Find out more about SFTI API specifications
   url: https://www.common-api.ch
+
 tags:
   - name: Full Mortgage Cases
-    description: Operatios related to full mortgage cases including the application details.
+    description: Operations related to full mortgage cases including the application details.
   - name: Existing Mortgages
     description: Operations related with existing mortgages.
   - name: Mortgage Products and Conditions
@@ -645,7 +646,7 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: we need an exmaple
+                    example: we need an example
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1570,12 +1571,12 @@ components:
           type: string
           maxLength: 35
           example: Biel
-          description: you guesssed it, the name of the town.
+          description: you guessed it, the name of the town.
         country:
           type: string
           maxLength: 2
           example: CH
-          description: a political area, sorrunded by borders, very often a natural border such as a river or a mountain.
+          description: a political area, surrounded by borders, very often a natural border such as a river or a mountain.
 
     # ---- Country Code ----
     Country:
@@ -1586,7 +1587,7 @@ components:
 
     # ---- Response
     CommonResourceCreatedResponse:
-      title: Recource created response
+      title: Resource created response
       description: Uuid v4 of the created resource.
       type: object
       required:
@@ -1595,7 +1596,7 @@ components:
         id:
           $ref: '#/components/schemas/CommonID'
           description: Uuid v4 of the created resource.
-    
+
     CommonErrorResponse:
       title: Common Error Response
       description: ...
@@ -1857,7 +1858,7 @@ components:
               - other
             example: floor
         heatProduction:
-          description: the way heat is generated within the building. 
+          description: the way heat is generated within the building.
           type: array
           items:
             type: string
@@ -2159,13 +2160,13 @@ components:
               $ref: '#/components/schemas/Date'
         transferOfOwnershipDate:
           $ref: '#/components/schemas/Date'
-          description: When the property will be fully transfered to the new owner.
+          description: When the property will be fully transferred to the new owner.
         publicNotarization:
           $ref: '#/components/schemas/Date'
           description: Date of public notarization
         remarks:
           type: string
-          description: remark regarding the erstimation. 
+          description: Remark regarding the estimation.
           example: We need an example for such a remark
         propertyLinks:
           description: A list of links to external resources related to the property.
@@ -2180,11 +2181,11 @@ components:
         EGRID:
           type: string
           example: CH480928387782
-          description: identifier of land a property is built on. 
+          description: Identifier of land a property is built on.
         EGID:
           type: string
           example: '191092250'
-          description: identifiert of the property.
+          description: Identifier of the property.
 
     Mortgage:
       description: All relevant information regarding a specific mortgage.
@@ -2218,7 +2219,7 @@ components:
         offerDate:
           $ref: '#/components/schemas/Date'
           description: >
-            The date when the offer is made by the FI. Optional field for use cases where no MortageOffer object is used and
+            The date when the offer is made by the FI. Optional field for use cases where no MortgageOffer object is used and
             therefore the offer date needs to be directly in Mortgage object.
           example: 2018-04-05
         validTo:
@@ -2247,7 +2248,7 @@ components:
           maximum: 25
           example: 5
         prolongable:
-          description: tells if a mortgage is prolongable or not. 
+          description: tells if a mortgage is prolongable or not.
           type: boolean
           example: 0
         propertyObjects:
@@ -2259,7 +2260,7 @@ components:
           type: array
           description: ..
           items:
-           $ref: '#/components/schemas/Mortgage'
+            $ref: '#/components/schemas/Mortgage'
 
     Offer:
       description: All relevant details describing the FI's offer for a mortgage product.
@@ -2390,7 +2391,7 @@ components:
             $ref: '#/components/schemas/ProductVariation'
         interestRateType:
           type: string
-          description: type of interest rate. 
+          description: type of interest rate.
           example: libor
           enum:
             - variable
@@ -2411,13 +2412,13 @@ components:
         - amortization
       properties:
         conditionId:
-          description: ID of condition. 
+          description: ID of condition.
           type: string
           format: uuid
           example: ef737eb0-c0a7-4f44-bdeb-32ba9bd99327
         productIdRef:
           type: string
-          description: Reference to prodcut ID.
+          description: Reference to product ID.
           format: uuid
           example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
         duration:
@@ -2525,7 +2526,7 @@ components:
                 description: The institute who has issued the replaced tranche.
                 example: Credit Suisse
         tppAdvisorDetail:
-          description: personal information if the advisor of the tpp. 
+          description: Personal information if the advisor of the TPP.
           type: object
           properties:
             name:
@@ -2703,7 +2704,7 @@ components:
           $ref: '#/components/schemas/Interest'
         interestRateType:
           type: string
-          description: type of intererest rate.
+          description: type of interest rate.
           example: libor
           enum:
             - variable
@@ -2779,7 +2780,7 @@ components:
         requestOfferType:
           description: Ding dong die Hex ist tot.
           type: string
-          example: binding  
+          example: binding
           enum:
             - binding
             - indicative
@@ -2910,7 +2911,7 @@ components:
               description: Gender of the applicant.
         financialSituation:
           type: object
-          description: the overall financial situation of a debtor. 
+          description: the overall financial situation of a debtor.
           properties:
             income:
               type: array
@@ -3075,7 +3076,7 @@ components:
           description: The amount of the sum insured in life insurance.
         remark:
           type: string
-          description: remark remerk. 
+          description: remark remark.
           example: We need an example for such a remark
         assetProvider:
           $ref: '#/components/schemas/AssetProvider'
@@ -3225,7 +3226,7 @@ components:
           description: Remark/comment which can be added by TPP.
 
     Document:
-      description: Document containing information for givent document type for given order.
+      description: Document containing information for given document type for given order.
       type: object
       required:
         - name
@@ -3286,7 +3287,7 @@ components:
 
     AssetProvider:
       description: >
-        Asset provider for each asset, additional information must be transfered. E.g. in case the applicant owns an addtional security of type
+        Asset provider for each asset, additional information must be transferred. E.g. in case the applicant owns an additional security of type
         insurance, insurance company name is provided
       type: object
       required:
@@ -3328,7 +3329,7 @@ components:
           type: number
           format: double
           description: >
-            Interest reate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show
+            Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show
             the margin above interest.
           minimum: 0
           maximum: 1
@@ -3336,7 +3337,7 @@ components:
         base:
           type: number
           format: double
-          description: Base rate uupon margin is applied (e.g. for SARON).
+          description: Base rate upon margin is applied (e.g. for SARON).
           minimum: 0
           maximum: 1
           example: 0.5
@@ -3465,14 +3466,14 @@ components:
         example: 25
         minimum: 1
       description: Optional parameter for pagination. Maximum number of entries to be returned.
-      
+
     cursor:
       in: query
       name: cursor
       required: false
       schema:
         type: string
-        example: cursorIDxyz     
+        example: cursorIDxyz
       description: Optional parameter for pagination. An opaque string value used for pagination.
 
     duration:
@@ -3506,7 +3507,7 @@ components:
       schema:
         type: string
       description: ID of the client forwarded to the provider.
-      
+
     correlation_in_header:
       in: header
       name: X-Correlation-ID
@@ -3514,7 +3515,7 @@ components:
       schema:
         type: string
       description: Unique ID (defined by the caller) which will be reflected back in the response.
-      
+
     agent_in_header:
       in: header
       name: User-Agent
