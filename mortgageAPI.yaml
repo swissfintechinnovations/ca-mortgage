@@ -1827,6 +1827,7 @@ components:
           description: Building standard of the sanitary installations.
           example: basic
         heatEmission:
+          description: Type of the heat emission.
           type: array
           items:
             type: string
@@ -1835,7 +1836,6 @@ components:
               - radiator
               - stove
               - other
-            description: Type of the heat emission.
             example: floor
         heatProduction:
           description: the way heat is generated within the building. 
