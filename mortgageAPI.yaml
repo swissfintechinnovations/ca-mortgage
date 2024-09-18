@@ -1786,7 +1786,7 @@ components:
           enum:
             - self
             - let
-          description: 'The type of usage of the financing property: self, let'.
+          description: 'The type of usage of the financing property: self, let'
           example: self
         propertyType:
           type: string
