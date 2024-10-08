@@ -2936,6 +2936,8 @@ components:
                   valueAdditionalProperty:
                     $ref: '#/components/schemas/Amount'
                     description: Value of the additional property
+                  mortgageAmountAdditionalProperty:
+                    $ref: '#/components/schemas/Amount'
                   propertyTypeAdditionalProperty:
                     type: string
                     enum:
