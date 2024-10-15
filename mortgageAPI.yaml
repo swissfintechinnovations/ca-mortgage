@@ -1934,6 +1934,16 @@ components:
               type: integer
               description: The number of separated garages (covered parking spaces).
               example: 2
+            numberOfExternalSeparateGarages:
+              type: integer
+              description: The number of separated garages (covered parking spaces).
+              example: 2
+            numberOfAttachedGarages:
+              type: integer
+              description: >
+                The number of garages which are attached to the house and which are included in the building volume of the house
+                (don't have a separate building insurance policy).
+              example: 2
             numberOfUndergroundCarParks:
               type: integer
               description: The number of underground parking places.
