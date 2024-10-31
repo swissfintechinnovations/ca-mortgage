@@ -1783,6 +1783,7 @@ components:
             - jointEstate
             - separateEstate
             - contributionToJointlyAcquiredProperty
+          description: Information how the property is owned.
         floorPlan:
           type: string
           enum:
