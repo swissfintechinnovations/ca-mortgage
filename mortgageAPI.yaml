@@ -2194,6 +2194,10 @@ components:
           type: string
           example: '191092250'
           description: Identifier of the property.
+        EWID:
+          type: string
+          example: '42'
+          description: Identifier of the apartment.
 
     Mortgage:
       description: All relevant information regarding a specific mortgage.
