@@ -50,8 +50,8 @@ paths:
       summary: Return the list of all mortgage cases for the authenticated context
       description: List of mortgage cases for the authenticated context including the corresponding properties, sorted by caseId.
       parameters:
+        - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -60,18 +60,20 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
+            X-Next-Cursor:
+              $ref: '#/components/headers/X-Next-Cursor'
           description: Paginated list of all mortgage cases with all related information sorted by caseId.
           content:
             application/json:
               schema:
                 type: object
+                required:
+                  - caseList
                 properties:
                   caseList:
                     type: array
                     items:
                       $ref: '#/components/schemas/MortgageCase'
-                  _links:
-                    $ref: '#/components/schemas/LinksPagination'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -143,8 +145,8 @@ paths:
             type: boolean
           description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering).
           example: true
+        - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -153,18 +155,20 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
+            X-Next-Cursor:
+              $ref: '#/components/headers/X-Next-Cursor'
           description: Paginated list of all mortgages with all related information sorted by mortgageId.
           content:
             application/json:
               schema:
                 type: object
+                required:
+                  - mortgageList
                 properties:
-                  MortgageList:
+                  mortgageList:
                     type: array
                     items:
                       $ref: '#/components/schemas/Mortgage'
-                  _links:
-                    $ref: '#/components/schemas/LinksPagination'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -242,8 +246,8 @@ paths:
               - fixed
           description: The type of the interest rates (for filtering).
         - $ref: '#/components/parameters/duration'
+        - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
         - $ref: '#/components/parameters/agent_in_header'
@@ -252,18 +256,20 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
+            X-Next-Cursor:
+              $ref: '#/components/headers/X-Next-Cursor'
           description: Paginated list of all mortgage products with all related information sorted by productId.
           content:
             application/json:
               schema:
                 type: object
+                required:
+                  - productList
                 properties:
                   productList:
                     type: array
                     items:
                       $ref: '#/components/schemas/Product'
-                  _links:
-                    $ref: '#/components/schemas/LinksPagination'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1395,6 +1401,8 @@ paths:
       summary: Get all active offers for a specific tranche
       description: Get offer framework for the to be extended mortgage.
       parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/path_mortgageId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
@@ -1404,11 +1412,15 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
+            X-Next-Cursor:
+              $ref: '#/components/headers/X-Next-Cursor'
           description: Paginated list of all offers for a specific expiring mortgage.
           content:
             application/json:
               schema:
                 type: object
+                required:
+                  - offerList
                 properties:
                   offerList:
                     type: array
@@ -3470,17 +3482,6 @@ components:
         example: 91d029b3-ee7a-44c3-ac18-cf621cb128a8
       description: Uuid v4 of an order.
 
-    offset:
-      in: query
-      name: offset
-      required: false
-      schema:
-        type: integer
-        format: int32
-        example: 25
-        minimum: 0
-      description: Optional parameter for pagination. The number of items to skip before starting to collect the result set.
-
     limit:
       in: query
       name: limit
@@ -3726,3 +3727,9 @@ components:
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+
+    X-Next-Cursor:
+      description: An opaque string value, or an empty string if there are no more results.
+      schema:
+        type: string
+        example: cursorIDxyz
