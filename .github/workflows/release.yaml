@@ -28,7 +28,7 @@ jobs:
       - name: Check user permission
         id: param_check
         run: |
-          if [[ "${{ github.actor }}" != "NikolajMarwitz" && "${{ github.actor }}" != "dkoeni" && "${{ github.actor }}" != "juergen-petry" ]]; then
+          if [[ "${{ github.actor }}" != "stephan-gerber" && "${{ github.actor }}" != "NikolajMarwitz" && "${{ github.actor }}" != "dkoeni" && "${{ github.actor }}" != "juergen-petry" ]]; then
             echo "You have no permissons to start the release action."
             exit 1
           fi
