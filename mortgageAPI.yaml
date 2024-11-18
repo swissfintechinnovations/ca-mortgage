@@ -747,6 +747,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/clientid_in_header'
         - $ref: '#/components/parameters/correlation_in_header'
@@ -756,50 +758,57 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
+            X-Next-Cursor:
+              $ref: '#/components/headers/X-Next-Cursor'
           description: OK.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    filename:
-                      type: string
-                      example: customer_id.pdf
-                    filetype:
-                      type: string
-                      example: pdf
-                    documentId:
-                      type: string
-                      format: uuid
-                      example: 7f648f12-fd45-4930-6543-456hf5671c37
-                      description: Document ID in uuid v4 format.
-                    filesize:
-                      type: integer
-                      example: 1024
-                      description: The file size in bytes.
-                    uploaddate:
-                      $ref: '#/components/schemas/Date'
-                    statusInfo:
-                      description: Document status info.
+                type: object
+                required:
+                  - documentList
+                properties:
+                  documentList:
+                    type: array
+                    items:
                       type: object
-                      required:
-                        - status
                       properties:
-                        status:
+                        filename:
                           type: string
-                          example: pending
-                          enum:
-                            - accepted
-                            - rejected
-                            - pending
-                          default: pending
-                          description: Get the current status of the application.
-                        statusReason:
+                          example: customer_id.pdf
+                        filetype:
                           type: string
-                          example: Additional information that can be shared with the status.
-                          description: The reason, of current status.
+                          example: pdf
+                        documentId:
+                          type: string
+                          format: uuid
+                          example: 7f648f12-fd45-4930-6543-456hf5671c37
+                          description: Document ID in uuid v4 format.
+                        filesize:
+                          type: integer
+                          example: 1024
+                          description: The file size in bytes.
+                        uploaddate:
+                          $ref: '#/components/schemas/Date'
+                        statusInfo:
+                          description: Document status info.
+                          type: object
+                          required:
+                            - status
+                          properties:
+                            status:
+                              type: string
+                              example: pending
+                              enum:
+                                - accepted
+                                - rejected
+                                - pending
+                              default: pending
+                              description: Get the current status of the application.
+                            statusReason:
+                              type: string
+                              example: Additional information that can be shared with the status.
+                              description: The reason, of current status.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1005,6 +1014,8 @@ paths:
       tags:
         - Mortgage Financing Request
       parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/path_applicationId'
         - $ref: '#/components/parameters/path_financingRequestId'
         - $ref: '#/components/parameters/clientid_in_header'
@@ -1015,11 +1026,15 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
+            X-Next-Cursor:
+              $ref: '#/components/headers/X-Next-Cursor'
           description: OK.
           content:
             application/json:
               schema:
                 type: object
+                required:
+                  - offerList
                 properties:
                   offerList:
                     type: array
