@@ -1,0 +1,8 @@
+in: path
+name: offerId
+required: true
+schema:
+  type: string
+  format: uuid
+  example: c2fee261-053c-4088-8986-11216f0c9be6
+description: Uuid v4 of the offer.

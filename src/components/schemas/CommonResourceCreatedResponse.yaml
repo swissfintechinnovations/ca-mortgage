@@ -1,0 +1,9 @@
+title: Resource created response
+description: Uuid v4 of the created resource.
+type: object
+required:
+  - id
+properties:
+  id:
+    $ref: ./CommonID.yaml
+    description: Uuid v4 of the created resource.

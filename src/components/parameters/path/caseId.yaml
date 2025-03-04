@@ -1,0 +1,8 @@
+in: path
+name: caseId
+required: true
+schema:
+  type: string
+  format: uuid
+  example: bcb5d762-8d28-43a2-9398-393b2e8d56ba$
+description: Uuid v4 of a specific existing mortgage case.

@@ -1,0 +1,11 @@
+type: string
+enum:
+  - bad
+  - bad-medium
+  - medium
+  - medium-good
+  - good
+  - good-verygood
+  - verygood
+description: The rating type.
+example: good

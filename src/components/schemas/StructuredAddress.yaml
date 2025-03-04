@@ -1,0 +1,36 @@
+description: structured address.
+title: Structured Address
+type: object
+required:
+  - streetName
+  - postCode
+  - townName
+  - country
+properties:
+  streetName:
+    type: string
+    maxLength: 70
+    example: Rue de la gare
+    description: Name of street.
+  buildingNumber:
+    type: string
+    maxLength: 16
+    example: 24A
+    description: number of building.
+  postCode:
+    type: string
+    maxLength: 16
+    description: zip code.
+    example: CH-2501
+  townName:
+    type: string
+    maxLength: 35
+    example: Biel
+    description: you guessed it, the name of the town.
+  country:
+    type: string
+    maxLength: 2
+    example: CH
+    description: >-
+      a political area, surrounded by borders, very often a natural border such
+      as a river or a mountain.

@@ -1,0 +1,12 @@
+in: query
+name: language
+required: true
+schema:
+  type: string
+  enum:
+    - de
+    - fr
+    - it
+    - en
+  example: fr
+description: Language of Document content.

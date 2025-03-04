@@ -1,0 +1,8 @@
+in: path
+name: financingRequestId
+required: true
+schema:
+  type: string
+  format: uuid
+  example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
+description: Uuid v4 of the financing request.
