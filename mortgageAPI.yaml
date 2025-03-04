@@ -2,10 +2,10 @@ openapi: 3.0.0
 info:
   version: 4.0.0
   title: Common Mortgage API (Public)
-  description: >-
-    This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who
-    want to get, extend, or transfer mortgages from and to financial institutions. This specification uses schema definitions from the Common Data
-    Model v1.2.2.
+  description: >
+    This specification defines a common mortgage API for mortgages as used in Switzerland.
+    The API is supposed to be used by requesting parties who want to get, extend, or transfer mortgages from and to financial institutions.
+    This specification uses schema definitions from the Common Data Model v1.2.2.
   termsOfService: Tbd
   contact:
     email: info@common-api.ch
@@ -17,11 +17,14 @@ servers:
 externalDocs:
   description: Find out more about SFTI API specifications
   url: https://www.common-api.ch
+
 tags:
-  - name: Existing Mortgages
-    description: Operations related with existing mortgages.
   - name: Full Mortgage Cases
     description: Operations related to full mortgage cases including the application details.
+  - name: Existing Mortgages
+    description: Operations related with existing mortgages.
+  - name: Mortgage Products and Conditions
+    description: Operations for synchronizing general mortgage product information from an FI.
   - name: Mortgage Application
     description: Operations needed to place an application (dossier) for a new mortgage.
   - name: Mortgage Financing Request
@@ -30,15 +33,15 @@ tags:
     description: Operations for handling the binding offers an FI provides.
   - name: Mortgage Order
     description: Operations for placing a binding order for a chosen offer.
-  - name: Mortgage Products and Conditions
-    description: Operations for synchronizing general mortgage product information from an FI.
   - name: Mortgage Prolongation
     description: Operations for handling the common special case of prolonging an existing mortgage.
+
 security:
   - ApiKeyAuth: []
   - OAuth2:
       - read
       - write
+
 paths:
   /mortgage-cases:
     get:
@@ -49,9 +52,9 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -87,6 +90,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgage-cases/{caseId}:
     get:
       tags:
@@ -94,10 +98,10 @@ paths:
       summary: Return a specific existing mortgage case
       description: A specific existing mortgage case including the corresponding properties.
       parameters:
-        - $ref: '#/components/parameters/caseId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -127,6 +131,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages:
     get:
       tags:
@@ -142,9 +147,9 @@ paths:
           example: true
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -180,6 +185,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/{mortgageId}:
     get:
       tags:
@@ -187,10 +193,10 @@ paths:
       summary: Return a specific existing mortgage
       description: A specific existing mortgage including the corresponding properties and related mortgages.
       parameters:
-        - $ref: '#/components/parameters/mortgageId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_mortgageId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -220,6 +226,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/products:
     get:
       summary: Get a list of all mortgage products
@@ -241,9 +248,9 @@ paths:
         - $ref: '#/components/parameters/duration'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -279,6 +286,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/products/{productId}/conditions:
     get:
       summary: Get the general conditions for the specified mortgage product
@@ -286,16 +294,16 @@ paths:
       tags:
         - Mortgage Products and Conditions
       parameters:
-        - $ref: '#/components/parameters/productId'
+        - $ref: '#/components/parameters/path_productId'
         - $ref: '#/components/parameters/limit'
         - in: query
           name: interest
           schema:
             type: string
           description: The interest (for filtering).
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -327,21 +335,21 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications:
     post:
       summary: Place a new mortgage application (serves as dossier)
-      description: >
+      description: |
         Place a new application including all necessary information about the property and applicant's financial situation.
 
-
-        **Note that in the case where the FI needs additional information on the property, the error response 400 must contain the minimum required
-        JSON object (PropertyObject) as detail**.
+        **Note that in the case where the FI needs additional information on the property, the error response 400 must contain
+        the minimum required JSON object (PropertyObject) as detail**.
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Static details (requesting party, property object) of the application to be added as a dossier.
         required: true
@@ -368,6 +376,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications/required-information:
     get:
       summary: Get the required property information for the specific FI needed for valuation
@@ -375,9 +384,9 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -404,6 +413,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}:
     get:
       summary: Get the details of a specific placed application
@@ -411,10 +421,10 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -444,18 +454,19 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
     put:
       summary: Update the application's details
-      description: >-
-        Update the application's details. Note that changing the application's details should not be possible after the application has been accepted
-        by the FI.
+      description: >
+        Update the application's details. Note that changing the application's details should not be possible after the application
+        has been accepted by the FI.
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the order to be added.
         required: true
@@ -493,16 +504,17 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
     delete:
       summary: Cancel the application and removing it
       description: The request to delete a previously shared application.
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -534,53 +546,19 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}/swissrets:
-    get:
-      summary: Get property details in SwissRETS format
-      description: Get the real estate property's details in SwissRETS format XML according to https://swissrets.ch/.
-      tags:
-        - Mortgage Application
-      parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
-      responses:
-        '200':
-          headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
-          description: OK.
-          content:
-            application/xml:
-              schema:
-                type: string
-        '400':
-          $ref: '#/components/responses/standard400'
-        '401':
-          $ref: '#/components/responses/standard401'
-        '403':
-          $ref: '#/components/responses/standard403'
-        '404':
-          $ref: '#/components/responses/standard404'
-        '405':
-          $ref: '#/components/responses/standard405'
-        '500':
-          $ref: '#/components/responses/standard500'
-        '501':
-          $ref: '#/components/responses/standard501'
-        '503':
-          $ref: '#/components/responses/standard503'
     post:
       summary: Add property details in the SwissRETS standard
-      description: This endpoint allows to upload the real estate property's details as an XML file in the SwissRETS format according to https://swissrets.ch/.
+      description: >
+        This endpoint allows to upload the real estate property's details as an XML file in the SwissRETS format according to https://swissrets.ch/.
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the real estate property to be added.
         required: true
@@ -607,16 +585,53 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
+    get:
+      summary: Get property details in SwissRETS format
+      description: Get the real estate property's details in SwissRETS format XML according to https://swissrets.ch/.
+      tags:
+        - Mortgage Application
+      parameters:
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
+      responses:
+        '200':
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          description: OK.
+          content:
+            application/xml:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
     put:
       summary: Update the real estate property's details
       description: This endpoint allows to upload a modified XML file in the SwissRETS format changing the already existing information.
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the real estate property to be added.
         required: true
@@ -654,7 +669,78 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}/documents:
+    post:
+      summary: Add documents for the specific application
+      description: Documents can be assigned to a specific application ID.
+      tags:
+        - Mortgage Application
+      parameters:
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
+      requestBody:
+        description: Details of the document to be added.
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - documentType
+                - fileContent
+                - name
+                - type
+                - size
+              properties:
+                documentType:
+                  $ref: '#/components/schemas/DocumentType'
+                fileContent:
+                  type: string
+                  format: binary
+                  description: The file content.
+                name:
+                  type: string
+                  description: The name of the file without file type extension.
+                  maxLength: 128
+                  example: my-property-flyer
+                type:
+                  type: string
+                  description: The file type.
+                  maxLength: 64
+                  example: application/pdf
+                size:
+                  type: integer
+                  format: int64
+                  description: The file size in bytes.
+                  example: 21543
+                applicantId:
+                  type: string
+                  format: uuid
+                  description: UUID v4 of the applicant (existing applicant within the current application).
+                  example: 576f8de3-6b30-4882-a7af-da2132a456cf
+      responses:
+        '201':
+          $ref: '#/components/responses/standard201'
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+
     get:
       summary: Get a list of submitted documents for a specifically placed application
       description: All documents that have been shared against the Application ID can be retrieved here.
@@ -663,10 +749,10 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -739,89 +825,21 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
-    post:
-      summary: Add documents for the specific application
-      description: Documents can be assigned to a specific application ID.
-      tags:
-        - Mortgage Application
-      parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
-      requestBody:
-        description: Details of the document to be added.
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              required:
-                - documentType
-                - fileContent
-                - name
-                - type
-                - size
-              properties:
-                documentType:
-                  $ref: '#/components/schemas/DocumentType'
-                fileContent:
-                  type: string
-                  format: binary
-                  description: The file content.
-                name:
-                  type: string
-                  description: The name of the file without file type extension.
-                  maxLength: 128
-                  example: my-property-flyer
-                type:
-                  type: string
-                  description: The file type.
-                  maxLength: 64
-                  example: application/pdf
-                size:
-                  type: integer
-                  format: int64
-                  description: The file size in bytes.
-                  example: 21543
-                applicantId:
-                  type: string
-                  format: uuid
-                  description: UUID v4 of the applicant (existing applicant within the current application).
-                  example: 576f8de3-6b30-4882-a7af-da2132a456cf
-      responses:
-        '201':
-          $ref: '#/components/responses/standard201'
-        '400':
-          $ref: '#/components/responses/standard400'
-        '401':
-          $ref: '#/components/responses/standard401'
-        '403':
-          $ref: '#/components/responses/standard403'
-        '404':
-          $ref: '#/components/responses/standard404'
-        '405':
-          $ref: '#/components/responses/standard405'
-        '500':
-          $ref: '#/components/responses/standard500'
-        '501':
-          $ref: '#/components/responses/standard501'
-        '503':
-          $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}/documents/{documentId}:
     delete:
       summary: Delete a formerly uploaded document
-      description: >-
-        Deletes a specific document attached to a specific application. Note that deleting documents should not be possible after the application has
-        been accepted by the FI.
+      description: >
+        Deletes a specific document attached to a specific application.
+        Note that deleting documents should not be possible after the application has been accepted by the FI.
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/documentId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_documentId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -852,6 +870,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}/status:
     get:
       summary: Get the current status of the application
@@ -859,10 +878,10 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -901,6 +920,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}/financing-requests:
     post:
       summary: Place a new financing-request for a specific accepted application (dossier)
@@ -908,10 +928,10 @@ paths:
       tags:
         - Mortgage Financing Request
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Specific financing request fo the given application (dossier).
         required: true
@@ -938,6 +958,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/required-information:
     get:
       summary: List all required documents / information for processing specific Financial request at FI
@@ -945,11 +966,11 @@ paths:
       tags:
         - Mortgage Financing Request
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/financingRequestId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_financingRequestId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -985,6 +1006,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}:
     get:
       summary: Get the details of a financing request
@@ -994,11 +1016,11 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/financingRequestId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_financingRequestId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -1034,6 +1056,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers:
     get:
       summary: List all binding offers for a given financing request
@@ -1041,11 +1064,11 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/financingRequestId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_financingRequestId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -1077,6 +1100,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}:
     get:
       summary: Get the details of a specific offer
@@ -1084,12 +1108,12 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/financingRequestId'
-        - $ref: '#/components/parameters/offerId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_financingRequestId'
+        - $ref: '#/components/parameters/path_offerId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -1119,6 +1143,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/offers/{offerId}/document:
     get:
       summary: Get document for the given offer
@@ -1126,11 +1151,11 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: '#/components/parameters/offerId'
+        - $ref: '#/components/parameters/path_offerId'
         - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -1163,16 +1188,18 @@ paths:
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}/required-information:
     get:
       summary: List all required documents / information for processing specific offer at FI
-      description: Lists the required documents for the previously submitted case. Thus, the TPP knows which documents are needed for the later check.
+      description: >
+        Lists the required documents for the previously submitted case.
+        Thus, the TPP knows which documents are needed for the later check.
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/financingRequestId'
-        - $ref: '#/components/parameters/offerId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_applicationId'
+        - $ref: '#/components/parameters/path_financingRequestId'
+        - $ref: '#/components/parameters/path_offerId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -1208,18 +1235,19 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/orders:
     post:
       summary: Place a new order
-      description: >-
-        Place a new order referencing a specific offerId and either an existing mortgage id (prolongation) or an application id (new mortgage)
-        including all relevant information.
+      description: >
+        Place a new order referencing a specific offerId and either an existing mortgage id (prolongation)
+        or an application id (new mortgage) including all relevant information.
       tags:
         - Mortgage Order
       parameters:
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       requestBody:
         description: Details of the order to be added.
         required: true
@@ -1246,6 +1274,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/orders/{orderId}:
     get:
       summary: Get the details of a specific placed order
@@ -1253,10 +1282,10 @@ paths:
       tags:
         - Mortgage Order
       parameters:
-        - $ref: '#/components/parameters/orderId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_orderId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -1286,19 +1315,20 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/orders/{orderId}/status:
     get:
       summary: Get the current status of the order
-      description: >-
-        Returns the current status of the order. An order can be in accepted rejected or pending status. In addition, further details regarding the
-        status can be transferred.
+      description: >
+        Returns the current status of the order. An order can be in accepted rejected or pending status.
+        In addition, further details regarding the status can be transferred.
       tags:
         - Mortgage Order
       parameters:
-        - $ref: '#/components/parameters/orderId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_orderId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -1336,6 +1366,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/orders/{orderId}/document:
     get:
       summary: Get document for the given order
@@ -1343,11 +1374,11 @@ paths:
       tags:
         - Mortgage Order
       parameters:
-        - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -1377,6 +1408,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/{mortgageId}/offers:
     get:
       tags:
@@ -1386,10 +1418,10 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/mortgageId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_mortgageId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -1425,6 +1457,7 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
   /mortgages/{mortgageId}/offers/{offerId}:
     get:
       tags:
@@ -1432,11 +1465,11 @@ paths:
       summary: Get a specific offer for a specific tranche
       description: Get a specific offer for the to be extended mortgage.
       parameters:
-        - $ref: '#/components/parameters/mortgageId'
-        - $ref: '#/components/parameters/offerId'
-        - $ref: '#/components/parameters/clientid'
-        - $ref: '#/components/parameters/correlation'
-        - $ref: '#/components/parameters/agent'
+        - $ref: '#/components/parameters/path_mortgageId'
+        - $ref: '#/components/parameters/path_offerId'
+        - $ref: '#/components/parameters/clientid_in_header'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/agent_in_header'
       responses:
         '200':
           headers:
@@ -1466,370 +1499,198 @@ paths:
           $ref: '#/components/responses/standard501'
         '503':
           $ref: '#/components/responses/standard503'
+
+# -------------------------
+# -------- Models ---------
+# -------------------------
 components:
   schemas:
-    StructuredAddress:
-      title: Structured Address
-      description: structured address.
+    # ---- Common Data Model v1.2.0
+    # ---- Date Formats
+    Date:
+      type: string
+      format: date
+      example: 2018-04-13
+      description: Date format.
+
+    DateTime:
+      type: string
+      format: date-time
+      example: 2018-04-13T11:11:11Z
+      description: DateTime format.
+
+    # ---- Links for Pagination----
+    LinksPagination:
+      description: Links (or cursors) returned in the answer of an API call.
+      type: object
+      properties:
+        self:
+          type: string
+          description: Link / cursor to the current result set (based on the submitted pagination approach).
+          example: /mortgage-app/api/v1/products?offset=75&limit=25
+        first:
+          type: string
+          description: Link / cursor to the first result set (based on the submitted pagination approach).
+          example: /mortgage-app/api/v1/products?offset=0&limit=25
+        previous:
+          type: string
+          description: Link / cursor to the previous result set (based on the submitted pagination approach).
+          example: /mortgage-app/api/v1/products?offset=50&limit=25
+        next:
+          type: string
+          description: Link / cursor to the next result set (based on the submitted pagination approach).
+          example: /mortgage-app/api/v1/products?offset=100&limit=25
+        last:
+          type: string
+          description: Link / cursor to the last result set (based on the submitted pagination approach).
+          example: /mortgage-app/api/v1/products?offset=150&limit=25
+
+    # ---- Currency ----
+    Currency:
+      description: ISO 4217 code.
+      type: string
+      pattern: '^[A-Z]{3}$'
+      example: CHF
+
+    # ---- Amount ----
+    Amount:
+      description: amount with currency.
       type: object
       required:
-        - country
-        - postCode
-        - streetName
-        - townName
+        - currency
+        - content
       properties:
-        country:
+        currency:
+          $ref: '#/components/schemas/Currency'
+        content:
+          description: amount given with fractional digits, the separator is a dot.
           type: string
-          maxLength: 2
-          example: CH
-          description: a political area, surrounded by borders, very often a natural border such as a river or a mountain.
-        postCode:
-          type: string
-          maxLength: 16
-          description: zip code.
-          example: CH-2501
+          pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
+          example: '235.45'
+
+    # ---- Address compliant to payment address (b.Link & ISO20022)----
+    StructuredAddress:
+      description: structured address.
+      title: Structured Address
+      type: object
+      required:
+        - streetName
+        - postCode
+        - townName
+        - country
+      properties:
         streetName:
           type: string
           maxLength: 70
           example: Rue de la gare
           description: Name of street.
-        townName:
-          type: string
-          maxLength: 35
-          example: Biel
-          description: you guessed it, the name of the town.
         buildingNumber:
           type: string
           maxLength: 16
           example: 24A
           description: number of building.
-    Amount:
-      description: amount with currency.
+        postCode:
+          type: string
+          maxLength: 16
+          description: zip code.
+          example: CH-2501
+        townName:
+          type: string
+          maxLength: 35
+          example: Biel
+          description: you guessed it, the name of the town.
+        country:
+          type: string
+          maxLength: 2
+          example: CH
+          description: a political area, surrounded by borders, very often a natural border such as a river or a mountain.
+
+    # ---- Country Code ----
+    Country:
+      type: string
+      pattern: '^[A-Z]{2}$'
+      example: CH
+      description: 2-Letter ISO 3166-2 Country Code.
+
+    # ---- Response
+    CommonResourceCreatedResponse:
+      title: Resource created response
+      description: Uuid v4 of the created resource.
       type: object
       required:
-        - content
-        - currency
+        - id
       properties:
-        content:
-          description: amount given with fractional digits, the separator is a dot.
+        id:
+          $ref: '#/components/schemas/CommonID'
+          description: Uuid v4 of the created resource.
+
+    CommonErrorResponse:
+      title: Common Error Response
+      description: ...
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+        title:
           type: string
-          pattern: ^-?\d{1,14}(?:\.\d{1,3})?$
-          example: '235.45'
-        currency:
-          title: Currency
-          description: ISO 4217 code.
+          example: This is the general problem description
+          description: ..
+        detail:
+          description: ..
+          type: array
+          items:
+            type: string
+            example: List of detailed problem description with respect to the current request
+            description: ..
+        instance:
           type: string
-          pattern: ^[A-Z]{3}$
-          example: CHF
-    PropertyObjectRatingType:
-      description: The rating type.
+          example: path/to/corresponding/resource
+          description: ..
+
+    CommonErrorType:
+      title: Common Error Type
+      description: Error Types for commonErrorResponse.
       type: string
       enum:
-        - bad
-        - bad-medium
-        - medium
-        - medium-good
-        - good
-        - good-verygood
-        - verygood
-      example: good
-    PropertyIdentifier:
-      description: Property identification (register of real estate).
-      type: object
-      properties:
-        EGID:
-          type: string
-          example: '191092250'
-          description: Identifier of the property.
-        EGRID:
-          type: string
-          example: CH480928387782
-          description: Identifier of land a property is built on.
-        EWID:
-          type: string
-          example: '42'
-          description: Identifier of the apartment.
-    Link:
-      description: Object containing a link to an external resource and its description.
-      type: object
-      required:
-        - url
-      properties:
-        url:
-          description: The URL pointing to the resource.
-          type: string
-          format: uri
-          minLength: 2
-          example: http://www.example.com/property.png
-        description:
-          description: A description of the resource.
-          type: string
-          example: The image shows the aerial view of the property
-        name:
-          description: The name of the resource.
-          type: string
-          example: Property image
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+      example: /problems/TECHNICAL_ERROR
+    # ---- End Response
+    # ---- End Common Data Model
+
     PropertyObject:
-      description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law.
+      description: >
+        The representation of a real estate object, real estate register id (propertyIdentifier) is optional
+        until otherwise required by law.
       type: object
       required:
-        - address
         - propertyObjectId
+        - address
       properties:
-        address:
-          $ref: '#/components/schemas/StructuredAddress'
         propertyObjectId:
           type: string
           description: The property object identifier defined by TPP.
           example: 9343dd26-4b54-4808-8978-538f8e869d0e
-        buildingRight:
-          type: object
-          description: if a property is in building right, the buyer owner buy the property, not the ground the property is built on.
-          properties:
-            hasBuildingRight:
-              type: boolean
-              description: If the property is built in a building right true, else false.
-              example: false
-            buildingRightExpiry:
-              description: Date when the building right expires.
-              type: string
-              format: date
-              example: '2018-04-13'
-            buildingRightRent:
-              $ref: '#/components/schemas/Amount'
-              description: Yearly payment for the building right.
-            buildingRightCompensation:
-              $ref: '#/components/schemas/Amount'
-              description: Payment received at the building right expiry.
-        buildingStandardBathroom:
-          type: string
-          enum:
-            - premium
-            - highlevel
-            - basic
-            - lowlevel
-          description: Building standard of the sanitary installations.
-          example: basic
-        buildingStandardFloorCoverings:
-          type: string
-          enum:
-            - premium
-            - highlevel
-            - basic
-            - lowlevel
-          description: Building standard of the floor coverings.
-          example: basic
-        buildingStandardKitchen:
-          type: string
-          enum:
-            - premium
-            - highlevel
-            - basic
-            - lowlevel
-          description: Building standard of the kitchen.
-          example: basic
-        ceilingHight:
-          type: string
-          enum:
-            - especially_high
-            - middle
-            - especially_low
-          description: The ceiling hight in the rooms.
-          example: middle
-        classOfProperty:
-          type: string
-          enum:
-            - main_residence
-            - main_residence_with_use_restriction
-            - second_residence
-            - second_residence_with_use_restriction
-            - rented_property
-            - rented_property_with_use_restriction
-            - other
-          description: The class of property (Main residence, second residence, rented).
-          example: main_residence
-        collateralValue:
-          $ref: '#/components/schemas/Amount'
-          description: Value of the property as base for the securization applying the lowest value principle (Belehnungsbasis)
-        estimation:
-          type: object
-          description: the estimation of the value of a property.
-          properties:
-            estimationId:
-              type: string
-              description: >
-                ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external
-                estimation tool.
-              example: asd23f
-            estimationSourceType:
-              type: string
-              example: iazi
-              enum:
-                - iazi
-                - wup
-            marketValue:
-              $ref: '#/components/schemas/Amount'
-              description: Estimated Market value of the property.
-            statisticalPriceRangeMax:
-              $ref: '#/components/schemas/Amount'
-              description: Estimated statistical price range maximum.
-            statisticalPriceRangeMin:
-              $ref: '#/components/schemas/Amount'
-              description: Estimated statistical price range minimum.
-            yearlyRentalIncome:
-              $ref: '#/components/schemas/Amount'
-              description: Estimated rental income per year
-            estimationDate:
-              description: Date format.
-              type: string
-              format: date
-              example: '2018-04-13'
-        floorPlan:
-          type: string
-          enum:
-            - efficient
-            - average
-            - inefficient
-          description: The efficiency of the floor plan.
-          example: average
-        heatEmission:
-          description: Type of the heat emission.
-          type: array
-          items:
-            type: string
-            enum:
-              - floor
-              - radiator
-              - stove
-              - other
-            example: floor
-        heatProduction:
-          description: the way heat is generated within the building.
-          type: array
-          items:
-            type: string
-            enum:
-              - oil
-              - gas
-              - biogas
-              - wood
-              - electric
-              - geothermal_probe
-              - heat_pump_water_water
-              - heat_pump_air_water
-              - district
-              - district_fossil
-              - solar_panel
-              - solar_thermal_collector
-              - block_type_thermal_power_station
-              - block_type_thermal_power_station_bio
-            description: Type of the heat production.
-            example: gas
-        investmentCost:
-          $ref: '#/components/schemas/Amount'
-          description: Total amount needed to pay object price and planned renovation (Total Anlagekosten)
-        limitForLandEncumbrances:
-          $ref: '#/components/schemas/Amount'
-          description: The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)
-        matrimonialPropertyScheme:
-          type: string
-          example: separateEstate
-          enum:
-            - jointEstate
-            - separateEstate
-            - contributionToJointlyAcquiredProperty
-          description: Information how the property is owned.
         name:
           type: string
           description: User-defined property name.
           example: My Nice Property
-        objectPrice:
-          $ref: '#/components/schemas/Amount'
-          description: Price paid to buy the property
-        outsideConstructionZone:
-          type: boolean
-          description: If the property is outside of the construction zone.
-          example: false
-        propertyBuildingInformation:
-          type: object
-          description: The property building information.
-          properties:
-            livingSpace:
-              type: object
-              properties:
-                livingSpaceInSqm:
-                  type: integer
-                  description: The area of the living space in quatermeter.
-                  example: 120
-                measurementStandard:
-                  type: string
-                  enum:
-                    - nla
-                    - gfa
-                  description: The measurement standard used to determine the living space (nla or gfa).
-                  example: nla
-            roofFloorExpandable:
-              type: boolean
-              description: If the roof floor is expandable true, else false.
-              example: false
-            volumeIncludingGarageInhouse:
-              type: integer
-              description: The volume of the house including the inhouse garage (relevant for WuP).
-              example: 1500
-            volumeIncludingAllGarages:
-              type: integer
-              description: The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).
-              example: 1620
-            landArea:
-              type: integer
-              description: The surface area of the land.
-              example: 2000
-            environmentStandard:
-              type: string
-              enum:
-                - high-level
-                - basic
-                - low-level
-              description: The rating type
-              example: basic
-            otherFeatures:
-              type: array
-              items:
-                type: string
-                enum:
-                  - barrier-free_living
-                  - automated_building_control
-                  - ventilation_system_without_minergie
-                  - indoor_pool
-                  - outdoor_pool
-                  - whirlpool_sauna
-                  - heated_conservatory
-                  - unheated_conservatory
-                  - security_system
-                  - chimney
-                  - passenger_elevator
-                  - freight_elevator
-                description: Additional features and services.
-                example: outdoor_pool
-            houseType:
-              type: string
-              enum:
-                - detached_house
-                - semidetached_house
-                - row_house
-                - row_corner_house
-                - terrace_house
-              description: The type of the house.
-              example: detached_house
-            normType:
-              type: string
-              enum:
-                - building_insurance
-                - sia116
-                - sia416
-                - other
-              description: The norm type.
-              example: building_insurance
+        address:
+          $ref: '#/components/schemas/StructuredAddress'
+        propertyIdentifier:
+          $ref: '#/components/schemas/PropertyIdentifier'
         propertyConstructionInformation:
           type: object
           description: The property construction information.
@@ -1873,8 +1734,8 @@ components:
                       - building_envelope
                       - building_services
                     description: >
-                      Type of Property Component which has been renovated. Please use consistently either the detailed Component types (e.g.
-                      interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings).
+                      Type of Property Component which has been renovated. Please use consistently either the detailed Component types
+                      (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings).
                     example: interior_fittings_floor_cover
                   yearOfRenovation:
                     type: integer
@@ -1930,6 +1791,133 @@ components:
               $ref: '#/components/schemas/PropertyObjectRatingType'
             stateBuildingType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
+        classOfProperty:
+          type: string
+          enum:
+            - main_residence
+            - main_residence_with_use_restriction
+            - second_residence
+            - second_residence_with_use_restriction
+            - rented_property
+            - rented_property_with_use_restriction
+            - other
+          description: The class of property (Main residence, second residence, rented).
+          example: main_residence
+        matrimonialPropertyScheme:
+          type: string
+          example: separateEstate
+          enum:
+            - jointEstate
+            - separateEstate
+            - contributionToJointlyAcquiredProperty
+          description: Information how the property is owned.
+        floorPlan:
+          type: string
+          enum:
+            - efficient
+            - average
+            - inefficient
+          description: The efficiency of the floor plan.
+          example: average
+        usageType:
+          type: string
+          enum:
+            - self
+            - let
+          description: >
+            The type of usage of the financing property: self, let
+          example: self
+        propertyType:
+          type: string
+          enum:
+            - single_family_house
+            - condominium
+            - vacation_house
+            - vacation_condominium
+            - agricultural_farm
+            - 2or3_family_house
+            - multi_family_house
+            - residential_building_plot
+            - building_plot_other
+            - mixed_property
+            - commercial_condominium
+            - office_building
+            - industrial_building
+            - special_object
+          description: The type of property.
+          example: single_family_house
+        ceilingHight:
+          type: string
+          enum:
+            - especially_high
+            - middle
+            - especially_low
+          description: The ceiling hight in the rooms.
+          example: middle
+        buildingStandardFloorCoverings:
+          type: string
+          enum:
+            - premium
+            - highlevel
+            - basic
+            - lowlevel
+          description: Building standard of the floor coverings.
+          example: basic
+        buildingStandardKitchen:
+          type: string
+          enum:
+            - premium
+            - highlevel
+            - basic
+            - lowlevel
+          description: Building standard of the kitchen.
+          example: basic
+        buildingStandardBathroom:
+          type: string
+          enum:
+            - premium
+            - highlevel
+            - basic
+            - lowlevel
+          description: Building standard of the sanitary installations.
+          example: basic
+        heatEmission:
+          description: Type of the heat emission.
+          type: array
+          items:
+            type: string
+            enum:
+              - floor
+              - radiator
+              - stove
+              - other
+            example: floor
+        heatProduction:
+          description: the way heat is generated within the building.
+          type: array
+          items:
+            type: string
+            enum:
+              - oil
+              - gas
+              - biogas
+              - wood
+              - electric
+              - geothermal_probe
+              - heat_pump_water_water
+              - heat_pump_air_water
+              - district
+              - district_fossil
+              - solar_panel
+              - solar_thermal_collector
+              - block_type_thermal_power_station
+              - block_type_thermal_power_station_bio
+            description: Type of the heat production.
+            example: gas
+        outsideConstructionZone:
+          type: boolean
+          description: If the property is outside of the construction zone.
+          example: false
         propertyElements:
           type: object
           description: The property detail information such as rooms count, parking places.
@@ -1954,7 +1942,7 @@ components:
               example: kitchen_full_room
             numberOfFamilyBathrooms:
               type: integer
-              description: |
+              description: >
                 Separate shower and bathtub in the bathroom (optional: toilet)
               example: 2
             numberOfBathWC:
@@ -1972,8 +1960,8 @@ components:
             numberOfSeparateGarages:
               type: integer
               description: >
-                The number of separated garages (covered parking spaces), which are located on the same property but are not included in the building
-                volume of the house (separate building insurance policy).
+                The number of separated garages (covered parking spaces), which are located on the same property but are not included
+                in the building volume of the house (separate building insurance policy).
               example: 2
             numberOfExternalSeparateGarages:
               type: integer
@@ -1982,8 +1970,8 @@ components:
             numberOfAttachedGarages:
               type: integer
               description: >
-                The number of garages which are attached to the house and which are included in the building volume of the house (don't have a
-                separate building insurance policy).
+                The number of garages which are attached to the house and which are included in the building volume of the house
+                (don't have a separate building insurance policy).
               example: 2
             numberOfUndergroundCarParks:
               type: integer
@@ -2071,156 +2059,809 @@ components:
               example: multiple_family_house
             locationInTheBuildingRating:
               $ref: '#/components/schemas/PropertyObjectRatingType'
-        propertyIdentifier:
-          $ref: '#/components/schemas/PropertyIdentifier'
+        propertyBuildingInformation:
+          type: object
+          description: The property building information.
+          properties:
+            livingSpace:
+              type: object
+              properties:
+                livingSpaceInSqm:
+                  type: integer
+                  description: The area of the living space in quatermeter.
+                  example: 120
+                measurementStandard:
+                  type: string
+                  enum:
+                    - nla
+                    - gfa
+                  description: The measurement standard used to determine the living space (nla or gfa).
+                  example: nla
+            roofFloorExpandable:
+              type: boolean
+              description: If the roof floor is expandable true, else false.
+              example: false
+            volumeIncludingGarageInhouse:
+              type: integer
+              description: The volume of the house including the inhouse garage (relevant for WuP).
+              example: 1500
+            volumeIncludingAllGarages:
+              type: integer
+              description: The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).
+              example: 1620
+            landArea:
+              type: integer
+              description: The surface area of the land.
+              example: 2000
+            environmentStandard:
+              type: string
+              enum:
+                - high-level
+                - basic
+                - low-level
+              description: The rating type
+              example: basic
+            otherFeatures:
+              type: array
+              items:
+                type: string
+                enum:
+                  - barrier-free_living
+                  - automated_building_control
+                  - ventilation_system_without_minergie
+                  - indoor_pool
+                  - outdoor_pool
+                  - whirlpool_sauna
+                  - heated_conservatory
+                  - unheated_conservatory
+                  - security_system
+                  - chimney
+                  - passenger_elevator
+                  - freight_elevator
+                description: Additional features and services.
+                example: outdoor_pool
+            houseType:
+              type: string
+              enum:
+                - detached_house
+                - semidetached_house
+                - row_house
+                - row_corner_house
+                - terrace_house
+              description: The type of the house.
+              example: detached_house
+            normType:
+              type: string
+              enum:
+                - building_insurance
+                - sia116
+                - sia416
+                - other
+              description: The norm type.
+              example: building_insurance
+        valueRelevantServitudes:
+          type: boolean
+          description: If the property has servitudes true, else false.
+          example: false
+        buildingRight:
+          type: object
+          description: if a property is in building right, the buyer owner buy the property, not the ground the property is built on.
+          properties:
+            hasBuildingRight:
+              type: boolean
+              description: If the property is built in a building right true, else false.
+              example: false
+            buildingRightExpiry:
+              $ref: '#/components/schemas/Date'
+              description: Date when the building right expires.
+            buildingRightRent:
+              $ref: '#/components/schemas/Amount'
+              description: Yearly payment for the building right.
+            buildingRightCompensation:
+              $ref: '#/components/schemas/Amount'
+              description: Payment received at the building right expiry.
+        objectPrice:
+          $ref: '#/components/schemas/Amount'
+          description: Price paid to buy the property
+        renovationAmount:
+          $ref: '#/components/schemas/Amount'
+          description: Amount needed to pay the planned renovation (Renovationsbetrag)
+        investmentCost:
+          $ref: '#/components/schemas/Amount'
+          description: Total amount needed to pay object price and planned renovation (Total Anlagekosten)
+        collateralValue:
+          $ref: '#/components/schemas/Amount'
+          description: Value of the property as base for the securization applying the lowest value principle (Belehnungsbasis)
+        limitForLandEncumbrances:
+          $ref: '#/components/schemas/Amount'
+          description: The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)
+        estimation:
+          type: object
+          description: the estimation of the value of a property.
+          properties:
+            estimationId:
+              type: string
+              description: >
+                ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external
+                estimation tool.
+              example: asd23f
+            estimationSourceType:
+              type: string
+              example: iazi
+              enum:
+                - iazi
+                - wup
+            marketValue:
+              $ref: '#/components/schemas/Amount'
+              description: Estimated Market value of the property.
+            statisticalPriceRangeMax:
+              $ref: '#/components/schemas/Amount'
+              description: Estimated statistical price range maximum.
+            statisticalPriceRangeMin:
+              $ref: '#/components/schemas/Amount'
+              description: Estimated statistical price range minimum.
+            yearlyRentalIncome:
+              $ref: '#/components/schemas/Amount'
+              description: Estimated rental income per year
+            estimationDate:
+              $ref: '#/components/schemas/Date'
+        transferOfOwnershipDate:
+          $ref: '#/components/schemas/Date'
+          description: When the property will be fully transferred to the new owner.
+        publicNotarization:
+          $ref: '#/components/schemas/Date'
+          description: Date of public notarization
+        remarks:
+          type: string
+          description: Remark regarding the estimation.
+          example: We need an example for such a remark
         propertyLinks:
           description: A list of links to external resources related to the property.
           type: array
           items:
             $ref: '#/components/schemas/Link'
-        propertyType:
+
+    PropertyIdentifier:
+      description: Property identification (register of real estate).
+      type: object
+      properties:
+        EGRID:
           type: string
-          enum:
-            - single_family_house
-            - condominium
-            - vacation_house
-            - vacation_condominium
-            - agricultural_farm
-            - 2or3_family_house
-            - multi_family_house
-            - residential_building_plot
-            - building_plot_other
-            - mixed_property
-            - commercial_condominium
-            - office_building
-            - industrial_building
-            - special_object
-          description: The type of property.
-          example: single_family_house
-        publicNotarization:
-          description: Date of public notarization
+          example: CH480928387782
+          description: Identifier of land a property is built on.
+        EGID:
           type: string
-          format: date
-          example: '2018-04-13'
-        remarks:
+          example: '191092250'
+          description: Identifier of the property.
+        EWID:
           type: string
-          description: Remark regarding the estimation.
-          example: We need an example for such a remark
-        renovationAmount:
+          example: '42'
+          description: Identifier of the apartment.
+
+    Mortgage:
+      description: All relevant information regarding a specific mortgage.
+      type: object
+      required:
+        - mortgageId
+        - product
+        - amountAtExpiry
+        - validFrom
+        - validTo
+        - interestRate
+        - interestRateType
+        - interestBasis
+        - durationType
+        - prolongable
+        - propertyObjects
+      properties:
+        mortgageId:
+          type: string
+          format: uuid
+          example: 206065b9-977b-4d2c-9092-00acf2392346
+          description: Uuid v4 of the specific mortgage.
+        product:
+          $ref: '#/components/schemas/Product'
+        amountAtExpiry:
           $ref: '#/components/schemas/Amount'
-          description: Amount needed to pay the planned renovation (Renovationsbetrag)
-        transferOfOwnershipDate:
-          description: When the property will be fully transferred to the new owner.
+        amountToday:
+          $ref: '#/components/schemas/Amount'
+        validFrom:
+          $ref: '#/components/schemas/Date'
+        offerDate:
+          $ref: '#/components/schemas/Date'
+          description: >
+            The date when the offer is made by the FI. Optional field for use cases where no MortgageOffer object is used and
+            therefore the offer date needs to be directly in Mortgage object.
+          example: 2018-04-05
+        validTo:
+          $ref: '#/components/schemas/Date'
+        interestRate:
           type: string
-          format: date
-          example: '2018-04-13'
-        usageType:
+          description: interest rate to be paid by debtor.
+          example: '1.4'
+        interestRateType:
+          type: string
+          description: type of interest rate.
+          example: libor
+          enum:
+            - variable
+            - libor
+            - saron
+            - fixed
+        interestBasis:
+          type: string
+          description: we need a description.
+          example: We need an example
+        durationType:
+          type: integer
+          description: The duration in years.
+          minimum: 0
+          maximum: 25
+          example: 5
+        prolongable:
+          description: tells if a mortgage is prolongable or not.
+          type: boolean
+          example: 0
+        propertyObjects:
+          type: array
+          description: ..
+          items:
+            $ref: '#/components/schemas/PropertyObject'
+        relatedMortgages:
+          type: array
+          description: ..
+          items:
+            $ref: '#/components/schemas/Mortgage'
+
+    Offer:
+      description: All relevant details describing the FI's offer for a mortgage product.
+      type: object
+      required:
+        - offerId
+        - financingRequestId
+        - totalAmount
+        - validTo
+        - offerItems
+      properties:
+        offerId:
+          type: string
+          format: uuid
+          example: 46eb482d-1e18-4b93-ae88-da14ad4ac051
+          description: Uuid v4 of the specific order.
+        financingRequestId:
+          type: string
+          format: uuid
+          example: fd3f2940-c9c9-46e7-8ed6-ab9e90363b2e
+          description: Uuid v4 of a specific financing request.
+        totalAmount:
+          $ref: '#/components/schemas/Amount'
+        validTo:
+          $ref: '#/components/schemas/Date'
+        offerItems:
+          description: ..
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferItem'
+        offerType:
+          type: string
+          description: type of offer (binding or indicative).
+          example: binding
+          enum:
+            - binding
+            - indicative
+
+    OfferItem:
+      description: All relevant details of a specific item being part of an FI's offer for a mortgage product.
+      type: object
+      required:
+        - offerItemId
+        - product
+        - trancheId
+      properties:
+        trancheId:
+          type: string
+          format: uuid
+          description: Uuid of the tranche.
+          example: 51b017e1-5e59-4b58-a0a0-c638c87db463
+        offerItemId:
+          type: string
+          format: uuid
+          example: d452083f-8316-410d-a609-d49463687329
+          description: Uuid v4 of the specific offer item.
+        product:
+          $ref: '#/components/schemas/Product'
+        conditions:
+          description: ..
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+
+    ProductVariation:
+      description: Product variation details.
+      type: object
+      properties:
+        duration:
+          type: integer
+          description: The duration in years.
+          minimum: 0
+          maximum: 25
+          example: 5
+        rate:
+          type: number
+          format: double
+          description: The interest rate.
+          minimum: 0
+          maximum: 1
+          example: 0.5
+        saronperiod:
+          type: string
+          description: The saron period.
+          example: 3m
+          enum:
+            - 1m
+            - 3m
+            - 6m
+            - 12m
+
+    Product:
+      description: All details regarding an FI's mortgage product.
+      type: object
+      required:
+        - productId
+        - names
+        - interestRateType
+      properties:
+        productId:
+          type: string
+          format: uuid
+          description: The product identifier (UUID v4).
+          example: 20460121-6aff-485b-a61d-6056ecd72bd8
+        names:
+          type: array
+          description: name of mortgage product.
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+                description: Product name description.
+                example: Fixed rate mortgage
+              language:
+                type: string
+                description: Language of product name
+                example: fr
+                enum:
+                  - de
+                  - fr
+                  - it
+                  - en
+        productVariations:
+          type: array
+          description: ..
+          items:
+            $ref: '#/components/schemas/ProductVariation'
+        interestRateType:
+          type: string
+          description: type of interest rate.
+          example: libor
+          enum:
+            - variable
+            - libor
+            - saron
+            - fixed
+
+    Condition:
+      description: All details regarding the conditions for a specific mortgage product the FI offers.
+      type: object
+      required:
+        - conditionId
+        - productIdRef
+        - duration
+        - maturityDate
+        - interest
+        - amountRange
+        - amortization
+      properties:
+        conditionId:
+          description: ID of condition.
+          type: string
+          format: uuid
+          example: ef737eb0-c0a7-4f44-bdeb-32ba9bd99327
+        productIdRef:
+          type: string
+          description: Reference to product ID.
+          format: uuid
+          example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
+        duration:
+          type: integer
+          description: The duration in years.
+          minimum: 0
+          maximum: 25
+          example: 5
+        maturityDate:
+          $ref: '#/components/schemas/Date'
+        interest:
+          $ref: '#/components/schemas/Interest'
+        amountRange:
+          $ref: '#/components/schemas/AmountRange'
+        amortization:
+          description: the amount of repayment.
+          type: integer
+          example: 1000
+        amortizations:
+          $ref: '#/components/schemas/Amortizations'
+
+    Party:
+      description: Links together the persons building the applicant party.
+      type: object
+      required:
+        - personList
+      properties:
+        primaryApplicantId:
+          type: string
+          format: uuid
+          description: ApplicantId for primary applicant of the applicant party. In case of multiple applicants this field is mandatory.
+          example: 576f8de3-6b30-4882-a7af-da2132a456cf
+        fiPrimaryApplicantId:
+          type: string
+          description: >
+            ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple
+            applicants and if known at the moment of the application.
+          example: asd23f
+        personList:
+          description: ..
+          type: array
+          items:
+            $ref: '#/components/schemas/Applicant'
+
+    Application:
+      description: All static application information needed by the FI to create binding offers.
+      type: object
+      required:
+        - mortgageType
+        - requestingParty
+        - propertyInformation
+      properties:
+        applicationId:
+          type: string
+          format: uuid
+          description: The application identifier (UUID v4) defined by FI.
+          example: f157c4be-106d-4304-972e-091e77b87e1c
+        tppApplicationId:
+          type: string
+          description: The application alphanumeric identifier defined by TPP.
+          pattern: '^[a-zA-Z0-9]{6,10}$'
+          example: asd23f
+        requestingParty:
+          $ref: '#/components/schemas/Party'
+        propertyInformation:
+          $ref: '#/components/schemas/PropertyObject'
+        mortgageType:
+          type: string
+          description: Type of business.
+          example: buy
+          enum:
+            - buy
+            - replacement
+            - construction_financing
+        channelType:
           type: string
           enum:
-            - self
-            - let
-          description: |
-            The type of usage of the financing property: self, let
-          example: self
-        valueRelevantServitudes:
-          type: boolean
-          description: If the property has servitudes true, else false.
-          example: false
-    IncomeType:
-      description: |
-        Common set of income types. For the enum value self_employment and dividend the 3 years avg is relevant.
-      type: string
-      enum:
-        - employment_gross
-        - employment_net
-        - self_employment
-        - self_employment_year-1
-        - self_employment_year-2
-        - self_employment_year-3
-        - bonus_year-1
-        - bonus_year-2
-        - bonus_year-3
-        - additional_income
-        - child_allowance
-        - asset_consumption_before_retirement
-        - pension_fund_income
-        - ahv_income
-        - further_income_after_retirement
-        - asset_consumption_after_retirement
-        - fixed_expenses
-        - dividend
-        - leasing_payment
-        - consumer_loan_payment
-        - child_allowance_payment
-        - rental_costs
-        - costs_for_additional_properties
-      example: employment_gross
-    AssetType:
-      description: Common set of asset types.
-      type: string
-      enum:
-        - cash
-        - gift
-        - reservation_deposit
-        - advancement_of_inheritance
-        - third_pillar
-        - third_pillar_3a
-        - third_pillar_3b
-        - pension_fund
-        - third_party_loan
-        - third_pillar_fund
-        - third_pillar_fund_3b
-        - third_pillar_fund_3a
-        - fungible_investments
-        - other
-        - vested_benefit
-        - life_insurance_3a
-        - life_insurance_3b
-        - unpledged_building_plot
-      example: cash
-    AssetProvider:
-      description: >-
-        Asset provider for each asset, additional information must be transferred. E.g. in case the applicant owns an additional security of type
-        insurance, insurance company name is provided
+            - advisor
+            - direct
+          description: The type of the channel the application was generated.
+          example: advisor
+        replacementType:
+          type: string
+          description: >
+            NOT required when mortgage type is BUY, Values: entire, partial.
+          example: entire
+          enum:
+            - entire
+            - partial
+        replacedTranches:
+          description: Tranche to be replaced.
+          type: array
+          items:
+            type: object
+            properties:
+              replacedTrancheAmount:
+                $ref: '#/components/schemas/Amount'
+                description: The amount of the replaced tranche.
+              replacedTrancheExpiry:
+                $ref: '#/components/schemas/Date'
+                description: The expiry date of the replaced tranche.
+                example: 2022-05-03
+              replacedTrancheIssuer:
+                type: string
+                description: The institute who has issued the replaced tranche.
+                example: Credit Suisse
+        tppAdvisorDetail:
+          description: Personal information if the advisor of the TPP.
+          type: object
+          properties:
+            name:
+              type: string
+              maxLength: 70
+              description: Name of the TPP advisor.
+              example: Max
+            surName:
+              type: string
+              maxLength: 70
+              description: Surname of the TPP advisor.
+              example: Muster
+            nameTpp:
+              type: string
+              maxLength: 70
+              description: Firm of the TPP advisor.
+              example: Muster Finanz AG
+            email:
+              type: string
+              description: Email of the TPP advisor.
+              example: max.muster@domain.ch
+            language:
+              type: string
+              example: fr
+              description: Preferred contact language of the TPP advisor.
+              enum:
+                - de
+                - fr
+                - it
+                - en
+            phone:
+              type: string
+              description: phone of the TPP advisor.
+              example: '+41443343456'
+            address:
+              $ref: '#/components/schemas/StructuredAddress'
+
+    Advertiser:
+      description: Information about the person or agency selling the property, in case it is applicable and known.
       type: object
       required:
         - name
       properties:
-        name:
+        advertiserType:
+          description: Specifies if the advertiser is a private person, a company or an agency.
           type: string
-          example: Credit Suisse
-          description: Name of the asset provider.
-    Asset:
-      description: 'Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.'
+          enum:
+            - private
+            - company
+            - agency
+          example: agency
+        name:
+          description: The name of the advertiser.
+          maxLength: 140
+          example: Real Estate Agency AG
+        contactPerson:
+          description: The person to contact in case the advertiser is an agency or a company.
+          type: string
+          maxLength: 140
+          example: Max Muster
+        language:
+          description: Preferred contact language of the advertiser.
+          type: string
+          example: fr
+          enum:
+            - de
+            - fr
+            - it
+            - en
+        phone:
+          description: The number on which the advertiser can be reached.
+          type: string
+          minLength: 4
+          maxLength: 13
+          example: '+41443343456'
+        email:
+          description: The email address on which the advertiser can be contacted.
+          type: string
+          format: email
+          minLength: 5
+          example: max.muster@domain.ch
+        address:
+          $ref: '#/components/schemas/StructuredAddress'
+
+    MortgageCase:
+      description: A complete mortgage case including the application details.
+      type: object
+      required:
+        - caseId
+        - application
+        - financing
+      properties:
+        caseId:
+          type: string
+          format: uuid
+          example: 2e1d21c3-0cd5-4354-a9e9-d2eb2c28b780
+          description: Uuid v4 of the mortgage case.
+        application:
+          $ref: '#/components/schemas/Application'
+        financing:
+          $ref: '#/components/schemas/Financing'
+        remark:
+          type: string
+          example: All documents verified at TPP
+          description: Remark/comment which can be added by TPP.
+
+    Financing:
+      description: Complete financing details of an application.
       type: object
       required:
         - amount
-        - assetType
       properties:
+        financingId:
+          type: string
+          format: uuid
+          description: Uuid of the financing.
+          example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
+        applicationIdRef:
+          type: string
+          format: uuid
+          description: Uuid of the financing's corresponding application.
+          example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
         amount:
           $ref: '#/components/schemas/Amount'
-          description: >-
-            The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life
-            insurance
-        assetType:
-          $ref: '#/components/schemas/AssetType'
-        assetProvider:
-          $ref: '#/components/schemas/AssetProvider'
-        insuranceSum:
+        increaseAmount:
           $ref: '#/components/schemas/Amount'
-          description: The amount of the sum insured in life insurance.
-        remark:
+        increasePurpose:
           type: string
-          description: remark remark.
-          example: We need an example for such a remark
+          description: The purpose of the increase.
+          example: renovation of the kitchen
+        amortizations:
+          $ref: '#/components/schemas/Amortizations'
+        tranches:
+          description: mortgage tranches.
+          type: array
+          items:
+            $ref: '#/components/schemas/FinancingTranche'
+        usedAssets:
+          type: array
+          description: used assets.
+          items:
+            $ref: '#/components/schemas/UsedAsset'
+        offerDate:
+          $ref: '#/components/schemas/Date'
+        publicCertDate:
+          $ref: '#/components/schemas/Date'
+
+    FinancingTranche:
+      description: Tranche of a financing.
+      type: object
+      required:
+        - amount
+        - payoutDate
+        - interest
+        - interestRateType
+      properties:
+        productIdRef:
+          type: string
+          format: uuid
+          description: Uuid of the product.
+          example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
+        amount:
+          $ref: '#/components/schemas/Amount'
+        payoutDate:
+          $ref: '#/components/schemas/Date'
+        maturityDate:
+          $ref: '#/components/schemas/Date'
+        duration:
+          type: integer
+          description: duratin of the mortgage in years.
+          example: 2
+          minimum: 1
+          maximum: 20
+        interest:
+          $ref: '#/components/schemas/Interest'
+        interestRateType:
+          type: string
+          description: type of interest rate.
+          example: libor
+          enum:
+            - variable
+            - libor
+            - saron
+            - fixed
+        saronperiod:
+          type: string
+          description: The saron period.
+          example: 3m
+          enum:
+            - 1m
+            - 3m
+            - 6m
+            - 12m
+        amortizations:
+          $ref: '#/components/schemas/Amortizations'
+
+    FinancingRequest:
+      description: Based on the application, several financing requests can be sent to the FI.
+      type: object
+      required:
+        - applicationId
+        - amount
+      properties:
+        financingRequestId:
+          type: string
+          format: uuid
+          example: 2e1d21c3-0cd5-4354-a9e9-d2eb2c28b780
+          description: Uuid v4 of the financing request defined by FI.
+        applicationId:
+          type: string
+          format: uuid
+          example: 3c921870-f29c-46ad-9ba5-c8b05e0d88d2
+          description: Uuid v4 of the corresponding application.
+        amount:
+          $ref: '#/components/schemas/Amount'
+        increaseAmount:
+          $ref: '#/components/schemas/Amount'
+        increasePurpose:
+          type: string
+          description: The purpose of the increase.
+          example: renovation of the kitchen
+        tranches:
+          description: a mortgage amount is distributed in one or more tranches.
+          type: array
+          items:
+            type: object
+            properties:
+              trancheId:
+                type: string
+                format: uuid
+                description: Uuid of the tranche
+                example: 51b017e1-5e59-4b58-a0a0-c638c87db463
+              productId:
+                type: string
+                format: uuid
+                description: Uuid of the product.
+                example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
+              productVariation:
+                $ref: '#/components/schemas/ProductVariation'
+              payOutDate:
+                $ref: '#/components/schemas/Date'
+              amount:
+                $ref: '#/components/schemas/Amount'
+        usedAssets:
+          description: Assets being used for the financing request.
+          type: array
+          items:
+            $ref: '#/components/schemas/UsedAsset'
+        publicCertDate:
+          $ref: '#/components/schemas/Date'
+        requestOfferType:
+          description: Ding dong die Hex ist tot.
+          type: string
+          example: binding
+          enum:
+            - binding
+            - indicative
+
     Applicant:
       description: Applicant information needed by the FI for creating a binding offer.
       type: object
       required:
-        - applicantDetail
         - applicantId
         - applicantType
+        - applicantDetail
       properties:
+        applicantId:
+          type: string
+          format: uuid
+          description: UUID v4 of the applicant (to be defined by TPP).
+          example: 576f8de3-6b30-4882-a7af-da2132a456cf
+        fiApplicantId:
+          type: string
+          description: >
+            ApplicantId of the applicant party defined by the financial institute,
+            only applicable if known at the moment of the application.
+          example: asd23f
+        applicantType:
+          description: type of applicant.
+          type: string
+          example: individual
+          enum:
+            - individual
+            - legal_entity
         applicantDetail:
           description: personal information regarding the applicant.
           type: object
@@ -2238,10 +2879,7 @@ components:
             address:
               $ref: '#/components/schemas/StructuredAddress'
             birthDate:
-              description: Date format.
-              type: string
-              format: date
-              example: '2018-04-13'
+              $ref: '#/components/schemas/Date'
             maritalStatus:
               type: string
               example: married
@@ -2258,8 +2896,8 @@ components:
               type: string
               example: 'yes'
               enum:
-                - 'yes'
-                - 'no'
+                - yes
+                - no
               description: Is the applicant owner of the financed property? Yes/No
             jobSituation:
               type: string
@@ -2271,10 +2909,7 @@ components:
                 - unemployed
                 - retired
             nationality:
-              description: 2-Letter ISO 3166-2 Country Code.
-              type: string
-              pattern: ^[A-Z]{2}$
-              example: CH
+              $ref: '#/components/schemas/Country'
             USPerson:
               type: boolean
               description: Is the applicant a US person.
@@ -2305,10 +2940,8 @@ components:
                   enum:
                     - crif
                 ratingDate:
+                  $ref: '#/components/schemas/Date'
                   description: Date of the solvency rating.
-                  type: string
-                  format: date
-                  example: '2018-04-13'
             applicantLanguage:
               type: string
               example: fr
@@ -2326,23 +2959,6 @@ components:
                 - other
               example: female
               description: Gender of the applicant.
-        applicantId:
-          type: string
-          format: uuid
-          description: UUID v4 of the applicant (to be defined by TPP).
-          example: 576f8de3-6b30-4882-a7af-da2132a456cf
-        applicantType:
-          description: type of applicant.
-          type: string
-          example: individual
-          enum:
-            - individual
-            - legal_entity
-        fiApplicantId:
-          type: string
-          description: |
-            ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
-          example: asd23f
         financialSituation:
           type: object
           description: the overall financial situation of a debtor.
@@ -2439,632 +3055,148 @@ components:
                       - special_object
                     description: The type of the additional property.
                     example: vacation_house
-    Party:
-      description: Links together the persons building the applicant party.
-      type: object
-      required:
-        - personList
-      properties:
-        personList:
-          description: ..
-          type: array
-          items:
-            $ref: '#/components/schemas/Applicant'
-        fiPrimaryApplicantId:
-          type: string
-          description: >-
-            ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple
-            applicants and if known at the moment of the application.
-          example: asd23f
-        primaryApplicantId:
-          title: Shared id
-          description: ApplicantId for primary applicant of the applicant party. In case of multiple applicants this field is mandatory.
-          type: string
-          format: uuid
-          example: 4bf92636-14a0-4511-98e2-acfde576e644
-    ApplicationId:
-      title: Application id
-      description: The application identifier (UUID v4) defined by FI.
+
+    # ---- Mortgage data types ----
+    PropertyObjectRatingType:
+      type: string
+      enum:
+        - bad
+        - bad-medium
+        - medium
+        - medium-good
+        - good
+        - good-verygood
+        - verygood
+      description: The rating type.
+      example: good
+
+    CommonID:
+      description: The unique identifier UUID v4 specified by RFC4122.
       type: string
       format: uuid
-      example: 4bf92636-14a0-4511-98e2-acfde576e644
-    Application:
-      description: All static application information needed by the FI to create binding offers.
-      type: object
-      required:
-        - mortgageType
-        - propertyInformation
-        - requestingParty
-      properties:
-        mortgageType:
-          type: string
-          description: Type of business.
-          example: buy
-          enum:
-            - buy
-            - replacement
-            - construction_financing
-        propertyInformation:
-          $ref: '#/components/schemas/PropertyObject'
-        requestingParty:
-          $ref: '#/components/schemas/Party'
-        applicationId:
-          $ref: '#/components/schemas/ApplicationId'
-        channelType:
-          type: string
-          enum:
-            - advisor
-            - direct
-          description: The type of the channel the application was generated.
-          example: advisor
-        replacedTranches:
-          description: Tranche to be replaced.
-          type: array
-          items:
-            type: object
-            properties:
-              replacedTrancheAmount:
-                $ref: '#/components/schemas/Amount'
-                description: The amount of the replaced tranche.
-              replacedTrancheExpiry:
-                description: The expiry date of the replaced tranche.
-                type: string
-                format: date
-                example: '2022-05-03'
-              replacedTrancheIssuer:
-                type: string
-                description: The institute who has issued the replaced tranche.
-                example: Credit Suisse
-        replacementType:
-          type: string
-          description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
-          example: entire
-          enum:
-            - entire
-            - partial
-        tppAdvisorDetail:
-          description: Personal information if the advisor of the TPP.
-          type: object
-          properties:
-            name:
-              type: string
-              maxLength: 70
-              description: Name of the TPP advisor.
-              example: Max
-            surName:
-              type: string
-              maxLength: 70
-              description: Surname of the TPP advisor.
-              example: Muster
-            nameTpp:
-              type: string
-              maxLength: 70
-              description: Firm of the TPP advisor.
-              example: Muster Finanz AG
-            email:
-              type: string
-              description: Email of the TPP advisor.
-              example: max.muster@domain.ch
-            language:
-              type: string
-              example: fr
-              description: Preferred contact language of the TPP advisor.
-              enum:
-                - de
-                - fr
-                - it
-                - en
-            phone:
-              type: string
-              description: phone of the TPP advisor.
-              example: '+41443343456'
-            address:
-              $ref: '#/components/schemas/StructuredAddress'
-        tppApplicationId:
-          type: string
-          description: The application alphanumeric identifier defined by TPP.
-          pattern: ^[a-zA-Z0-9]{6,10}$
-          example: asd23f
-    CaseId:
-      title: Case id
-      description: Uuid v4 of the mortgage case.
+      example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6
+
+    AssetType:
+      description: Common set of asset types.
       type: string
-      format: uuid
-      example: 4bf92636-14a0-4511-98e2-acfde576e644
-    Amortizations:
-      description: Information about the amortization on mortgage or on tranche level.
-      type: object
-      properties:
-        amortizationAccountNr:
-          type: string
-          description: The account number from which the amortization is paid.
-          example: IE12BOFI90000112345678
-        amortizationAmount:
-          $ref: '#/components/schemas/Amount'
-          description: The amount of the periodic amortization.
-          example: 27400
-        amortizationPeriodicity:
-          type: string
-          enum:
-            - yearly
-            - quarterly
-            - monthly
-          description: The periodicity the amortization is paid.
-          example: quarterly
-        amortizationStart:
-          description: Start date of amortization
-          type: string
-          format: date
-          example: '2018-04-13'
-        amortizationType:
-          type: string
-          enum:
-            - direct
-            - indirect
-          description: The type of amortization.
-          example: direct
-    Interest:
-      description: The current rate and optionally the referred base.
-      type: object
-      required:
-        - currentRate
-      properties:
-        currentRate:
-          type: number
-          format: double
-          description: |
-            Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.
-          minimum: 0
-          maximum: 1
-          example: 0.5
-        base:
-          type: number
-          format: double
-          description: Base rate upon margin is applied (e.g. for SARON).
-          minimum: 0
-          maximum: 1
-          example: 0.5
-    FinancingTranche:
-      description: Tranche of a financing.
-      type: object
-      required:
-        - amount
-        - interest
-        - interestRateType
-        - payoutDate
-      properties:
-        amount:
-          $ref: '#/components/schemas/Amount'
-        interest:
-          $ref: '#/components/schemas/Interest'
-        interestRateType:
-          type: string
-          description: type of interest rate.
-          example: libor
-          enum:
-            - variable
-            - libor
-            - saron
-            - fixed
-        payoutDate:
-          description: Date format.
-          type: string
-          format: date
-          example: '2018-04-13'
-        amortizations:
-          $ref: '#/components/schemas/Amortizations'
-        duration:
-          type: integer
-          description: duratin of the mortgage in years.
-          example: 2
-          minimum: 1
-          maximum: 20
-        maturityDate:
-          description: Date format.
-          type: string
-          format: date
-          example: '2018-04-13'
-        productIdRef:
-          type: string
-          format: uuid
-          description: Uuid of the product.
-          example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
-        saronperiod:
-          type: string
-          description: The saron period.
-          example: 3m
-          enum:
-            - 1m
-            - 3m
-            - 6m
-            - 12m
+      example: cash
+      enum:
+        - cash
+        - gift
+        - reservation_deposit
+        - advancement_of_inheritance
+        - third_pillar
+        - third_pillar_3a
+        - third_pillar_3b
+        - pension_fund
+        - third_party_loan
+        - third_pillar_fund
+        - third_pillar_fund_3b
+        - third_pillar_fund_3a
+        - fungible_investments
+        - other
+        - vested_benefit
+        - life_insurance_3a
+        - life_insurance_3b
+        - unpledged_building_plot
+
     AssetUsageType:
       description: Common set of asset usage types.
       type: string
+      example: pledged
       enum:
         - pledged
         - withdraw
-      example: pledged
-    UsedAsset:
+
+    Asset:
       description: >
-        Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also be
-        recorded in the array of assets in the financial situation of one applicant.
+        Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.
       type: object
       required:
-        - amount
-        - applicantId
         - assetType
+        - amount
       properties:
-        amount:
-          $ref: '#/components/schemas/Amount'
-        applicantId:
-          type: string
-          format: uuid
-          description: UUID v4 of the applicant (existing applicant within the current application).
-          example: 576f8de3-6b30-4882-a7af-da2132a456cf
         assetType:
           $ref: '#/components/schemas/AssetType'
+        amount:
+          $ref: '#/components/schemas/Amount'
+          description: >
+            The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund,
+            surrender value in life insurance
+        insuranceSum:
+          $ref: '#/components/schemas/Amount'
+          description: The amount of the sum insured in life insurance.
+        remark:
+          type: string
+          description: remark remark.
+          example: We need an example for such a remark
         assetProvider:
           $ref: '#/components/schemas/AssetProvider'
+
+    UsedAsset:
+      description: >
+        Asset used by an applicant: Array of all assets which will be used for the financial request. At least,
+        all of these used assets must also be recorded in the array of assets in the financial situation of one applicant.
+      type: object
+      required:
+        - assetType
+        - amount
+        - applicantId
+      properties:
+        assetType:
+          $ref: '#/components/schemas/AssetType'
+        amount:
+          $ref: '#/components/schemas/Amount'
         insuranceSum:
           $ref: '#/components/schemas/Amount'
           description: The amount of the sum insured in life insurance.
         usageType:
           $ref: '#/components/schemas/AssetUsageType'
-    Financing:
-      description: Complete financing details of an application.
-      type: object
-      required:
-        - amount
-      properties:
-        amount:
-          $ref: '#/components/schemas/Amount'
-        amortizations:
-          $ref: '#/components/schemas/Amortizations'
-        applicationIdRef:
+        applicantId:
           type: string
           format: uuid
-          description: Uuid of the financing's corresponding application.
-          example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
-        financingId:
-          type: string
-          format: uuid
-          description: Uuid of the financing.
-          example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
-        increaseAmount:
-          $ref: '#/components/schemas/Amount'
-        increasePurpose:
-          type: string
-          description: The purpose of the increase.
-          example: renovation of the kitchen
-        offerDate:
-          description: Date format.
-          type: string
-          format: date
-          example: '2018-04-13'
-        publicCertDate:
-          description: Date format.
-          type: string
-          format: date
-          example: '2018-04-13'
-        tranches:
-          description: mortgage tranches.
-          type: array
-          items:
-            $ref: '#/components/schemas/FinancingTranche'
-        usedAssets:
-          type: array
-          description: used assets.
-          items:
-            $ref: '#/components/schemas/UsedAsset'
-    MortgageCase:
-      description: A complete mortgage case including the application details.
-      type: object
-      required:
-        - application
-        - caseId
-        - financing
-      properties:
-        application:
-          $ref: '#/components/schemas/Application'
-        caseId:
-          $ref: '#/components/schemas/CaseId'
-        financing:
-          $ref: '#/components/schemas/Financing'
-        remark:
-          type: string
-          example: All documents verified at TPP
-          description: Remark/comment which can be added by TPP.
-    CommonErrorType:
-      title: Common Error Type
-      description: Error Types for commonErrorResponse.
+          description: UUID v4 of the applicant (existing applicant within the current application).
+          example: 576f8de3-6b30-4882-a7af-da2132a456cf
+        assetProvider:
+          $ref: '#/components/schemas/AssetProvider'
+
+    IncomeType:
+      description: >
+        Common set of income types.
+        For the enum value self_employment and dividend the 3 years avg is relevant.
       type: string
+      example: employment_gross
       enum:
-        - /problems/INVALID_PAYLOAD
-        - /problems/MALFORMED_PAYLOAD
-        - /problems/INVALID_TOKEN
-        - /problems/EXPIRED_TOKEN
-        - /problems/INSUFFICIENT_PRIVILEGES
-        - /problems/NO_ACCESS_TO_RESOURCE
-        - /problems/RESOURCE_DOES_NOT_EXIST
-        - /problems/RESOURCE_NOT_READY
-        - /problems/RESOURCE_TOO_LARGE
-        - /problems/WRONG_METHOD
-        - /problems/OPERATION_NOT_ALLOWED
-        - /problems/TECHNICAL_ERROR
-        - /problems/NOT_IMPLEMENTED
-        - /problems/SERVICE_UNAVAILABLE
-      example: /problems/TECHNICAL_ERROR
-    CommonErrorResponse:
-      title: Common Error Response
-      description: ...
-      type: object
-      properties:
-        detail:
-          description: ..
-          type: array
-          items:
-            type: string
-            example: List of detailed problem description with respect to the current request
-            description: ..
-        instance:
-          type: string
-          example: path/to/corresponding/resource
-          description: ..
-        title:
-          type: string
-          example: This is the general problem description
-          description: ..
-        type:
-          $ref: '#/components/schemas/CommonErrorType'
-    MortgageId:
-      title: Mortgage id
-      description: Uuid v4 of the mortgage.
-      type: string
-      format: uuid
-      example: 4bf92636-14a0-4511-98e2-acfde576e644
-    ProductId:
-      title: Product id
-      description: Uuid of the product.
-      type: string
-      format: uuid
-      example: 4bf92636-14a0-4511-98e2-acfde576e644
-    ProductVariation:
-      description: Product variation details.
-      type: object
-      properties:
-        duration:
-          type: integer
-          description: The duration in years.
-          minimum: 0
-          maximum: 25
-          example: 5
-        rate:
-          type: number
-          format: double
-          description: The interest rate.
-          minimum: 0
-          maximum: 1
-          example: 0.5
-        saronperiod:
-          type: string
-          description: The saron period.
-          example: 3m
-          enum:
-            - 1m
-            - 3m
-            - 6m
-            - 12m
-    Product:
-      description: All details regarding an FI's mortgage product.
-      type: object
-      required:
-        - interestRateType
-        - names
-        - productId
-      properties:
-        interestRateType:
-          type: string
-          description: type of interest rate.
-          example: libor
-          enum:
-            - variable
-            - libor
-            - saron
-            - fixed
-        names:
-          type: array
-          description: name of mortgage product.
-          items:
-            type: object
-            properties:
-              description:
-                type: string
-                description: Product name description.
-                example: Fixed rate mortgage
-              language:
-                type: string
-                description: Language of product name
-                example: fr
-                enum:
-                  - de
-                  - fr
-                  - it
-                  - en
-        productId:
-          $ref: '#/components/schemas/ProductId'
-        productVariations:
-          type: array
-          description: ..
-          items:
-            $ref: '#/components/schemas/ProductVariation'
-    Mortgage:
-      description: All relevant information regarding a specific mortgage.
-      type: object
-      required:
-        - amountAtExpiry
-        - durationType
-        - interestBasis
-        - interestRate
-        - interestRateType
-        - mortgageId
-        - product
-        - prolongable
-        - propertyObjects
-        - validFrom
-        - validTo
-      properties:
-        amountAtExpiry:
-          $ref: '#/components/schemas/Amount'
-        durationType:
-          type: integer
-          description: The duration in years.
-          minimum: 0
-          maximum: 25
-          example: 5
-        interestBasis:
-          type: string
-          description: we need a description.
-          example: We need an example
-        interestRate:
-          type: string
-          description: interest rate to be paid by debtor.
-          example: '1.4'
-        interestRateType:
-          type: string
-          description: type of interest rate.
-          example: libor
-          enum:
-            - variable
-            - libor
-            - saron
-            - fixed
-        mortgageId:
-          $ref: '#/components/schemas/MortgageId'
-          description: Uuid v4 of the specific mortgage.
-        product:
-          $ref: '#/components/schemas/Product'
-        prolongable:
-          description: tells if a mortgage is prolongable or not.
-          type: boolean
-          example: 0
-        propertyObjects:
-          type: array
-          description: ..
-          items:
-            $ref: '#/components/schemas/PropertyObject'
-        validFrom:
-          description: Date format.
-          type: string
-          format: date
-          example: '2018-04-13'
-        validTo:
-          description: Date format.
-          type: string
-          format: date
-          example: '2018-04-13'
-        amountToday:
-          $ref: '#/components/schemas/Amount'
-        offerDate:
-          description: >
-            The date when the offer is made by the FI. Optional field for use cases where no MortgageOffer object is used and therefore the offer date
-            needs to be directly in Mortgage object.
-          type: string
-          format: date
-          example: '2018-04-05'
-        relatedMortgages:
-          type: array
-          description: ..
-          items:
-            $ref: '#/components/schemas/Mortgage'
-    AmountRange:
-      description: Min and max amount with currency.
-      type: object
-      required:
-        - currency
-        - maxContent
-        - minContent
-      properties:
-        currency:
-          title: Currency
-          description: ISO 4217 code.
-          type: string
-          pattern: ^[A-Z]{3}$
-          example: CHF
-        maxContent:
-          description: max amount given with fractional digits, the separator is a dot.
-          type: string
-          pattern: ^-?\d{1,14}(?:\.\d{1,3})?$
-          example: '5000000'
-        minContent:
-          description: min amount given with fractional digits, the separator is a dot.
-          type: string
-          pattern: ^-?\d{1,14}(?:\.\d{1,3})?$
-          example: '1000000'
-    Condition:
-      description: All details regarding the conditions for a specific mortgage product the FI offers.
-      type: object
-      required:
-        - amortization
-        - amountRange
-        - conditionId
-        - duration
-        - interest
-        - maturityDate
-        - productIdRef
-      properties:
-        amortization:
-          description: the amount of repayment.
-          type: integer
-          example: 1000
-        amountRange:
-          $ref: '#/components/schemas/AmountRange'
-        conditionId:
-          description: ID of condition.
-          type: string
-          format: uuid
-          example: ef737eb0-c0a7-4f44-bdeb-32ba9bd99327
-        duration:
-          type: integer
-          description: The duration in years.
-          minimum: 0
-          maximum: 25
-          example: 5
-        interest:
-          $ref: '#/components/schemas/Interest'
-        maturityDate:
-          description: Date format.
-          type: string
-          format: date
-          example: '2018-04-13'
-        productIdRef:
-          type: string
-          description: Reference to product ID.
-          format: uuid
-          example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
-        amortizations:
-          $ref: '#/components/schemas/Amortizations'
-    CommonResourceCreatedResponse:
-      title: Resource created response
-      description: Uuid v4 of the created resource.
-      type: object
-      required:
-        - id
-      properties:
-        id:
-          title: Shared id
-          description: Uuid v4 of the created resource.
-          type: string
-          format: uuid
-          example: 4bf92636-14a0-4511-98e2-acfde576e644
-    Date:
-      description: Date format.
-      type: string
-      format: date
-      example: '2018-04-13'
+        - employment_gross
+        - employment_net
+        - self_employment
+        - self_employment_year-1
+        - self_employment_year-2
+        - self_employment_year-3
+        - bonus_year-1
+        - bonus_year-2
+        - bonus_year-3
+        - additional_income
+        - child_allowance
+        - asset_consumption_before_retirement
+        - pension_fund_income
+        - ahv_income
+        - further_income_after_retirement
+        - asset_consumption_after_retirement
+        - fixed_expenses
+        - dividend
+        - leasing_payment
+        - consumer_loan_payment
+        - child_allowance_payment
+        - rental_costs
+        - costs_for_additional_properties
+
     DocumentType:
-      description: All supported document types. For the enum value tax_statement. Tax statement is required.
+      description: >
+        All supported document types.
+        For the enum value tax_statement. Tax statement is required.
       type: string
+      example: tax_statement
       enum:
         - cash
         - gift
@@ -3113,141 +3245,38 @@ components:
         - survey_copy
         - cubical_calculation
         - other
-      example: tax_statement
-    DocumentId:
-      title: Document id
-      description: Unique ID (uuid v4) of the document.
-      type: string
-      format: uuid
-      example: 4bf92636-14a0-4511-98e2-acfde576e644
-    FinancingRequestId:
-      title: Financing request id
-      description: Uuid v4 of the financing request defined by FI.
-      type: string
-      format: uuid
-      example: 4bf92636-14a0-4511-98e2-acfde576e644
-    FinancingRequest:
-      description: Based on the application, several financing requests can be sent to the FI.
+
+    Order:
+      description: All information needed to choose a specific offer and place a binding order.
       type: object
       required:
-        - amount
-        - applicationId
-      properties:
-        amount:
-          $ref: '#/components/schemas/Amount'
-        applicationId:
-          $ref: '#/components/schemas/ApplicationId'
-        financingRequestId:
-          $ref: '#/components/schemas/FinancingRequestId'
-        increaseAmount:
-          $ref: '#/components/schemas/Amount'
-        increasePurpose:
-          type: string
-          description: The purpose of the increase.
-          example: renovation of the kitchen
-        publicCertDate:
-          description: Date format.
-          type: string
-          format: date
-          example: '2018-04-13'
-        requestOfferType:
-          description: Ding dong die Hex ist tot.
-          type: string
-          example: binding
-          enum:
-            - binding
-            - indicative
-        tranches:
-          description: a mortgage amount is distributed in one or more tranches.
-          type: array
-          items:
-            type: object
-            properties:
-              trancheId:
-                type: string
-                format: uuid
-                description: Uuid of the tranche
-                example: 51b017e1-5e59-4b58-a0a0-c638c87db463
-              productId:
-                $ref: '#/components/schemas/ProductId'
-              productVariation:
-                $ref: '#/components/schemas/ProductVariation'
-              payOutDate:
-                description: Date format.
-                type: string
-                format: date
-                example: '2018-04-13'
-              amount:
-                $ref: '#/components/schemas/Amount'
-        usedAssets:
-          description: Assets being used for the financing request.
-          type: array
-          items:
-            $ref: '#/components/schemas/UsedAsset'
-    OfferId:
-      title: Offer id
-      description: Uuid v4 of the specific order.
-      type: string
-      format: uuid
-      example: 4bf92636-14a0-4511-98e2-acfde576e644
-    OfferItem:
-      description: All relevant details of a specific item being part of an FI's offer for a mortgage product.
-      type: object
-      required:
-        - offerItemId
-        - product
-        - trancheId
-      properties:
-        offerItemId:
-          type: string
-          format: uuid
-          example: d452083f-8316-410d-a609-d49463687329
-          description: Uuid v4 of the specific offer item.
-        product:
-          $ref: '#/components/schemas/Product'
-        trancheId:
-          type: string
-          format: uuid
-          description: Uuid of the tranche.
-          example: 51b017e1-5e59-4b58-a0a0-c638c87db463
-        conditions:
-          description: ..
-          type: array
-          items:
-            $ref: '#/components/schemas/Condition'
-    Offer:
-      description: All relevant details describing the FI's offer for a mortgage product.
-      type: object
-      required:
-        - financingRequestId
         - offerId
-        - offerItems
-        - totalAmount
-        - validTo
       properties:
-        financingRequestId:
-          $ref: '#/components/schemas/FinancingRequestId'
+        orderId:
+          type: string
+          format: uuid
+          example: 6faea0b8-26a2-4b17-b10f-8f56fe355f50
+          description: Uuid v4 of the order defined by FI.
         offerId:
-          $ref: '#/components/schemas/OfferId'
-        offerItems:
-          description: ..
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferItem'
-        totalAmount:
-          $ref: '#/components/schemas/Amount'
-        validTo:
-          description: Date format.
           type: string
-          format: date
-          example: '2018-04-13'
-        offerType:
+          format: uuid
+          description: uuid of offer.
+          example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
+        mortgageId:
           type: string
-          description: type of offer (binding or indicative).
-          example: binding
-          enum:
-            - binding
-            - indicative
+          format: uuid
+          description: uuid of mortgage.
+          example: ef25ce8b-2fb1-45d9-bae0-6f263241a280
+        applicationId:
+          type: string
+          format: uuid
+          description: ID of application.
+          example: 59e8c8a6-4d32-4e7b-bcf0-05813029498e
+        remark:
+          type: string
+          example: All documents verified at TPP
+          description: Remark/comment which can be added by TPP.
+
     Document:
       description: Document containing information for given document type for given order.
       type: object
@@ -3258,6 +3287,11 @@ components:
           type: string
           example: MortgageOffer_WaimerANON_587b23d1-12a8-475a-968b-abee245e3393
           description: Name of the document.
+        parentId:
+          type: string
+          format: uuid
+          example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
+          description: Id for parent object of given document.
         content:
           type: string
           description: base64 Encoded Content.
@@ -3267,49 +3301,306 @@ components:
           description: Content type.
           example: application/octet-stream
         createDate:
-          description: Date format.
-          type: string
-          format: date
-          example: '2018-04-13'
+          $ref: '#/components/schemas/Date'
         modifyDate:
-          description: Date format.
+          $ref: '#/components/schemas/Date'
+
+    Amortizations:
+      description: Information about the amortization on mortgage or on tranche level.
+      type: object
+      properties:
+        amortizationType:
           type: string
-          format: date
-          example: '2018-04-13'
-        parentId:
+          enum:
+            - direct
+            - indirect
+          description: The type of amortization.
+          example: direct
+        amortizationAmount:
+          $ref: '#/components/schemas/Amount'
+          description: The amount of the periodic amortization.
+          example: 27400
+        amortizationStart:
+          $ref: '#/components/schemas/Date'
+          description: Start date of amortization
+          example: 2018-04-13
+        amortizationPeriodicity:
           type: string
-          format: uuid
-          example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
-          description: Id for parent object of given document.
-    OrderId:
-      title: Order id
-      description: Uuid v4 of the order defined by FI.
-      type: string
-      format: uuid
-      example: 4bf92636-14a0-4511-98e2-acfde576e644
-    Order:
-      description: All information needed to choose a specific offer and place a binding order.
+          enum:
+            - yearly
+            - quarterly
+            - monthly
+          description: The periodicity the amortization is paid.
+          example: quarterly
+        amortizationAccountNr:
+          type: string
+          description: The account number from which the amortization is paid.
+          example: IE12BOFI90000112345678
+
+    AssetProvider:
+      description: >
+        Asset provider for each asset, additional information must be transferred. E.g. in case the applicant owns an additional security of type
+        insurance, insurance company name is provided
       type: object
       required:
-        - offerId
+        - name
       properties:
-        offerId:
-          $ref: '#/components/schemas/OfferId'
-          description: uuid of offer.
-        applicationId:
-          $ref: '#/components/schemas/ApplicationId'
-          description: ID of application.
-        mortgageId:
-          $ref: '#/components/schemas/MortgageId'
-          description: uuid of mortgage.
-        orderId:
-          $ref: '#/components/schemas/OrderId'
-          description: Uuid v4 of the order defined by FI.
-        remark:
+        name:
           type: string
-          example: All documents verified at TPP
-          description: Remark/comment which can be added by TPP.
+          example: Credit Suisse
+          description: Name of the asset provider.
+
+    AmountRange:
+      description: Min and max amount with currency.
+      type: object
+      required:
+        - currency
+        - minContent
+        - maxContent
+      properties:
+        currency:
+          $ref: '#/components/schemas/Currency'
+        minContent:
+          description: min amount given with fractional digits, the separator is a dot.
+          type: string
+          pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
+          example: '1000000'
+        maxContent:
+          description: max amount given with fractional digits, the separator is a dot.
+          type: string
+          pattern: '^-?\d{1,14}(?:\.\d{1,3})?$'
+          example: '5000000'
+
+    Interest:
+      description: The current rate and optionally the referred base.
+      type: object
+      required:
+        - currentRate
+      properties:
+        currentRate:
+          type: number
+          format: double
+          description: >
+            Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show
+            the margin above interest.
+          minimum: 0
+          maximum: 1
+          example: 0.5
+        base:
+          type: number
+          format: double
+          description: Base rate upon margin is applied (e.g. for SARON).
+          minimum: 0
+          maximum: 1
+          example: 0.5
+
+    Link:
+      description: Object containing a link to an external resource and its description.
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          description: The URL pointing to the resource.
+          type: string
+          format: uri
+          minLength: 2
+          example: http://www.example.com/property.png
+        name:
+          description: The name of the resource.
+          type: string
+          example: Property image
+        description:
+          description: A description of the resource.
+          type: string
+          example: The image shows the aerial view of the property
+
+  # ---- Global Common Header Parameters ----
+  parameters:
+    path_caseId:
+      in: path
+      name: caseId
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: bcb5d762-8d28-43a2-9398-393b2e8d56ba$
+      description: Uuid v4 of a specific existing mortgage case.
+
+    path_mortgageId:
+      in: path
+      name: mortgageId
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: bcb5d762-8d28-43a2-9398-393b2e8d56ba
+      description: Uuid v4 of a specific existing mortgage.
+
+    path_productId:
+      in: path
+      name: productId
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: a86dd383-055e-471a-a098-682ae5ef8348
+      description: A product's uuid v4.
+
+    path_applicationId:
+      in: path
+      name: applicationId
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 4bf92636-14a0-4511-98e2-acfde576e644
+      description: Uuid v4 of the application request.
+
+    path_documentId:
+      in: path
+      name: documentId
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 7f648f12-c15f-4930-8380-238da5671c37
+      description: Unique ID (uuid v4) of the document.
+
+    path_financingRequestId:
+      in: path
+      name: financingRequestId
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 1a75e7fc-f3c3-45a9-9268-ec21c405bbc8
+      description: Uuid v4 of the financing request.
+
+    path_offerId:
+      in: path
+      name: offerId
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: c2fee261-053c-4088-8986-11216f0c9be6
+      description: Uuid v4 of the offer.
+
+    path_orderId:
+      in: path
+      name: orderId
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 91d029b3-ee7a-44c3-ac18-cf621cb128a8
+      description: Uuid v4 of an order.
+
+    limit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        format: int32
+        example: 25
+        minimum: 1
+      description: Optional parameter for pagination. Maximum number of entries to be returned.
+
+    cursor:
+      in: query
+      name: cursor
+      required: false
+      schema:
+        type: string
+        example: cursorIDxyz
+      description: Optional parameter for pagination. An opaque string value used for pagination.
+
+    duration:
+      in: query
+      name: duration
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 20
+        example: 10
+      description: The type of duration (for filtering).
+
+    language:
+      in: query
+      name: language
+      required: true
+      schema:
+        type: string
+        enum:
+          - de
+          - fr
+          - it
+          - en
+        example: fr
+      description: Language of Document content.
+
+    clientid_in_header:
+      in: header
+      name: X-CorAPI-Client-ID
+      required: true
+      schema:
+        type: string
+      description: ID of the client forwarded to the provider.
+
+    correlation_in_header:
+      in: header
+      name: X-Correlation-ID
+      required: true
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+
+    agent_in_header:
+      in: header
+      name: User-Agent
+      required: true
+      schema:
+        type: string
+      description: Name and version of the of the Client software.
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+
   responses:
+    standard201:
+      description: created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonResourceCreatedResponse'
+      headers:
+        location:
+          schema:
+            type: string
+            format: uri
+            description: >
+              In the location header of the response you will find the URI of the newly created resource.
+              With a GET call to this address you can retrieve a representation of the new product.
+        X-Correlation-ID:
+          schema:
+            type: string
+          description: Reflects the ID (set by the caller) from the request.
+
     standard400:
       headers:
         Content-Type:
@@ -3318,13 +3609,14 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: >-
-        Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request
-        syntax.
+      description: >
+        Bad Request - The server cannot or will not process the request due to something that is perceived to be
+        a client error as malformed request syntax.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+
     standard401:
       headers:
         Content-Type:
@@ -3338,6 +3630,7 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+
     standard403:
       headers:
         Content-Type:
@@ -3351,6 +3644,7 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+
     standard404:
       headers:
         Content-Type:
@@ -3359,11 +3653,14 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+      description: >
+        Not Found - The origin server did not find a current representation for the target resource or
+        is not willing to disclose that one exists.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+
     standard405:
       headers:
         Content-Type:
@@ -3372,11 +3669,14 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+      description: >
+        Method Not Allowed - The method received in the request-line is known by the origin server
+        but not supported by the target resource.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+
     standard500:
       headers:
         Content-Type:
@@ -3390,6 +3690,7 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+
     standard501:
       headers:
         Content-Type:
@@ -3403,6 +3704,7 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+
     standard503:
       headers:
         Content-Type:
@@ -3416,172 +3718,33 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
-    standard201:
-      description: created
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CommonResourceCreatedResponse'
-      headers:
-        location:
-          schema:
-            type: string
-            format: uri
-            description: >-
-              In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
-              retrieve a representation of the new product.
-        X-Correlation-ID:
-          schema:
-            type: string
-          description: Reflects the ID (set by the caller) from the request.
-  parameters:
-    cursor:
-      in: query
-      name: cursor
-      description: Optional parameter for pagination. An opaque string value used for pagination.
-      required: false
-      schema:
-        type: string
-        example: cursorIDxyz
-    limit:
-      in: query
-      name: limit
-      description: Optional parameter for pagination. Maximum number of entries to be returned.
-      required: false
-      schema:
-        type: integer
-        format: int32
-        example: 25
-        minimum: 1
-    clientid:
-      in: header
-      name: X-CorAPI-Client-ID
-      description: ID of the client forwarded to the provider.
-      required: true
-      schema:
-        type: string
-    correlation:
-      in: header
-      name: X-Correlation-ID
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
-      required: true
-      schema:
-        type: string
-    agent:
-      in: header
-      name: User-Agent
-      description: Name and version of the of the Client software.
-      required: true
-      schema:
-        type: string
-    caseId:
-      in: path
-      name: caseId
-      description: Uuid v4 of a specific existing mortgage case.
-      required: true
-      schema:
-        $ref: '#/components/schemas/CaseId'
-    mortgageId:
-      in: path
-      name: mortgageId
-      description: Uuid v4 of a specific existing mortgage.
-      required: true
-      schema:
-        $ref: '#/components/schemas/MortgageId'
-    duration:
-      in: query
-      name: duration
-      description: The type of duration (for filtering).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 20
-        example: 10
-    productId:
-      in: path
-      name: productId
-      description: A product's uuid v4.
-      required: true
-      schema:
-        $ref: '#/components/schemas/ProductId'
-    applicationId:
-      in: path
-      name: applicationId
-      description: Uuid v4 of the application request.
-      required: true
-      schema:
-        $ref: '#/components/schemas/ApplicationId'
-    documentId:
-      in: path
-      name: documentId
-      description: Unique ID (uuid v4) of the document.
-      required: true
-      schema:
-        $ref: '#/components/schemas/DocumentId'
-    financingRequestId:
-      in: path
-      name: financingRequestId
-      description: Uuid v4 of the financing request.
-      required: true
-      schema:
-        $ref: '#/components/schemas/FinancingRequestId'
-    offerId:
-      in: path
-      name: offerId
-      description: Uuid v4 of the offer.
-      required: true
-      schema:
-        $ref: '#/components/schemas/OfferId'
-    language:
-      in: query
-      name: language
-      description: Language of Document content.
-      required: true
-      schema:
-        type: string
-        enum:
-          - de
-          - fr
-          - it
-          - en
-        example: fr
-    orderId:
-      in: path
-      name: orderId
-      description: Uuid v4 of an order.
-      required: true
-      schema:
-        $ref: '#/components/schemas/OrderId'
+  # ---- End Responses - Standard
+
+  # --- Response Headers - used by Standard Responses ---
   headers:
+    Content-Language:
+      description: Response language - always en
+      schema:
+        type: string
+
+    Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807
+      schema:
+        type: string
+
+    Location:
+      description: Location (submissionId) of the submitted message. Add /status for the status report.
+      schema:
+        type: string
+
     X-Correlation-ID:
       description: Client defined ID from request to correlates HTTP requests between a client and server
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+
     X-Next-Cursor:
       description: An opaque string value, or an empty string if there are no more results.
       schema:
         type: string
         example: cursorIDxyz
-    Content-Type:
-      description: application/problem+json; charset=utf-8 according to RFC7807
-      schema:
-        type: string
-    Content-Language:
-      description: Response language - always en
-      schema:
-        type: string
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: X-API-Key
-    OAuth2:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: https://example.com/oauth/authorize
-          tokenUrl: https://example.com/oauth/token
-          scopes:
-            read: Grants read access
-            write: Grants write access

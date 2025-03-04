@@ -116,8 +116,7 @@ properties:
       - legal_entity
   fiApplicantId:
     type: string
-    description: |
-      ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
+    description: ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
     example: asd23f
   financialSituation:
     type: object
