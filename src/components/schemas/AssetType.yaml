@@ -1,6 +1,5 @@
 description: Common set of asset types.
 type: string
-example: cash
 enum:
   - cash
   - gift
@@ -20,3 +19,4 @@ enum:
   - life_insurance_3a
   - life_insurance_3b
   - unpledged_building_plot
+example: cash

@@ -9,11 +9,11 @@ properties:
     format: uri
     minLength: 2
     example: http://www.example.com/property.png
-  name:
-    description: The name of the resource.
-    type: string
-    example: Property image
   description:
     description: A description of the resource.
     type: string
     example: The image shows the aerial view of the property
+  name:
+    description: The name of the resource.
+    type: string
+    example: Property image

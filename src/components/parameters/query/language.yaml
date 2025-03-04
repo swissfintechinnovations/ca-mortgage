@@ -1,5 +1,6 @@
 in: query
 name: language
+description: Language of Document content.
 required: true
 schema:
   type: string
@@ -9,4 +10,3 @@ schema:
     - it
     - en
   example: fr
-description: Language of Document content.

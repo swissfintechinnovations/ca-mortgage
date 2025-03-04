@@ -1,31 +1,25 @@
 description: All relevant details describing the FI's offer for a mortgage product.
 type: object
 required:
-  - offerId
   - financingRequestId
+  - offerId
+  - offerItems
   - totalAmount
   - validTo
-  - offerItems
 properties:
-  offerId:
-    type: string
-    format: uuid
-    example: 46eb482d-1e18-4b93-ae88-da14ad4ac051
-    description: Uuid v4 of the specific order.
   financingRequestId:
-    type: string
-    format: uuid
-    example: fd3f2940-c9c9-46e7-8ed6-ab9e90363b2e
-    description: Uuid v4 of a specific financing request.
-  totalAmount:
-    $ref: ./Amount.yaml
-  validTo:
-    $ref: ./Date.yaml
+    $ref: ./FinancingRequestId.yaml
+  offerId:
+    $ref: ./OfferId.yaml
   offerItems:
     description: ..
     type: array
     items:
       $ref: ./OfferItem.yaml
+  totalAmount:
+    $ref: ./Amount.yaml
+  validTo:
+    $ref: ./generic/Date.yaml
   offerType:
     type: string
     description: type of offer (binding or indicative).

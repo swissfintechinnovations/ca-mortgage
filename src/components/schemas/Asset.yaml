@@ -1,18 +1,16 @@
-description: >
-  Asset information: Array of all assets the applicant possesses, incl. the
-  assets which will be used for the financial request.
+description: "Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request."
 type: object
 required:
-  - assetType
   - amount
+  - assetType
 properties:
-  assetType:
-    $ref: ./AssetType.yaml
   amount:
     $ref: ./Amount.yaml
-    description: >
-      The amount of the asset e.g. market value of fungible investment, existing
-      retirement asset in pension fund, surrender value in life insurance
+    description: The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life insurance
+  assetType:
+    $ref: ./AssetType.yaml
+  assetProvider:
+    $ref: ./AssetProvider.yaml
   insuranceSum:
     $ref: ./Amount.yaml
     description: The amount of the sum insured in life insurance.
@@ -20,5 +18,3 @@ properties:
     type: string
     description: remark remark.
     example: We need an example for such a remark
-  assetProvider:
-    $ref: ./AssetProvider.yaml

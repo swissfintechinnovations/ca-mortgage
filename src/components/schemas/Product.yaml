@@ -1,15 +1,19 @@
 description: All details regarding an FI's mortgage product.
 type: object
 required:
-  - productId
-  - names
   - interestRateType
+  - names
+  - productId
 properties:
-  productId:
+  interestRateType:
     type: string
-    format: uuid
-    description: The product identifier (UUID v4).
-    example: 20460121-6aff-485b-a61d-6056ecd72bd8
+    description: type of interest rate.
+    example: libor
+    enum:
+      - variable
+      - libor
+      - saron
+      - fixed
   names:
     type: array
     description: name of mortgage product.
@@ -29,17 +33,10 @@ properties:
             - fr
             - it
             - en
+  productId:
+    $ref: ./ProductId.yaml
   productVariations:
     type: array
     description: ..
     items:
       $ref: ./ProductVariation.yaml
-  interestRateType:
-    type: string
-    description: type of interest rate.
-    example: libor
-    enum:
-      - variable
-      - libor
-      - saron
-      - fixed

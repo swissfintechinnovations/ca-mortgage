@@ -5,5 +5,5 @@ required:
   - id
 properties:
   id:
-    $ref: ./CommonID.yaml
+    $ref: ./generic/Id.yaml
     description: Uuid v4 of the created resource.

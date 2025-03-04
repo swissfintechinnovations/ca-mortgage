@@ -1,3 +1,4 @@
+description: The rating type.
 type: string
 enum:
   - bad
@@ -7,5 +8,4 @@ enum:
   - good
   - good-verygood
   - verygood
-description: The rating type.
 example: good

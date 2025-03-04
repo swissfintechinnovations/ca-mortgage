@@ -1,8 +1,6 @@
 in: path
 name: orderId
+description: Uuid v4 of an order.
 required: true
 schema:
-  type: string
-  format: uuid
-  example: 91d029b3-ee7a-44c3-ac18-cf621cb128a8
-description: Uuid v4 of an order.
+  $ref: ../../schemas/OrderId.yaml

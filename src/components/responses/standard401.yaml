@@ -5,9 +5,7 @@ headers:
     $ref: ../headers/Content-Language.yaml
   X-Correlation-ID:
     $ref: ../headers/X-Correlation-ID.yaml
-description: >-
-  Unauthorized - The request has not been applied because it lacks valid
-  authentication credentials for the target resource.
+description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
 content:
   application/problem+json:
     schema:

@@ -1,17 +1,14 @@
 description: A complete mortgage case including the application details.
 type: object
 required:
-  - caseId
   - application
+  - caseId
   - financing
 properties:
-  caseId:
-    type: string
-    format: uuid
-    example: 2e1d21c3-0cd5-4354-a9e9-d2eb2c28b780
-    description: Uuid v4 of the mortgage case.
   application:
     $ref: ./Application.yaml
+  caseId:
+    $ref: ./CaseId.yaml
   financing:
     $ref: ./Financing.yaml
   remark:

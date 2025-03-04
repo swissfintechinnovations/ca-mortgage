@@ -1,6 +1,6 @@
 description: Common set of asset usage types.
 type: string
-example: pledged
 enum:
   - pledged
   - withdraw
+example: pledged

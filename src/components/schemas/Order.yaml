@@ -3,26 +3,18 @@ type: object
 required:
   - offerId
 properties:
-  orderId:
-    type: string
-    format: uuid
-    example: 6faea0b8-26a2-4b17-b10f-8f56fe355f50
-    description: Uuid v4 of the order defined by FI.
   offerId:
-    type: string
-    format: uuid
+    $ref: ./OfferId.yaml
     description: uuid of offer.
-    example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
-  mortgageId:
-    type: string
-    format: uuid
-    description: uuid of mortgage.
-    example: ef25ce8b-2fb1-45d9-bae0-6f263241a280
   applicationId:
-    type: string
-    format: uuid
+    $ref: ./ApplicationId.yaml
     description: ID of application.
-    example: 59e8c8a6-4d32-4e7b-bcf0-05813029498e
+  mortgageId:
+    $ref: ./MortgageId.yaml
+    description: uuid of mortgage.
+  orderId:
+    $ref: ./OrderId.yaml
+    description: Uuid v4 of the order defined by FI.
   remark:
     type: string
     example: All documents verified at TPP

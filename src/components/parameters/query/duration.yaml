@@ -1,8 +1,8 @@
 in: query
 name: duration
+description: The type of duration (for filtering).
 schema:
   type: integer
   minimum: 1
   maximum: 20
   example: 10
-description: The type of duration (for filtering).

@@ -1,8 +1,6 @@
 in: path
 name: applicationId
+description: Uuid v4 of the application request.
 required: true
 schema:
-  type: string
-  format: uuid
-  example: 4bf92636-14a0-4511-98e2-acfde576e644
-description: Uuid v4 of the application request.
+  $ref: ../../schemas/ApplicationId.yaml

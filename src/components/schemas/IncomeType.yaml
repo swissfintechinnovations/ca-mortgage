@@ -1,8 +1,6 @@
-description: >
-  Common set of income types. For the enum value self_employment and dividend
-  the 3 years avg is relevant.
+description: |
+  Common set of income types. For the enum value self_employment and dividend the 3 years avg is relevant.
 type: string
-example: employment_gross
 enum:
   - employment_gross
   - employment_net
@@ -27,3 +25,4 @@ enum:
   - child_allowance_payment
   - rental_costs
   - costs_for_additional_properties
+example: employment_gross

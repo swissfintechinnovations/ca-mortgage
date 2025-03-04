@@ -1,8 +1,6 @@
 in: path
 name: documentId
+description: Unique ID (uuid v4) of the document.
 required: true
 schema:
-  type: string
-  format: uuid
-  example: 7f648f12-c15f-4930-8380-238da5671c37
-description: Unique ID (uuid v4) of the document.
+  $ref: ../../schemas/DocumentId.yaml

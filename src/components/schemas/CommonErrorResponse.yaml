@@ -2,12 +2,6 @@ title: Common Error Response
 description: ...
 type: object
 properties:
-  type:
-    $ref: ./CommonErrorType.yaml
-  title:
-    type: string
-    example: This is the general problem description
-    description: ..
   detail:
     description: ..
     type: array
@@ -19,3 +13,9 @@ properties:
     type: string
     example: path/to/corresponding/resource
     description: ..
+  title:
+    type: string
+    example: This is the general problem description
+    description: ..
+  type:
+    $ref: ./CommonErrorType.yaml

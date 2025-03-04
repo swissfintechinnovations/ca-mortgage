@@ -1,8 +1,5 @@
-description: >
-  All supported document types. For the enum value tax_statement. Tax statement
-  is required.
+description: All supported document types. For the enum value tax_statement. Tax statement is required.
 type: string
-example: tax_statement
 enum:
   - cash
   - gift
@@ -51,3 +48,4 @@ enum:
   - survey_copy
   - cubical_calculation
   - other
+example: tax_statement

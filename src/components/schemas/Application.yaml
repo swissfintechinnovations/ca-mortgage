@@ -2,23 +2,9 @@ description: All static application information needed by the FI to create bindi
 type: object
 required:
   - mortgageType
-  - requestingParty
   - propertyInformation
+  - requestingParty
 properties:
-  applicationId:
-    type: string
-    format: uuid
-    description: The application identifier (UUID v4) defined by FI.
-    example: f157c4be-106d-4304-972e-091e77b87e1c
-  tppApplicationId:
-    type: string
-    description: The application alphanumeric identifier defined by TPP.
-    pattern: ^[a-zA-Z0-9]{6,10}$
-    example: asd23f
-  requestingParty:
-    $ref: ./Party.yaml
-  propertyInformation:
-    $ref: ./PropertyObject.yaml
   mortgageType:
     type: string
     description: Type of business.
@@ -27,6 +13,12 @@ properties:
       - buy
       - replacement
       - construction_financing
+  propertyInformation:
+    $ref: ./PropertyObject.yaml
+  requestingParty:
+    $ref: ./Party.yaml
+  applicationId:
+    $ref: ./ApplicationId.yaml
   channelType:
     type: string
     enum:
@@ -34,14 +26,6 @@ properties:
       - direct
     description: The type of the channel the application was generated.
     example: advisor
-  replacementType:
-    type: string
-    description: |
-      NOT required when mortgage type is BUY, Values: entire, partial.
-    example: entire
-    enum:
-      - entire
-      - partial
   replacedTranches:
     description: Tranche to be replaced.
     type: array
@@ -52,13 +36,20 @@ properties:
           $ref: ./Amount.yaml
           description: The amount of the replaced tranche.
         replacedTrancheExpiry:
-          $ref: ./Date.yaml
+          $ref: ./generic/Date.yaml
           description: The expiry date of the replaced tranche.
           example: '2022-05-03'
         replacedTrancheIssuer:
           type: string
           description: The institute who has issued the replaced tranche.
           example: Credit Suisse
+  replacementType:
+    type: string
+    description: "NOT required when mortgage type is BUY, Values: entire, partial."
+    example: entire
+    enum:
+      - entire
+      - partial
   tppAdvisorDetail:
     description: Personal information if the advisor of the TPP.
     type: object
@@ -97,3 +88,8 @@ properties:
         example: '+41443343456'
       address:
         $ref: ./StructuredAddress.yaml
+  tppApplicationId:
+    type: string
+    description: The application alphanumeric identifier defined by TPP.
+    pattern: ^[a-zA-Z0-9]{6,10}$
+    example: asd23f

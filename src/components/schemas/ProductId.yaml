@@ -1,0 +1,3 @@
+title: Product id
+description: Uuid of the product.
+$ref: ./generic/Id.yaml

@@ -1,14 +1,14 @@
 description: Property identification (register of real estate).
 type: object
 properties:
-  EGRID:
-    type: string
-    example: CH480928387782
-    description: Identifier of land a property is built on.
   EGID:
     type: string
     example: '191092250'
     description: Identifier of the property.
+  EGRID:
+    type: string
+    example: CH480928387782
+    description: Identifier of land a property is built on.
   EWID:
     type: string
     example: '42'

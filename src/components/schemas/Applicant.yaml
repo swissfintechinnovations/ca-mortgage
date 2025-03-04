@@ -1,28 +1,10 @@
 description: Applicant information needed by the FI for creating a binding offer.
 type: object
 required:
+  - applicantDetail
   - applicantId
   - applicantType
-  - applicantDetail
 properties:
-  applicantId:
-    type: string
-    format: uuid
-    description: UUID v4 of the applicant (to be defined by TPP).
-    example: 576f8de3-6b30-4882-a7af-da2132a456cf
-  fiApplicantId:
-    type: string
-    description: >
-      ApplicantId of the applicant party defined by the financial institute,
-      only applicable if known at the moment of the application.
-    example: asd23f
-  applicantType:
-    description: type of applicant.
-    type: string
-    example: individual
-    enum:
-      - individual
-      - legal_entity
   applicantDetail:
     description: personal information regarding the applicant.
     type: object
@@ -40,7 +22,7 @@ properties:
       address:
         $ref: ./StructuredAddress.yaml
       birthDate:
-        $ref: ./Date.yaml
+        $ref: ./generic/Date.yaml
       maritalStatus:
         type: string
         example: married
@@ -70,7 +52,7 @@ properties:
           - unemployed
           - retired
       nationality:
-        $ref: ./Country.yaml
+        $ref: ./generic/Country.yaml
       USPerson:
         type: boolean
         description: Is the applicant a US person.
@@ -101,7 +83,7 @@ properties:
             enum:
               - crif
           ratingDate:
-            $ref: ./Date.yaml
+            $ref: ./generic/Date.yaml
             description: Date of the solvency rating.
       applicantLanguage:
         type: string
@@ -120,6 +102,23 @@ properties:
           - other
         example: female
         description: Gender of the applicant.
+  applicantId:
+    type: string
+    format: uuid
+    description: UUID v4 of the applicant (to be defined by TPP).
+    example: 576f8de3-6b30-4882-a7af-da2132a456cf
+  applicantType:
+    description: type of applicant.
+    type: string
+    example: individual
+    enum:
+      - individual
+      - legal_entity
+  fiApplicantId:
+    type: string
+    description: |
+      ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
+    example: asd23f
   financialSituation:
     type: object
     description: the overall financial situation of a debtor.
@@ -140,9 +139,7 @@ properties:
               type: string
               example: We need an example for such a remark
             incomeProvider:
-              description: >-
-                Income provider for each income or cost position can be
-                transferred.
+              description: Income provider for each income or cost position can be transferred.
               type: string
               example: Employer AG
       liabilities:
