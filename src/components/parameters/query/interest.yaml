@@ -1,0 +1,5 @@
+in: query
+name: interest
+description: The interest (for filtering).
+schema:
+  type: string

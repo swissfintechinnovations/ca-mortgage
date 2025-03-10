@@ -1,0 +1,11 @@
+in: query
+name: interest_rate_type
+description: The type of the interest rates (for filtering).
+schema:
+  type: string
+  example: saron
+  enum:
+    - variable
+    - libor
+    - saron
+    - fixed

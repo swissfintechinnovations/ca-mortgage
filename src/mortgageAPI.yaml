@@ -131,12 +131,7 @@ paths:
       summary: Return the list of all mortgages for the authenticated context
       description: List of mortgages for the authenticated context including the corresponding properties and related mortgages, sorted by mortgageId.
       parameters:
-        - in: query
-          name: expiring
-          schema:
-            type: boolean
-          description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering).
-          example: true
+        - $ref: ./components/parameters/query/expiring.yaml
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
         - $ref: ./components/parameters/header/clientid.yaml
@@ -224,17 +219,7 @@ paths:
       tags:
         - Mortgage Products and Conditions
       parameters:
-        - in: query
-          name: interest_rate_type
-          schema:
-            type: string
-            example: saron
-            enum:
-              - variable
-              - libor
-              - saron
-              - fixed
-          description: The type of the interest rates (for filtering).
+        - $ref: ./components/parameters/query/interest_rate_type.yaml
         - $ref: ./components/parameters/query/duration.yaml
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
@@ -285,11 +270,7 @@ paths:
       parameters:
         - $ref: ./components/parameters/path/productId.yaml
         - $ref: ./components/parameters/query/limit.yaml
-        - in: query
-          name: interest
-          schema:
-            type: string
-          description: The interest (for filtering).
+        - $ref: ./components/parameters/query/interest.yaml
         - $ref: ./components/parameters/header/clientid.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
@@ -298,6 +279,8 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: ./components/headers/X-Correlation-ID.yaml
+            X-Next-Cursor:
+              $ref: ./components/headers/X-Next-Cursor.yaml
           description: List of conditions related to a specific mortgage product.
           content:
             application/json:
@@ -671,51 +654,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - documentList
-                properties:
-                  documentList:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        filename:
-                          type: string
-                          example: customer_id.pdf
-                        filetype:
-                          type: string
-                          example: pdf
-                        documentId:
-                          type: string
-                          format: uuid
-                          example: 7f648f12-fd45-4930-6543-456hf5671c37
-                          description: Document ID in uuid v4 format.
-                        filesize:
-                          type: integer
-                          example: 1024
-                          description: The file size in bytes.
-                        uploaddate:
-                          $ref: ./components/schemas/generic/Date.yaml
-                        statusInfo:
-                          description: Document status info.
-                          type: object
-                          required:
-                            - status
-                          properties:
-                            status:
-                              type: string
-                              example: pending
-                              enum:
-                                - accepted
-                                - rejected
-                                - pending
-                              default: pending
-                              description: Get the current status of the application.
-                            statusReason:
-                              type: string
-                              example: Additional information that can be shared with the status.
-                              description: The reason, of current status.
+                $ref: ./components/schemas/DocumentUpload.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
