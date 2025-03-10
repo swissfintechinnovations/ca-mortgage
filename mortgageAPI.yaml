@@ -134,12 +134,7 @@ paths:
       summary: Return the list of all mortgages for the authenticated context
       description: List of mortgages for the authenticated context including the corresponding properties and related mortgages, sorted by mortgageId.
       parameters:
-        - in: query
-          name: expiring
-          schema:
-            type: boolean
-          description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering).
-          example: true
+        - $ref: '#/components/parameters/expiring'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/clientid'
@@ -227,17 +222,7 @@ paths:
       tags:
         - Mortgage Products and Conditions
       parameters:
-        - in: query
-          name: interest_rate_type
-          schema:
-            type: string
-            example: saron
-            enum:
-              - variable
-              - libor
-              - saron
-              - fixed
-          description: The type of the interest rates (for filtering).
+        - $ref: '#/components/parameters/interest_rate_type'
         - $ref: '#/components/parameters/duration'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
@@ -288,11 +273,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/productId'
         - $ref: '#/components/parameters/limit'
-        - in: query
-          name: interest
-          schema:
-            type: string
-          description: The interest (for filtering).
+        - $ref: '#/components/parameters/interest'
         - $ref: '#/components/parameters/clientid'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
@@ -301,6 +282,8 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
+            X-Next-Cursor:
+              $ref: '#/components/headers/X-Next-Cursor'
           description: List of conditions related to a specific mortgage product.
           content:
             application/json:
@@ -678,51 +661,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - documentList
-                properties:
-                  documentList:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        filename:
-                          type: string
-                          example: customer_id.pdf
-                        filetype:
-                          type: string
-                          example: pdf
-                        documentId:
-                          type: string
-                          format: uuid
-                          example: 7f648f12-fd45-4930-6543-456hf5671c37
-                          description: Document ID in uuid v4 format.
-                        filesize:
-                          type: integer
-                          example: 1024
-                          description: The file size in bytes.
-                        uploaddate:
-                          $ref: '#/components/schemas/Date'
-                        statusInfo:
-                          description: Document status info.
-                          type: object
-                          required:
-                            - status
-                          properties:
-                            status:
-                              type: string
-                              example: pending
-                              enum:
-                                - accepted
-                                - rejected
-                                - pending
-                              default: pending
-                              description: Get the current status of the application.
-                            statusReason:
-                              type: string
-                              example: Additional information that can be shared with the status.
-                              description: The reason, of current status.
+                $ref: '#/components/schemas/DocumentUpload'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -3052,11 +2991,56 @@ components:
           type: string
           format: uuid
           example: 4bf92636-14a0-4511-98e2-acfde576e644
-    Date:
-      description: Date format.
-      type: string
-      format: date
-      example: '2018-04-13'
+    DocumentUpload:
+      description: Document to upload with metadata.
+      type: object
+      required:
+        - documentList
+      properties:
+        documentList:
+          type: array
+          items:
+            type: object
+            properties:
+              filename:
+                type: string
+                example: customer_id.pdf
+              filetype:
+                type: string
+                example: pdf
+              documentId:
+                type: string
+                format: uuid
+                example: 7f648f12-fd45-4930-6543-456hf5671c37
+                description: Document ID in uuid v4 format.
+              filesize:
+                type: integer
+                example: 1024
+                description: The file size in bytes.
+              uploaddate:
+                description: Date format.
+                type: string
+                format: date
+                example: '2018-04-13'
+              statusInfo:
+                description: Document status info.
+                type: object
+                required:
+                  - status
+                properties:
+                  status:
+                    type: string
+                    example: pending
+                    enum:
+                      - accepted
+                      - rejected
+                      - pending
+                    default: pending
+                    description: Get the current status of the application.
+                  statusReason:
+                    type: string
+                    example: Additional information that can be shared with the status.
+                    description: The reason, of current status.
     DocumentType:
       description: All supported document types. For the enum value tax_statement. Tax statement is required.
       type: string
@@ -3476,6 +3460,13 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/CaseId'
+    expiring:
+      in: query
+      name: expiring
+      description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering).
+      schema:
+        type: boolean
+      example: true
     mortgageId:
       in: path
       name: mortgageId
@@ -3483,6 +3474,18 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/MortgageId'
+    interest_rate_type:
+      in: query
+      name: interest_rate_type
+      description: The type of the interest rates (for filtering).
+      schema:
+        type: string
+        example: saron
+        enum:
+          - variable
+          - libor
+          - saron
+          - fixed
     duration:
       in: query
       name: duration
@@ -3499,6 +3502,12 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/ProductId'
+    interest:
+      in: query
+      name: interest
+      description: The interest (for filtering).
+      schema:
+        type: string
     applicationId:
       in: path
       name: applicationId
