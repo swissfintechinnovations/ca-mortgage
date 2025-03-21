@@ -1,0 +1,6 @@
+in: path
+name: orderId
+description: Uuid v4 of an order.
+required: true
+schema:
+  $ref: ../../schemas/OrderId.yaml

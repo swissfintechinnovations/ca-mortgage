@@ -1,0 +1,4 @@
+description: Date format.
+type: string
+format: date
+example: '2018-04-13'

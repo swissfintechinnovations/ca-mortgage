@@ -1,0 +1,27 @@
+description: Common set of income types. For the enum value self_employment and dividend the 3 years avg is relevant.
+type: string
+enum:
+  - employment_gross
+  - employment_net
+  - self_employment
+  - self_employment_year-1
+  - self_employment_year-2
+  - self_employment_year-3
+  - bonus_year-1
+  - bonus_year-2
+  - bonus_year-3
+  - additional_income
+  - child_allowance
+  - asset_consumption_before_retirement
+  - pension_fund_income
+  - ahv_income
+  - further_income_after_retirement
+  - asset_consumption_after_retirement
+  - fixed_expenses
+  - dividend
+  - leasing_payment
+  - consumer_loan_payment
+  - child_allowance_payment
+  - rental_costs
+  - costs_for_additional_properties
+example: employment_gross

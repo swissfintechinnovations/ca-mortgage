@@ -1,0 +1,47 @@
+description: Tranche of a financing.
+type: object
+required:
+  - amount
+  - interest
+  - interestRateType
+  - payoutDate
+properties:
+  amount:
+    $ref: ./Amount.yaml
+  interest:
+    $ref: ./Interest.yaml
+  interestRateType:
+    type: string
+    description: type of interest rate.
+    example: libor
+    enum:
+      - variable
+      - libor
+      - saron
+      - fixed
+  payoutDate:
+    $ref: ./generic/Date.yaml
+  amortizations:
+    $ref: ./Amortizations.yaml
+  duration:
+    type: integer
+    description: duratin of the mortgage in years.
+    example: 2
+    minimum: 1
+    maximum: 20
+  maturityDate:
+    $ref: ./generic/Date.yaml
+  productIdRef:
+    type: string
+    format: uuid
+    description: Uuid of the product.
+    example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
+  saronperiod:
+    type: string
+    description: The saron period.
+    example: 3m
+    enum:
+      - 1m
+      - 3m
+      - 6m
+      - 12m

@@ -1,0 +1,3 @@
+title: Financing request id
+description: Uuid v4 of the financing request defined by FI.
+$ref: ./generic/Id.yaml

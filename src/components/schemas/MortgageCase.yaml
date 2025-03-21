@@ -1,0 +1,17 @@
+description: A complete mortgage case including the application details.
+type: object
+required:
+  - application
+  - caseId
+  - financing
+properties:
+  application:
+    $ref: ./Application.yaml
+  caseId:
+    $ref: ./CaseId.yaml
+  financing:
+    $ref: ./Financing.yaml
+  remark:
+    type: string
+    example: All documents verified at TPP
+    description: Remark/comment which can be added by TPP.

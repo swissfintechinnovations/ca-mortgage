@@ -1,0 +1,5 @@
+title: Shared id
+description: Unique identifier to referenece resources.
+type: string
+format: uuid
+example: 4bf92636-14a0-4511-98e2-acfde576e644

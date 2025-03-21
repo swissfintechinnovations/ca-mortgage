@@ -1,0 +1,6 @@
+in: path
+name: productId
+description: A product's uuid v4.
+required: true
+schema:
+  $ref: ../../schemas/ProductId.yaml

@@ -1,0 +1,12 @@
+headers:
+  Content-Type:
+    $ref: ../headers/Content-Type.yaml
+  Content-Language:
+    $ref: ../headers/Content-Language.yaml
+  X-Correlation-ID:
+    $ref: ../headers/X-Correlation-ID.yaml
+description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/CommonErrorResponse.yaml

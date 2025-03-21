@@ -1,0 +1,13 @@
+description: amount with currency.
+type: object
+required:
+  - content
+  - currency
+properties:
+  content:
+    description: amount given with fractional digits, the separator is a dot.
+    type: string
+    pattern: ^-?\d{1,14}(?:\.\d{1,3})?$
+    example: '235.45'
+  currency:
+    $ref: ./generic/Currency.yaml

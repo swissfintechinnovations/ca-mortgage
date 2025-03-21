@@ -1,0 +1,95 @@
+description: All static application information needed by the FI to create binding offers.
+type: object
+required:
+  - mortgageType
+  - propertyInformation
+  - requestingParty
+properties:
+  mortgageType:
+    type: string
+    description: Type of business.
+    example: buy
+    enum:
+      - buy
+      - replacement
+      - construction_financing
+  propertyInformation:
+    $ref: ./PropertyObject.yaml
+  requestingParty:
+    $ref: ./Party.yaml
+  applicationId:
+    $ref: ./ApplicationId.yaml
+  channelType:
+    type: string
+    enum:
+      - advisor
+      - direct
+    description: The type of the channel the application was generated.
+    example: advisor
+  replacedTranches:
+    description: Tranche to be replaced.
+    type: array
+    items:
+      type: object
+      properties:
+        replacedTrancheAmount:
+          $ref: ./Amount.yaml
+          description: The amount of the replaced tranche.
+        replacedTrancheExpiry:
+          $ref: ./generic/Date.yaml
+          description: The expiry date of the replaced tranche.
+          example: '2022-05-03'
+        replacedTrancheIssuer:
+          type: string
+          description: The institute who has issued the replaced tranche.
+          example: Credit Suisse
+  replacementType:
+    type: string
+    description: "NOT required when mortgage type is BUY, Values: entire, partial."
+    example: entire
+    enum:
+      - entire
+      - partial
+  tppAdvisorDetail:
+    description: Personal information if the advisor of the TPP.
+    type: object
+    properties:
+      name:
+        type: string
+        maxLength: 70
+        description: Name of the TPP advisor.
+        example: Max
+      surName:
+        type: string
+        maxLength: 70
+        description: Surname of the TPP advisor.
+        example: Muster
+      nameTpp:
+        type: string
+        maxLength: 70
+        description: Firm of the TPP advisor.
+        example: Muster Finanz AG
+      email:
+        type: string
+        description: Email of the TPP advisor.
+        example: max.muster@domain.ch
+      language:
+        type: string
+        example: fr
+        description: Preferred contact language of the TPP advisor.
+        enum:
+          - de
+          - fr
+          - it
+          - en
+      phone:
+        type: string
+        description: phone of the TPP advisor.
+        example: '+41443343456'
+      address:
+        $ref: ./StructuredAddress.yaml
+  tppApplicationId:
+    type: string
+    description: The application alphanumeric identifier defined by TPP.
+    pattern: ^[a-zA-Z0-9]{6,10}$
+    example: asd23f

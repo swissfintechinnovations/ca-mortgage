@@ -1,0 +1,51 @@
+description: All supported document types. For the enum value tax_statement. Tax statement is required.
+type: string
+enum:
+  - cash
+  - gift
+  - reservation_deposit
+  - advancement_of_inheritance
+  - third_pillar
+  - pension_fund
+  - third_party_loan
+  - third_pillar_fund
+  - fungible_investments
+  - vested_benefit
+  - life_insurance_3a
+  - life_insurance_3b
+  - tax_statement
+  - lending_of_third_party_property
+  - employment
+  - self_employment
+  - additional_income
+  - pension_fund_income
+  - ahv_income
+  - fixed_expenses
+  - dividend
+  - publicly_notarized_purchase_contract
+  - draft_purchase_contract
+  - land_register_extract
+  - official_estimation
+  - building_insurance_certificate
+  - professional_estimation
+  - real_estate_documentation
+  - situation_cadastral_plan
+  - floor_plan
+  - property_pictures_outside
+  - property_pictures_inside
+  - proof_of_interest
+  - easements_contracts
+  - owner_association
+  - contract_for_the_establishment
+  - mortgage_note
+  - mortgage_note_erection
+  - salary_certificate_month
+  - salary_certificate_year
+  - consent_form
+  - debt_information
+  - divorce_copy
+  - building_plan
+  - survey_copy
+  - cubical_calculation
+  - other
+example: tax_statement

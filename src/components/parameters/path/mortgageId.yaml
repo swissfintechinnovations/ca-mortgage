@@ -1,0 +1,6 @@
+in: path
+name: mortgageId
+description: Uuid v4 of a specific existing mortgage.
+required: true
+schema:
+  $ref: ../../schemas/MortgageId.yaml

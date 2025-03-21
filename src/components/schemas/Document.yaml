@@ -1,0 +1,26 @@
+description: Document containing information for given document type for given order.
+type: object
+required:
+  - name
+properties:
+  name:
+    type: string
+    example: MortgageOffer_WaimerANON_587b23d1-12a8-475a-968b-abee245e3393
+    description: Name of the document.
+  content:
+    type: string
+    description: base64 Encoded Content.
+    example: JVBERi0xLjQKJeLjz9MKMzEgMCBvYmoKPDwvQnl0ZVJhbmdl
+  contentType:
+    type: string
+    description: Content type.
+    example: application/octet-stream
+  createDate:
+    $ref: ./generic/Date.yaml
+  modifyDate:
+    $ref: ./generic/Date.yaml
+  parentId:
+    type: string
+    format: uuid
+    example: 2752ce81-5bf0-4991-89ac-87d6e7fd0c47
+    description: Id for parent object of given document.

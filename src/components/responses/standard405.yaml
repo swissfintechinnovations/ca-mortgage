@@ -1,0 +1,12 @@
+headers:
+  Content-Type:
+    $ref: ../headers/Content-Type.yaml
+  Content-Language:
+    $ref: ../headers/Content-Language.yaml
+  X-Correlation-ID:
+    $ref: ../headers/X-Correlation-ID.yaml
+description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/CommonErrorResponse.yaml

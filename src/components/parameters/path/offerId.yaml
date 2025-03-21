@@ -1,0 +1,6 @@
+in: path
+name: offerId
+description: Uuid v4 of the offer.
+required: true
+schema:
+  $ref: ../../schemas/OfferId.yaml

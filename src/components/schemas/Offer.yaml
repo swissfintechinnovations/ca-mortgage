@@ -1,0 +1,29 @@
+description: All relevant details describing the FI's offer for a mortgage product.
+type: object
+required:
+  - financingRequestId
+  - offerId
+  - offerItems
+  - totalAmount
+  - validTo
+properties:
+  financingRequestId:
+    $ref: ./FinancingRequestId.yaml
+  offerId:
+    $ref: ./OfferId.yaml
+  offerItems:
+    description: ..
+    type: array
+    items:
+      $ref: ./OfferItem.yaml
+  totalAmount:
+    $ref: ./Amount.yaml
+  validTo:
+    $ref: ./generic/Date.yaml
+  offerType:
+    type: string
+    description: type of offer (binding or indicative).
+    example: binding
+    enum:
+      - binding
+      - indicative

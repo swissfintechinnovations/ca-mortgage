@@ -1,0 +1,6 @@
+in: path
+name: financingRequestId
+description: Uuid v4 of the financing request.
+required: true
+schema:
+  $ref: ../../schemas/FinancingRequestId.yaml

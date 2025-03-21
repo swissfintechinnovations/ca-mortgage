@@ -1,0 +1,537 @@
+description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law.
+type: object
+required:
+  - address
+  - propertyObjectId
+properties:
+  address:
+    $ref: ./StructuredAddress.yaml
+  propertyObjectId:
+    type: string
+    description: The property object identifier defined by TPP.
+    example: 9343dd26-4b54-4808-8978-538f8e869d0e
+  buildingRight:
+    type: object
+    description: if a property is in building right, the buyer owner buy the property, not the ground the property is built on.
+    properties:
+      hasBuildingRight:
+        type: boolean
+        description: If the property is built in a building right true, else false.
+        example: false
+      buildingRightExpiry:
+        $ref: ./generic/Date.yaml
+        description: Date when the building right expires.
+      buildingRightRent:
+        $ref: ./Amount.yaml
+        description: Yearly payment for the building right.
+      buildingRightCompensation:
+        $ref: ./Amount.yaml
+        description: Payment received at the building right expiry.
+  buildingStandardBathroom:
+    type: string
+    enum:
+      - premium
+      - highlevel
+      - basic
+      - lowlevel
+    description: Building standard of the sanitary installations.
+    example: basic
+  buildingStandardFloorCoverings:
+    type: string
+    enum:
+      - premium
+      - highlevel
+      - basic
+      - lowlevel
+    description: Building standard of the floor coverings.
+    example: basic
+  buildingStandardKitchen:
+    type: string
+    enum:
+      - premium
+      - highlevel
+      - basic
+      - lowlevel
+    description: Building standard of the kitchen.
+    example: basic
+  ceilingHight:
+    type: string
+    enum:
+      - especially_high
+      - middle
+      - especially_low
+    description: The ceiling hight in the rooms.
+    example: middle
+  classOfProperty:
+    type: string
+    enum:
+      - main_residence
+      - main_residence_with_use_restriction
+      - second_residence
+      - second_residence_with_use_restriction
+      - rented_property
+      - rented_property_with_use_restriction
+      - other
+    description: The class of property (Main residence, second residence, rented).
+    example: main_residence
+  collateralValue:
+    $ref: ./Amount.yaml
+    description: Value of the property as base for the securization applying the lowest value principle (Belehnungsbasis)
+  estimation:
+    type: object
+    description: the estimation of the value of a property.
+    properties:
+      estimationId:
+        type: string
+        description: ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.
+        example: asd23f
+      estimationSourceType:
+        type: string
+        example: iazi
+        enum:
+          - iazi
+          - wup
+      marketValue:
+        $ref: ./Amount.yaml
+        description: Estimated Market value of the property.
+      statisticalPriceRangeMax:
+        $ref: ./Amount.yaml
+        description: Estimated statistical price range maximum.
+      statisticalPriceRangeMin:
+        $ref: ./Amount.yaml
+        description: Estimated statistical price range minimum.
+      yearlyRentalIncome:
+        $ref: ./Amount.yaml
+        description: Estimated rental income per year
+      estimationDate:
+        $ref: ./generic/Date.yaml
+  floorPlan:
+    type: string
+    enum:
+      - efficient
+      - average
+      - inefficient
+    description: The efficiency of the floor plan.
+    example: average
+  heatEmission:
+    description: Type of the heat emission.
+    type: array
+    items:
+      type: string
+      enum:
+        - floor
+        - radiator
+        - stove
+        - other
+      example: floor
+  heatProduction:
+    description: the way heat is generated within the building.
+    type: array
+    items:
+      type: string
+      enum:
+        - oil
+        - gas
+        - biogas
+        - wood
+        - electric
+        - geothermal_probe
+        - heat_pump_water_water
+        - heat_pump_air_water
+        - district
+        - district_fossil
+        - solar_panel
+        - solar_thermal_collector
+        - block_type_thermal_power_station
+        - block_type_thermal_power_station_bio
+      description: Type of the heat production.
+      example: gas
+  investmentCost:
+    $ref: ./Amount.yaml
+    description: Total amount needed to pay object price and planned renovation (Total Anlagekosten)
+  limitForLandEncumbrances:
+    $ref: ./Amount.yaml
+    description: The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)
+  matrimonialPropertyScheme:
+    type: string
+    example: separateEstate
+    enum:
+      - jointEstate
+      - separateEstate
+      - contributionToJointlyAcquiredProperty
+    description: Information how the property is owned.
+  name:
+    type: string
+    description: User-defined property name.
+    example: My Nice Property
+  objectPrice:
+    $ref: ./Amount.yaml
+    description: Price paid to buy the property
+  outsideConstructionZone:
+    type: boolean
+    description: If the property is outside of the construction zone.
+    example: false
+  propertyBuildingInformation:
+    type: object
+    description: The property building information.
+    properties:
+      livingSpace:
+        type: object
+        properties:
+          livingSpaceInSqm:
+            type: integer
+            description: The area of the living space in quatermeter.
+            example: 120
+          measurementStandard:
+            type: string
+            enum:
+              - nla
+              - gfa
+            description: The measurement standard used to determine the living space (nla or gfa).
+            example: nla
+      roofFloorExpandable:
+        type: boolean
+        description: If the roof floor is expandable true, else false.
+        example: false
+      volumeIncludingGarageInhouse:
+        type: integer
+        description: The volume of the house including the inhouse garage (relevant for WuP).
+        example: 1500
+      volumeIncludingAllGarages:
+        type: integer
+        description: The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).
+        example: 1620
+      landArea:
+        type: integer
+        description: The surface area of the land.
+        example: 2000
+      environmentStandard:
+        type: string
+        enum:
+          - high-level
+          - basic
+          - low-level
+        description: The rating type
+        example: basic
+      otherFeatures:
+        type: array
+        items:
+          type: string
+          enum:
+            - barrier-free_living
+            - automated_building_control
+            - ventilation_system_without_minergie
+            - indoor_pool
+            - outdoor_pool
+            - whirlpool_sauna
+            - heated_conservatory
+            - unheated_conservatory
+            - security_system
+            - chimney
+            - passenger_elevator
+            - freight_elevator
+          description: Additional features and services.
+          example: outdoor_pool
+      houseType:
+        type: string
+        enum:
+          - detached_house
+          - semidetached_house
+          - row_house
+          - row_corner_house
+          - terrace_house
+        description: The type of the house.
+        example: detached_house
+      normType:
+        type: string
+        enum:
+          - building_insurance
+          - sia116
+          - sia416
+          - other
+        description: The norm type.
+        example: building_insurance
+  propertyConstructionInformation:
+    type: object
+    description: The property construction information.
+    properties:
+      constructionYear:
+        type: integer
+        description: construction year.
+        example: 1990
+      renovation:
+        type: boolean
+        description: If the property is renovated true, else false.
+        example: false
+      renovationYear:
+        type: integer
+        description: renovation year.
+        example: 1990
+        default: 0
+      propertyRenovations:
+        type: array
+        items:
+          type: object
+          properties:
+            refurbishmentComponentType:
+              type: string
+              enum:
+                - total
+                - interior_fittings_kitchen
+                - interior_fittings_bathroom_sanitary
+                - interior_fittings_floor_cover
+                - interior_fittings_remaining
+                - building_envelope_pitched_roof
+                - building_envelope_flat_roof
+                - building_services_heat_production
+                - building_services_heat_emission
+                - buildings_services_electrical_ventilation_elevator
+                - work_on_surroundings
+                - supporting_structure
+                - building_envelope_windows
+                - building_envelope_facade_balcony
+                - interior_fittings
+                - building_envelope
+                - building_services
+              description: Type of Property Component which has been renovated. Please use consistently either the detailed Component types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings).
+              example: interior_fittings_floor_cover
+            yearOfRenovation:
+              type: integer
+              description: renovation year
+              example: 2015
+              default: 0
+            renovationCost:
+              $ref: ./Amount.yaml
+              description: cost of renovation
+      minergieStandardType:
+        type: string
+        enum:
+          - none
+          - minergie
+          - minergie-p
+          - minergie-eco
+          - minergie-p-eco
+          - minergie-a
+          - minergie-a-eco
+        description: The minergie standard
+        example: minergie-p
+      BECCStandardType:
+        type: string
+        enum:
+          - none
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: Energy certificate from Cantons
+        example: B
+      luxusFlag:
+        type: string
+        enum:
+          - '0'
+          - '0.5'
+          - '1.0'
+        description: |
+          Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not:
+          - 0 = No
+          - 0.5 = Partially
+          - 1 = Yes
+
+          Proposed Mapping of WuP-Values:
+          - 1.0-4.0 => 0 (No)
+          - 4.1-4.5 => 0.5 (Partially)
+          - 4.6-5.0 => 1.0 (Yes)
+        example: 0
+      constructionQualityType:
+        $ref: ./PropertyObjectRatingType.yaml
+      stateBuildingType:
+        $ref: ./PropertyObjectRatingType.yaml
+  propertyElements:
+    type: object
+    description: The property detail information such as rooms count, parking places.
+    properties:
+      numberOfRooms:
+        type: number
+        format: double
+        description: The number of the rooms.
+        example: 4.5
+      numberOfRoomsInGrannyFlat:
+        type: number
+        format: double
+        description: The number of the rooms in the granny flat
+        example: 2.5
+      roomCountType:
+        type: string
+        enum:
+          - kitchen_not_counted
+          - kitchen_half_room
+          - kitchen_full_room
+        description: Reflects the type of the room count type. E.g. if the kitchen counts as full room.
+        example: kitchen_full_room
+      numberOfFamilyBathrooms:
+        type: integer
+        description: 'Separate shower and bathtub in the bathroom (optional: toilet)'
+        example: 2
+      numberOfBathWC:
+        type: integer
+        description: Bath or shower, sink, toilet
+        example: 2
+      numberOfGuestWC:
+        type: integer
+        description: Separate, single toilet with wash basin
+        example: 2
+      numberOfExternalParking:
+        type: integer
+        description: The number of external parking spaces.
+        example: 2
+      numberOfSeparateGarages:
+        type: integer
+        description: The number of separated garages (covered parking spaces), which are located on the same property but are not included in the building volume of the house (separate building insurance policy).
+        example: 2
+      numberOfExternalSeparateGarages:
+        type: integer
+        description: The number of separated garages (covered parking spaces).
+        example: 2
+      numberOfAttachedGarages:
+        type: integer
+        description: The number of garages which are attached to the house and which are included in the building volume of the house (don't have a separate building insurance policy).
+        example: 2
+      numberOfUndergroundCarParks:
+        type: integer
+        description: The number of underground parking places.
+        example: 2
+  propertyFlatInformation:
+    type: object
+    description: The property flat information.
+    properties:
+      numberOfFlats:
+        type: integer
+        description: The number of flats in the building.
+        example: 10
+      numberOfFloors:
+        type: integer
+        description: The number of floors in the building.
+        example: 4
+      stateApartmentType:
+        $ref: ./PropertyObjectRatingType.yaml
+      floor:
+        type: integer
+        description: The floor of the flat.
+        example: 2
+      balconyOrTerraceArea:
+        type: integer
+        description: The area of the balcony or terrace in quatermeter.
+        example: 20
+      livingSpace:
+        type: object
+        properties:
+          livingSpaceInSqm:
+            type: integer
+            description: The area of the living space in quatermeter.
+            example: 120
+          measurementStandard:
+            type: string
+            enum:
+              - nla
+              - gfa
+            description: The measurement standard used to determine the living space (nla or gfa).
+            example: nla
+      multistorey:
+        type: boolean
+        description: If the flat is multistorey true, else false.
+        example: false
+      otherFeatures:
+        type: array
+        items:
+          type: string
+          enum:
+            - coowned_garden_terrace_room
+            - coowned_indoor_pool
+            - coowned_outdoor_pool
+            - whirlpool_sauna
+            - heated_conservatory
+            - unheated_conservatory
+            - security_system
+            - chimney
+            - elevator_in_stairwell
+            - elevator_into_apartment
+            - barrier-free_living
+            - automated_building_control
+            - ventilation_system_without_minergie
+          description: Additional features and services.
+          example: coowned_outdoor_pool
+      quote:
+        type: integer
+        description: The quote of the flat property against the whole building property.
+        example: 120
+      apartmentType:
+        type: string
+        enum:
+          - garden_flat
+          - floor_flat
+          - roof_flat
+          - attic
+        description: The type of the apartment (floor, garden level, storey).
+        example: floor_flat
+      buildingType:
+        type: string
+        enum:
+          - multiple_family_house
+          - terrace_house
+        description: The type of the building (multiple_family_house, terrace_house).
+        example: multiple_family_house
+      locationInTheBuildingRating:
+        $ref: ./PropertyObjectRatingType.yaml
+  propertyIdentifier:
+    $ref: ./PropertyIdentifier.yaml
+  propertyLinks:
+    description: A list of links to external resources related to the property.
+    type: array
+    items:
+      $ref: ./Link.yaml
+  propertyType:
+    type: string
+    enum:
+      - single_family_house
+      - condominium
+      - vacation_house
+      - vacation_condominium
+      - agricultural_farm
+      - 2or3_family_house
+      - multi_family_house
+      - residential_building_plot
+      - building_plot_other
+      - mixed_property
+      - commercial_condominium
+      - office_building
+      - industrial_building
+      - special_object
+    description: The type of property.
+    example: single_family_house
+  publicNotarization:
+    $ref: ./generic/Date.yaml
+    description: Date of public notarization
+  remarks:
+    type: string
+    description: Remark regarding the estimation.
+    example: We need an example for such a remark
+  renovationAmount:
+    $ref: ./Amount.yaml
+    description: Amount needed to pay the planned renovation (Renovationsbetrag)
+  transferOfOwnershipDate:
+    $ref: ./generic/Date.yaml
+    description: When the property will be fully transferred to the new owner.
+  usageType:
+    type: string
+    enum:
+      - self
+      - let
+    description: 'The type of usage of the financing property: self, let'
+    example: self
+  valueRelevantServitudes:
+    type: boolean
+    description: If the property has servitudes true, else false.
+    example: false

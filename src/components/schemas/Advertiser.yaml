@@ -1,0 +1,45 @@
+description: Information about the person or agency selling the property, in case it is applicable and known.
+type: object
+required:
+  - name
+properties:
+  name:
+    description: The name of the advertiser.
+    maxLength: 140
+    example: Real Estate Agency AG
+  address:
+    $ref: ./StructuredAddress.yaml
+  advertiserType:
+    description: Specifies if the advertiser is a private person, a company or an agency.
+    type: string
+    enum:
+      - private
+      - company
+      - agency
+    example: agency
+  contactPerson:
+    description: The person to contact in case the advertiser is an agency or a company.
+    type: string
+    maxLength: 140
+    example: Max Muster
+  email:
+    description: The email address on which the advertiser can be contacted.
+    type: string
+    format: email
+    minLength: 5
+    example: max.muster@domain.ch
+  language:
+    description: Preferred contact language of the advertiser.
+    type: string
+    example: fr
+    enum:
+      - de
+      - fr
+      - it
+      - en
+  phone:
+    description: The number on which the advertiser can be reached.
+    type: string
+    minLength: 4
+    maxLength: 13
+    example: '+41443343456'

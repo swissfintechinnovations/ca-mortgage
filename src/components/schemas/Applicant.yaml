@@ -1,0 +1,216 @@
+description: Applicant information needed by the FI for creating a binding offer.
+type: object
+required:
+  - applicantDetail
+  - applicantId
+  - applicantType
+properties:
+  applicantDetail:
+    description: personal information regarding the applicant.
+    type: object
+    properties:
+      name:
+        type: string
+        maxLength: 70
+        description: Name of the applicant.
+        example: Max
+      surName:
+        type: string
+        maxLength: 70
+        description: Surname of the applicant
+        example: Muster
+      address:
+        $ref: ./StructuredAddress.yaml
+      birthDate:
+        $ref: ./generic/Date.yaml
+      maritalStatus:
+        type: string
+        example: married
+        description: Martial status of the applicant.
+        enum:
+          - unmarried
+          - married
+          - divorced
+          - widowed
+          - registered-partnership
+          - legally-separated
+          - partnership-dissolved
+      PropertyOwner:
+        type: string
+        example: 'yes'
+        enum:
+          - 'yes'
+          - 'no'
+        description: Is the applicant owner of the financed property? Yes/No
+      jobSituation:
+        type: string
+        example: employed
+        description: Job situation of the applicant.
+        enum:
+          - employed
+          - selfEmployed
+          - unemployed
+          - retired
+      nationality:
+        $ref: ./generic/Country.yaml
+      USPerson:
+        type: boolean
+        description: Is the applicant a US person.
+        example: false
+      email:
+        type: string
+        description: Email of the applicant.
+        example: max.muster@domain.ch
+      phone:
+        type: string
+        description: Phone number of the applicant.
+        example: '+41443343456'
+      solvencyRating:
+        description: Solvency rating of the applicant e.g. CRIF
+        type: object
+        required:
+          - ratingValue
+          - ratingSourceType
+        properties:
+          ratingValue:
+            type: integer
+            description: Solvency rating value
+            example: 420
+          ratingSourceType:
+            type: string
+            description: Provider of the solvency rating.
+            example: crif
+            enum:
+              - crif
+          ratingDate:
+            $ref: ./generic/Date.yaml
+            description: Date of the solvency rating.
+      applicantLanguage:
+        type: string
+        example: fr
+        description: Preferred contact language of the applicant.
+        enum:
+          - de
+          - fr
+          - it
+          - en
+      gender:
+        type: string
+        enum:
+          - male
+          - female
+          - other
+        example: female
+        description: Gender of the applicant.
+  applicantId:
+    type: string
+    format: uuid
+    description: UUID v4 of the applicant (to be defined by TPP).
+    example: 576f8de3-6b30-4882-a7af-da2132a456cf
+  applicantType:
+    description: type of applicant.
+    type: string
+    example: individual
+    enum:
+      - individual
+      - legal_entity
+  fiApplicantId:
+    type: string
+    description: ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
+    example: asd23f
+  financialSituation:
+    type: object
+    description: the overall financial situation of a debtor.
+    properties:
+      income:
+        type: array
+        items:
+          type: object
+          required:
+            - incomeType
+            - amount
+          properties:
+            incomeType:
+              $ref: ./IncomeType.yaml
+            amount:
+              $ref: ./Amount.yaml
+            remark:
+              type: string
+              example: We need an example for such a remark
+            incomeProvider:
+              description: Income provider for each income or cost position can be transferred.
+              type: string
+              example: Employer AG
+      liabilities:
+        type: array
+        items:
+          type: object
+          required:
+            - liabilityType
+            - amount
+          properties:
+            liabilityType:
+              type: string
+              example: mortgage
+              description: Liability type
+              enum:
+                - leasing
+                - alimony
+                - mortgage
+                - other
+            amount:
+              $ref: ./Amount.yaml
+            remark:
+              type: string
+              example: We need an example for such a remark
+            liabilityProvider:
+              description: Name of the liability provider or creditor.
+              type: string
+              example: Leasing Firm AG
+      assets:
+        type: array
+        items:
+          $ref: ./Asset.yaml
+      residentialSituation:
+        type: string
+        enum:
+          - home_owner
+          - renter
+        example: renter
+      additionalProperties:
+        type: array
+        items:
+          type: object
+          required:
+            - valueAdditionalProperty
+            - propertyTypeAdditionalProperty
+          properties:
+            nameAdditionalProperty:
+              type: string
+              maxLength: 70
+              description: Name of the additional property.
+              example: Orchard Villa, Holderstrasse 10
+            valueAdditionalProperty:
+              $ref: ./Amount.yaml
+              description: Value of the additional property.
+            mortgageAmountAdditionalProperty:
+              $ref: ./Amount.yaml
+            propertyTypeAdditionalProperty:
+              type: string
+              enum:
+                - single_family_house
+                - condominium
+                - vacation_house
+                - vacation_condominium
+                - agricultural_farm
+                - 2or3_family_house
+                - multi_family_house
+                - residential_building_plot
+                - building_plot_other
+                - mixed_property
+                - commercial_condominium
+                - office_building
+                - industrial_building
+                - special_object
+              description: The type of the additional property.
+              example: vacation_house

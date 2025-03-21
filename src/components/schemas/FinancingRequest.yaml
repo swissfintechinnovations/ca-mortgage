@@ -1,0 +1,51 @@
+description: Based on the application, several financing requests can be sent to the FI.
+type: object
+required:
+  - amount
+  - applicationId
+properties:
+  amount:
+    $ref: ./Amount.yaml
+  applicationId:
+    $ref: ./ApplicationId.yaml
+  financingRequestId:
+    $ref: ./FinancingRequestId.yaml
+  increaseAmount:
+    $ref: ./Amount.yaml
+  increasePurpose:
+    type: string
+    description: The purpose of the increase.
+    example: renovation of the kitchen
+  publicCertDate:
+    $ref: ./generic/Date.yaml
+  requestOfferType:
+    description: Ding dong die Hex ist tot.
+    type: string
+    example: binding
+    enum:
+      - binding
+      - indicative
+  tranches:
+    description: a mortgage amount is distributed in one or more tranches.
+    type: array
+    items:
+      type: object
+      properties:
+        trancheId:
+          type: string
+          format: uuid
+          description: Uuid of the tranche
+          example: 51b017e1-5e59-4b58-a0a0-c638c87db463
+        productId:
+          $ref: ./ProductId.yaml
+        productVariation:
+          $ref: ./ProductVariation.yaml
+        payOutDate:
+          $ref: ./generic/Date.yaml
+        amount:
+          $ref: ./Amount.yaml
+  usedAssets:
+    description: Assets being used for the financing request.
+    type: array
+    items:
+      $ref: ./UsedAsset.yaml

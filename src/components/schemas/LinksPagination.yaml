@@ -1,0 +1,23 @@
+description: Links (or cursors) returned in the answer of an API call.
+type: object
+properties:
+  first:
+    type: string
+    description: Link / cursor to the first result set (based on the submitted pagination approach).
+    example: /mortgage-app/api/v1/products?offset=0&limit=25
+  last:
+    type: string
+    description: Link / cursor to the last result set (based on the submitted pagination approach).
+    example: /mortgage-app/api/v1/products?offset=150&limit=25
+  next:
+    type: string
+    description: Link / cursor to the next result set (based on the submitted pagination approach).
+    example: /mortgage-app/api/v1/products?offset=100&limit=25
+  previous:
+    type: string
+    description: Link / cursor to the previous result set (based on the submitted pagination approach).
+    example: /mortgage-app/api/v1/products?offset=50&limit=25
+  self:
+    type: string
+    description: Link / cursor to the current result set (based on the submitted pagination approach).
+    example: /mortgage-app/api/v1/products?offset=75&limit=25

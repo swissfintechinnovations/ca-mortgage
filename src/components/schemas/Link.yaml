@@ -1,0 +1,19 @@
+description: Object containing a link to an external resource and its description.
+type: object
+required:
+  - url
+properties:
+  url:
+    description: The URL pointing to the resource.
+    type: string
+    format: uri
+    minLength: 2
+    example: http://www.example.com/property.png
+  description:
+    description: A description of the resource.
+    type: string
+    example: The image shows the aerial view of the property
+  name:
+    description: The name of the resource.
+    type: string
+    example: Property image

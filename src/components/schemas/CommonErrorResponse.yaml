@@ -1,0 +1,21 @@
+title: Common Error Response
+description: ...
+type: object
+properties:
+  detail:
+    description: ..
+    type: array
+    items:
+      type: string
+      example: List of detailed problem description with respect to the current request
+      description: ..
+  instance:
+    type: string
+    example: path/to/corresponding/resource
+    description: ..
+  title:
+    type: string
+    example: This is the general problem description
+    description: ..
+  type:
+    $ref: ./CommonErrorType.yaml

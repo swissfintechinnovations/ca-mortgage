@@ -1,0 +1,24 @@
+description: All relevant details of a specific item being part of an FI's offer for a mortgage product.
+type: object
+required:
+  - offerItemId
+  - product
+  - trancheId
+properties:
+  offerItemId:
+    type: string
+    format: uuid
+    example: d452083f-8316-410d-a609-d49463687329
+    description: Uuid v4 of the specific offer item.
+  product:
+    $ref: ./Product.yaml
+  trancheId:
+    type: string
+    format: uuid
+    description: Uuid of the tranche.
+    example: 51b017e1-5e59-4b58-a0a0-c638c87db463
+  conditions:
+    description: ..
+    type: array
+    items:
+      $ref: ./Condition.yaml

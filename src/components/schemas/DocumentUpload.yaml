@@ -1,0 +1,46 @@
+description: Document to upload with metadata.
+type: object
+required:
+  - documentList
+properties:
+  documentList:
+    type: array
+    items:
+      type: object
+      properties:
+        filename:
+          type: string
+          example: customer_id.pdf
+        filetype:
+          type: string
+          example: pdf
+        documentId:
+          type: string
+          format: uuid
+          example: 7f648f12-fd45-4930-6543-456hf5671c37
+          description: Document ID in uuid v4 format.
+        filesize:
+          type: integer
+          example: 1024
+          description: The file size in bytes.
+        uploaddate:
+          $ref: ./generic/Date.yaml
+        statusInfo:
+          description: Document status info.
+          type: object
+          required:
+            - status
+          properties:
+            status:
+              type: string
+              example: pending
+              enum:
+                - accepted
+                - rejected
+                - pending
+              default: pending
+              description: Get the current status of the application.
+            statusReason:
+              type: string
+              example: Additional information that can be shared with the status.
+              description: The reason, of current status.

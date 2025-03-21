@@ -1,0 +1,6 @@
+in: path
+name: documentId
+description: Unique ID (uuid v4) of the document.
+required: true
+schema:
+  $ref: ../../schemas/DocumentId.yaml

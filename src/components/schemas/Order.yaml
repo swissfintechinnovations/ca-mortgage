@@ -1,0 +1,21 @@
+description: All information needed to choose a specific offer and place a binding order.
+type: object
+required:
+  - offerId
+properties:
+  offerId:
+    $ref: ./OfferId.yaml
+    description: uuid of offer.
+  applicationId:
+    $ref: ./ApplicationId.yaml
+    description: ID of application.
+  mortgageId:
+    $ref: ./MortgageId.yaml
+    description: uuid of mortgage.
+  orderId:
+    $ref: ./OrderId.yaml
+    description: Uuid v4 of the order defined by FI.
+  remark:
+    type: string
+    example: All documents verified at TPP
+    description: Remark/comment which can be added by TPP.

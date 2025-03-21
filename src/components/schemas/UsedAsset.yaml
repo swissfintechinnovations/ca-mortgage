@@ -1,0 +1,23 @@
+description: 'Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also be recorded in the array of assets in the financial situation of one applicant.'
+type: object
+required:
+  - amount
+  - applicantId
+  - assetType
+properties:
+  amount:
+    $ref: ./Amount.yaml
+  applicantId:
+    type: string
+    format: uuid
+    description: UUID v4 of the applicant (existing applicant within the current application).
+    example: 576f8de3-6b30-4882-a7af-da2132a456cf
+  assetType:
+    $ref: ./AssetType.yaml
+  assetProvider:
+    $ref: ./AssetProvider.yaml
+  insuranceSum:
+    $ref: ./Amount.yaml
+    description: The amount of the sum insured in life insurance.
+  usageType:
+    $ref: ./AssetUsageType.yaml

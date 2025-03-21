@@ -1,0 +1,6 @@
+in: query
+name: expiring
+description: Whether or not the mortgage is qualified for being prolonged, i.e., expiring soon or already expired (for filtering).
+schema:
+  type: boolean
+example: true

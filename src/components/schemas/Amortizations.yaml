@@ -1,0 +1,30 @@
+description: Information about the amortization on mortgage or on tranche level.
+type: object
+properties:
+  amortizationAccountNr:
+    type: string
+    description: The account number from which the amortization is paid.
+    example: IE12BOFI90000112345678
+  amortizationAmount:
+    $ref: ./Amount.yaml
+    description: The amount of the periodic amortization.
+    example: 27400
+  amortizationPeriodicity:
+    type: string
+    enum:
+      - yearly
+      - quarterly
+      - monthly
+    description: The periodicity the amortization is paid.
+    example: quarterly
+  amortizationStart:
+    $ref: ./generic/Date.yaml
+    description: Start date of amortization
+    example: '2018-04-13'
+  amortizationType:
+    type: string
+    enum:
+      - direct
+      - indirect
+    description: The type of amortization.
+    example: direct

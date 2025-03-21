@@ -1,0 +1,22 @@
+description: Common set of asset types.
+type: string
+enum:
+  - cash
+  - gift
+  - reservation_deposit
+  - advancement_of_inheritance
+  - third_pillar
+  - third_pillar_3a
+  - third_pillar_3b
+  - pension_fund
+  - third_party_loan
+  - third_pillar_fund
+  - third_pillar_fund_3b
+  - third_pillar_fund_3a
+  - fungible_investments
+  - other
+  - vested_benefit
+  - life_insurance_3a
+  - life_insurance_3b
+  - unpledged_building_plot
+example: cash

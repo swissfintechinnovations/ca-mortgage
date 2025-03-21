@@ -1,0 +1,6 @@
+in: path
+name: caseId
+description: Uuid v4 of a specific existing mortgage case.
+required: true
+schema:
+  $ref: ../../schemas/CaseId.yaml

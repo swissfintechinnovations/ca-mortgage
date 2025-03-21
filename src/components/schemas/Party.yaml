@@ -1,0 +1,17 @@
+description: Links together the persons building the applicant party.
+type: object
+required:
+  - personList
+properties:
+  personList:
+    description: ..
+    type: array
+    items:
+      $ref: ./Applicant.yaml
+  fiPrimaryApplicantId:
+    type: string
+    description: ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple applicants and if known at the moment of the application.
+    example: asd23f
+  primaryApplicantId:
+    $ref: ./generic/Id.yaml
+    description: ApplicantId for primary applicant of the applicant party. In case of multiple applicants this field is mandatory.

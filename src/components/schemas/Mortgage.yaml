@@ -1,0 +1,69 @@
+description: All relevant information regarding a specific mortgage.
+type: object
+required:
+  - amountAtExpiry
+  - durationType
+  - interestBasis
+  - interestRate
+  - interestRateType
+  - mortgageId
+  - product
+  - prolongable
+  - propertyObjects
+  - validFrom
+  - validTo
+properties:
+  amountAtExpiry:
+    $ref: ./Amount.yaml
+  durationType:
+    type: integer
+    description: The duration in years.
+    minimum: 0
+    maximum: 25
+    example: 5
+  interestBasis:
+    type: string
+    description: we need a description.
+    example: We need an example
+  interestRate:
+    type: string
+    description: interest rate to be paid by debtor.
+    example: '1.4'
+  interestRateType:
+    type: string
+    description: type of interest rate.
+    example: libor
+    enum:
+      - variable
+      - libor
+      - saron
+      - fixed
+  mortgageId:
+    $ref: ./MortgageId.yaml
+    description: Uuid v4 of the specific mortgage.
+  product:
+    $ref: ./Product.yaml
+  prolongable:
+    description: tells if a mortgage is prolongable or not.
+    type: boolean
+    example: 0
+  propertyObjects:
+    type: array
+    description: ..
+    items:
+      $ref: ./PropertyObject.yaml
+  validFrom:
+    $ref: ./generic/Date.yaml
+  validTo:
+    $ref: ./generic/Date.yaml
+  amountToday:
+    $ref: ./Amount.yaml
+  offerDate:
+    $ref: ./generic/Date.yaml
+    description: The date when the offer is made by the FI. Optional field for use cases where no MortgageOffer object is used and therefore the offer date needs to be directly in Mortgage object.
+    example: '2018-04-05'
+  relatedMortgages:
+    type: array
+    description: ..
+    items:
+      $ref: ./Mortgage.yaml

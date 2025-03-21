@@ -1,0 +1,15 @@
+description: created
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/CommonResourceCreatedResponse.yaml
+headers:
+  location:
+    schema:
+      type: string
+      format: uri
+      description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
+  X-Correlation-ID:
+    schema:
+      type: string
+    description: Reflects the ID (set by the caller) from the request.

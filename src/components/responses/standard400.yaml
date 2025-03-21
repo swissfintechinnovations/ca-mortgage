@@ -1,0 +1,12 @@
+headers:
+  Content-Type:
+    $ref: ../headers/Content-Type.yaml
+  Content-Language:
+    $ref: ../headers/Content-Language.yaml
+  X-Correlation-ID:
+    $ref: ../headers/X-Correlation-ID.yaml
+description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/CommonErrorResponse.yaml
