@@ -2,10 +2,10 @@ openapi: 3.0.0
 info:
   version: 4.0.0
   title: Common Mortgage API (Public)
-  description: >-
-    This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting parties who
-    want to get, extend, or transfer mortgages from and to financial institutions. This specification uses schema definitions from the Common Data
-    Model v1.2.2.
+  description: |
+    This specification defines a common mortgage API for mortgages as used in Switzerland. The API is supposed to be used by requesting
+    parties who want to get, extend, or transfer mortgages from and to financial institutions. This specification uses schema definitions
+    from the Common Data Model v1.2.2.
   termsOfService: Tbd
   contact:
     email: info@common-api.ch
@@ -313,12 +313,10 @@ paths:
   /mortgages/applications:
     post:
       summary: Place a new mortgage application (serves as dossier)
-      description: >
+      description: |
         Place a new application including all necessary information about the property and applicant's financial situation.
-
-
-        **Note that in the case where the FI needs additional information on the property, the error response 400 must contain the minimum required
-        JSON object (PropertyObject) as detail**.
+        **Note that in the case where the FI needs additional information on the property, the error response 400 must contain the minimum
+        required JSON object (PropertyObject) as detail**.
       tags:
         - Mortgage Application
       parameters:
@@ -429,9 +427,9 @@ paths:
           $ref: '#/components/responses/standard503'
     put:
       summary: Update the application's details
-      description: >-
-        Update the application's details. Note that changing the application's details should not be possible after the application has been accepted
-        by the FI.
+      description: |
+        Update the application's details. Note that changing the application's details should not be possible after the application has been
+        accepted by the FI.
       tags:
         - Mortgage Application
       parameters:
@@ -556,7 +554,9 @@ paths:
           $ref: '#/components/responses/standard503'
     post:
       summary: Add property details in the SwissRETS standard
-      description: This endpoint allows to upload the real estate property's details as an XML file in the SwissRETS format according to https://swissrets.ch/.
+      description: |
+        This endpoint allows to upload the real estate property's details as an XML file in the SwissRETS format according to
+        https://swissrets.ch/.
       tags:
         - Mortgage Application
       parameters:
@@ -750,9 +750,9 @@ paths:
   /mortgages/applications/{applicationId}/documents/{documentId}:
     delete:
       summary: Delete a formerly uploaded document
-      description: >-
-        Deletes a specific document attached to a specific application. Note that deleting documents should not be possible after the application has
-        been accepted by the FI.
+      description: |
+        Deletes a specific document attached to a specific application. Note that deleting documents should not be possible after the
+        application has been accepted by the FI.
       tags:
         - Mortgage Application
       parameters:
@@ -1150,9 +1150,9 @@ paths:
   /mortgages/orders:
     post:
       summary: Place a new order
-      description: >-
-        Place a new order referencing a specific offerId and either an existing mortgage id (prolongation) or an application id (new mortgage)
-        including all relevant information.
+      description: |
+        Place a new order referencing a specific offerId and either an existing mortgage id (prolongation) or an application id (new
+        mortgage) including all relevant information.
       tags:
         - Mortgage Order
       parameters:
@@ -1228,9 +1228,9 @@ paths:
   /mortgages/orders/{orderId}/status:
     get:
       summary: Get the current status of the order
-      description: >-
-        Returns the current status of the order. An order can be in accepted rejected or pending status. In addition, further details regarding the
-        status can be transferred.
+      description: |
+        Returns the current status of the order. An order can be in accepted rejected or pending status. In addition, further details
+        regarding the status can be transferred.
       tags:
         - Mortgage Order
       parameters:
@@ -1608,7 +1608,8 @@ components:
             - legal_entity
         fiApplicantId:
           type: string
-          description: ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
+          description: |
+            ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
           example: asd23f
         financialSituation:
           type: object
@@ -1818,7 +1819,7 @@ components:
       properties:
         amount:
           $ref: '#/components/schemas/Amount'
-          description: >-
+          description: |
             The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life
             insurance
         assetType:
@@ -1833,7 +1834,7 @@ components:
           description: remark remark.
           example: We need an example for such a remark
     AssetProvider:
-      description: >-
+      description: |
         Asset provider for each asset, additional information must be transferred. E.g. in case the applicant owns an additional security of type
         insurance, insurance company name is provided
       type: object
@@ -2320,7 +2321,8 @@ components:
         currentRate:
           type: number
           format: double
-          description: Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.
+          description: |
+            Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.
           minimum: 0
           maximum: 1
           example: 0.5
@@ -2419,9 +2421,9 @@ components:
         amountToday:
           $ref: '#/components/schemas/Amount'
         offerDate:
-          description: >-
-            The date when the offer is made by the FI. Optional field for use cases where no MortgageOffer object is used and therefore the offer date
-            needs to be directly in Mortgage object.
+          description: |
+            The date when the offer is made by the FI. Optional field for use cases where no MortgageOffer object is used and therefore the offer
+            date needs to be directly in Mortgage object.
           type: string
           format: date
           example: '2018-04-05'
@@ -2559,7 +2561,7 @@ components:
             $ref: '#/components/schemas/Applicant'
         fiPrimaryApplicantId:
           type: string
-          description: >-
+          description: |
             ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple
             applicants and if known at the moment of the application.
           example: asd23f
@@ -2661,7 +2663,8 @@ components:
           example: '42'
           description: Identifier of the apartment.
     PropertyObject:
-      description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law.
+      description: |
+        The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law.
       type: object
       required:
         - address
@@ -2748,9 +2751,9 @@ components:
           properties:
             estimationId:
               type: string
-              description: >-
-                ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external
-                estimation tool.
+              description: |
+                ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the
+                external estimation tool.
               example: asd23f
             estimationSourceType:
               type: string
@@ -2963,7 +2966,7 @@ components:
                       - interior_fittings
                       - building_envelope
                       - building_services
-                    description: >-
+                    description: |
                       Type of Property Component which has been renovated. Please use consistently either the detailed Component types (e.g.
                       interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings).
                     example: interior_fittings_floor_cover
@@ -3011,7 +3014,6 @@ components:
                 - 0 = No
                 - 0.5 = Partially
                 - 1 = Yes
-
                 Proposed Mapping of WuP-Values:
                 - 1.0-4.0 => 0 (No)
                 - 4.1-4.5 => 0.5 (Partially)
@@ -3061,9 +3063,9 @@ components:
               example: 2
             numberOfSeparateGarages:
               type: integer
-              description: >-
-                The number of separated garages (covered parking spaces), which are located on the same property but are not included in the building
-                volume of the house (separate building insurance policy).
+              description: |
+                The number of separated garages (covered parking spaces), which are located on the same property but are not included in the
+                building volume of the house (separate building insurance policy).
               example: 2
             numberOfExternalSeparateGarages:
               type: integer
@@ -3071,7 +3073,7 @@ components:
               example: 2
             numberOfAttachedGarages:
               type: integer
-              description: >-
+              description: |
                 The number of garages which are attached to the house and which are included in the building volume of the house (don't have a
                 separate building insurance policy).
               example: 2
@@ -3263,9 +3265,9 @@ components:
           example: 24A
           description: number of building.
     UsedAsset:
-      description: >-
-        Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also be
-        recorded in the array of assets in the financial situation of one applicant.
+      description: |
+        Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also
+        be recorded in the array of assets in the financial situation of one applicant.
       type: object
       required:
         - amount
@@ -3300,7 +3302,7 @@ components:
           schema:
             type: string
             format: uri
-            description: >-
+            description: |
               In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
               retrieve a representation of the new product.
         X-Correlation-ID:
@@ -3315,9 +3317,9 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: >-
-        Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request
-        syntax.
+      description: |
+        Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed
+        request syntax.
       content:
         application/problem+json:
           schema:
@@ -3356,7 +3358,8 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+      description: |
+        Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
       content:
         application/problem+json:
           schema:
@@ -3369,7 +3372,8 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+      description: |
+        Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
       content:
         application/problem+json:
           schema:

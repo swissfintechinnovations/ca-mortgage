@@ -6,7 +6,8 @@ properties:
   currentRate:
     type: number
     format: double
-    description: Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.
+    description: |
+      Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.
     minimum: 0
     maximum: 1
     example: 0.5
