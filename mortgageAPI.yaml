@@ -1608,7 +1608,8 @@ components:
             - legal_entity
         fiApplicantId:
           type: string
-          description: ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
+          description: |
+            ApplicantId of the applicant party defined by the financial institute, only applicable if known at the moment of the application.
           example: asd23f
         financialSituation:
           type: object
@@ -2320,7 +2321,8 @@ components:
         currentRate:
           type: number
           format: double
-          description: Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.
+          description: |
+            Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.
           minimum: 0
           maximum: 1
           example: 0.5
@@ -2661,7 +2663,8 @@ components:
           example: '42'
           description: Identifier of the apartment.
     PropertyObject:
-      description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law.
+      description: |
+        The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law.
       type: object
       required:
         - address
@@ -3355,7 +3358,8 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+      description: |
+        Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
       content:
         application/problem+json:
           schema:
@@ -3368,7 +3372,8 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-ID:
           $ref: '#/components/headers/X-Correlation-ID'
-      description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+      description: |
+        Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
       content:
         application/problem+json:
           schema:
