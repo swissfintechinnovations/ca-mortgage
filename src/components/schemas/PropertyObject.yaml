@@ -1,4 +1,5 @@
-description: The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law.
+description: |
+  The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law.
 type: object
 required:
   - address
