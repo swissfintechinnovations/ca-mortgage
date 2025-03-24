@@ -60,7 +60,9 @@ properties:
     $ref: ./Amount.yaml
   offerDate:
     $ref: ./generic/Date.yaml
-    description: The date when the offer is made by the FI. Optional field for use cases where no MortgageOffer object is used and therefore the offer date needs to be directly in Mortgage object.
+    description: |
+      The date when the offer is made by the FI. Optional field for use cases where no MortgageOffer object is used and therefore the offer
+      date needs to be directly in Mortgage object.
     example: '2018-04-05'
   relatedMortgages:
     type: array

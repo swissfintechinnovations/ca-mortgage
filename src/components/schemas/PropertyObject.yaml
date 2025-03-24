@@ -83,7 +83,9 @@ properties:
     properties:
       estimationId:
         type: string
-        description: ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the external estimation tool.
+        description: |
+          ID of the property estimation to connect the done estimation in the core banking system with the estimation of the tpp in the
+          external estimation tool.
         example: asd23f
       estimationSourceType:
         type: string
@@ -293,7 +295,9 @@ properties:
                 - interior_fittings
                 - building_envelope
                 - building_services
-              description: Type of Property Component which has been renovated. Please use consistently either the detailed Component types (e.g. interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings).
+              description: |
+                Type of Property Component which has been renovated. Please use consistently either the detailed Component types (e.g.
+                interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings).
               example: interior_fittings_floor_cover
             yearOfRenovation:
               type: integer
@@ -339,7 +343,6 @@ properties:
           - 0 = No
           - 0.5 = Partially
           - 1 = Yes
-
           Proposed Mapping of WuP-Values:
           - 1.0-4.0 => 0 (No)
           - 4.1-4.5 => 0.5 (Partially)
@@ -389,7 +392,9 @@ properties:
         example: 2
       numberOfSeparateGarages:
         type: integer
-        description: The number of separated garages (covered parking spaces), which are located on the same property but are not included in the building volume of the house (separate building insurance policy).
+        description: |
+          The number of separated garages (covered parking spaces), which are located on the same property but are not included in the
+          building volume of the house (separate building insurance policy).
         example: 2
       numberOfExternalSeparateGarages:
         type: integer
@@ -397,7 +402,9 @@ properties:
         example: 2
       numberOfAttachedGarages:
         type: integer
-        description: The number of garages which are attached to the house and which are included in the building volume of the house (don't have a separate building insurance policy).
+        description: |
+          The number of garages which are attached to the house and which are included in the building volume of the house (don't have a
+          separate building insurance policy).
         example: 2
       numberOfUndergroundCarParks:
         type: integer

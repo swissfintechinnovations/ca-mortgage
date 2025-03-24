@@ -8,7 +8,9 @@ headers:
     schema:
       type: string
       format: uri
-      description: In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can retrieve a representation of the new product.
+      description: |
+        In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
+        retrieve a representation of the new product.
   X-Correlation-ID:
     schema:
       type: string

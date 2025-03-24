@@ -45,7 +45,7 @@ properties:
           example: Credit Suisse
   replacementType:
     type: string
-    description: "NOT required when mortgage type is BUY, Values: entire, partial."
+    description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
     example: entire
     enum:
       - entire
