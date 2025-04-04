@@ -214,7 +214,7 @@ properties:
           - high-level
           - basic
           - low-level
-        description: The rating type
+        description: The rating type.
         example: basic
       otherFeatures:
         type: array
@@ -302,7 +302,7 @@ properties:
               example: interior_fittings_floor_cover
             yearOfRenovation:
               type: integer
-              description: renovation year
+              description: renovation year.
               example: 2015
               default: 0
             renovationCost:
@@ -318,7 +318,7 @@ properties:
           - minergie-p-eco
           - minergie-a
           - minergie-a-eco
-        description: The minergie standard
+        description: The minergie standard.
         example: minergie-p
       BECCStandardType:
         type: string
@@ -331,7 +331,7 @@ properties:
           - E
           - F
           - G
-        description: Energy certificate from Cantons
+        description: Energy certificate from Cantons.
         example: B
       luxusFlag:
         type: string
@@ -341,14 +341,14 @@ properties:
           - '1.0'
         description: |
           Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not:
-          - 0 = No
-          - 0.5 = Partially
-          - 1 = Yes
+          - '0' = No
+          - '0.5' = Partially
+          - '1' = Yes
           Proposed Mapping of WuP-Values:
           - 1.0-4.0 => 0 (No)
           - 4.1-4.5 => 0.5 (Partially)
           - 4.6-5.0 => 1.0 (Yes)
-        example: 0
+        example: '0'
       constructionQualityType:
         $ref: ./PropertyObjectRatingType.yaml
       stateBuildingType:
@@ -365,7 +365,7 @@ properties:
       numberOfRoomsInGrannyFlat:
         type: number
         format: double
-        description: The number of the rooms in the granny flat
+        description: The number of the rooms in the granny flat.
         example: 2.5
       roomCountType:
         type: string
@@ -377,15 +377,15 @@ properties:
         example: kitchen_full_room
       numberOfFamilyBathrooms:
         type: integer
-        description: 'Separate shower and bathtub in the bathroom (optional: toilet)'
+        description: 'Separate shower and bathtub in the bathroom (optional: toilet).'
         example: 2
       numberOfBathWC:
         type: integer
-        description: Bath or shower, sink, toilet
+        description: Bath or shower, sink, toilet.
         example: 2
       numberOfGuestWC:
         type: integer
-        description: Separate, single toilet with wash basin
+        description: Separate, single toilet with wash basin.
         example: 2
       numberOfExternalParking:
         type: integer
@@ -521,7 +521,7 @@ properties:
     example: single_family_house
   publicNotarization:
     $ref: ./generic/Date.yaml
-    description: Date of public notarization
+    description: Date of public notarization.
   remarks:
     type: string
     description: Remark regarding the estimation.
@@ -537,7 +537,7 @@ properties:
     enum:
       - self
       - let
-    description: 'The type of usage of the financing property: self, let'
+    description: 'The type of usage of the financing property: self, let.'
     example: self
   valueRelevantServitudes:
     type: boolean
