@@ -17,7 +17,7 @@ properties:
       surName:
         type: string
         maxLength: 70
-        description: Surname of the applicant,
+        description: Surname of the applicant.
         example: Muster
       address:
         $ref: ./StructuredAddress.yaml

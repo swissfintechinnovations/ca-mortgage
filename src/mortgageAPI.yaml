@@ -895,7 +895,7 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: ./components/headers/X-Correlation-ID.yaml
-          description: OK
+          description: OK.
           content:
             application/json:
               schema:
