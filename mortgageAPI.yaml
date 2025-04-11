@@ -895,7 +895,7 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
-          description: OK
+          description: OK.
           content:
             application/json:
               schema:
@@ -1502,7 +1502,7 @@ components:
             surName:
               type: string
               maxLength: 70
-              description: Surname of the applicant,
+              description: Surname of the applicant.
               example: Muster
             address:
               $ref: '#/components/schemas/StructuredAddress'
