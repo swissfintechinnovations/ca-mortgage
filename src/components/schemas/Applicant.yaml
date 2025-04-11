@@ -17,7 +17,7 @@ properties:
       surName:
         type: string
         maxLength: 70
-        description: Surname of the applicant
+        description: Surname of the applicant.
         example: Muster
       address:
         $ref: ./StructuredAddress.yaml
@@ -41,7 +41,7 @@ properties:
         enum:
           - 'yes'
           - 'no'
-        description: Is the applicant owner of the financed property? Yes/No
+        description: Is the applicant owner of the financed property? Yes/No.
       jobSituation:
         type: string
         example: employed
@@ -66,7 +66,7 @@ properties:
         description: Phone number of the applicant.
         example: '+41443343456'
       solvencyRating:
-        description: Solvency rating of the applicant e.g. CRIF
+        description: Solvency rating of the applicant e.g. CRIF.
         type: object
         required:
           - ratingValue
@@ -74,7 +74,7 @@ properties:
         properties:
           ratingValue:
             type: integer
-            description: Solvency rating value
+            description: Solvency rating value.
             example: 420
           ratingSourceType:
             type: string
@@ -153,7 +153,7 @@ properties:
             liabilityType:
               type: string
               example: mortgage
-              description: Liability type
+              description: Liability type.
               enum:
                 - leasing
                 - alimony

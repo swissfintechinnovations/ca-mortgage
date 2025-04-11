@@ -46,7 +46,7 @@ properties:
   prolongable:
     description: tells if a mortgage is prolongable or not.
     type: boolean
-    example: 0
+    example: false
   propertyObjects:
     type: array
     description: ..
