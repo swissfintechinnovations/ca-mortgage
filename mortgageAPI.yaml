@@ -315,6 +315,7 @@ paths:
       summary: Place a new mortgage application (serves as dossier)
       description: |
         Place a new application including all necessary information about the property and applicant's financial situation.
+
         **Note that in the case where the FI needs additional information on the property, the error response 400 must contain the minimum
         required JSON object (PropertyObject) as detail**.
       tags:
@@ -1650,6 +1651,8 @@ components:
                       - leasing
                       - alimony
                       - mortgage
+                      - loan
+                      - consumer_loan
                       - other
                   amount:
                     $ref: '#/components/schemas/Amount'
