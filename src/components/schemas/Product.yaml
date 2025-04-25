@@ -26,7 +26,7 @@ properties:
           example: Fixed rate mortgage
         language:
           type: string
-          description: Language of product name
+          description: Language of product name.
           example: fr
           enum:
             - de

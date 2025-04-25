@@ -34,7 +34,7 @@ properties:
         trancheId:
           type: string
           format: uuid
-          description: Uuid of the tranche
+          description: Uuid of the tranche.
           example: 51b017e1-5e59-4b58-a0a0-c638c87db463
         productId:
           $ref: ./ProductId.yaml

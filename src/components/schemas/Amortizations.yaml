@@ -19,7 +19,7 @@ properties:
     example: quarterly
   amortizationStart:
     $ref: ./generic/Date.yaml
-    description: Start date of amortization
+    description: Start date of amortization.
     example: '2018-04-13'
   amortizationType:
     type: string

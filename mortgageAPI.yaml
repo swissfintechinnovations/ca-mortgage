@@ -15,7 +15,7 @@ info:
 servers:
   - url: https://mortgage.common-api.ch
 externalDocs:
-  description: Find out more about SFTI API specifications
+  description: Find out more about SFTI API specifications.
   url: https://www.common-api.ch
 tags:
   - name: Existing Mortgages
@@ -895,7 +895,7 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
-          description: OK
+          description: OK.
           content:
             application/json:
               schema:
@@ -1429,7 +1429,7 @@ components:
           description: The periodicity the amortization is paid.
           example: quarterly
         amortizationStart:
-          description: Start date of amortization
+          description: Start date of amortization.
           type: string
           format: date
           example: '2018-04-13'
@@ -1502,7 +1502,7 @@ components:
             surName:
               type: string
               maxLength: 70
-              description: Surname of the applicant
+              description: Surname of the applicant.
               example: Muster
             address:
               $ref: '#/components/schemas/StructuredAddress'
@@ -1529,7 +1529,7 @@ components:
               enum:
                 - 'yes'
                 - 'no'
-              description: Is the applicant owner of the financed property? Yes/No
+              description: Is the applicant owner of the financed property? Yes/No.
             jobSituation:
               type: string
               example: employed
@@ -1557,7 +1557,7 @@ components:
               description: Phone number of the applicant.
               example: '+41443343456'
             solvencyRating:
-              description: Solvency rating of the applicant e.g. CRIF
+              description: Solvency rating of the applicant e.g. CRIF.
               type: object
               required:
                 - ratingValue
@@ -1565,7 +1565,7 @@ components:
               properties:
                 ratingValue:
                   type: integer
-                  description: Solvency rating value
+                  description: Solvency rating value.
                   example: 420
                 ratingSourceType:
                   type: string
@@ -1646,7 +1646,7 @@ components:
                   liabilityType:
                     type: string
                     example: mortgage
-                    description: Liability type
+                    description: Liability type.
                     enum:
                       - leasing
                       - alimony
@@ -2209,7 +2209,7 @@ components:
               trancheId:
                 type: string
                 format: uuid
-                description: Uuid of the tranche
+                description: Uuid of the tranche.
                 example: 51b017e1-5e59-4b58-a0a0-c638c87db463
               productId:
                 $ref: '#/components/schemas/ProductId'
@@ -2405,7 +2405,7 @@ components:
         prolongable:
           description: tells if a mortgage is prolongable or not.
           type: boolean
-          example: 0
+          example: false
         propertyObjects:
           type: array
           description: ..
@@ -2603,7 +2603,7 @@ components:
                 example: Fixed rate mortgage
               language:
                 type: string
-                description: Language of product name
+                description: Language of product name.
                 example: fr
                 enum:
                   - de
@@ -2887,7 +2887,7 @@ components:
                 - high-level
                 - basic
                 - low-level
-              description: The rating type
+              description: The rating type.
               example: basic
             otherFeatures:
               type: array
@@ -2975,7 +2975,7 @@ components:
                     example: interior_fittings_floor_cover
                   yearOfRenovation:
                     type: integer
-                    description: renovation year
+                    description: renovation year.
                     example: 2015
                     default: 0
                   renovationCost:
@@ -2991,7 +2991,7 @@ components:
                 - minergie-p-eco
                 - minergie-a
                 - minergie-a-eco
-              description: The minergie standard
+              description: The minergie standard.
               example: minergie-p
             BECCStandardType:
               type: string
@@ -3004,7 +3004,7 @@ components:
                 - E
                 - F
                 - G
-              description: Energy certificate from Cantons
+              description: Energy certificate from Cantons.
               example: B
             luxusFlag:
               type: string
@@ -3014,14 +3014,14 @@ components:
                 - '1.0'
               description: |
                 Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not:
-                - 0 = No
-                - 0.5 = Partially
-                - 1 = Yes
+                - '0' = No
+                - '0.5' = Partially
+                - '1' = Yes
                 Proposed Mapping of WuP-Values:
                 - 1.0-4.0 => 0 (No)
                 - 4.1-4.5 => 0.5 (Partially)
                 - 4.6-5.0 => 1.0 (Yes)
-              example: 0
+              example: '0'
             constructionQualityType:
               $ref: '#/components/schemas/PropertyObjectRatingType'
             stateBuildingType:
@@ -3038,7 +3038,7 @@ components:
             numberOfRoomsInGrannyFlat:
               type: number
               format: double
-              description: The number of the rooms in the granny flat
+              description: The number of the rooms in the granny flat.
               example: 2.5
             roomCountType:
               type: string
@@ -3050,15 +3050,15 @@ components:
               example: kitchen_full_room
             numberOfFamilyBathrooms:
               type: integer
-              description: 'Separate shower and bathtub in the bathroom (optional: toilet)'
+              description: 'Separate shower and bathtub in the bathroom (optional: toilet).'
               example: 2
             numberOfBathWC:
               type: integer
-              description: Bath or shower, sink, toilet
+              description: Bath or shower, sink, toilet.
               example: 2
             numberOfGuestWC:
               type: integer
-              description: Separate, single toilet with wash basin
+              description: Separate, single toilet with wash basin.
               example: 2
             numberOfExternalParking:
               type: integer
@@ -3193,7 +3193,7 @@ components:
           description: The type of property.
           example: single_family_house
         publicNotarization:
-          description: Date of public notarization
+          description: Date of public notarization.
           type: string
           format: date
           example: '2018-04-13'
@@ -3214,7 +3214,7 @@ components:
           enum:
             - self
             - let
-          description: 'The type of usage of the financing property: self, let'
+          description: 'The type of usage of the financing property: self, let.'
           example: self
         valueRelevantServitudes:
           type: boolean
@@ -3295,7 +3295,7 @@ components:
           $ref: '#/components/schemas/AssetUsageType'
   responses:
     standard201:
-      description: created
+      description: created.
       content:
         application/json:
           schema:
@@ -3565,15 +3565,15 @@ components:
         $ref: '#/components/schemas/ProductId'
   headers:
     Content-Language:
-      description: Response language - always en
+      description: Response language - always en.
       schema:
         type: string
     Content-Type:
-      description: application/problem+json; charset=utf-8 according to RFC7807
+      description: application/problem+json; charset=utf-8 according to RFC7807.
       schema:
         type: string
     X-Correlation-ID:
-      description: Client defined ID from request to correlates HTTP requests between a client and server
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
