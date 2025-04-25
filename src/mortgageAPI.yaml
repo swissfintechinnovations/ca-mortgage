@@ -15,7 +15,7 @@ info:
 servers:
   - url: https://mortgage.common-api.ch
 externalDocs:
-  description: Find out more about SFTI API specifications
+  description: Find out more about SFTI API specifications.
   url: https://www.common-api.ch
 tags:
   - name: Existing Mortgages
@@ -895,7 +895,7 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: ./components/headers/X-Correlation-ID.yaml
-          description: OK
+          description: OK.
           content:
             application/json:
               schema:
