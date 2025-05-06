@@ -1651,6 +1651,8 @@ components:
                       - leasing
                       - alimony
                       - mortgage
+                      - loan
+                      - consumer_loan
                       - other
                   amount:
                     $ref: '#/components/schemas/Amount'
