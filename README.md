@@ -14,4 +14,4 @@
 This is the official SFTI repo for the mortgage API. Documentations may be found in the [Wiki](https://github.com/swissfintechinnovations/ca-mortgage/wiki).
 
 An easy-to-read representation of the Mortgage API is accessible via the following link:
-- [Mortgage API](https://editor.swagger.io/?url=https://raw.githubusercontent.com/swissfintechinnovations/ca-mortgage/main/mortgageAPI.yaml)
+- [Mortgage API](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/swissfintechinnovations/ca-mortgage/main/mortgageAPI.yaml)
