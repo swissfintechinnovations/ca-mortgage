@@ -49,7 +49,7 @@ paths:
       parameters:
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -94,8 +94,8 @@ paths:
       summary: Return a specific existing mortgage case
       description: A specific existing mortgage case including the corresponding properties.
       parameters:
-        - $ref: ./components/parameters/path/caseId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/case_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -137,7 +137,7 @@ paths:
         - $ref: ./components/parameters/query/expiring.yaml
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -182,8 +182,8 @@ paths:
       summary: Return a specific existing mortgage
       description: A specific existing mortgage including the corresponding properties and related mortgages.
       parameters:
-        - $ref: ./components/parameters/path/mortgageId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/mortgage_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -226,7 +226,7 @@ paths:
         - $ref: ./components/parameters/query/duration.yaml
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -271,10 +271,10 @@ paths:
       tags:
         - Mortgage Products and Conditions
       parameters:
-        - $ref: ./components/parameters/path/productId.yaml
+        - $ref: ./components/parameters/path/product_id.yaml
         - $ref: ./components/parameters/query/limit.yaml
         - $ref: ./components/parameters/query/interest.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -321,7 +321,7 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       requestBody:
@@ -357,7 +357,7 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -393,8 +393,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -434,8 +434,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       requestBody:
@@ -481,8 +481,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -523,8 +523,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -561,8 +561,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       requestBody:
@@ -597,8 +597,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       requestBody:
@@ -647,8 +647,8 @@ paths:
       parameters:
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -685,8 +685,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       requestBody:
@@ -757,9 +757,9 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/path/documentId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/path/document_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -799,8 +799,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -848,8 +848,8 @@ paths:
       tags:
         - Mortgage Financing Request
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       requestBody:
@@ -885,9 +885,9 @@ paths:
       tags:
         - Mortgage Financing Request
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/path/financingRequestId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/path/financing_request_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -934,9 +934,9 @@ paths:
       parameters:
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/path/financingRequestId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/path/financing_request_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -981,9 +981,9 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/path/financingRequestId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/path/financing_request_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -1024,10 +1024,10 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/path/financingRequestId.yaml
-        - $ref: ./components/parameters/path/offerId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/path/financing_request_id.yaml
+        - $ref: ./components/parameters/path/offer_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -1066,9 +1066,9 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: ./components/parameters/path/offerId.yaml
+        - $ref: ./components/parameters/path/offer_id.yaml
         - $ref: ./components/parameters/query/language.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -1107,10 +1107,10 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: ./components/parameters/path/applicationId.yaml
-        - $ref: ./components/parameters/path/financingRequestId.yaml
-        - $ref: ./components/parameters/path/offerId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/application_id.yaml
+        - $ref: ./components/parameters/path/financing_request_id.yaml
+        - $ref: ./components/parameters/path/offer_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -1157,7 +1157,7 @@ paths:
       tags:
         - Mortgage Order
       parameters:
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       requestBody:
@@ -1193,8 +1193,8 @@ paths:
       tags:
         - Mortgage Order
       parameters:
-        - $ref: ./components/parameters/path/orderId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/order_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -1235,8 +1235,8 @@ paths:
       tags:
         - Mortgage Order
       parameters:
-        - $ref: ./components/parameters/path/orderId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/order_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -1283,9 +1283,9 @@ paths:
       tags:
         - Mortgage Order
       parameters:
-        - $ref: ./components/parameters/path/orderId.yaml
+        - $ref: ./components/parameters/path/order_id.yaml
         - $ref: ./components/parameters/query/language.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -1326,8 +1326,8 @@ paths:
       parameters:
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
-        - $ref: ./components/parameters/path/mortgageId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/mortgage_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:
@@ -1372,9 +1372,9 @@ paths:
       summary: Get a specific offer for a specific tranche
       description: Get a specific offer for the to be extended mortgage.
       parameters:
-        - $ref: ./components/parameters/path/mortgageId.yaml
-        - $ref: ./components/parameters/path/offerId.yaml
-        - $ref: ./components/parameters/header/clientid.yaml
+        - $ref: ./components/parameters/path/mortgage_id.yaml
+        - $ref: ./components/parameters/path/offer_id.yaml
+        - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
         - $ref: ./components/parameters/header/agent.yaml
       responses:

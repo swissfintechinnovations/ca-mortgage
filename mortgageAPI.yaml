@@ -49,7 +49,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -94,8 +94,8 @@ paths:
       summary: Return a specific existing mortgage case
       description: A specific existing mortgage case including the corresponding properties.
       parameters:
-        - $ref: '#/components/parameters/caseId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/case_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -137,7 +137,7 @@ paths:
         - $ref: '#/components/parameters/expiring'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -182,8 +182,8 @@ paths:
       summary: Return a specific existing mortgage
       description: A specific existing mortgage including the corresponding properties and related mortgages.
       parameters:
-        - $ref: '#/components/parameters/mortgageId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/mortgage_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -226,7 +226,7 @@ paths:
         - $ref: '#/components/parameters/duration'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -271,10 +271,10 @@ paths:
       tags:
         - Mortgage Products and Conditions
       parameters:
-        - $ref: '#/components/parameters/productId'
+        - $ref: '#/components/parameters/product_id'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/interest'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -321,7 +321,7 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       requestBody:
@@ -357,7 +357,7 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -393,8 +393,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -434,8 +434,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       requestBody:
@@ -481,8 +481,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -523,8 +523,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -561,8 +561,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       requestBody:
@@ -597,8 +597,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       requestBody:
@@ -647,8 +647,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -685,8 +685,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       requestBody:
@@ -757,9 +757,9 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/documentId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/document_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -799,8 +799,8 @@ paths:
       tags:
         - Mortgage Application
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -848,8 +848,8 @@ paths:
       tags:
         - Mortgage Financing Request
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       requestBody:
@@ -885,9 +885,9 @@ paths:
       tags:
         - Mortgage Financing Request
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/financingRequestId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/financing_request_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -934,9 +934,9 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/financingRequestId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/financing_request_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -981,9 +981,9 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/financingRequestId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/financing_request_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -1024,10 +1024,10 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/financingRequestId'
-        - $ref: '#/components/parameters/offerId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/financing_request_id'
+        - $ref: '#/components/parameters/offer_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -1066,9 +1066,9 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: '#/components/parameters/offerId'
+        - $ref: '#/components/parameters/offer_id'
         - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -1107,10 +1107,10 @@ paths:
       tags:
         - Mortgage Offers
       parameters:
-        - $ref: '#/components/parameters/applicationId'
-        - $ref: '#/components/parameters/financingRequestId'
-        - $ref: '#/components/parameters/offerId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/application_id'
+        - $ref: '#/components/parameters/financing_request_id'
+        - $ref: '#/components/parameters/offer_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -1157,7 +1157,7 @@ paths:
       tags:
         - Mortgage Order
       parameters:
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       requestBody:
@@ -1193,8 +1193,8 @@ paths:
       tags:
         - Mortgage Order
       parameters:
-        - $ref: '#/components/parameters/orderId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/order_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -1235,8 +1235,8 @@ paths:
       tags:
         - Mortgage Order
       parameters:
-        - $ref: '#/components/parameters/orderId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/order_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -1283,9 +1283,9 @@ paths:
       tags:
         - Mortgage Order
       parameters:
-        - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/order_id'
         - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -1326,8 +1326,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/mortgageId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/mortgage_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -1372,9 +1372,9 @@ paths:
       summary: Get a specific offer for a specific tranche
       description: Get a specific offer for the to be extended mortgage.
       parameters:
-        - $ref: '#/components/parameters/mortgageId'
-        - $ref: '#/components/parameters/offerId'
-        - $ref: '#/components/parameters/clientid'
+        - $ref: '#/components/parameters/mortgage_id'
+        - $ref: '#/components/parameters/offer_id'
+        - $ref: '#/components/parameters/client_id'
         - $ref: '#/components/parameters/correlation'
         - $ref: '#/components/parameters/agent'
       responses:
@@ -3428,21 +3428,21 @@ components:
       required: true
       schema:
         type: string
-    applicationId:
+    application_id:
       in: path
       name: applicationId
       description: Uuid v4 of the application request.
       required: true
       schema:
         $ref: '#/components/schemas/ApplicationId'
-    caseId:
+    case_id:
       in: path
       name: caseId
       description: Uuid v4 of a specific existing mortgage case.
       required: true
       schema:
         $ref: '#/components/schemas/CaseId'
-    clientid:
+    client_id:
       in: header
       name: X-CorAPI-Client-ID
       description: ID of the client forwarded to the provider.
@@ -3464,7 +3464,7 @@ components:
       schema:
         type: string
         example: cursorIDxyz
-    documentId:
+    document_id:
       in: path
       name: documentId
       description: Unique ID (uuid v4) of the document.
@@ -3487,7 +3487,7 @@ components:
       schema:
         type: boolean
       example: true
-    financingRequestId:
+    financing_request_id:
       in: path
       name: financingRequestId
       description: Uuid v4 of the financing request.
@@ -3535,28 +3535,28 @@ components:
         format: int32
         example: 25
         minimum: 1
-    mortgageId:
+    mortgage_id:
       in: path
       name: mortgageId
       description: Uuid v4 of a specific existing mortgage.
       required: true
       schema:
         $ref: '#/components/schemas/MortgageId'
-    offerId:
+    offer_id:
       in: path
       name: offerId
       description: Uuid v4 of the offer.
       required: true
       schema:
         $ref: '#/components/schemas/OfferId'
-    orderId:
+    order_id:
       in: path
       name: orderId
       description: Uuid v4 of an order.
       required: true
       schema:
         $ref: '#/components/schemas/OrderId'
-    productId:
+    product_id:
       in: path
       name: productId
       description: A product's uuid v4.
