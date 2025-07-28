@@ -46,6 +46,7 @@ paths:
         - Full Mortgage Cases
       summary: Return the list of all mortgage cases for the authenticated context
       description: List of mortgage cases for the authenticated context including the corresponding properties, sorted by caseId.
+      operationId: listMortgageCases
       parameters:
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
@@ -93,6 +94,7 @@ paths:
         - Full Mortgage Cases
       summary: Return a specific existing mortgage case
       description: A specific existing mortgage case including the corresponding properties.
+      operationId: getMortgageCase
       parameters:
         - $ref: ./components/parameters/path/case_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -133,6 +135,7 @@ paths:
         - Existing Mortgages
       summary: Return the list of all mortgages for the authenticated context
       description: List of mortgages for the authenticated context including the corresponding properties and related mortgages, sorted by mortgageId.
+      operationId: listMortgages
       parameters:
         - $ref: ./components/parameters/query/expiring.yaml
         - $ref: ./components/parameters/query/cursor.yaml
@@ -181,6 +184,7 @@ paths:
         - Existing Mortgages
       summary: Return a specific existing mortgage
       description: A specific existing mortgage including the corresponding properties and related mortgages.
+      operationId: getMortgage
       parameters:
         - $ref: ./components/parameters/path/mortgage_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -217,10 +221,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/products:
     get:
-      summary: Get a list of all mortgage products
-      description: Get a complete overview of all available mortgage products sorted by productId.
       tags:
         - Mortgage Products and Conditions
+      summary: Get a list of all mortgage products
+      description: Get a complete overview of all available mortgage products sorted by productId.
+      operationId: listProducts
       parameters:
         - $ref: ./components/parameters/query/interest_rate_type.yaml
         - $ref: ./components/parameters/query/duration.yaml
@@ -266,10 +271,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/products/{productId}/conditions:
     get:
-      summary: Get the general conditions for the specified mortgage product
-      description: The standard financial conditions for the product.
       tags:
         - Mortgage Products and Conditions
+      summary: Get the general conditions for the specified mortgage product
+      description: The standard financial conditions for the product.
+      operationId: listProductConditions
       parameters:
         - $ref: ./components/parameters/path/product_id.yaml
         - $ref: ./components/parameters/query/limit.yaml
@@ -312,14 +318,15 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications:
     post:
+      tags:
+        - Mortgage Application
       summary: Place a new mortgage application (serves as dossier)
       description: |
         Place a new application including all necessary information about the property and applicant's financial situation.
 
         **Note that in the case where the FI needs additional information on the property, the error response 400 must contain the minimum
         required JSON object (PropertyObject) as detail**.
-      tags:
-        - Mortgage Application
+      operationId: createApplication
       parameters:
         - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
@@ -352,10 +359,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/required-information:
     get:
-      summary: Get the required property information for the specific FI needed for valuation
-      description: Show the subset of property details required by the FI for valuation.
       tags:
         - Mortgage Application
+      summary: Get the required property information for the specific FI needed for valuation
+      description: Show the subset of property details required by the FI for valuation.
+      operationId: getApplicationRequiredInformation
       parameters:
         - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
@@ -388,10 +396,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}:
     get:
-      summary: Get the details of a specific placed application
-      description: Get the details of a specific placed application.
       tags:
         - Mortgage Application
+      summary: Get the details of a specific placed application
+      description: Get the details of a specific placed application.
+      operationId: getApplication
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -427,12 +436,13 @@ paths:
         '503':
           $ref: ./components/responses/standard503.yaml
     put:
+      tags:
+        - Mortgage Application
       summary: Update the application's details
       description: |
         Update the application's details. Note that changing the application's details should not be possible after the application has been
         accepted by the FI.
-      tags:
-        - Mortgage Application
+      operationId: updateApplication
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -476,10 +486,11 @@ paths:
         '503':
           $ref: ./components/responses/standard503.yaml
     delete:
-      summary: Cancel the application and removing it
-      description: The request to delete a previously shared application.
       tags:
         - Mortgage Application
+      summary: Cancel the application and removing it
+      description: The request to delete a previously shared application.
+      operationId: deleteApplication
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -518,10 +529,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}/swissrets:
     get:
-      summary: Get property details in SwissRETS format
-      description: Get the real estate property's details in SwissRETS format XML according to https://swissrets.ch/.
       tags:
         - Mortgage Application
+      summary: Get property details in SwissRETS format
+      description: Get the real estate property's details in SwissRETS format XML according to https://swissrets.ch/.
+      operationId: getApplicationInSwissrets
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -554,12 +566,13 @@ paths:
         '503':
           $ref: ./components/responses/standard503.yaml
     post:
+      tags:
+        - Mortgage Application
       summary: Add property details in the SwissRETS standard
       description: |
         This endpoint allows to upload the real estate property's details as an XML file in the SwissRETS format according to
         https://swissrets.ch/.
-      tags:
-        - Mortgage Application
+      operationId: addApplicationInSwissrets
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -592,10 +605,11 @@ paths:
         '503':
           $ref: ./components/responses/standard503.yaml
     put:
-      summary: Update the real estate property's details
-      description: This endpoint allows to upload a modified XML file in the SwissRETS format changing the already existing information.
       tags:
         - Mortgage Application
+      summary: Update the real estate property's details
+      description: This endpoint allows to upload a modified XML file in the SwissRETS format changing the already existing information.
+      operationId: updateApplicationInSwissrets
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -640,10 +654,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}/documents:
     get:
-      summary: Get a list of submitted documents for a specifically placed application
-      description: All documents that have been shared against the Application ID can be retrieved here.
       tags:
         - Mortgage Application
+      summary: Get a list of submitted documents for a specifically placed application
+      description: All documents that have been shared against the Application ID can be retrieved here.
+      operationId: getApplicationDocuments
       parameters:
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
@@ -680,10 +695,11 @@ paths:
         '503':
           $ref: ./components/responses/standard503.yaml
     post:
-      summary: Add documents for the specific application
-      description: Documents can be assigned to a specific application ID.
       tags:
         - Mortgage Application
+      summary: Add documents for the specific application
+      description: Documents can be assigned to a specific application ID.
+      operationId: addApplicationDocument
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -750,12 +766,13 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}/documents/{documentId}:
     delete:
+      tags:
+        - Mortgage Application
       summary: Delete a formerly uploaded document
       description: |
         Deletes a specific document attached to a specific application. Note that deleting documents should not be possible after the
         application has been accepted by the FI.
-      tags:
-        - Mortgage Application
+      operationId: deleteApplicationDocument
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/path/document_id.yaml
@@ -794,10 +811,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}/status:
     get:
-      summary: Get the current status of the application
-      description: Get the current status of the application (rejected with reason, accepted, pending with reason).
       tags:
         - Mortgage Application
+      summary: Get the current status of the application
+      description: Get the current status of the application (rejected with reason, accepted, pending with reason).
+      operationId: getApplicationStatus
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -843,10 +861,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}/financing-requests:
     post:
-      summary: Place a new financing-request for a specific accepted application (dossier)
-      description: Place a new financing request including all necessary information.
       tags:
         - Mortgage Financing Request
+      summary: Place a new financing-request for a specific accepted application (dossier)
+      description: Place a new financing request including all necessary information.
+      operationId: addApplicationFinancingRequest
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -880,10 +899,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/required-information:
     get:
-      summary: List all required documents / information for processing specific Financial request at FI
-      description: All required documents for a specific FinancingRequestId can be retrieved herewith.
       tags:
         - Mortgage Financing Request
+      summary: List all required documents / information for processing specific Financial request at FI
+      description: All required documents for a specific FinancingRequestId can be retrieved herewith.
+      operationId: listApplicationFinancingRequestRequiredInformation
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/path/financing_request_id.yaml
@@ -927,10 +947,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}:
     get:
-      summary: Get the details of a financing request
-      description: Get a specific financing request based on the financingRequestId.
       tags:
         - Mortgage Financing Request
+      summary: Get the details of a financing request
+      description: Get a specific financing request based on the financingRequestId.
+      operationId: getApplicationFinancingRequest
       parameters:
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
@@ -976,10 +997,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers:
     get:
-      summary: List all binding offers for a given financing request
-      description: Lists the offers for a transferred application and the corresponding financing request.
       tags:
         - Mortgage Offers
+      summary: List all binding offers for a given financing request
+      description: Lists the offers for a transferred application and the corresponding financing request.
+      operationId: listApplicationFinancingRequestOffers
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/path/financing_request_id.yaml
@@ -1019,10 +1041,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}:
     get:
-      summary: Get the details of a specific offer
-      description: Get the details of a specific offer for a specific placed application.
       tags:
         - Mortgage Offers
+      summary: Get the details of a specific offer
+      description: Get the details of a specific offer for a specific placed application.
+      operationId: getApplicationFinancingRequestOffer
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/path/financing_request_id.yaml
@@ -1061,10 +1084,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/offers/{offerId}/document:
     get:
-      summary: Get document for the given offer
-      description: Get document for the offer, this can be used by TPP to display offer content.
       tags:
         - Mortgage Offers
+      summary: Get document for the given offer
+      description: Get document for the offer, this can be used by TPP to display offer content.
+      operationId: getOfferDocument
       parameters:
         - $ref: ./components/parameters/path/offer_id.yaml
         - $ref: ./components/parameters/query/language.yaml
@@ -1102,10 +1126,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}/required-information:
     get:
-      summary: List all required documents / information for processing specific offer at FI
-      description: Lists the required documents for the previously submitted case. Thus, the TPP knows which documents are needed for the later check.
       tags:
         - Mortgage Offers
+      summary: List all required documents / information for processing specific offer at FI
+      description: Lists the required documents for the previously submitted case. Thus, the TPP knows which documents are needed for the later check.
+      operationId: listApplicationFinancingRequestOfferRequiredInformation
       parameters:
         - $ref: ./components/parameters/path/application_id.yaml
         - $ref: ./components/parameters/path/financing_request_id.yaml
@@ -1150,12 +1175,13 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/orders:
     post:
+      tags:
+        - Mortgage Order
       summary: Place a new order
       description: |
         Place a new order referencing a specific offerId and either an existing mortgage id (prolongation) or an application id (new
         mortgage) including all relevant information.
-      tags:
-        - Mortgage Order
+      operationId: addOrder
       parameters:
         - $ref: ./components/parameters/header/client_id.yaml
         - $ref: ./components/parameters/header/correlation.yaml
@@ -1188,10 +1214,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/orders/{orderId}:
     get:
-      summary: Get the details of a specific placed order
-      description: Get the details of a specific placed order.
       tags:
         - Mortgage Order
+      summary: Get the details of a specific placed order
+      description: Get the details of a specific placed order.
+      operationId: getOrder
       parameters:
         - $ref: ./components/parameters/path/order_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -1228,12 +1255,13 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/orders/{orderId}/status:
     get:
+      tags:
+        - Mortgage Order
       summary: Get the current status of the order
       description: |
         Returns the current status of the order. An order can be in accepted rejected or pending status. In addition, further details
         regarding the status can be transferred.
-      tags:
-        - Mortgage Order
+      operationId: getOrderStatus
       parameters:
         - $ref: ./components/parameters/path/order_id.yaml
         - $ref: ./components/parameters/header/client_id.yaml
@@ -1278,10 +1306,11 @@ paths:
           $ref: ./components/responses/standard503.yaml
   /mortgages/orders/{orderId}/document:
     get:
-      summary: Get document for the given order
-      description: Get document for given order, this can be used by TPP to display offer content.
       tags:
         - Mortgage Order
+      summary: Get document for the given order
+      description: Get document for given order, this can be used by TPP to display offer content.
+      operationId: getOrderDocument
       parameters:
         - $ref: ./components/parameters/path/order_id.yaml
         - $ref: ./components/parameters/query/language.yaml
@@ -1323,6 +1352,7 @@ paths:
         - Mortgage Prolongation
       summary: Get all active offers for a specific tranche
       description: Get offer framework for the to be extended mortgage.
+      operationId: listOffers
       parameters:
         - $ref: ./components/parameters/query/cursor.yaml
         - $ref: ./components/parameters/query/limit.yaml
@@ -1371,6 +1401,7 @@ paths:
         - Mortgage Prolongation
       summary: Get a specific offer for a specific tranche
       description: Get a specific offer for the to be extended mortgage.
+      operationId: getOffer
       parameters:
         - $ref: ./components/parameters/path/mortgage_id.yaml
         - $ref: ./components/parameters/path/offer_id.yaml
