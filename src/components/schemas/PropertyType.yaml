@@ -1,0 +1,6 @@
+description: 'The type of usage of the property: self, let.'
+type: string
+enum:
+  - self
+  - let
+example: self

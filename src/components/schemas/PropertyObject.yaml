@@ -501,24 +501,7 @@ properties:
     items:
       $ref: ./Link.yaml
   propertyType:
-    type: string
-    enum:
-      - single_family_house
-      - condominium
-      - vacation_house
-      - vacation_condominium
-      - agricultural_farm
-      - 2or3_family_house
-      - multi_family_house
-      - residential_building_plot
-      - building_plot_other
-      - mixed_property
-      - commercial_condominium
-      - office_building
-      - industrial_building
-      - special_object
-    description: The type of property.
-    example: single_family_house
+    $ref: ./PropertyType.yaml
   publicNotarization:
     $ref: ./generic/Date.yaml
     description: Date of public notarization.
@@ -533,12 +516,7 @@ properties:
     $ref: ./generic/Date.yaml
     description: When the property will be fully transferred to the new owner.
   usageType:
-    type: string
-    enum:
-      - self
-      - let
-    description: 'The type of usage of the financing property: self, let.'
-    example: self
+    $ref: ./UsageType.yaml
   valueRelevantServitudes:
     type: boolean
     description: If the property has servitudes true, else false.
