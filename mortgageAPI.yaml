@@ -3227,12 +3227,24 @@ components:
         - verygood
       example: good
     PropertyType:
-      description: 'The type of usage of the property: self, let.'
+      description: The type of property.
       type: string
       enum:
-        - self
-        - let
-      example: self
+        - single_family_house
+        - condominium
+        - vacation_house
+        - vacation_condominium
+        - agricultural_farm
+        - 2or3_family_house
+        - multi_family_house
+        - residential_building_plot
+        - building_plot_other
+        - mixed_property
+        - commercial_condominium
+        - office_building
+        - industrial_building
+        - special_object
+      example: single_family_house
     StructuredAddress:
       title: Structured Address
       description: structured address.
@@ -3269,24 +3281,12 @@ components:
           example: 24A
           description: number of building.
     UsageType:
-      description: The type of property.
+      description: 'The type of usage of the property: self, let.'
       type: string
       enum:
-        - single_family_house
-        - condominium
-        - vacation_house
-        - vacation_condominium
-        - agricultural_farm
-        - 2or3_family_house
-        - multi_family_house
-        - residential_building_plot
-        - building_plot_other
-        - mixed_property
-        - commercial_condominium
-        - office_building
-        - industrial_building
-        - special_object
-      example: single_family_house
+        - self
+        - let
+      example: self
     UsedAsset:
       description: |
         Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also
