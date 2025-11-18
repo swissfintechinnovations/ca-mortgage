@@ -1,4 +1,4 @@
-description: The rating type.
+description: The rating type for the different property objects such as i.e. the construction quality.
 type: string
 enum:
   - bad
