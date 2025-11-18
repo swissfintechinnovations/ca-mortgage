@@ -1,4 +1,4 @@
-description: 'The type of property.'
+description: The type of the property, i.e. a single family house.
 type: string
 enum:
   - single_family_house
