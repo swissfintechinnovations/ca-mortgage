@@ -20,6 +20,6 @@ properties:
     $ref: ./AssetProvider.yaml
   insuranceSum:
     $ref: ./Amount.yaml
-    description: The amount of the sum insured in life insurance.
+    description: The amount, which is insured within the life insurance.
   usageType:
     $ref: ./AssetUsageType.yaml
