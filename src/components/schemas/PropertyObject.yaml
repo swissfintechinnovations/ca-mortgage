@@ -13,7 +13,7 @@ properties:
     example: 9343dd26-4b54-4808-8978-538f8e869d0e
   buildingRight:
     type: object
-    description: if a property is in building right, the buyer owner buy the property, not the ground the property is built on.
+    description: Building right is a time-limited right of use to erect a building on someone else's land without having to purchase the land itself. In other words, you are only the owner of the building, not the land on which it stands.
     properties:
       hasBuildingRight:
         type: boolean
@@ -61,7 +61,7 @@ properties:
       - especially_high
       - middle
       - especially_low
-    description: The ceiling hight in the rooms.
+    description: The ceiling hight of the rooms.
     example: middle
   classOfProperty:
     type: string
@@ -128,7 +128,7 @@ properties:
         - other
       example: floor
   heatProduction:
-    description: the way heat is generated within the building.
+    description: The way heat is generated within the building.
     type: array
     items:
       type: string
@@ -151,10 +151,10 @@ properties:
       example: gas
   investmentCost:
     $ref: ./Amount.yaml
-    description: Total amount needed to pay object price and planned renovation (Total Anlagekosten)
+    description: Total amount needed to pay object price and planned renovation (Total Anlagekosten).
   limitForLandEncumbrances:
     $ref: ./Amount.yaml
-    description: The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB)
+    description: The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB).
   matrimonialPropertyScheme:
     type: string
     example: separateEstate
@@ -169,7 +169,7 @@ properties:
     example: My Nice Property
   objectPrice:
     $ref: ./Amount.yaml
-    description: Price paid to buy the property
+    description: Price paid to buy the property.
   outsideConstructionZone:
     type: boolean
     description: If the property is outside of the construction zone.
@@ -233,7 +233,7 @@ properties:
             - chimney
             - passenger_elevator
             - freight_elevator
-          description: Additional features and services.
+          description: Additional features and services of the property.
           example: outdoor_pool
       houseType:
         type: string
@@ -264,11 +264,11 @@ properties:
         example: 1990
       renovation:
         type: boolean
-        description: If the property is renovated true, else false.
+        description: If the property as a whole has been renovated true, else false.
         example: false
       renovationYear:
         type: integer
-        description: renovation year.
+        description: The year in which the property as a whole has been renovated.
         example: 1990
         default: 0
       propertyRenovations:
@@ -296,18 +296,17 @@ properties:
                 - interior_fittings
                 - building_envelope
                 - building_services
-              description: |
-                Type of Property Component which has been renovated. Please use consistently either the detailed Component types (e.g.
+              description: Type of Property Component which has been renovated. Please use consistently either the detailed Component types (e.g.
                 interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings).
               example: interior_fittings_floor_cover
             yearOfRenovation:
               type: integer
-              description: renovation year.
+              description: The year in which a component type of the property has been renovated.
               example: 2015
               default: 0
             renovationCost:
               $ref: ./Amount.yaml
-              description: cost of renovation
+              description: The renovation cost the respective component type.
       minergieStandardType:
         type: string
         enum:
@@ -377,7 +376,7 @@ properties:
         example: kitchen_full_room
       numberOfFamilyBathrooms:
         type: integer
-        description: 'Separate shower and bathtub in the bathroom (optional: toilet).'
+        description: Separate shower and bathtub in the bathroom (optional: toilet).
         example: 2
       numberOfBathWC:
         type: integer
@@ -409,7 +408,7 @@ properties:
         example: 2
       numberOfUndergroundCarParks:
         type: integer
-        description: The number of underground parking places.
+        description: The number of underground parking spaces.
         example: 2
   propertyFlatInformation:
     type: object
