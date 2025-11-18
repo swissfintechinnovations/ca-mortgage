@@ -1,4 +1,4 @@
-description: 'The type of usage of the property: self, let.'
+description: The type of usage of the property: self, let.
 type: string
 enum:
   - self
