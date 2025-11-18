@@ -21,14 +21,14 @@ properties:
     type: string
     maxLength: 70
     example: Rue de la gare
-    description: Name of street.
+    description: The name of the street.
   townName:
     type: string
     maxLength: 35
     example: Biel
-    description: you guessed it, the name of the town.
+    description: The name of the town.
   buildingNumber:
     type: string
     maxLength: 16
     example: 24A
-    description: number of building.
+    description: The number of the building.
