@@ -1,4 +1,4 @@
-description: Document to upload with metadata.
+description: Document to upload with metadata, including details about the document file and its current status.
 type: object
 required:
   - documentList
@@ -18,15 +18,15 @@ properties:
           type: string
           format: uuid
           example: 7f648f12-fd45-4930-6543-456hf5671c37
-          description: Document ID in uuid v4 format.
+          description: A unique identifier for the document, in UUID v4 format.
         filesize:
           type: integer
           example: 1024
-          description: The file size in bytes.
+          description: The size of the document file in bytes.
         uploaddate:
           $ref: ./generic/Date.yaml
         statusInfo:
-          description: Document status info.
+          description: Information about the current status of the document.
           type: object
           required:
             - status
@@ -39,8 +39,8 @@ properties:
                 - rejected
                 - pending
               default: pending
-              description: Get the current status of the application.
+              description: The current processing status of the document.
             statusReason:
               type: string
               example: Additional information that can be shared with the status.
-              description: The reason, of current status.
+              description: A reason explaining the current status of the document (e.g., additional information or approval required).
