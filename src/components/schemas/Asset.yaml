@@ -1,4 +1,4 @@
-description: 'Asset information: Array of all assets the applicant possesses, incl. the assets which will be used for the financial request.'
+description: 'Asset information: An array of all assets the applicant possesses, including those that will be used for the financial request.'
 type: object
 required:
   - amount
@@ -7,16 +7,15 @@ properties:
   amount:
     $ref: ./Amount.yaml
     description: |
-      The amount of the asset e.g. market value of fungible investment, existing retirement asset in pension fund, surrender value in life
-      insurance
+     The value of the asset, such as the market value of a fungible investment, the current retirement asset in a pension fund, or the surrender value of life insurance.
   assetType:
     $ref: ./AssetType.yaml
   assetProvider:
     $ref: ./AssetProvider.yaml
   insuranceSum:
     $ref: ./Amount.yaml
-    description: The amount of the sum insured in life insurance.
+    description: The insured amount in a life insurance policy.
   remark:
     type: string
-    description: remark remark.
-    example: We need an example for such a remark
+    description: Additional notes or comments regarding the asset.
+    example: This asset is tied to a long-term pension plan with a guaranteed return.
