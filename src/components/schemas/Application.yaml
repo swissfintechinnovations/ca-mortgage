@@ -1,4 +1,4 @@
-description: All static application information needed by the FI to create binding offers.
+description: All static application information required by the FI to create binding offers.
 type: object
 required:
   - mortgageType
@@ -7,7 +7,7 @@ required:
 properties:
   mortgageType:
     type: string
-    description: Type of business.
+    description: Type of mortgage request being made.
     example: buy
     enum:
       - buy
@@ -24,59 +24,59 @@ properties:
     enum:
       - advisor
       - direct
-    description: The type of the channel the application was generated.
+    description: The type of the channel through which the application was submitted.
     example: advisor
   replacedTranches:
-    description: Tranche to be replaced.
+    description: Information about the tranche(s) being replaced.
     type: array
     items:
       type: object
       properties:
         replacedTrancheAmount:
           $ref: ./Amount.yaml
-          description: The amount of the replaced tranche.
+          description: The amount of the tranche being replaced.
         replacedTrancheExpiry:
           $ref: ./generic/Date.yaml
-          description: The expiry date of the replaced tranche.
+          description: The expiration date of the replaced tranche.
           example: '2022-05-03'
         replacedTrancheIssuer:
           type: string
-          description: The institute who has issued the replaced tranche.
+          description: The financial institution that issued the tranche being replaced.
           example: Credit Suisse
   replacementType:
     type: string
-    description: 'NOT required when mortgage type is BUY, Values: entire, partial.'
+    description: Type of replacement. Not required if the mortgage type is "BUY". Possible values are "entire" or "partial".
     example: entire
     enum:
       - entire
       - partial
   tppAdvisorDetail:
-    description: Personal information if the advisor of the TPP.
+    description: Personal information of the TPP advisor.
     type: object
     properties:
       name:
         type: string
         maxLength: 70
-        description: Name of the TPP advisor.
+        description: The first name of the TPP advisor.
         example: Max
       surName:
         type: string
         maxLength: 70
-        description: Surname of the TPP advisor.
+        description: The last name of the TPP advisor.
         example: Muster
       nameTpp:
         type: string
         maxLength: 70
-        description: Firm of the TPP advisor.
+        description: The name of the TPP firm the advisor belongs to.
         example: Muster Finanz AG
       email:
         type: string
-        description: Email of the TPP advisor.
+        description: The email address of the TPP advisor.
         example: max.muster@domain.ch
       language:
         type: string
         example: fr
-        description: Preferred contact language of the TPP advisor.
+        description: The preferred contact language of the TPP advisor.
         enum:
           - de
           - fr
@@ -84,7 +84,7 @@ properties:
           - en
       phone:
         type: string
-        description: phone of the TPP advisor.
+        description: The phone number of the TPP advisor.
         example: '+41443343456'
       address:
         $ref: ./StructuredAddress.yaml
