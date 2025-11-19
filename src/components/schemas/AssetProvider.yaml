@@ -1,6 +1,5 @@
 description: |
-  Asset provider for each asset, additional information must be transferred. E.g. in case the applicant owns an additional security of type
-  insurance, insurance company name is provided
+  The asset provider for each asset. Additional information must be provided depending on the asset type. For example, if the applicant owns an insurance policy, the name of the insurance company should be included.
 type: object
 required:
   - name
@@ -8,4 +7,4 @@ properties:
   name:
     type: string
     example: Credit Suisse
-    description: Name of the asset provider.
+    description: The name of the asset provider, such as a bank, insurance company, or financial institution.
