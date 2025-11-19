@@ -1,4 +1,4 @@
-description: Common set of asset usage types.
+description: A common set of asset usage types that specify how an asset is intended to be used.
 type: string
 enum:
   - pledged
