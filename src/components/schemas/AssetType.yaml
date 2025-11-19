@@ -1,4 +1,4 @@
-description: Common set of asset types.
+description: A common set of asset types that can be used to categorize the applicant's assets.
 type: string
 enum:
   - cash
