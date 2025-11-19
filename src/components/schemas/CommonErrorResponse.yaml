@@ -1,21 +1,21 @@
 title: Common Error Response
-description: ...
+description: A standard error response format used to provide detailed information about issues encountered during the processing of a request.
 type: object
 properties:
   detail:
-    description: ..
+    description: A list of detailed problem descriptions related to the current request.
     type: array
     items:
       type: string
       example: List of detailed problem description with respect to the current request
-      description: ..
+      description: A detailed explanation of the specific issues encountered, often including error codes or messages.
   instance:
     type: string
     example: path/to/corresponding/resource
-    description: ..
+    description: The path to the specific resource or request instance where the error occurred.
   title:
     type: string
     example: This is the general problem description
-    description: ..
+    description: A brief, high-level title summarizing the nature of the error.
   type:
     $ref: ./CommonErrorType.yaml
