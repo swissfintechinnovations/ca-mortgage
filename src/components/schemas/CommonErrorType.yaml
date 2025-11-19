@@ -1,5 +1,5 @@
 title: Common Error Type
-description: Error Types for commonErrorResponse.
+description:  list of predefined error types used in the CommonErrorResponse to categorize the various problems that may occur during the processing of a request.
 type: string
 enum:
   - /problems/INVALID_PAYLOAD
