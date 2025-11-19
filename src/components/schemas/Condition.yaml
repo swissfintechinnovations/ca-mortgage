@@ -1,4 +1,4 @@
-description: All details regarding the conditions for a specific mortgage product the FI offers.
+description: All details regarding the conditions for a specific mortgage product offered by the FI.
 type: object
 required:
   - amortization
@@ -10,19 +10,19 @@ required:
   - productIdRef
 properties:
   amortization:
-    description: the amount of repayment.
+    description: The amount to be repaid periodically as part of the mortgage agreement.
     type: integer
     example: 1000
   amountRange:
     $ref: ./AmountRange.yaml
   conditionId:
-    description: ID of condition.
+    description: A unique identifier for the specific mortgage condition.
     type: string
     format: uuid
     example: ef737eb0-c0a7-4f44-bdeb-32ba9bd99327
   duration:
     type: integer
-    description: The duration in years.
+    description: The duration of the mortgage in years.
     minimum: 0
     maximum: 25
     example: 5
@@ -32,7 +32,7 @@ properties:
     $ref: ./generic/Date.yaml
   productIdRef:
     type: string
-    description: Reference to product ID.
+    description: A reference to the unique product ID for the mortgage.
     format: uuid
     example: 0b34cd1b-32a5-4bb7-bcc5-bf81f8f8aaf1
   amortizations:
