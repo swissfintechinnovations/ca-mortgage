@@ -1,4 +1,4 @@
-description: Complete financing details of an application.
+description: Complete financing details for an application, including the amount, amortization, financing IDs, and associated assets.
 type: object
 required:
   - amount
@@ -10,30 +10,30 @@ properties:
   applicationIdRef:
     type: string
     format: uuid
-    description: Uuid of the financing's corresponding application.
+    description: he UUID of the corresponding application for this financing.
     example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
   financingId:
     type: string
     format: uuid
-    description: Uuid of the financing.
+    description: The UUID of the financing itself.
     example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
   increaseAmount:
     $ref: ./Amount.yaml
   increasePurpose:
     type: string
-    description: The purpose of the increase.
+    description: The reason or purpose for the increase in financing (e.g., home renovation).
     example: renovation of the kitchen
   offerDate:
     $ref: ./generic/Date.yaml
   publicCertDate:
     $ref: ./generic/Date.yaml
   tranches:
-    description: mortgage tranches.
+    description: The mortgage tranches associated with the financing.
     type: array
     items:
       $ref: ./FinancingTranche.yaml
   usedAssets:
     type: array
-    description: used assets.
+    description: A list of assets used for the financing.
     items:
       $ref: ./UsedAsset.yaml
