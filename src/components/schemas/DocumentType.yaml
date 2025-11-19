@@ -1,4 +1,4 @@
-description: All supported document types. For the enum value tax_statement. Tax statement is required.
+description: A list of all supported document types. For the enum value "tax_statement", a tax statement is required.
 type: string
 enum:
   - cash
