@@ -1,4 +1,4 @@
-description: Tranche of a financing.
+description: A tranche of a financing, representing a portion of the total financing amount with specific terms and conditions.
 type: object
 required:
   - amount
@@ -12,7 +12,7 @@ properties:
     $ref: ./Interest.yaml
   interestRateType:
     type: string
-    description: type of interest rate.
+    description: The type of interest rate applied to this tranche.
     example: libor
     enum:
       - variable
@@ -25,7 +25,7 @@ properties:
     $ref: ./Amortizations.yaml
   duration:
     type: integer
-    description: duratin of the mortgage in years.
+    description:  The duration of the mortgage for this tranche, in years.
     example: 2
     minimum: 1
     maximum: 20
@@ -34,11 +34,11 @@ properties:
   productIdRef:
     type: string
     format: uuid
-    description: Uuid of the product.
+    description: The UUID of the associated product for this tranche.
     example: 6e61ff5d-3ffd-4254-a77d-73cc25d35e92
   saronperiod:
     type: string
-    description: The saron period.
+    description: The SARON (Swiss Average Rate Overnight) period for variable interest rate tranches.
     example: 3m
     enum:
       - 1m
