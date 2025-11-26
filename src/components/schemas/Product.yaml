@@ -37,6 +37,6 @@ properties:
     $ref: ./ProductId.yaml
   productVariations:
     type: array
-    description: A list of variations of the mortgage product, such as different term lengths, interest rate options, or other variations.
+    description: A list of variations of the mortgage product, detailing the term length, interest rate, and optional SARON period.
     items:
       $ref: ./ProductVariation.yaml
