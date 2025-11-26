@@ -1,5 +1,6 @@
 description: |
-  The representation of a real estate object, real estate register id (propertyIdentifier) is optional until otherwise required by law.
+  The details representing a real estate object, including various identifiers and attributes such as the address, property type, and construction information. 
+  The real estate register ID (propertyIdentifier) is optional unless required by law.
 type: object
 required:
   - address
@@ -9,25 +10,25 @@ properties:
     $ref: ./StructuredAddress.yaml
   propertyObjectId:
     type: string
-    description: The property object identifier defined by TPP.
+    description: The unique identifier for the property object defined by the third-party provider (TPP).
     example: 9343dd26-4b54-4808-8978-538f8e869d0e
   buildingRight:
     type: object
-    description: Building right is a time-limited right of use to erect a building on someone else's land without having to purchase the land itself. In other words, you are only the owner of the building, not the land on which it stands.
+    description: A building right is a time-limited right to construct a building on land that is not owned by the builder, meaning the builder owns only the building, not the land it is built on.
     properties:
       hasBuildingRight:
         type: boolean
-        description: If the property is built in a building right true, else false.
+        description: Indicates whether the property is built under a building right. True if the property is built on a building right, otherwise false.
         example: false
       buildingRightExpiry:
         $ref: ./generic/Date.yaml
-        description: Date when the building right expires.
+        description: The date when the building right expires.
       buildingRightRent:
         $ref: ./Amount.yaml
-        description: Yearly payment for the building right.
+        description: The yearly payment for the building right.
       buildingRightCompensation:
         $ref: ./Amount.yaml
-        description: Payment received at the building right expiry.
+        description: The compensation paid when the building right expires.
   buildingStandardBathroom:
     type: string
     enum:
@@ -35,7 +36,7 @@ properties:
       - highlevel
       - basic
       - lowlevel
-    description: Building standard of the sanitary installations.
+    description: The building standard of the bathroom fixtures and fittings.
     example: basic
   buildingStandardFloorCoverings:
     type: string
@@ -44,7 +45,7 @@ properties:
       - highlevel
       - basic
       - lowlevel
-    description: Building standard of the floor coverings.
+    description: The building standard of the floor coverings.
     example: basic
   buildingStandardKitchen:
     type: string
@@ -53,7 +54,7 @@ properties:
       - highlevel
       - basic
       - lowlevel
-    description: Building standard of the kitchen.
+    description: The building standard of the kitchen fittings and appliances.
     example: basic
   ceilingHight:
     type: string
@@ -73,14 +74,14 @@ properties:
       - rented_property
       - rented_property_with_use_restriction
       - other
-    description: The class of property (Main residence, second residence, rented).
+    description: The classification of the property, such as main residence, second residence, or rented property.
     example: main_residence
   collateralValue:
     $ref: ./Amount.yaml
-    description: Value of the property as base for the securization applying the lowest value principle (Belehnungsbasis)
+    description: The value of the property used for securing the mortgage, applying the lowest value principle (Belehnungsbasis).
   estimation:
     type: object
-    description: the estimation of the value of a property.
+    description: The estimation of the value of a property provided by an external source.
     properties:
       estimationId:
         type: string
@@ -96,16 +97,16 @@ properties:
           - wup
       marketValue:
         $ref: ./Amount.yaml
-        description: Estimated Market value of the property.
+        description: The estimated Market value of the property.
       statisticalPriceRangeMax:
         $ref: ./Amount.yaml
-        description: Estimated statistical price range maximum.
+        description: The estimated upper limit of the statistical price range for the property.
       statisticalPriceRangeMin:
         $ref: ./Amount.yaml
-        description: Estimated statistical price range minimum.
+        description: The estimated lower limit of the statistical price range for the property.
       yearlyRentalIncome:
         $ref: ./Amount.yaml
-        description: Estimated rental income per year
+        description: The estimated annual rental income the property can generate.
       estimationDate:
         $ref: ./generic/Date.yaml
   floorPlan:
@@ -114,10 +115,10 @@ properties:
       - efficient
       - average
       - inefficient
-    description: The efficiency of the floor plan.
+    description: The efficiency rating of the property’s floor plan.
     example: average
   heatEmission:
-    description: Type of the heat emission.
+    description: Type of heat emission systems used in the property, such as floor heating, radiators, stoves, etc.
     type: array
     items:
       type: string
@@ -128,7 +129,7 @@ properties:
         - other
       example: floor
   heatProduction:
-    description: The way heat is generated within the building.
+    description: The type of heating system used to generate heat in the property, such as oil, gas, or renewable sources like solar or geothermal.
     type: array
     items:
       type: string
@@ -151,7 +152,7 @@ properties:
       example: gas
   investmentCost:
     $ref: ./Amount.yaml
-    description: Total amount needed to pay object price and planned renovation (Total Anlagekosten).
+    description: The total amount required to purchase the property and complete any planned renovations (total Anlagekosten).
   limitForLandEncumbrances:
     $ref: ./Amount.yaml
     description: The limit for land encumbrance according to Bundesgericht über das bäuerliche Bodenrecht, SR 211.412.11 (Belastungsgrenze BGBB).
@@ -162,28 +163,28 @@ properties:
       - jointEstate
       - separateEstate
       - contributionToJointlyAcquiredProperty
-    description: Information how the property is owned.
+    description: The property ownership arrangement, such as joint estate or separate estate.
   name:
     type: string
-    description: User-defined property name.
+    description: A user-defined name for the property.
     example: My Nice Property
   objectPrice:
     $ref: ./Amount.yaml
-    description: Price paid to buy the property.
+    description: The price paid to purchase the property.
   outsideConstructionZone:
     type: boolean
-    description: If the property is outside of the construction zone.
+    description: Indicates whether the property is located outside the designated construction zone.
     example: false
   propertyBuildingInformation:
     type: object
-    description: The property building information.
+    description: Detailed building information about the property, such as living space, garage volume, and land area.
     properties:
       livingSpace:
         type: object
         properties:
           livingSpaceInSqm:
             type: integer
-            description: The area of the living space in quatermeter.
+            description: The area of the living space in square meters.
             example: 120
           measurementStandard:
             type: string
@@ -194,19 +195,19 @@ properties:
             example: nla
       roofFloorExpandable:
         type: boolean
-        description: If the roof floor is expandable true, else false.
+        description: Indicates whether the roof floor can be expanded (true) or not (false).
         example: false
       volumeIncludingGarageInhouse:
         type: integer
-        description: The volume of the house including the inhouse garage (relevant for WuP).
+        description: The total volume of the house, including any in-house garages (relevant for WuP).
         example: 1500
       volumeIncludingAllGarages:
         type: integer
-        description: The volume of the house including all inhouse and external garages and garage boxes (relevant for IAZI).
+        description: The total volume of the house, including in-house and external garages (relevant for IAZI).
         example: 1620
       landArea:
         type: integer
-        description: The surface area of the land.
+        description: The total surface area of the land.
         example: 2000
       environmentStandard:
         type: string
@@ -214,7 +215,7 @@ properties:
           - high-level
           - basic
           - low-level
-        description: The rating type.
+        description: The environmental rating of the property.
         example: basic
       otherFeatures:
         type: array
@@ -243,7 +244,7 @@ properties:
           - row_house
           - row_corner_house
           - terrace_house
-        description: The type of the house.
+        description: The type of house, such as detached or semidetached.
         example: detached_house
       normType:
         type: string
@@ -256,19 +257,19 @@ properties:
         example: building_insurance
   propertyConstructionInformation:
     type: object
-    description: The property construction information.
+    description: Detailed construction information about the property, including the year of construction, renovation status, and specific renovations made to the property.
     properties:
       constructionYear:
         type: integer
-        description: construction year.
+        description: The year when the property was originally constructed.
         example: 1990
       renovation:
         type: boolean
-        description: If the property as a whole has been renovated true, else false.
+        description: Indicates whether the property has undergone full renovation (true) or not (false).
         example: false
       renovationYear:
         type: integer
-        description: The year in which the property as a whole has been renovated.
+        description: The year in which the entire property was renovated, if applicable.
         example: 1990
         default: 0
       propertyRenovations:
@@ -301,7 +302,7 @@ properties:
               example: interior_fittings_floor_cover
             yearOfRenovation:
               type: integer
-              description: The year in which a component type of the property has been renovated.
+              description: The year in which a component type of the property was renovated.
               example: 2015
               default: 0
             renovationCost:
@@ -330,7 +331,7 @@ properties:
           - E
           - F
           - G
-        description: Energy certificate from Cantons.
+        description:  Energy certificate from Cantons. The energy rating of the building after renovation.
         example: B
       luxusFlag:
         type: string
@@ -339,7 +340,7 @@ properties:
           - '0.5'
           - '1.0'
         description: |
-          Used for object value calculation (e.g. IAZI) and indicates whether an object is luxury or not:
+          Used for object value calculation (e.g. IAZI) and indicates whether the object is luxury or not:
           - '0' = No
           - '0.5' = Partially
           - '1' = Yes
@@ -354,7 +355,7 @@ properties:
         $ref: ./PropertyObjectRatingType.yaml
   propertyElements:
     type: object
-    description: The property detail information such as rooms count, parking places.
+    description: Detailed information about the property’s elements, such as room count, parking spaces, and additional features like garages and bathrooms.
     properties:
       numberOfRooms:
         type: number
@@ -506,7 +507,7 @@ properties:
     description: Date of public notarization.
   remarks:
     type: string
-    description: Remark regarding the estimation.
+    description: Additional comments or remarks related to the property estimation, such as conditions or special circumstances.
     example: We need an example for such a remark
   renovationAmount:
     $ref: ./Amount.yaml
