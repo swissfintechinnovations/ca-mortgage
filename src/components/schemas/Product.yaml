@@ -1,4 +1,4 @@
-description: All details regarding an FI's mortgage product.
+description: All details regarding a financial institution's (FI) mortgage product, including interest rate type, product names, and variations.
 type: object
 required:
   - interestRateType
@@ -7,7 +7,7 @@ required:
 properties:
   interestRateType:
     type: string
-    description: type of interest rate.
+    description: The type of interest rate applied to the mortgage product.
     example: libor
     enum:
       - variable
@@ -16,17 +16,17 @@ properties:
       - fixed
   names:
     type: array
-    description: name of mortgage product.
+    description: A list of names for the mortgage product in different languages.
     items:
       type: object
       properties:
         description:
           type: string
-          description: Product name description.
+          description: A description of the mortgage product name.
           example: Fixed rate mortgage
         language:
           type: string
-          description: Language of product name.
+          description: The language of the product name.
           example: fr
           enum:
             - de
@@ -37,6 +37,6 @@ properties:
     $ref: ./ProductId.yaml
   productVariations:
     type: array
-    description: ..
+    description: A list of variations of the mortgage product, such as different term lengths, interest rate options, or other variations.
     items:
       $ref: ./ProductVariation.yaml
