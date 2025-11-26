@@ -1,4 +1,4 @@
-description: The type of usage of the property: self, let.
+description: The type of property usage, indicating whether the property is used by the owner ("self") or rented out ("let").
 type: string
 enum:
   - self
