@@ -1,4 +1,4 @@
-description: All relevant information regarding a specific mortgage.
+description: All relevant information regarding a specific mortgage, including details on the mortgage amount, interest rate, validity, and associated property.
 type: object
 required:
   - amountAtExpiry
@@ -17,21 +17,21 @@ properties:
     $ref: ./Amount.yaml
   durationType:
     type: integer
-    description: The duration in years.
+    description: The duration of the mortgage in years.
     minimum: 0
     maximum: 25
     example: 5
   interestBasis:
     type: string
-    description: we need a description.
-    example: We need an example
+    description: The basis on which the interest is calculated (e.g., daily, monthly).
+    example: Daily
   interestRate:
     type: string
-    description: interest rate to be paid by debtor.
+    description: The interest rate to be paid by debtor.
     example: '1.4'
   interestRateType:
     type: string
-    description: type of interest rate.
+    description: The type of interest rate applied to the mortgage.
     example: libor
     enum:
       - variable
@@ -40,11 +40,11 @@ properties:
       - fixed
   mortgageId:
     $ref: ./MortgageId.yaml
-    description: Uuid v4 of the specific mortgage.
+    description: UUID v4 identifier of the specific mortgage.
   product:
     $ref: ./Product.yaml
   prolongable:
-    description: tells if a mortgage is prolongable or not.
+    description: Indicates whether the mortgage can be prolonged.
     type: boolean
     example: false
   propertyObjects:
@@ -61,11 +61,10 @@ properties:
   offerDate:
     $ref: ./generic/Date.yaml
     description: |
-      The date when the offer is made by the FI. Optional field for use cases where no MortgageOffer object is used and therefore the offer
-      date needs to be directly in Mortgage object.
+      The date when the mortgage offer is made by the financial institution (FI). This is an optional field, typically used in cases where no separate MortgageOffer object is available.
     example: '2018-04-05'
   relatedMortgages:
     type: array
-    description: ..
+    description: A list of mortgages related to this mortgage (e.g., linked loans or second mortgages).
     items:
       $ref: ./Mortgage.yaml
