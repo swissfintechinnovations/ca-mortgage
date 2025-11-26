@@ -1,22 +1,22 @@
-description: Product variation details.
+description: Details about a variation of the mortgage product, such as duration, interest rate, and SARON period.
 type: object
 properties:
   duration:
     type: integer
-    description: The duration in years.
+    description: The duration of the mortgage variation in years.
     minimum: 0
     maximum: 25
     example: 5
   rate:
     type: number
     format: double
-    description: The interest rate.
+    description: The interest rate for this mortgage variation, expressed as a decimal
     minimum: 0
     maximum: 1
     example: 0.5
   saronperiod:
     type: string
-    description: The saron period.
+    description: The SARON (Swiss Average Rate Overnight) period for the mortgage variation.
     example: 3m
     enum:
       - 1m
