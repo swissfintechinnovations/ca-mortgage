@@ -1,19 +1,19 @@
-description: Links together the persons building the applicant party.
+description: Links together the persons forming the applicant party for a mortgage application.
 type: object
 required:
   - personList
 properties:
   personList:
-    description: ..
+    description: A list of individuals who are part of the applicant party. Each individual is represented by an applicant object.
     type: array
     items:
       $ref: ./Applicant.yaml
   fiPrimaryApplicantId:
     type: string
     description: |
-      ApplicantId for primary applicant of the applicant party defined by the financial institute, only applicable in case of multiple
-      applicants and if known at the moment of the application.
+      The ApplicantId for the primary applicant, as defined by the financial institution. This field is applicable only when there are multiple 
+      applicants and if the primary applicant is known at the time of the application.
     example: asd23f
   primaryApplicantId:
     $ref: ./generic/Id.yaml
-    description: ApplicantId for primary applicant of the applicant party. In case of multiple applicants this field is mandatory.
+    description: The ApplicantId for the primary applicant in the applicant party. This field is mandatory if there are multiple applicants.
