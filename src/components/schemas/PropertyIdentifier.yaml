@@ -1,15 +1,15 @@
-description: Property identification (register of real estate).
+description: Identification details for a property, including identifiers for the property itself, the land it is built on, and the specific apartment unit.
 type: object
 properties:
   EGID:
     type: string
     example: '191092250'
-    description: Identifier of the property.
+    description: The unique identifier for the property.
   EGRID:
     type: string
     example: CH480928387782
-    description: Identifier of land a property is built on.
+    description: The unique identifier for the land on which the property is built.
   EWID:
     type: string
     example: '42'
-    description: Identifier of the apartment.
+    description: The unique identifier for the specific apartment within the property.
