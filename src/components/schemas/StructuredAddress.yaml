@@ -1,5 +1,5 @@
 title: Structured Address
-description: structured address.
+description:  A structured format for representing an address, including country, postcode, street name, and town name.
 type: object
 required:
   - country
@@ -11,24 +11,24 @@ properties:
     type: string
     maxLength: 2
     example: CH
-    description: a political area, surrounded by borders, very often a natural border such as a river or a mountain.
+    description: The country or political area, typically defined by borders, which can be natural (e.g., rivers or mountains) or artificial (e.g., political boundaries).
   postCode:
     type: string
     maxLength: 16
-    description: zip code.
+    description: The postal code or ZIP code for the address.
     example: CH-2501
   streetName:
     type: string
     maxLength: 70
     example: Rue de la gare
-    description: The name of the street.
+    description: The name of the street or road in the address.
   townName:
     type: string
     maxLength: 35
     example: Biel
-    description: The name of the town.
+    description: The name of the town, city, or locality.
   buildingNumber:
     type: string
     maxLength: 16
     example: 24A
-    description: The number of the building.
+    description: The specific building or house number within the street.
