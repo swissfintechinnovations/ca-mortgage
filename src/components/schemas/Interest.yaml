@@ -1,4 +1,4 @@
-description: The current rate and optionally the referred base.
+description: The current interest rate and optionally the base rate to which the margin is applied.
 type: object
 required:
   - currentRate
@@ -7,14 +7,14 @@ properties:
     type: number
     format: double
     description: |
-      Interest rate in decimals. 2.45% would be sent as 0.0245. For flexible interest mortgage this would show the margin above interest.
+      The interest rate expressed as a decimal. For example, 2.45% would be represented as 0.0245. For flexible interest mortgage this would show the margin above interest.
     minimum: 0
     maximum: 1
     example: 0.5
   base:
     type: number
     format: double
-    description: Base rate upon margin is applied (e.g. for SARON).
+    description: The reference base rate to which the margin is applied (e.g. SARON rate).
     minimum: 0
     maximum: 1
     example: 0.5
