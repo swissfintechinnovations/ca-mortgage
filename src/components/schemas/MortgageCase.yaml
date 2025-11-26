@@ -1,4 +1,4 @@
-description: A complete mortgage case including the application details.
+description: A complete mortgage case that includes all relevant details of the application, case ID, and financing.
 type: object
 required:
   - application
@@ -14,4 +14,4 @@ properties:
   remark:
     type: string
     example: All documents verified at TPP
-    description: Remark/comment which can be added by TPP.
+    description: A remark or comment that can be added by the Third-Party Provider (TPP), such as notes about the application or verification process.
