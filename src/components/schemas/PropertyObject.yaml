@@ -297,8 +297,8 @@ properties:
                 - interior_fittings
                 - building_envelope
                 - building_services
-              description: Type of Property Component which has been renovated. Please use consistently either the detailed Component types (e.g.
-                interior_fittings_floor_cover) or the simple Component Types (e.g. interior_fittings).
+              description: Type of property component that has been renovated. Please use consistently either the detailed component types 
+              (e.g., interior_fittings_floor_cover) or the simple component types (e.g., interior_fittings).
               example: interior_fittings_floor_cover
             yearOfRenovation:
               type: integer
@@ -307,7 +307,7 @@ properties:
               default: 0
             renovationCost:
               $ref: ./Amount.yaml
-              description: The renovation cost the respective component type.
+              description: The renovation cost for the respective component type.
       minergieStandardType:
         type: string
         enum:
@@ -318,7 +318,7 @@ properties:
           - minergie-p-eco
           - minergie-a
           - minergie-a-eco
-        description: The minergie standard.
+        description: The minergie standard. Defines the energy efficiency standard of the building.
         example: minergie-p
       BECCStandardType:
         type: string
@@ -360,12 +360,12 @@ properties:
       numberOfRooms:
         type: number
         format: double
-        description: The number of the rooms.
+        description: The number of rooms in the property.
         example: 4.5
       numberOfRoomsInGrannyFlat:
         type: number
         format: double
-        description: The number of the rooms in the granny flat.
+        description: The number of the rooms in the granny flat (if applicable).
         example: 2.5
       roomCountType:
         type: string
@@ -373,38 +373,38 @@ properties:
           - kitchen_not_counted
           - kitchen_half_room
           - kitchen_full_room
-        description: Reflects the type of the room count type. E.g. if the kitchen counts as full room.
+        description: Reflects the type of the room count type. For example, whether the kitchen is counted as a full room.
         example: kitchen_full_room
       numberOfFamilyBathrooms:
         type: integer
-        description: Separate shower and bathtub in the bathroom (optional: toilet).
+        description: The number of family bathrooms, typically containing a separate shower and a bathtub (optional: toilet).
         example: 2
       numberOfBathWC:
         type: integer
-        description: Bath or shower, sink, toilet.
+        description: The number of bathrooms , including a bath or a shower, a sink, and a toilet.
         example: 2
       numberOfGuestWC:
         type: integer
-        description: Separate, single toilet with wash basin.
+        description: The number of separate guest toilets with wash basin.
         example: 2
       numberOfExternalParking:
         type: integer
-        description: The number of external parking spaces.
+        description: The number of external parking spaces available.
         example: 2
       numberOfSeparateGarages:
         type: integer
         description: |
-          The number of separated garages (covered parking spaces), which are located on the same property but are not included in the
+          The number of separate garages (covered parking spaces), located on the same property but not included in the 
           building volume of the house (separate building insurance policy).
         example: 2
       numberOfExternalSeparateGarages:
         type: integer
-        description: The number of separated garages (covered parking spaces).
+        description: The number of external separate garages (covered parking spaces) outside of the property.
         example: 2
       numberOfAttachedGarages:
         type: integer
         description: |
-          The number of garages which are attached to the house and which are included in the building volume of the house (don't have a
+          The number of garages attached to the house and which are included in the building volume of the house (no
           separate building insurance policy).
         example: 2
       numberOfUndergroundCarParks:
@@ -413,7 +413,7 @@ properties:
         example: 2
   propertyFlatInformation:
     type: object
-    description: The property flat information.
+    description: he property flat information, such as the number of flats, floors, and features specific to the flat.
     properties:
       numberOfFlats:
         type: integer
@@ -427,18 +427,18 @@ properties:
         $ref: ./PropertyObjectRatingType.yaml
       floor:
         type: integer
-        description: The floor of the flat.
+        description: The floor on which the flat is located.
         example: 2
       balconyOrTerraceArea:
         type: integer
-        description: The area of the balcony or terrace in quatermeter.
+        description: The area of the balcony or terrace in square meters.
         example: 20
       livingSpace:
         type: object
         properties:
           livingSpaceInSqm:
             type: integer
-            description: The area of the living space in quatermeter.
+            description: The area of the living space in square meters
             example: 120
           measurementStandard:
             type: string
@@ -449,7 +449,7 @@ properties:
             example: nla
       multistorey:
         type: boolean
-        description: If the flat is multistorey true, else false.
+        description: Indicates if the flat is multi-storey (true) or not (false).
         example: false
       otherFeatures:
         type: array
@@ -469,11 +469,11 @@ properties:
             - barrier-free_living
             - automated_building_control
             - ventilation_system_without_minergie
-          description: Additional features and services.
+          description: Additional features and services associated with the flat, such as a garden, pool, or security system.
           example: coowned_outdoor_pool
       quote:
         type: integer
-        description: The quote of the flat property against the whole building property.
+        description: The proportion of the flat’s value relative to the entire building property.
         example: 120
       apartmentType:
         type: string
@@ -482,21 +482,21 @@ properties:
           - floor_flat
           - roof_flat
           - attic
-        description: The type of the apartment (floor, garden level, storey).
+        description: The type of the apartment (e.g., garden flat, floor flat, roof flat, attic).
         example: floor_flat
       buildingType:
         type: string
         enum:
           - multiple_family_house
           - terrace_house
-        description: The type of the building (multiple_family_house, terrace_house).
+        description: The type of building in which the flat is located (e.g., multi-family house, terrace house).
         example: multiple_family_house
       locationInTheBuildingRating:
         $ref: ./PropertyObjectRatingType.yaml
   propertyIdentifier:
     $ref: ./PropertyIdentifier.yaml
   propertyLinks:
-    description: A list of links to external resources related to the property.
+    description: A list of links to external resources related to the property, such as documents, plans, or external data sources.
     type: array
     items:
       $ref: ./Link.yaml
@@ -511,13 +511,13 @@ properties:
     example: We need an example for such a remark
   renovationAmount:
     $ref: ./Amount.yaml
-    description: Amount needed to pay the planned renovation (Renovationsbetrag)
+    description: Amount needed to pay for the planned renovation (Renovationsbetrag)
   transferOfOwnershipDate:
     $ref: ./generic/Date.yaml
-    description: When the property will be fully transferred to the new owner.
+    description: The date when the property will be fully transferred to the new owner.
   usageType:
     $ref: ./UsageType.yaml
   valueRelevantServitudes:
     type: boolean
-    description: If the property has servitudes true, else false.
+    description: Indicates whether the property has servitudes that may affect its value (true or false).
     example: false
