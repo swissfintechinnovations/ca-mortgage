@@ -1,6 +1,6 @@
 description: |
-  Asset used by an applicant: Array of all assets which will be used for the financial request. At least, all of these used assets must also
-  be recorded in the array of assets in the financial situation of one applicant.
+  Asset used by an applicant: An array of all assets that will be used in the financial request. At least, all of these assets must be 
+  recorded in the asset array within the financial situation of the respective applicant.
 type: object
 required:
   - amount
