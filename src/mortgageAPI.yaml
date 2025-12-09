@@ -183,7 +183,7 @@ paths:
       tags:
         - Existing Mortgages
       summary: Return a specific existing mortgage
-      description: Returns a details of a specific existing mortgage including all corresponding properties and related mortgages.
+      description: Returns the details of a specific existing mortgage including all corresponding properties and related mortgages.
       operationId: getMortgage
       parameters:
         - $ref: ./components/parameters/path/mortgage_id.yaml
