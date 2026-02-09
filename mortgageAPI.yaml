@@ -716,8 +716,8 @@ paths:
                 - documentType
                 - fileContent
                 - name
-                - type
                 - size
+                - type
               properties:
                 documentType:
                   $ref: '#/components/schemas/DocumentType'
@@ -730,16 +730,16 @@ paths:
                   description: The name of the file without file type extension.
                   maxLength: 128
                   example: my-property-flyer
-                type:
-                  type: string
-                  description: The file type.
-                  maxLength: 64
-                  example: application/pdf
                 size:
                   type: integer
                   format: int64
                   description: The file size in bytes.
                   example: 21543
+                type:
+                  type: string
+                  description: The file type.
+                  maxLength: 64
+                  example: application/pdf
                 applicantId:
                   type: string
                   format: uuid
@@ -832,6 +832,10 @@ paths:
               schema:
                 type: object
                 properties:
+                  detail:
+                    type: string
+                    example: Waiting for details
+                    description: Additional information that can be shared with the status.
                   status:
                     type: string
                     enum:
@@ -839,10 +843,6 @@ paths:
                       - rejected
                       - pending
                     example: pending
-                  detail:
-                    type: string
-                    example: Waiting for details
-                    description: Additional information that can be shared with the status.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -921,14 +921,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  financingRequestId:
-                    type: string
-                    format: uuid
-                    example: 550e8400-e29b-41d4-a716-446655440000
                   documents:
                     type: array
                     items:
                       $ref: '#/components/schemas/DocumentType'
+                  financingRequestId:
+                    type: string
+                    format: uuid
+                    example: 550e8400-e29b-41d4-a716-446655440000
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1149,14 +1149,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  offerId:
-                    type: string
-                    format: uuid
-                    example: 550e8400-e29b-41d4-a716-446655440000
                   documents:
                     type: array
                     items:
                       $ref: '#/components/schemas/DocumentType'
+                  offerId:
+                    type: string
+                    format: uuid
+                    example: 550e8400-e29b-41d4-a716-446655440000
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1278,6 +1278,9 @@ paths:
               schema:
                 type: object
                 properties:
+                  detail:
+                    type: string
+                    example: Waiting for details
                   status:
                     type: string
                     enum:
@@ -1285,9 +1288,6 @@ paths:
                       - rejected
                       - pending
                     example: pending
-                  detail:
-                    type: string
-                    example: Waiting for details
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1902,7 +1902,7 @@ components:
       example: 4bf92636-14a0-4511-98e2-acfde576e644
     CommonErrorResponse:
       title: Common Error Response
-      description: ...
+      description: '...'
       type: object
       properties:
         detail:
@@ -3323,11 +3323,11 @@ components:
       headers:
         location:
           schema:
-            type: string
-            format: uri
             description: |
               In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
               retrieve a representation of the new product.
+            type: string
+            format: uri
         X-Correlation-ID:
           schema:
             type: string
@@ -3526,12 +3526,12 @@ components:
       description: The type of the interest rates (for filtering).
       schema:
         type: string
-        example: saron
         enum:
           - variable
           - libor
           - saron
           - fixed
+        example: saron
     language:
       in: query
       name: language
@@ -3553,8 +3553,8 @@ components:
       schema:
         type: integer
         format: int32
-        example: 25
         minimum: 1
+        example: 25
     mortgage_id:
       in: path
       name: mortgageId
