@@ -1902,7 +1902,7 @@ components:
       example: 4bf92636-14a0-4511-98e2-acfde576e644
     CommonErrorResponse:
       title: Common Error Response
-      description: '...'
+      description: ..
       type: object
       properties:
         detail:
