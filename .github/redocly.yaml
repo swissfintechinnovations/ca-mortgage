@@ -1,0 +1,4 @@
+apis:
+  mortgage:
+    root: ../src/mortgageAPI.yaml
+    output: ../mortgageAPI.yaml
