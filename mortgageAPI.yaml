@@ -2363,7 +2363,7 @@ components:
           type: string
           format: uri
           minLength: 2
-          example: http://www.example.com/property.png
+          example: https://example.com/property.png
         description:
           description: A description of the resource.
           type: string
