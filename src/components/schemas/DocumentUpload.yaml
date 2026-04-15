@@ -17,7 +17,7 @@ properties:
         documentId:
           type: string
           format: uuid
-          example: 7f648f12-fd45-4930-6543-456hf5671c37
+          example: 7f648f12-fd45-4930-6543-456ef5671c37
           description: Document ID in uuid v4 format.
         filesize:
           type: integer
