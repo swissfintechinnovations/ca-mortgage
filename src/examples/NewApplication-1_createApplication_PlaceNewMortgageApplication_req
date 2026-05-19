@@ -1,0 +1,238 @@
+POST /mortgages/applications HTTP/1.1
+Host: mortgage.common-api.ch
+Accept: application/json
+Content-Type: application/json
+X-API-Key: {{apiKey}}
+X-Correlation-ID: {{correlationId}}
+X-Client-ID: {{clientId}}
+X-Agent: {{agent}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "applicationId": "1f8d61e8-50c4-4db2-8715-0c7f5dfc8f01",
+  "requestingParty": {
+    "primaryApplicantId": "576f8de3-6b30-4882-a7af-da2132a456cf",
+    "personList": [
+      {
+        "applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf",
+        "fiApplicantId": "asd23f",
+        "applicantType": "individual",
+        "applicantDetail": {
+          "name": "Ehegatten Eigenheim",
+          "surName": "additionalproperties",
+          "address": {
+            "streetName": "Zürcherstrasse",
+            "buildingNumber": "28",
+            "postCode": "CH-8600",
+            "townName": "Dübendorf",
+            "country": "CH"
+          },
+          "birthDate": "1990-04-13",
+          "maritalStatus": "married",
+          "PropertyOwner": "yes",
+          "USPerson": false,
+          "email": "linus.muster@domain.ch",
+          "phone": "+41791231212",
+          "gender": "male"
+        },
+        "financialSituation": {
+          "income": [
+            {
+              "incomeType": "employment_gross",
+              "amount": {
+                "currency": "CHF",
+                "content": "130000"
+              }
+            },
+            {
+              "incomeType": "employment_net",
+              "amount": {
+                "currency": "CHF",
+                "content": "115000"
+              }
+            },
+            {
+              "incomeType": "bonus_year-1",
+              "amount": {
+                "currency": "CHF",
+                "content": "10000"
+              }
+            },
+            {
+              "incomeType": "child_allowance_payment",
+              "amount": {
+                "currency": "CHF",
+                "content": "12000"
+              }
+            }
+          ],
+          "assets": [
+            {
+              "assetType": "fungible_investments",
+              "amount": {
+                "currency": "CHF",
+                "content": "50000"
+              },
+              "insuranceSum": {
+                "currency": "CHF",
+                "content": "120000"
+              }
+            }
+          ],
+          "additionalProperties": [
+            {
+              "nameAdditionalProperty": "weitere LG Er",
+              "valueAdditionalProperty": {
+                "currency": "CHF",
+                "content": "800000"
+              },
+              "mortgageAmountAdditionalProperty": {
+                "currency": "CHF",
+                "content": "550001"
+              },
+              "propertyTypeAdditionalProperty": "condominium",
+              "usageTypeAdditionalProperty": "let"
+            }
+          ]
+        }
+      },
+      {
+        "applicantId": "321d8ab3-6b30-4882-a7af-da2132a123ab",
+        "fiApplicantId": "asd23f",
+        "applicantType": "individual",
+        "applicantDetail": {
+          "name": "weiterLG",
+          "surName": "ohne mietkosten",
+          "address": {
+            "streetName": "Zürcherstrasse",
+            "buildingNumber": "28",
+            "postCode": "CH-8600",
+            "townName": "Dübendorf",
+            "country": "CH"
+          },
+          "birthDate": "1991-07-01",
+          "maritalStatus": "married",
+          "PropertyOwner": "yes",
+          "USPerson": false,
+          "email": "silvia.muster@domain.ch",
+          "phone": "+41791111111",
+          "gender": "female"
+        },
+        "financialSituation": {
+          "income": [
+            {
+              "incomeType": "employment_gross",
+              "amount": {
+                "currency": "CHF",
+                "content": "80000"
+              }
+            },
+            {
+              "incomeType": "employment_net",
+              "amount": {
+                "currency": "CHF",
+                "content": "70000"
+              }
+            }
+          ],
+          "assets": [
+            {
+              "assetType": "fungible_investments",
+              "amount": {
+                "currency": "CHF",
+                "content": "30000"
+              }
+            }
+          ],
+          "additionalProperties": [
+            {
+              "nameAdditionalProperty": "additionalproperty Sie",
+              "valueAdditionalProperty": {
+                "currency": "CHF",
+                "content": "800000"
+              },
+              "mortgageAmountAdditionalProperty": {
+                "currency": "CHF",
+                "content": "550001"
+              },
+              "propertyTypeAdditionalProperty": "condominium",
+              "usageTypeAdditionalProperty": "let"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "propertyInformation": {
+    "propertyObjectId": "9343dd26-4b54-4808-8978-538f8e869d0e",
+    "address": {
+      "streetName": "Zürichstrasse",
+      "buildingNumber": "10",
+      "postCode": "CH-8600",
+      "townName": "Dübendorf",
+      "country": "CH"
+    },
+    "propertyConstructionInformation": {
+      "constructionYear": 2010,
+      "minergieStandardType": "minergie-p-eco",
+      "luxusFlag": "0",
+      "constructionQualityType": "good-verygood",
+      "stateBuildingType": "verygood"
+    },
+    "floorPlan": "average",
+    "usageType": "self",
+    "propertyType": "condominium",
+    "ceilingHight": "middle",
+    "buildingStandardFloorCoverings": "highlevel",
+    "buildingStandardKitchen": "premium",
+    "buildingStandardBathroom": "basic",
+    "heatEmission": [
+      "floor",
+      "radiator"
+    ],
+    "heatProduction": [
+      "geothermal_probe",
+      "solar_thermal_collector"
+    ],
+    "outsideConstructionZone": false,
+    "propertyElements": {
+      "numberOfRooms": 5.5,
+      "numberOfFamilyBathrooms": 0,
+      "numberOfBathWC": 2,
+      "numberOfGuestWC": 1,
+      "numberOfExternalParking": 0,
+      "numberOfSeparateGarages": 0,
+      "numberOfExternalSeparateGarages": 0,
+      "numberOfAttachedGarages": 1,
+      "numberOfUndergroundCarParks": 2
+    },
+    "propertyFlatInformation": {
+      "numberOfFlats": 9,
+      "numberOfFloors": 4,
+      "stateApartmentType": "medium-good",
+      "floor": 0,
+      "balconyOrTerraceArea": 20,
+      "livingSpace": {
+        "livingSpaceInSqm": 120,
+        "measurementStandard": "nla"
+      },
+      "multistorey": true,
+      "otherFeatures": [
+        "coowned_outdoor_pool",
+        "elevator_in_stairwell"
+      ],
+      "quote": 120,
+      "apartmentType": "garden_flat",
+      "buildingType": "multiple_family_house",
+      "locationInTheBuildingRating": "good"
+    },
+    "objectPrice": {
+      "currency": "CHF",
+      "content": "1180000"
+    },
+    "transferOfOwnershipDate": "2027-04-13"
+  },
+  "mortgageType": "buy",
+  "channelType": "advisor",
+  "tppApplicationId": "BUY001"
+}

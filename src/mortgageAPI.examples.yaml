@@ -1,0 +1,268 @@
+# Add these examples objects to src/mortgageAPI.yaml.
+
+/mortgages:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              ListExistingMortgages:
+                summary: List existing mortgages
+                x-usecase: Show my existing mortgages
+                x-req: examples/ShowMortgages-1_listMortgages_ListExistingMortgages_req
+                externalValue: ./examples/ShowMortgages-1_listMortgages_ListExistingMortgages_res.json
+
+/mortgages/applications:
+  post:
+    requestBody:
+      content:
+        application/json:
+          examples:
+            PlaceNewMortgageApplication:
+              summary: Place a new mortgage application
+              x-usecase: Place a new mortgage application
+              x-req: examples/NewApplication-1_createApplication_PlaceNewMortgageApplication_req
+              externalValue: ./examples/NewApplication-1_createApplication_PlaceNewMortgageApplication_req.json
+            ReplacementApplication:
+              summary: Place a replacement application for a bank-to-bank transfer
+              x-usecase: Transfer Mortgage Bank-to-Bank
+              x-req: examples/TransferMortgage-1_createApplication_ReplacementApplication_req
+              externalValue: ./examples/TransferMortgage-1_createApplication_ReplacementApplication_req.json
+            TPPReplacementApplication:
+              summary: Place a replacement application through a TPP platform
+              x-usecase: Transfer via TPP Platform
+              x-req: examples/TransferMortgageTPP-1_createApplication_TPPReplacementApplication_req
+              externalValue: ./examples/TransferMortgageTPP-1_createApplication_TPPReplacementApplication_req.json
+
+/mortgages/applications/required-information:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              RequiredPropertyInformation:
+                summary: Get required property information for valuation
+                x-usecase: Manage a mortgage application
+                x-req: examples/ManageApplication-2_getApplicationRequiredInformation_RequiredPropertyInformation_req
+                externalValue: ./examples/ManageApplication-2_getApplicationRequiredInformation_RequiredPropertyInformation_res.json
+
+/mortgages/applications/{applicationId}/documents:
+  post:
+    requestBody:
+      content:
+        multipart/form-data:
+          examples:
+            AddApplicationDocument:
+              summary: Add a document for a specific application
+              x-usecase: Manage a mortgage application
+              x-req: examples/ManageApplication-3_addApplicationDocument_AddApplicationDocument_req
+              externalValue: ./examples/ManageApplication-3_addApplicationDocument_AddApplicationDocument_req.json
+
+/mortgages/applications/{applicationId}/financing-requests:
+  post:
+    requestBody:
+      content:
+        application/json:
+          examples:
+            NewMortgageFinancingRequest:
+              summary: Place a financing request for a new mortgage application
+              x-usecase: Get offers for new mortgage applications
+              x-req: examples/Offers-1_addApplicationFinancingRequest_NewMortgageFinancingRequest_req
+              externalValue: ./examples/Offers-1_addApplicationFinancingRequest_NewMortgageFinancingRequest_req.json
+            ReplacementFinancingRequest:
+              summary: Place a financing request for a replacement application
+              x-usecase: Transfer Mortgage Bank-to-Bank
+              x-req: examples/TransferMortgage-2_addApplicationFinancingRequest_ReplacementFinancingRequest_req
+              externalValue: ./examples/TransferMortgage-2_addApplicationFinancingRequest_ReplacementFinancingRequest_req.json
+            TPPFinancingRequest:
+              summary: Place a financing request through a TPP platform
+              x-usecase: Transfer via TPP Platform
+              x-req: examples/TransferMortgageTPP-2_addApplicationFinancingRequest_TPPFinancingRequest_req
+              externalValue: ./examples/TransferMortgageTPP-2_addApplicationFinancingRequest_TPPFinancingRequest_req.json
+
+/mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              ListBindingOffers:
+                summary: List binding offers for a financing request
+                x-usecase: Get offers for new mortgage applications
+                x-req: examples/Offers-2_listApplicationFinancingRequestOffers_ListBindingOffers_req
+                externalValue: ./examples/Offers-2_listApplicationFinancingRequestOffers_ListBindingOffers_res.json
+
+/mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              NewMortgageOffer:
+                summary: Get the details of a specific offer
+                x-usecase: Get offers for new mortgage applications
+                x-req: examples/Offers-3_getApplicationFinancingRequestOffer_NewMortgageOffer_req
+                externalValue: ./examples/Offers-3_getApplicationFinancingRequestOffer_NewMortgageOffer_res.json
+              TPPOffer:
+                summary: Get the offer returned to the TPP platform
+                x-usecase: Transfer via TPP Platform
+                x-req: examples/TransferMortgageTPP-3_getApplicationFinancingRequestOffer_TPPOffer_req
+                externalValue: ./examples/TransferMortgageTPP-3_getApplicationFinancingRequestOffer_TPPOffer_res.json
+
+/mortgages/applications/{applicationId}/financing-requests/{financingRequestId}/offers/{offerId}/required-information:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              AdditionalInformationRequired:
+                summary: List additional information required due to risk change
+                x-usecase: Prolongation risk change
+                x-req: examples/ProlongationChange-1_listApplicationFinancingRequestOfferRequiredInformation_AdditionalInformationRequired_req
+                externalValue: ./examples/ProlongationChange-1_listApplicationFinancingRequestOfferRequiredInformation_AdditionalInformationRequired_res.json
+
+/mortgages/applications/{applicationId}/status:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              ApplicationStatus:
+                summary: Get the current status of an application
+                x-usecase: Manage a mortgage application
+                x-req: examples/ManageApplication-1_getApplicationStatus_ApplicationStatus_req
+                externalValue: ./examples/ManageApplication-1_getApplicationStatus_ApplicationStatus_res.json
+
+/mortgages/orders:
+  post:
+    requestBody:
+      content:
+        application/json:
+          examples:
+            NewMortgageOrder:
+              summary: Place a new order for a new mortgage
+              x-usecase: Place and manage mortgage orders
+              x-req: examples/Orders-1_addOrder_NewMortgageOrder_req
+              externalValue: ./examples/Orders-1_addOrder_NewMortgageOrder_req.json
+            ProlongationOrder:
+              summary: Place a prolongation order without material risk change
+              x-usecase: Prolongation no risk change
+              x-req: examples/ProlongationNoChange-1_addOrder_ProlongationOrder_req
+              externalValue: ./examples/ProlongationNoChange-1_addOrder_ProlongationOrder_req.json
+            ReplacementOrder:
+              summary: Place an order for a replacement mortgage
+              x-usecase: Transfer Mortgage Bank-to-Bank
+              x-req: examples/TransferMortgage-3_addOrder_ReplacementOrder_req
+              externalValue: ./examples/TransferMortgage-3_addOrder_ReplacementOrder_req.json
+            TPPOrder:
+              summary: Place an order through a TPP platform
+              x-usecase: Transfer via TPP Platform
+              x-req: examples/TransferMortgageTPP-4_addOrder_TPPOrder_req
+              externalValue: ./examples/TransferMortgageTPP-4_addOrder_TPPOrder_req.json
+
+/mortgages/orders/{orderId}:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              OrderDetails:
+                summary: Get the details of a specific placed order
+                x-usecase: Place and manage mortgage orders
+                x-req: examples/Orders-2_getOrder_OrderDetails_req
+                externalValue: ./examples/Orders-2_getOrder_OrderDetails_res.json
+
+/mortgages/orders/{orderId}/status:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              OrderStatus:
+                summary: Get the current status of an order
+                x-usecase: Place and manage mortgage orders
+                x-req: examples/Orders-3_getOrderStatus_OrderStatus_req
+                externalValue: ./examples/Orders-3_getOrderStatus_OrderStatus_res.json
+              ProlongationAccepted:
+                summary: Get accepted prolongation order status
+                x-usecase: Prolongation no risk change
+                x-req: examples/ProlongationNoChange-2_getOrderStatus_ProlongationAccepted_req
+                externalValue: ./examples/ProlongationNoChange-2_getOrderStatus_ProlongationAccepted_res.json
+              ProlongationPendingRiskChange:
+                summary: Get pending prolongation order status due to risk change
+                x-usecase: Prolongation risk change
+                x-req: examples/ProlongationChange-2_getOrderStatus_ProlongationPendingRiskChange_req
+                externalValue: ./examples/ProlongationChange-2_getOrderStatus_ProlongationPendingRiskChange_res.json
+
+/mortgages/products:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              ListMortgageProducts:
+                summary: Get an overview of all mortgage products
+                x-usecase: Get products and conditions
+                x-req: examples/Products-1_listProducts_ListMortgageProducts_req
+                externalValue: ./examples/Products-1_listProducts_ListMortgageProducts_res.json
+
+/mortgages/products/{productId}/conditions:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              ProductConditions:
+                summary: Get the general conditions for a specified mortgage product
+                x-usecase: Get products and conditions
+                x-req: examples/Products-2_listProductConditions_ProductConditions_req
+                externalValue: ./examples/Products-2_listProductConditions_ProductConditions_res.json
+
+/mortgages/{mortgageId}:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              ExistingMortgage:
+                summary: Get a specific existing mortgage
+                x-usecase: Show my existing mortgages
+                x-req: examples/ShowMortgages-2_getMortgage_ExistingMortgage_req
+                externalValue: ./examples/ShowMortgages-2_getMortgage_ExistingMortgage_res.json
+
+/mortgages/{mortgageId}/offers:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              ListExpiringMortgageOffers:
+                summary: List current offers for an expiring mortgage
+                x-usecase: Show current offers for my expiring mortgages
+                x-req: examples/ShowOffers-1_listOffers_ListExpiringMortgageOffers_req
+                externalValue: ./examples/ShowOffers-1_listOffers_ListExpiringMortgageOffers_res.json
+
+/mortgages/{mortgageId}/offers/{offerId}:
+  get:
+    responses:
+      '200':
+        content:
+          application/json:
+            examples:
+              ExpiringMortgageOffer:
+                summary: Get a specific prolongation offer
+                x-usecase: Show current offers for my expiring mortgages
+                x-req: examples/ShowOffers-2_getOffer_ExpiringMortgageOffer_req
+                externalValue: ./examples/ShowOffers-2_getOffer_ExpiringMortgageOffer_res.json

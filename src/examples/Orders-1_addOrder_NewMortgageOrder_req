@@ -1,0 +1,15 @@
+POST /mortgages/orders HTTP/1.1
+Host: mortgage.common-api.ch
+Accept: application/json
+Content-Type: application/json
+X-API-Key: {{apiKey}}
+X-Correlation-ID: {{correlationId}}
+X-Client-ID: {{clientId}}
+X-Agent: {{agent}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "offerId": "0fdc4dc8-7b85-42d4-8fd6-6e15c4170a7a",
+  "applicationId": "1f8d61e8-50c4-4db2-8715-0c7f5dfc8f01",
+  "remark": "Customer accepted the binding offer after all documents were verified."
+}

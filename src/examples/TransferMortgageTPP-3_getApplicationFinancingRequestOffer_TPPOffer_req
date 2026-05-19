@@ -1,0 +1,8 @@
+GET /mortgages/applications/7650e0c9-8508-4896-94de-65fd8e85f92a/financing-requests/0c0bb5c9-9ec2-4205-841e-85a91c14eb71/offers/b8ed4d9e-c90d-4cc5-8b92-7d6f5d2b9431 HTTP/1.1
+Host: mortgage.common-api.ch
+Accept: application/json
+X-API-Key: {{apiKey}}
+X-Correlation-ID: {{correlationId}}
+X-Client-ID: {{clientId}}
+X-Agent: {{agent}}
+Authorization: Bearer {{accessToken}}

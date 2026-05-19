@@ -1,0 +1,58 @@
+{
+  "applicationId": "1f8d61e8-50c4-4db2-8715-0c7f5dfc8f01",
+  "amount": {
+    "currency": "CHF",
+    "content": "885000"
+  },
+  "requestOfferType": "binding",
+  "publicCertDate": "2026-08-15",
+  "tranches": [
+    {
+      "trancheId": "216f5f85-1a31-4f13-afbb-ec02fb3e4d01",
+      "productId": "a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2",
+      "payOutDate": "2026-09-30",
+      "amount": {
+        "currency": "CHF",
+        "content": "400000"
+      }
+    },
+    {
+      "trancheId": "30bd7266-5fd3-4219-a831-beb6360b02ae",
+      "productId": "f98a7426-6ca4-451b-9c26-3efb46be042e",
+      "payOutDate": "2026-09-30",
+      "amount": {
+        "currency": "CHF",
+        "content": "485000"
+      }
+    }
+  ],
+  "usedAssets": [
+    {
+      "assetType": "cash",
+      "amount": {
+        "currency": "CHF",
+        "content": "140000"
+      },
+      "usageType": "withdraw",
+      "applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf"
+    },
+    {
+      "assetType": "third_pillar",
+      "amount": {
+        "currency": "CHF",
+        "content": "60000"
+      },
+      "usageType": "withdraw",
+      "applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf"
+    },
+    {
+      "assetType": "pension_fund",
+      "amount": {
+        "currency": "CHF",
+        "content": "95000"
+      },
+      "usageType": "pledged",
+      "applicantId": "321d8ab3-6b30-4882-a7af-da2132a123ab"
+    }
+  ]
+}

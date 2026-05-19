@@ -72,6 +72,12 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/MortgageCase.yaml
+              examples:
+                ListExistingMortgages:
+                  summary: List existing mortgages
+                  x-usecase: Show my existing mortgages
+                  x-req: examples/ShowMortgages-1_listMortgageCases_ListExistingMortgages_req
+                  externalValue: ./examples/ShowMortgages-1_listMortgageCases_ListExistingMortgages_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -162,6 +168,12 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/Mortgage.yaml
+              examples:
+                ExistingMortgagesList:
+                  summary: List existing mortgages
+                  x-usecase: Show my existing mortgages
+                  x-req: examples/ShowMortgages-1_listMortgageCases_ListExistingMortgages_req
+                  externalValue: ./examples/ShowMortgages-1_listMortgageCases_ListExistingMortgages_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -203,6 +215,12 @@ paths:
                 properties:
                   Mortgage:
                     $ref: ./components/schemas/Mortgage.yaml
+              examples:
+                ExistingMortgage:
+                  summary: Get a specific existing mortgage
+                  x-usecase: Show my existing mortgages
+                  x-req: examples/ShowMortgages-2_getMortgage_ExistingMortgage_req
+                  externalValue: ./examples/ShowMortgages-2_getMortgage_ExistingMortgage_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -253,6 +271,12 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/Product.yaml
+              examples:
+                ListMortgageProducts:
+                  summary: Get an overview of all mortgage products
+                  x-usecase: Get products and conditions
+                  x-req: examples/Products-1_listProducts_ListMortgageProducts_req
+                  externalValue: ./examples/Products-1_listProducts_ListMortgageProducts_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -300,6 +324,12 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/Condition.yaml
+              examples:
+                ProductConditions:
+                  summary: Get the general conditions for a specified mortgage product
+                  x-usecase: Get products and conditions
+                  x-req: examples/Products-2_listProductConditions_ProductConditions_req
+                  externalValue: ./examples/Products-2_listProductConditions_ProductConditions_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -338,6 +368,22 @@ paths:
           application/json:
             schema:
               $ref: ./components/schemas/Application.yaml
+            examples:
+              PlaceNewMortgageApplication:
+                summary: Place a new mortgage application
+                x-usecase: Place a new mortgage application
+                x-req: examples/NewApplication-1_createApplication_place_new_mortgage_application_request
+                externalValue: ./examples/NewApplication-1_createApplication_place_new_mortgage_application_request.json
+              ReplacementApplication:
+                summary: Place a replacement application for a bank-to-bank transfer
+                x-usecase: Transfer Mortgage Bank-to-Bank
+                x-req: examples/TransferMortgage-1_createApplication_ReplacementApplication_req
+                externalValue: ./examples/TransferMortgage-1_createApplication_ReplacementApplication_req.json
+              TPPReplacementApplication:
+                summary: Place a replacement application through a TPP platform
+                x-usecase: Transfer via TPP Platform
+                x-req: examples/TransferMortgageTPP-1_createApplication_TPPReplacementApplication_req
+                externalValue: ./examples/TransferMortgageTPP-1_createApplication_TPPReplacementApplication_req.json
       responses:
         '201':
           $ref: ./components/responses/standard201.yaml
@@ -378,6 +424,12 @@ paths:
             application/json:
               schema:
                 $ref: ./components/schemas/PropertyObject.yaml
+              examples:
+                RequiredPropertyInformation:
+                  summary: Get required property information for valuation
+                  x-usecase: Manage a mortgage application
+                  x-req: examples/ManageApplication-2_getApplicationRequiredInformation_RequiredPropertyInformation_req
+                  externalValue: ./examples/ManageApplication-2_getApplicationRequiredInformation_RequiredPropertyInformation_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -745,6 +797,12 @@ paths:
                   format: uuid
                   description: UUID v4 of the applicant (existing applicant within the current application).
                   example: 576f8de3-6b30-4882-a7af-da2132a456cf
+            examples:
+              AddApplicationDocument:
+                summary: Add a document for a specific application
+                x-usecase: Manage a mortgage application
+                x-req: examples/ManageApplication-3_addApplicationDocument_AddApplicationDocument_req
+                externalValue: ./examples/ManageApplication-3_addApplicationDocument_AddApplicationDocument_req.json
       responses:
         '201':
           $ref: ./components/responses/standard201.yaml
@@ -843,6 +901,12 @@ paths:
                     type: string
                     example: Waiting for details
                     description: Additional information that can be shared with the status.
+              examples:
+                ApplicationStatus:
+                  summary: Get the current status of an application
+                  x-usecase: Manage a mortgage application
+                  x-req: examples/ManageApplication-1_getApplicationStatus_ApplicationStatus_req
+                  externalValue: ./examples/ManageApplication-1_getApplicationStatus_ApplicationStatus_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -878,6 +942,22 @@ paths:
           application/json:
             schema:
               $ref: ./components/schemas/FinancingRequest.yaml
+            examples:
+              NewMortgageFinancingRequest:
+                summary: Place a financing request for a new mortgage application
+                x-usecase: Get offers for new mortgage applications
+                x-req: examples/Offers-1_addApplicationFinancingRequest_NewMortgageFinancingRequest_req
+                externalValue: ./examples/Offers-1_addApplicationFinancingRequest_NewMortgageFinancingRequest_req.json
+              ReplacementFinancingRequest:
+                summary: Place a financing request for a replacement application
+                x-usecase: Transfer Mortgage Bank-to-Bank
+                x-req: examples/TransferMortgage-2_addApplicationFinancingRequest_ReplacementFinancingRequest_req
+                externalValue: ./examples/TransferMortgage-2_addApplicationFinancingRequest_ReplacementFinancingRequest_req.json
+              TPPFinancingRequest:
+                summary: Place a financing request through a TPP platform
+                x-usecase: Transfer via TPP Platform
+                x-req: examples/TransferMortgageTPP-2_addApplicationFinancingRequest_TPPFinancingRequest_req
+                externalValue: ./examples/TransferMortgageTPP-2_addApplicationFinancingRequest_TPPFinancingRequest_req.json
       responses:
         '201':
           $ref: ./components/responses/standard201.yaml
@@ -1023,6 +1103,12 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/Offer.yaml
+              examples:
+                ListBindingOffers:
+                  summary: List binding offers for a financing request
+                  x-usecase: Get offers for new mortgage applications
+                  x-req: examples/Offers-2_listApplicationFinancingRequestOffers_ListBindingOffers_req
+                  externalValue: ./examples/Offers-2_listApplicationFinancingRequestOffers_ListBindingOffers_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1066,6 +1152,17 @@ paths:
                 properties:
                   offer:
                     $ref: ./components/schemas/Offer.yaml
+              examples:
+                NewMortgageOffer:
+                  summary: Get the details of a specific offer
+                  x-usecase: Get offers for new mortgage applications
+                  x-req: examples/Offers-3_getApplicationFinancingRequestOffer_NewMortgageOffer_req
+                  externalValue: ./examples/Offers-3_getApplicationFinancingRequestOffer_NewMortgageOffer_res.json
+                TPPOffer:
+                  summary: Get the offer returned to the TPP platform
+                  x-usecase: Transfer via TPP Platform
+                  x-req: examples/TransferMortgageTPP-3_getApplicationFinancingRequestOffer_TPPOffer_req
+                  externalValue: ./examples/TransferMortgageTPP-3_getApplicationFinancingRequestOffer_TPPOffer_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1157,6 +1254,12 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/DocumentType.yaml
+              examples:
+                AdditionalInformationRequired:
+                  summary: List additional information required due to risk change
+                  x-usecase: Prolongation risk change
+                  x-req: examples/ProlongationChange-1_listApplicationFinancingRequestOfferRequiredInformation_AdditionalInformationRequired_req
+                  externalValue: ./examples/ProlongationChange-1_listApplicationFinancingRequestOfferRequiredInformation_AdditionalInformationRequired_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1193,6 +1296,27 @@ paths:
           application/json:
             schema:
               $ref: ./components/schemas/Order.yaml
+            examples:
+              NewMortgageOrder:
+                summary: Place a new order for a new mortgage
+                x-usecase: Place and manage mortgage orders
+                x-req: examples/Orders-1_addOrder_NewMortgageOrder_req
+                externalValue: ./examples/Orders-1_addOrder_NewMortgageOrder_req.json
+              ProlongationOrder:
+                summary: Place a prolongation order without material risk change
+                x-usecase: Prolongation no risk change
+                x-req: examples/ProlongationNoChange-1_addOrder_ProlongationOrder_req
+                externalValue: ./examples/ProlongationNoChange-1_addOrder_ProlongationOrder_req.json
+              ReplacementOrder:
+                summary: Place an order for a replacement mortgage
+                x-usecase: Transfer Mortgage Bank-to-Bank
+                x-req: examples/TransferMortgage-3_addOrder_ReplacementOrder_req
+                externalValue: ./examples/TransferMortgage-3_addOrder_ReplacementOrder_req.json
+              TPPOrder:
+                summary: Place an order through a TPP platform
+                x-usecase: Transfer via TPP Platform
+                x-req: examples/TransferMortgageTPP-4_addOrder_TPPOrder_req
+                externalValue: ./examples/TransferMortgageTPP-4_addOrder_TPPOrder_req.json
       responses:
         '201':
           $ref: ./components/responses/standard201.yaml
@@ -1237,6 +1361,12 @@ paths:
                 properties:
                   offer:
                     $ref: ./components/schemas/Order.yaml
+              examples:
+                OrderDetails:
+                  summary: Get the details of a specific placed order
+                  x-usecase: Place and manage mortgage orders
+                  x-req: examples/Orders-2_getOrder_OrderDetails_req
+                  externalValue: ./examples/Orders-2_getOrder_OrderDetails_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1288,6 +1418,22 @@ paths:
                   detail:
                     type: string
                     example: Waiting for details
+              examples:
+                OrderStatus:
+                  summary: Get the current status of an order
+                  x-usecase: Place and manage mortgage orders
+                  x-req: examples/Orders-3_getOrderStatus_OrderStatus_req
+                  externalValue: ./examples/Orders-3_getOrderStatus_OrderStatus_res.json
+                ProlongationAccepted:
+                  summary: Get accepted prolongation order status
+                  x-usecase: Prolongation no risk change
+                  x-req: examples/ProlongationNoChange-2_getOrderStatus_ProlongationAccepted_req
+                  externalValue: ./examples/ProlongationNoChange-2_getOrderStatus_ProlongationAccepted_res.json
+                ProlongationPendingRiskChange:
+                  summary: Get pending prolongation order status due to risk change
+                  x-usecase: Prolongation risk change
+                  x-req: examples/ProlongationChange-2_getOrderStatus_ProlongationPendingRiskChange_req
+                  externalValue: ./examples/ProlongationChange-2_getOrderStatus_ProlongationPendingRiskChange_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1379,6 +1525,12 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/Offer.yaml
+              examples:
+                ListExpiringMortgageOffers:
+                  summary: List current offers for an expiring mortgage
+                  x-usecase: Show current offers for my expiring mortgages
+                  x-req: examples/ShowOffers-1_listOffers_ListExpiringMortgageOffers_req
+                  externalValue: ./examples/ShowOffers-1_listOffers_ListExpiringMortgageOffers_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1421,6 +1573,12 @@ paths:
                 properties:
                   offer:
                     $ref: ./components/schemas/Offer.yaml
+              examples:
+                ExpiringMortgageOffer:
+                  summary: Get a specific prolongation offer
+                  x-usecase: Show current offers for my expiring mortgages
+                  x-req: examples/ShowOffers-2_getOffer_ExpiringMortgageOffer_req
+                  externalValue: ./examples/ShowOffers-2_getOffer_ExpiringMortgageOffer_res.json
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':

@@ -1,0 +1,40 @@
+POST /mortgages/applications/6f88656f-57f3-4a1a-9648-8718f92fb1e2/financing-requests HTTP/1.1
+Host: mortgage.common-api.ch
+Accept: application/json
+Content-Type: application/json
+X-API-Key: {{apiKey}}
+X-Correlation-ID: {{correlationId}}
+X-Client-ID: {{clientId}}
+X-Agent: {{agent}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "applicationId": "6f88656f-57f3-4a1a-9648-8718f92fb1e2",
+  "amount": {
+    "currency": "CHF",
+    "content": "780000"
+  },
+  "requestOfferType": "binding",
+  "tranches": [
+    {
+      "trancheId": "c12fbf5d-d342-49e2-8122-0fed0e1b4262",
+      "productId": "f98a7426-6ca4-451b-9c26-3efb46be042e",
+      "payOutDate": "2026-06-30",
+      "amount": {
+        "currency": "CHF",
+        "content": "780000"
+      }
+    }
+  ],
+  "usedAssets": [
+    {
+      "assetType": "third_pillar_fund_3a",
+      "amount": {
+        "currency": "CHF",
+        "content": "85000"
+      },
+      "usageType": "pledged",
+      "applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+GET /mortgages/products/a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2/conditions?limit=20 HTTP/1.1
+Host: mortgage.common-api.ch
+Accept: application/json
+X-API-Key: {{apiKey}}
+X-Correlation-ID: {{correlationId}}
+X-Client-ID: {{clientId}}
+X-Agent: {{agent}}
+Authorization: Bearer {{accessToken}}

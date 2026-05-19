@@ -1,0 +1,60 @@
+{
+	"applicationId": "5385c8ad-1f00-446f-a19d-4fa1898c5ec0",
+	"amount": {
+		"currency": "CHF",
+		"content": "777000"
+	},
+	"tranches": [
+		{
+			"trancheId": "51b017e1-5e59-4b58-a0a0-c638c87db463",
+			"productId": "4bf92636-14a0-4511-98e2-acfde576e644",
+			"payOutDate": "2026-02-22"
+		}
+	],
+	"usedAssets": [
+		{
+			"assetType": "third_pillar_fund",
+			"amount": {
+				"currency": "CHF",
+				"content": "65000"
+			},
+			"usageType": "pledged",
+			"applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf"
+		},
+		{
+			"assetType": "third_pillar_fund_3a",
+			"amount": {
+				"currency": "CHF",
+				"content": "50000"
+			},
+			"insuranceSum": {
+				"currency": "CHF",
+				"content": "120000"
+			},
+			"usageType": "pledged",
+			"applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf"
+		},
+		{
+			"assetType": "life_insurance_3a",
+			"amount": {
+				"currency": "CHF",
+				"content": "20000"
+			},
+			"insuranceSum": {
+				"currency": "CHF",
+				"content": "60000"
+			},
+			"usageType": "pledged",
+			"applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf"
+		},
+		{
+			"assetType": "vested_benefit",
+			"amount": {
+				"currency": "CHF",
+				"content": "225000"
+			},
+			"usageType": "pledged",
+			"applicantId": "321d8ab3-6b30-4882-a7af-da2132a123ab"
+		}
+	]
+}

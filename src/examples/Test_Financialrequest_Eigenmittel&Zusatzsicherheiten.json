@@ -1,0 +1,82 @@
+{
+  "applicationId": "f942c4ce-113b-1234-846e-091e77f76d3b",
+  "amount": {
+    "currency": "CHF",
+    "content": "900000"
+  },
+  "usedAssets": [
+    {
+      "assetType": "unpledged_building_plot",
+      "amount": {
+        "currency": "CHF",
+        "content": "10000"
+      },
+      "usageType": "withdraw",
+      "applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf"
+    },
+    {
+      "assetType": "gift",
+      "amount": {
+        "currency": "CHF",
+        "content": "25000"
+      },
+      "usageType": "withdraw",
+      "applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf"
+    },
+    {
+      "assetType": "third_pillar",
+      "amount": {
+        "currency": "CHF",
+        "content": "75000"
+      },
+      "usageType": "withdraw",
+      "applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf"
+    },
+	
+    {
+      "assetType": "third_pillar",
+      "amount": {
+        "currency": "CHF",
+        "content": "133333"
+      },
+      "usageType": "pledged",
+      "applicantId": "576f8de3-6b30-4882-a7af-da2132a456cf"
+    },
+    {
+      "assetType": "third_party_loan",
+      "amount": {
+        "currency": "CHF",
+        "content": "30000"
+      },
+      "usageType": "withdraw",
+      "applicantId": "321d8ab3-6b30-4882-a7af-da2132a123ab"
+    },
+    {
+      "assetType": "advancement_of_inheritance",
+      "amount": {
+        "currency": "CHF",
+        "content": "15000"
+      },
+      "usageType": "withdraw",
+      "applicantId": "321d8ab3-6b30-4882-a7af-da2132a123ab"
+    },
+    {
+      "assetType": "cash",
+      "amount": {
+        "currency": "CHF",
+        "content": "5000"
+      },
+      "usageType": "withdraw",
+      "applicantId": "321d8ab3-6b30-4882-a7af-da2132a123ab"
+    },
+    {
+      "assetType": "pension_fund",
+      "amount": {
+        "currency": "CHF",
+        "content": "40000"
+      },
+      "usageType": "withdraw",
+      "applicantId": "321d8ab3-6b30-4882-a7af-da2132a123ab"
+    }
+  ]
+}

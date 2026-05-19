@@ -1,0 +1,4 @@
+GET /mortgages/6a41f44e-04de-40c6-88b7-1343cf83c51a HTTP/1.1
+Host: mortgage.common-api.ch
+Accept: application/json
+X-Correlation-ID: b0c2d2d8-9c21-4ef7-990d-2e5aa95ccf3d

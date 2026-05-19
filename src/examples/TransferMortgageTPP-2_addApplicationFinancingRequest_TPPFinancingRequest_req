@@ -1,0 +1,38 @@
+POST /mortgages/applications/7650e0c9-8508-4896-94de-65fd8e85f92a/financing-requests HTTP/1.1
+Host: mortgage.common-api.ch
+Accept: application/json
+Content-Type: application/json
+X-API-Key: {{apiKey}}
+X-Correlation-ID: {{correlationId}}
+X-Client-ID: {{clientId}}
+X-Agent: {{agent}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "applicationId": "7650e0c9-8508-4896-94de-65fd8e85f92a",
+  "amount": {
+    "currency": "CHF",
+    "content": "690000"
+  },
+  "requestOfferType": "indicative",
+  "tranches": [
+    {
+      "trancheId": "f18b1ed3-750e-421e-a89b-60d3c0c7d90f",
+      "productId": "c1029198-43d3-46c8-8d35-912d44ec2713",
+      "payOutDate": "2026-10-31",
+      "amount": {
+        "currency": "CHF",
+        "content": "300000"
+      }
+    },
+    {
+      "trancheId": "f3626ac3-0494-4e53-9c97-6ea3b11057fd",
+      "productId": "a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2",
+      "payOutDate": "2026-10-31",
+      "amount": {
+        "currency": "CHF",
+        "content": "390000"
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+POST /mortgages/applications/1f8d61e8-50c4-4db2-8715-0c7f5dfc8f01/documents HTTP/1.1
+Host: mortgage.common-api.ch
+Accept: application/json
+Content-Type: multipart/form-data; boundary=----MortgageBoundary
+X-API-Key: {{apiKey}}
+X-Correlation-ID: {{correlationId}}
+X-Client-ID: {{clientId}}
+X-Agent: {{agent}}
+Authorization: Bearer {{accessToken}}
+
+------MortgageBoundary
+Content-Disposition: form-data; name="documentType"
+
+salary_statement
+------MortgageBoundary
+Content-Disposition: form-data; name="fileContent"; filename="salary_statement_maria_meier_2026_04.pdf"
+Content-Type: application/pdf
+
+JVBERi0xLjQKJcfs...
+------MortgageBoundary
+Content-Disposition: form-data; name="name"
+
+salary_statement_maria_meier_2026_04
+------MortgageBoundary
+Content-Disposition: form-data; name="type"
+
+application/pdf
+------MortgageBoundary
+Content-Disposition: form-data; name="size"
+
+184231
+------MortgageBoundary
+Content-Disposition: form-data; name="applicantId"
+
+576f8de3-6b30-4882-a7af-da2132a456cf
+------MortgageBoundary--

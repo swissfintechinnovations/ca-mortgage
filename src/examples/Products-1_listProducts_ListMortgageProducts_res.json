@@ -1,0 +1,61 @@
+{
+  "productList": [
+    {
+      "productId": "a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2",
+      "interestRateType": "fixed",
+      "names": [
+        {
+          "language": "de",
+          "description": "Festhypothek 5 Jahre"
+        },
+        {
+          "language": "en",
+          "description": "Fixed-rate mortgage 5 years"
+        }
+      ],
+      "productVariations": [
+        {
+          "duration": 5
+        }
+      ]
+    },
+    {
+      "productId": "f98a7426-6ca4-451b-9c26-3efb46be042e",
+      "interestRateType": "fixed",
+      "names": [
+        {
+          "language": "de",
+          "description": "Festhypothek 10 Jahre"
+        },
+        {
+          "language": "en",
+          "description": "Fixed-rate mortgage 10 years"
+        }
+      ],
+      "productVariations": [
+        {
+          "duration": 10
+        }
+      ]
+    },
+    {
+      "productId": "c1029198-43d3-46c8-8d35-912d44ec2713",
+      "interestRateType": "saron",
+      "names": [
+        {
+          "language": "de",
+          "description": "SARON Hypothek"
+        },
+        {
+          "language": "en",
+          "description": "SARON mortgage"
+        }
+      ],
+      "productVariations": [
+        {
+          "duration": 3
+        }
+      ]
+    }
+  ]
+}

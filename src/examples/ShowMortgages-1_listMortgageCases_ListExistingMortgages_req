@@ -1,0 +1,13 @@
+GET /mortgages?limit=20 HTTP/1.1
+Host: mortgage.common-api.ch
+Accept: application/json
+
+
+GET /mortgages?expiring=true&limit=20 HTTP/1.1
+Host: mortgage.common-api.ch
+Accept: application/json
+X-API-Key: {{apiKey}}
+X-Correlation-ID: f8a2df80-2ef2-4d5d-a621-61f0df64cb23
+X-Client-ID: tpp-demo-client
+X-Agent: Swiss Mortgage Compare AG
+Authorization: Bearer {{accessToken}}

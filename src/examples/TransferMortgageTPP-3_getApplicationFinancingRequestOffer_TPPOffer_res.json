@@ -1,0 +1,104 @@
+{
+  "offer": {
+    "offerId": "b8ed4d9e-c90d-4cc5-8b92-7d6f5d2b9431",
+    "financingRequestId": "0c0bb5c9-9ec2-4205-841e-85a91c14eb71",
+    "totalAmount": {
+      "currency": "CHF",
+      "content": "690000"
+    },
+    "validTo": "2026-07-15",
+    "offerType": "indicative",
+    "offerItems": [
+      {
+        "offerItemId": "89eb0b42-878a-46c4-a113-73cf9b60b5b1",
+        "trancheId": "216f5f85-1a31-4f13-afbb-ec02fb3e4d01",
+        "product": {
+          "productId": "a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2",
+          "interestRateType": "fixed",
+          "names": [
+            {
+              "language": "de",
+              "description": "Festhypothek 5 Jahre"
+            },
+            {
+              "language": "en",
+              "description": "Fixed-rate mortgage 5 years"
+            }
+          ],
+          "productVariations": [
+            {
+              "duration": 5
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "conditionId": "52b0d93a-0c02-4981-a6fa-5d35dc9f1d55",
+            "productIdRef": "a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2",
+            "duration": 5,
+            "maturityDate": "2031-06-30",
+            "amortization": 12000,
+            "amountRange": {
+              "minimumAmount": {
+                "currency": "CHF",
+                "content": "100000"
+              },
+              "maximumAmount": {
+                "currency": "CHF",
+                "content": "2000000"
+              }
+            },
+            "interest": {
+              "interestRate": "1.82"
+            }
+          }
+        ]
+      },
+      {
+        "offerItemId": "7c47d76f-e463-4a2f-b2eb-f9c9ad7b5b66",
+        "trancheId": "30bd7266-5fd3-4219-a831-beb6360b02ae",
+        "product": {
+          "productId": "f98a7426-6ca4-451b-9c26-3efb46be042e",
+          "interestRateType": "fixed",
+          "names": [
+            {
+              "language": "de",
+              "description": "Festhypothek 10 Jahre"
+            },
+            {
+              "language": "en",
+              "description": "Fixed-rate mortgage 10 years"
+            }
+          ],
+          "productVariations": [
+            {
+              "duration": 10
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "conditionId": "907a913c-b4d5-43d7-b0a3-15ecdfc73dd2",
+            "productIdRef": "f98a7426-6ca4-451b-9c26-3efb46be042e",
+            "duration": 10,
+            "maturityDate": "2036-06-30",
+            "amortization": 10000,
+            "amountRange": {
+              "minimumAmount": {
+                "currency": "CHF",
+                "content": "100000"
+              },
+              "maximumAmount": {
+                "currency": "CHF",
+                "content": "2000000"
+              }
+            },
+            "interest": {
+              "interestRate": "2.05"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

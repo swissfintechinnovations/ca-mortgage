@@ -1,0 +1,34 @@
+{
+  "propertyObjectId": "9343dd26-4b54-4808-8978-538f8e869d0e",
+  "propertyElements": {
+    "numberOfRooms": 5.5,
+    "numberOfFamilyBathrooms": 0,
+    "numberOfBathWC": 2,
+    "numberOfGuestWC": 1,
+    "numberOfExternalParking": 0,
+    "numberOfSeparateGarages": 0,
+    "numberOfExternalSeparateGarages": 0,
+    "numberOfAttachedGarages": 1,
+    "numberOfUndergroundCarParks": 2
+  },
+  "propertyFlatInformation": {
+    "numberOfFlats": 9,
+    "numberOfFloors": 4,
+    "stateApartmentType": "medium-good",
+    "floor": 0,
+    "balconyOrTerraceArea": 20,
+    "livingSpace": {
+      "livingSpaceInSqm": 120,
+      "measurementStandard": "nla"
+    },
+    "multistorey": true,
+    "otherFeatures": [
+      "coowned_outdoor_pool",
+      "elevator_in_stairwell"
+    ],
+    "quote": 120,
+    "apartmentType": "garden_flat",
+    "buildingType": "multiple_family_house",
+    "locationInTheBuildingRating": "good"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "Mortgage": {
+    "mortgageId": "6a41f44e-04de-40c6-88b7-1343cf83c51a",
+    "amountAtExpiry": {
+      "currency": "CHF",
+      "content": "520000"
+    },
+    "amountToday": {
+      "currency": "CHF",
+      "content": "540000"
+    },
+    "durationType": 5,
+    "interestBasis": "actual/360",
+    "interestRate": "1.35",
+    "interestRateType": "fixed",
+    "product": {
+      "productId": "a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2",
+      "interestRateType": "fixed",
+      "names": [
+        {
+          "language": "de",
+          "description": "Festhypothek 5 Jahre"
+        },
+        {
+          "language": "en",
+          "description": "Fixed-rate mortgage 5 years"
+        }
+      ],
+      "productVariations": [
+        {
+          "duration": 5
+        }
+      ]
+    },
+    "prolongable": true,
+    "propertyObjects": [
+      {
+        "propertyObjectId": "9343dd26-4b54-4808-8978-538f8e869d0e",
+        "address": {
+          "streetName": "Zürichstrasse",
+          "buildingNumber": "10",
+          "postCode": "CH-8600",
+          "townName": "Dübendorf",
+          "country": "CH"
+        },
+        "propertyConstructionInformation": {
+          "constructionYear": 2010,
+          "minergieStandardType": "minergie-p-eco",
+          "luxusFlag": "0",
+          "constructionQualityType": "good-verygood",
+          "stateBuildingType": "verygood"
+        },
+        "floorPlan": "average",
+        "usageType": "self",
+        "propertyType": "condominium",
+        "ceilingHight": "middle",
+        "buildingStandardFloorCoverings": "highlevel",
+        "buildingStandardKitchen": "premium",
+        "buildingStandardBathroom": "basic",
+        "heatEmission": [
+          "floor",
+          "radiator"
+        ],
+        "heatProduction": [
+          "geothermal_probe",
+          "solar_thermal_collector"
+        ],
+        "outsideConstructionZone": false,
+        "propertyElements": {
+          "numberOfRooms": 5.5,
+          "numberOfFamilyBathrooms": 0,
+          "numberOfBathWC": 2,
+          "numberOfGuestWC": 1,
+          "numberOfExternalParking": 0,
+          "numberOfSeparateGarages": 0,
+          "numberOfExternalSeparateGarages": 0,
+          "numberOfAttachedGarages": 1,
+          "numberOfUndergroundCarParks": 2
+        },
+        "propertyFlatInformation": {
+          "numberOfFlats": 9,
+          "numberOfFloors": 4,
+          "stateApartmentType": "medium-good",
+          "floor": 0,
+          "balconyOrTerraceArea": 20,
+          "livingSpace": {
+            "livingSpaceInSqm": 120,
+            "measurementStandard": "nla"
+          },
+          "multistorey": true,
+          "otherFeatures": [
+            "coowned_outdoor_pool",
+            "elevator_in_stairwell"
+          ],
+          "quote": 120,
+          "apartmentType": "garden_flat",
+          "buildingType": "multiple_family_house",
+          "locationInTheBuildingRating": "good"
+        },
+        "objectPrice": {
+          "currency": "CHF",
+          "content": "1100000"
+        },
+        "transferOfOwnershipDate": "2027-04-13"
+      }
+    ],
+    "validFrom": "2021-07-01",
+    "validTo": "2026-06-30",
+    "offerDate": "2026-05-19"
+  }
+}
