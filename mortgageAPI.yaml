@@ -72,6 +72,181 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/MortgageCase'
+              examples:
+                ListExistingMortgages:
+                  summary: List existing mortgages
+                  x-usecase: Show my existing mortgages
+                  x-req: examples/ShowMortgages-1_listMortgageCases_ListExistingMortgages_req
+                  value:
+                    mortgageList:
+                      - mortgageId: 6a41f44e-04de-40c6-88b7-1343cf83c51a
+                        amountAtExpiry:
+                          currency: CHF
+                          content: '520000'
+                        amountToday:
+                          currency: CHF
+                          content: '540000'
+                        durationType: 5
+                        interestBasis: actual/360
+                        interestRate: '1.35'
+                        interestRateType: fixed
+                        product:
+                          productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                          interestRateType: fixed
+                          names:
+                            - language: de
+                              description: Festhypothek 5 Jahre
+                            - language: en
+                              description: Fixed-rate mortgage 5 years
+                          productVariations:
+                            - duration: 5
+                        prolongable: true
+                        propertyObjects:
+                          - propertyObjectId: 9343dd26-4b54-4808-8978-538f8e869d0e
+                            address:
+                              streetName: Zürichstrasse
+                              buildingNumber: '10'
+                              postCode: CH-8600
+                              townName: Dübendorf
+                              country: CH
+                            propertyConstructionInformation:
+                              constructionYear: 2010
+                              minergieStandardType: minergie-p-eco
+                              luxusFlag: '0'
+                              constructionQualityType: good-verygood
+                              stateBuildingType: verygood
+                            floorPlan: average
+                            usageType: self
+                            propertyType: condominium
+                            ceilingHight: middle
+                            buildingStandardFloorCoverings: highlevel
+                            buildingStandardKitchen: premium
+                            buildingStandardBathroom: basic
+                            heatEmission:
+                              - floor
+                              - radiator
+                            heatProduction:
+                              - geothermal_probe
+                              - solar_thermal_collector
+                            outsideConstructionZone: false
+                            propertyElements:
+                              numberOfRooms: 5.5
+                              numberOfFamilyBathrooms: 0
+                              numberOfBathWC: 2
+                              numberOfGuestWC: 1
+                              numberOfExternalParking: 0
+                              numberOfSeparateGarages: 0
+                              numberOfExternalSeparateGarages: 0
+                              numberOfAttachedGarages: 1
+                              numberOfUndergroundCarParks: 2
+                            propertyFlatInformation:
+                              numberOfFlats: 9
+                              numberOfFloors: 4
+                              stateApartmentType: medium-good
+                              floor: 0
+                              balconyOrTerraceArea: 20
+                              livingSpace:
+                                livingSpaceInSqm: 120
+                                measurementStandard: nla
+                              multistorey: true
+                              otherFeatures:
+                                - coowned_outdoor_pool
+                                - elevator_in_stairwell
+                              quote: 120
+                              apartmentType: garden_flat
+                              buildingType: multiple_family_house
+                              locationInTheBuildingRating: good
+                            objectPrice:
+                              currency: CHF
+                              content: '1100000'
+                            transferOfOwnershipDate: '2027-04-13'
+                        validFrom: '2021-07-01'
+                        validTo: '2026-06-30'
+                        offerDate: '2026-05-19'
+                      - mortgageId: 99e5ad1a-0cf2-4e9e-9f85-95a8c74efb85
+                        amountAtExpiry:
+                          currency: CHF
+                          content: '350000'
+                        amountToday:
+                          currency: CHF
+                          content: '370000'
+                        durationType: 10
+                        interestBasis: actual/360
+                        interestRate: '1.58'
+                        interestRateType: fixed
+                        product:
+                          productId: f98a7426-6ca4-451b-9c26-3efb46be042e
+                          interestRateType: fixed
+                          names:
+                            - language: de
+                              description: Festhypothek 10 Jahre
+                            - language: en
+                              description: Fixed-rate mortgage 10 years
+                          productVariations:
+                            - duration: 10
+                        prolongable: false
+                        propertyObjects:
+                          - propertyObjectId: 9343dd26-4b54-4808-8978-538f8e869d0e
+                            address:
+                              streetName: Zürichstrasse
+                              buildingNumber: '10'
+                              postCode: CH-8600
+                              townName: Dübendorf
+                              country: CH
+                            propertyConstructionInformation:
+                              constructionYear: 2010
+                              minergieStandardType: minergie-p-eco
+                              luxusFlag: '0'
+                              constructionQualityType: good-verygood
+                              stateBuildingType: verygood
+                            floorPlan: average
+                            usageType: self
+                            propertyType: condominium
+                            ceilingHight: middle
+                            buildingStandardFloorCoverings: highlevel
+                            buildingStandardKitchen: premium
+                            buildingStandardBathroom: basic
+                            heatEmission:
+                              - floor
+                              - radiator
+                            heatProduction:
+                              - geothermal_probe
+                              - solar_thermal_collector
+                            outsideConstructionZone: false
+                            propertyElements:
+                              numberOfRooms: 5.5
+                              numberOfFamilyBathrooms: 0
+                              numberOfBathWC: 2
+                              numberOfGuestWC: 1
+                              numberOfExternalParking: 0
+                              numberOfSeparateGarages: 0
+                              numberOfExternalSeparateGarages: 0
+                              numberOfAttachedGarages: 1
+                              numberOfUndergroundCarParks: 2
+                            propertyFlatInformation:
+                              numberOfFlats: 9
+                              numberOfFloors: 4
+                              stateApartmentType: medium-good
+                              floor: 0
+                              balconyOrTerraceArea: 20
+                              livingSpace:
+                                livingSpaceInSqm: 120
+                                measurementStandard: nla
+                              multistorey: true
+                              otherFeatures:
+                                - coowned_outdoor_pool
+                                - elevator_in_stairwell
+                              quote: 120
+                              apartmentType: garden_flat
+                              buildingType: multiple_family_house
+                              locationInTheBuildingRating: good
+                            objectPrice:
+                              currency: CHF
+                              content: '1100000'
+                            transferOfOwnershipDate: '2027-04-13'
+                        validFrom: '2024-08-01'
+                        validTo: '2034-07-31'
+                        offerDate: '2026-05-19'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -162,6 +337,181 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Mortgage'
+              examples:
+                ExistingMortgagesList:
+                  summary: List existing mortgages
+                  x-usecase: Show my existing mortgages
+                  x-req: examples/ShowMortgages-1_listMortgageCases_ListExistingMortgages_req
+                  value:
+                    mortgageList:
+                      - mortgageId: 6a41f44e-04de-40c6-88b7-1343cf83c51a
+                        amountAtExpiry:
+                          currency: CHF
+                          content: '520000'
+                        amountToday:
+                          currency: CHF
+                          content: '540000'
+                        durationType: 5
+                        interestBasis: actual/360
+                        interestRate: '1.35'
+                        interestRateType: fixed
+                        product:
+                          productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                          interestRateType: fixed
+                          names:
+                            - language: de
+                              description: Festhypothek 5 Jahre
+                            - language: en
+                              description: Fixed-rate mortgage 5 years
+                          productVariations:
+                            - duration: 5
+                        prolongable: true
+                        propertyObjects:
+                          - propertyObjectId: 9343dd26-4b54-4808-8978-538f8e869d0e
+                            address:
+                              streetName: Zürichstrasse
+                              buildingNumber: '10'
+                              postCode: CH-8600
+                              townName: Dübendorf
+                              country: CH
+                            propertyConstructionInformation:
+                              constructionYear: 2010
+                              minergieStandardType: minergie-p-eco
+                              luxusFlag: '0'
+                              constructionQualityType: good-verygood
+                              stateBuildingType: verygood
+                            floorPlan: average
+                            usageType: self
+                            propertyType: condominium
+                            ceilingHight: middle
+                            buildingStandardFloorCoverings: highlevel
+                            buildingStandardKitchen: premium
+                            buildingStandardBathroom: basic
+                            heatEmission:
+                              - floor
+                              - radiator
+                            heatProduction:
+                              - geothermal_probe
+                              - solar_thermal_collector
+                            outsideConstructionZone: false
+                            propertyElements:
+                              numberOfRooms: 5.5
+                              numberOfFamilyBathrooms: 0
+                              numberOfBathWC: 2
+                              numberOfGuestWC: 1
+                              numberOfExternalParking: 0
+                              numberOfSeparateGarages: 0
+                              numberOfExternalSeparateGarages: 0
+                              numberOfAttachedGarages: 1
+                              numberOfUndergroundCarParks: 2
+                            propertyFlatInformation:
+                              numberOfFlats: 9
+                              numberOfFloors: 4
+                              stateApartmentType: medium-good
+                              floor: 0
+                              balconyOrTerraceArea: 20
+                              livingSpace:
+                                livingSpaceInSqm: 120
+                                measurementStandard: nla
+                              multistorey: true
+                              otherFeatures:
+                                - coowned_outdoor_pool
+                                - elevator_in_stairwell
+                              quote: 120
+                              apartmentType: garden_flat
+                              buildingType: multiple_family_house
+                              locationInTheBuildingRating: good
+                            objectPrice:
+                              currency: CHF
+                              content: '1100000'
+                            transferOfOwnershipDate: '2027-04-13'
+                        validFrom: '2021-07-01'
+                        validTo: '2026-06-30'
+                        offerDate: '2026-05-19'
+                      - mortgageId: 99e5ad1a-0cf2-4e9e-9f85-95a8c74efb85
+                        amountAtExpiry:
+                          currency: CHF
+                          content: '350000'
+                        amountToday:
+                          currency: CHF
+                          content: '370000'
+                        durationType: 10
+                        interestBasis: actual/360
+                        interestRate: '1.58'
+                        interestRateType: fixed
+                        product:
+                          productId: f98a7426-6ca4-451b-9c26-3efb46be042e
+                          interestRateType: fixed
+                          names:
+                            - language: de
+                              description: Festhypothek 10 Jahre
+                            - language: en
+                              description: Fixed-rate mortgage 10 years
+                          productVariations:
+                            - duration: 10
+                        prolongable: false
+                        propertyObjects:
+                          - propertyObjectId: 9343dd26-4b54-4808-8978-538f8e869d0e
+                            address:
+                              streetName: Zürichstrasse
+                              buildingNumber: '10'
+                              postCode: CH-8600
+                              townName: Dübendorf
+                              country: CH
+                            propertyConstructionInformation:
+                              constructionYear: 2010
+                              minergieStandardType: minergie-p-eco
+                              luxusFlag: '0'
+                              constructionQualityType: good-verygood
+                              stateBuildingType: verygood
+                            floorPlan: average
+                            usageType: self
+                            propertyType: condominium
+                            ceilingHight: middle
+                            buildingStandardFloorCoverings: highlevel
+                            buildingStandardKitchen: premium
+                            buildingStandardBathroom: basic
+                            heatEmission:
+                              - floor
+                              - radiator
+                            heatProduction:
+                              - geothermal_probe
+                              - solar_thermal_collector
+                            outsideConstructionZone: false
+                            propertyElements:
+                              numberOfRooms: 5.5
+                              numberOfFamilyBathrooms: 0
+                              numberOfBathWC: 2
+                              numberOfGuestWC: 1
+                              numberOfExternalParking: 0
+                              numberOfSeparateGarages: 0
+                              numberOfExternalSeparateGarages: 0
+                              numberOfAttachedGarages: 1
+                              numberOfUndergroundCarParks: 2
+                            propertyFlatInformation:
+                              numberOfFlats: 9
+                              numberOfFloors: 4
+                              stateApartmentType: medium-good
+                              floor: 0
+                              balconyOrTerraceArea: 20
+                              livingSpace:
+                                livingSpaceInSqm: 120
+                                measurementStandard: nla
+                              multistorey: true
+                              otherFeatures:
+                                - coowned_outdoor_pool
+                                - elevator_in_stairwell
+                              quote: 120
+                              apartmentType: garden_flat
+                              buildingType: multiple_family_house
+                              locationInTheBuildingRating: good
+                            objectPrice:
+                              currency: CHF
+                              content: '1100000'
+                            transferOfOwnershipDate: '2027-04-13'
+                        validFrom: '2024-08-01'
+                        validTo: '2034-07-31'
+                        offerDate: '2026-05-19'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -203,6 +553,97 @@ paths:
                 properties:
                   Mortgage:
                     $ref: '#/components/schemas/Mortgage'
+              examples:
+                ExistingMortgage:
+                  summary: Get a specific existing mortgage
+                  x-usecase: Show my existing mortgages
+                  x-req: examples/ShowMortgages-2_getMortgage_ExistingMortgage_req
+                  value:
+                    Mortgage:
+                      mortgageId: 6a41f44e-04de-40c6-88b7-1343cf83c51a
+                      amountAtExpiry:
+                        currency: CHF
+                        content: '520000'
+                      amountToday:
+                        currency: CHF
+                        content: '540000'
+                      durationType: 5
+                      interestBasis: actual/360
+                      interestRate: '1.35'
+                      interestRateType: fixed
+                      product:
+                        productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                        interestRateType: fixed
+                        names:
+                          - language: de
+                            description: Festhypothek 5 Jahre
+                          - language: en
+                            description: Fixed-rate mortgage 5 years
+                        productVariations:
+                          - duration: 5
+                      prolongable: true
+                      propertyObjects:
+                        - propertyObjectId: 9343dd26-4b54-4808-8978-538f8e869d0e
+                          address:
+                            streetName: Zürichstrasse
+                            buildingNumber: '10'
+                            postCode: CH-8600
+                            townName: Dübendorf
+                            country: CH
+                          propertyConstructionInformation:
+                            constructionYear: 2010
+                            minergieStandardType: minergie-p-eco
+                            luxusFlag: '0'
+                            constructionQualityType: good-verygood
+                            stateBuildingType: verygood
+                          floorPlan: average
+                          usageType: self
+                          propertyType: condominium
+                          ceilingHight: middle
+                          buildingStandardFloorCoverings: highlevel
+                          buildingStandardKitchen: premium
+                          buildingStandardBathroom: basic
+                          heatEmission:
+                            - floor
+                            - radiator
+                          heatProduction:
+                            - geothermal_probe
+                            - solar_thermal_collector
+                          outsideConstructionZone: false
+                          propertyElements:
+                            numberOfRooms: 5.5
+                            numberOfFamilyBathrooms: 0
+                            numberOfBathWC: 2
+                            numberOfGuestWC: 1
+                            numberOfExternalParking: 0
+                            numberOfSeparateGarages: 0
+                            numberOfExternalSeparateGarages: 0
+                            numberOfAttachedGarages: 1
+                            numberOfUndergroundCarParks: 2
+                          propertyFlatInformation:
+                            numberOfFlats: 9
+                            numberOfFloors: 4
+                            stateApartmentType: medium-good
+                            floor: 0
+                            balconyOrTerraceArea: 20
+                            livingSpace:
+                              livingSpaceInSqm: 120
+                              measurementStandard: nla
+                            multistorey: true
+                            otherFeatures:
+                              - coowned_outdoor_pool
+                              - elevator_in_stairwell
+                            quote: 120
+                            apartmentType: garden_flat
+                            buildingType: multiple_family_house
+                            locationInTheBuildingRating: good
+                          objectPrice:
+                            currency: CHF
+                            content: '1100000'
+                          transferOfOwnershipDate: '2027-04-13'
+                      validFrom: '2021-07-01'
+                      validTo: '2026-06-30'
+                      offerDate: '2026-05-19'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -253,6 +694,40 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Product'
+              examples:
+                ListMortgageProducts:
+                  summary: Get an overview of all mortgage products
+                  x-usecase: Get products and conditions
+                  x-req: examples/Products-1_listProducts_ListMortgageProducts_req
+                  value:
+                    productList:
+                      - productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                        interestRateType: fixed
+                        names:
+                          - language: de
+                            description: Festhypothek 5 Jahre
+                          - language: en
+                            description: Fixed-rate mortgage 5 years
+                        productVariations:
+                          - duration: 5
+                      - productId: f98a7426-6ca4-451b-9c26-3efb46be042e
+                        interestRateType: fixed
+                        names:
+                          - language: de
+                            description: Festhypothek 10 Jahre
+                          - language: en
+                            description: Fixed-rate mortgage 10 years
+                        productVariations:
+                          - duration: 10
+                      - productId: c1029198-43d3-46c8-8d35-912d44ec2713
+                        interestRateType: saron
+                        names:
+                          - language: de
+                            description: SARON Hypothek
+                          - language: en
+                            description: SARON mortgage
+                        productVariations:
+                          - duration: 3
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -300,6 +775,55 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Condition'
+              examples:
+                ProductConditions:
+                  summary: Get the general conditions for a specified mortgage product
+                  x-usecase: Get products and conditions
+                  x-req: examples/Products-2_listProductConditions_ProductConditions_req
+                  value:
+                    conditionList:
+                      - conditionId: 52b0d93a-0c02-4981-a6fa-5d35dc9f1d55
+                        productIdRef: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                        duration: 5
+                        maturityDate: '2031-06-30'
+                        amortization: 12000
+                        amountRange:
+                          minimumAmount:
+                            currency: CHF
+                            content: '100000'
+                          maximumAmount:
+                            currency: CHF
+                            content: '2000000'
+                        interest:
+                          interestRate: '1.82'
+                      - conditionId: 907a913c-b4d5-43d7-b0a3-15ecdfc73dd2
+                        productIdRef: f98a7426-6ca4-451b-9c26-3efb46be042e
+                        duration: 10
+                        maturityDate: '2036-06-30'
+                        amortization: 10000
+                        amountRange:
+                          minimumAmount:
+                            currency: CHF
+                            content: '100000'
+                          maximumAmount:
+                            currency: CHF
+                            content: '2000000'
+                        interest:
+                          interestRate: '2.05'
+                      - conditionId: 7ad925f7-38d7-45c7-bf6f-6357a18c0c73
+                        productIdRef: c1029198-43d3-46c8-8d35-912d44ec2713
+                        duration: 3
+                        maturityDate: '2029-06-30'
+                        amortization: 15000
+                        amountRange:
+                          minimumAmount:
+                            currency: CHF
+                            content: '100000'
+                          maximumAmount:
+                            currency: CHF
+                            content: '1500000'
+                        interest:
+                          interestRate: '1.65'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -338,6 +862,563 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Application'
+            examples:
+              PlaceNewMortgageApplication:
+                summary: Place a new mortgage application
+                x-usecase: Place a new mortgage application
+                x-req: examples/NewApplication-1_createApplication_PlaceNewMortgageApplication_req
+                value:
+                  applicationId: 1f8d61e8-50c4-4db2-8715-0c7f5dfc8f01
+                  requestingParty:
+                    primaryApplicantId: 576f8de3-6b30-4882-a7af-da2132a456cf
+                    personList:
+                      - applicantId: 576f8de3-6b30-4882-a7af-da2132a456cf
+                        fiApplicantId: asd23f
+                        applicantType: individual
+                        applicantDetail:
+                          name: Ehegatten Eigenheim
+                          surName: additionalproperties
+                          address:
+                            streetName: Zürcherstrasse
+                            buildingNumber: '28'
+                            postCode: CH-8600
+                            townName: Dübendorf
+                            country: CH
+                          birthDate: '1990-04-13'
+                          maritalStatus: married
+                          PropertyOwner: 'yes'
+                          USPerson: false
+                          email: linus.muster@domain.ch
+                          phone: '+41791231212'
+                          gender: male
+                        financialSituation:
+                          income:
+                            - incomeType: employment_gross
+                              amount:
+                                currency: CHF
+                                content: '130000'
+                            - incomeType: employment_net
+                              amount:
+                                currency: CHF
+                                content: '115000'
+                            - incomeType: bonus_year-1
+                              amount:
+                                currency: CHF
+                                content: '10000'
+                            - incomeType: child_allowance_payment
+                              amount:
+                                currency: CHF
+                                content: '12000'
+                          assets:
+                            - assetType: fungible_investments
+                              amount:
+                                currency: CHF
+                                content: '50000'
+                              insuranceSum:
+                                currency: CHF
+                                content: '120000'
+                          additionalProperties:
+                            - nameAdditionalProperty: weitere LG Er
+                              valueAdditionalProperty:
+                                currency: CHF
+                                content: '800000'
+                              mortgageAmountAdditionalProperty:
+                                currency: CHF
+                                content: '550001'
+                              propertyTypeAdditionalProperty: condominium
+                              usageTypeAdditionalProperty: let
+                      - applicantId: 321d8ab3-6b30-4882-a7af-da2132a123ab
+                        fiApplicantId: asd23f
+                        applicantType: individual
+                        applicantDetail:
+                          name: weiterLG
+                          surName: ohne mietkosten
+                          address:
+                            streetName: Zürcherstrasse
+                            buildingNumber: '28'
+                            postCode: CH-8600
+                            townName: Dübendorf
+                            country: CH
+                          birthDate: '1991-07-01'
+                          maritalStatus: married
+                          PropertyOwner: 'yes'
+                          USPerson: false
+                          email: silvia.muster@domain.ch
+                          phone: '+41791111111'
+                          gender: female
+                        financialSituation:
+                          income:
+                            - incomeType: employment_gross
+                              amount:
+                                currency: CHF
+                                content: '80000'
+                            - incomeType: employment_net
+                              amount:
+                                currency: CHF
+                                content: '70000'
+                          assets:
+                            - assetType: fungible_investments
+                              amount:
+                                currency: CHF
+                                content: '30000'
+                          additionalProperties:
+                            - nameAdditionalProperty: additionalproperty Sie
+                              valueAdditionalProperty:
+                                currency: CHF
+                                content: '800000'
+                              mortgageAmountAdditionalProperty:
+                                currency: CHF
+                                content: '550001'
+                              propertyTypeAdditionalProperty: condominium
+                              usageTypeAdditionalProperty: let
+                  propertyInformation:
+                    propertyObjectId: 9343dd26-4b54-4808-8978-538f8e869d0e
+                    address:
+                      streetName: Zürichstrasse
+                      buildingNumber: '10'
+                      postCode: CH-8600
+                      townName: Dübendorf
+                      country: CH
+                    propertyConstructionInformation:
+                      constructionYear: 2010
+                      minergieStandardType: minergie-p-eco
+                      luxusFlag: '0'
+                      constructionQualityType: good-verygood
+                      stateBuildingType: verygood
+                    floorPlan: average
+                    usageType: self
+                    propertyType: condominium
+                    ceilingHight: middle
+                    buildingStandardFloorCoverings: highlevel
+                    buildingStandardKitchen: premium
+                    buildingStandardBathroom: basic
+                    heatEmission:
+                      - floor
+                      - radiator
+                    heatProduction:
+                      - geothermal_probe
+                      - solar_thermal_collector
+                    outsideConstructionZone: false
+                    propertyElements:
+                      numberOfRooms: 5.5
+                      numberOfFamilyBathrooms: 0
+                      numberOfBathWC: 2
+                      numberOfGuestWC: 1
+                      numberOfExternalParking: 0
+                      numberOfSeparateGarages: 0
+                      numberOfExternalSeparateGarages: 0
+                      numberOfAttachedGarages: 1
+                      numberOfUndergroundCarParks: 2
+                    propertyFlatInformation:
+                      numberOfFlats: 9
+                      numberOfFloors: 4
+                      stateApartmentType: medium-good
+                      floor: 0
+                      balconyOrTerraceArea: 20
+                      livingSpace:
+                        livingSpaceInSqm: 120
+                        measurementStandard: nla
+                      multistorey: true
+                      otherFeatures:
+                        - coowned_outdoor_pool
+                        - elevator_in_stairwell
+                      quote: 120
+                      apartmentType: garden_flat
+                      buildingType: multiple_family_house
+                      locationInTheBuildingRating: good
+                    objectPrice:
+                      currency: CHF
+                      content: '1180000'
+                    transferOfOwnershipDate: '2027-04-13'
+                  mortgageType: buy
+                  channelType: advisor
+                  tppApplicationId: BUY001
+              ReplacementApplication:
+                summary: Place a replacement application for a bank-to-bank transfer
+                x-usecase: Transfer Mortgage Bank-to-Bank
+                x-req: examples/TransferMortgage-1_createApplication_ReplacementApplication_req
+                value:
+                  applicationId: 6f88656f-57f3-4a1a-9648-8718f92fb1e2
+                  requestingParty:
+                    primaryApplicantId: 576f8de3-6b30-4882-a7af-da2132a456cf
+                    personList:
+                      - applicantId: 576f8de3-6b30-4882-a7af-da2132a456cf
+                        fiApplicantId: asd23f
+                        applicantType: individual
+                        applicantDetail:
+                          name: Ehegatten Eigenheim
+                          surName: additionalproperties
+                          address:
+                            streetName: Zürcherstrasse
+                            buildingNumber: '28'
+                            postCode: CH-8600
+                            townName: Dübendorf
+                            country: CH
+                          birthDate: '1990-04-13'
+                          maritalStatus: married
+                          PropertyOwner: 'yes'
+                          USPerson: false
+                          email: linus.muster@domain.ch
+                          phone: '+41791231212'
+                          gender: male
+                        financialSituation:
+                          income:
+                            - incomeType: employment_gross
+                              amount:
+                                currency: CHF
+                                content: '130000'
+                            - incomeType: employment_net
+                              amount:
+                                currency: CHF
+                                content: '115000'
+                            - incomeType: bonus_year-1
+                              amount:
+                                currency: CHF
+                                content: '10000'
+                            - incomeType: child_allowance_payment
+                              amount:
+                                currency: CHF
+                                content: '12000'
+                          assets:
+                            - assetType: fungible_investments
+                              amount:
+                                currency: CHF
+                                content: '50000'
+                              insuranceSum:
+                                currency: CHF
+                                content: '120000'
+                          additionalProperties:
+                            - nameAdditionalProperty: weitere LG Er
+                              valueAdditionalProperty:
+                                currency: CHF
+                                content: '800000'
+                              mortgageAmountAdditionalProperty:
+                                currency: CHF
+                                content: '550001'
+                              propertyTypeAdditionalProperty: condominium
+                              usageTypeAdditionalProperty: let
+                      - applicantId: 321d8ab3-6b30-4882-a7af-da2132a123ab
+                        fiApplicantId: asd23f
+                        applicantType: individual
+                        applicantDetail:
+                          name: weiterLG
+                          surName: ohne mietkosten
+                          address:
+                            streetName: Zürcherstrasse
+                            buildingNumber: '28'
+                            postCode: CH-8600
+                            townName: Dübendorf
+                            country: CH
+                          birthDate: '1991-07-01'
+                          maritalStatus: married
+                          PropertyOwner: 'yes'
+                          USPerson: false
+                          email: silvia.muster@domain.ch
+                          phone: '+41791111111'
+                          gender: female
+                        financialSituation:
+                          income:
+                            - incomeType: employment_gross
+                              amount:
+                                currency: CHF
+                                content: '80000'
+                            - incomeType: employment_net
+                              amount:
+                                currency: CHF
+                                content: '70000'
+                          assets:
+                            - assetType: fungible_investments
+                              amount:
+                                currency: CHF
+                                content: '30000'
+                          additionalProperties:
+                            - nameAdditionalProperty: additionalproperty Sie
+                              valueAdditionalProperty:
+                                currency: CHF
+                                content: '800000'
+                              mortgageAmountAdditionalProperty:
+                                currency: CHF
+                                content: '550001'
+                              propertyTypeAdditionalProperty: condominium
+                              usageTypeAdditionalProperty: let
+                  propertyInformation:
+                    propertyObjectId: 9343dd26-4b54-4808-8978-538f8e869d0e
+                    address:
+                      streetName: Zürichstrasse
+                      buildingNumber: '10'
+                      postCode: CH-8600
+                      townName: Dübendorf
+                      country: CH
+                    propertyConstructionInformation:
+                      constructionYear: 2010
+                      minergieStandardType: minergie-p-eco
+                      luxusFlag: '0'
+                      constructionQualityType: good-verygood
+                      stateBuildingType: verygood
+                    floorPlan: average
+                    usageType: self
+                    propertyType: condominium
+                    ceilingHight: middle
+                    buildingStandardFloorCoverings: highlevel
+                    buildingStandardKitchen: premium
+                    buildingStandardBathroom: basic
+                    heatEmission:
+                      - floor
+                      - radiator
+                    heatProduction:
+                      - geothermal_probe
+                      - solar_thermal_collector
+                    outsideConstructionZone: false
+                    propertyElements:
+                      numberOfRooms: 5.5
+                      numberOfFamilyBathrooms: 0
+                      numberOfBathWC: 2
+                      numberOfGuestWC: 1
+                      numberOfExternalParking: 0
+                      numberOfSeparateGarages: 0
+                      numberOfExternalSeparateGarages: 0
+                      numberOfAttachedGarages: 1
+                      numberOfUndergroundCarParks: 2
+                    propertyFlatInformation:
+                      numberOfFlats: 9
+                      numberOfFloors: 4
+                      stateApartmentType: medium-good
+                      floor: 0
+                      balconyOrTerraceArea: 20
+                      livingSpace:
+                        livingSpaceInSqm: 120
+                        measurementStandard: nla
+                      multistorey: true
+                      otherFeatures:
+                        - coowned_outdoor_pool
+                        - elevator_in_stairwell
+                      quote: 120
+                      apartmentType: garden_flat
+                      buildingType: multiple_family_house
+                      locationInTheBuildingRating: good
+                    objectPrice:
+                      currency: CHF
+                      content: '1100000'
+                    transferOfOwnershipDate: '2027-04-13'
+                  mortgageType: replacement
+                  replacementType: entire
+                  channelType: advisor
+                  tppApplicationId: REPL01
+                  replacedTranches:
+                    - replacedTrancheAmount:
+                        currency: CHF
+                        content: '520000'
+                      replacedTrancheExpiry: '2026-06-30'
+                      replacedTrancheIssuer: Alte Kantonalbank
+                    - replacedTrancheAmount:
+                        currency: CHF
+                        content: '260000'
+                      replacedTrancheExpiry: '2026-06-30'
+                      replacedTrancheIssuer: Alte Kantonalbank
+              TPPReplacementApplication:
+                summary: Place a replacement application through a TPP platform
+                x-usecase: Transfer via TPP Platform
+                x-req: examples/TransferMortgageTPP-1_createApplication_TPPReplacementApplication_req
+                value:
+                  applicationId: 7650e0c9-8508-4896-94de-65fd8e85f92a
+                  requestingParty:
+                    primaryApplicantId: 576f8de3-6b30-4882-a7af-da2132a456cf
+                    personList:
+                      - applicantId: 576f8de3-6b30-4882-a7af-da2132a456cf
+                        fiApplicantId: asd23f
+                        applicantType: individual
+                        applicantDetail:
+                          name: 2additionalproperties inkl Eigenheim
+                          surName: Konkubinat
+                          address:
+                            streetName: Zürcherstrasse
+                            buildingNumber: '28'
+                            postCode: CH-8600
+                            townName: Dübendorf
+                            country: CH
+                          birthDate: '1990-04-13'
+                          maritalStatus: unmarried
+                          PropertyOwner: 'yes'
+                          USPerson: false
+                          email: linus.muster@domain.ch
+                          phone: '+41791231212'
+                          gender: male
+                        financialSituation:
+                          income:
+                            - incomeType: employment_gross
+                              amount:
+                                currency: CHF
+                                content: '130000'
+                            - incomeType: employment_net
+                              amount:
+                                currency: CHF
+                                content: '115000'
+                            - incomeType: bonus_year-1
+                              amount:
+                                currency: CHF
+                                content: '10000'
+                            - incomeType: child_allowance_payment
+                              amount:
+                                currency: CHF
+                                content: '12000'
+                          assets:
+                            - assetType: fungible_investments
+                              amount:
+                                currency: CHF
+                                content: '50000'
+                              insuranceSum:
+                                currency: CHF
+                                content: '120000'
+                          residentialSituation: renter
+                          additionalProperties:
+                            - nameAdditionalProperty: Eigenheim am Spechtweg 13
+                              valueAdditionalProperty:
+                                currency: CHF
+                                content: '800000'
+                              mortgageAmountAdditionalProperty:
+                                currency: CHF
+                                content: '550001'
+                              propertyTypeAdditionalProperty: condominium
+                              usageTypeAdditionalProperty: let
+                            - nameAdditionalProperty: weitere LG
+                              valueAdditionalProperty:
+                                currency: CHF
+                                content: '800000'
+                              mortgageAmountAdditionalProperty:
+                                currency: CHF
+                                content: '550001'
+                              propertyTypeAdditionalProperty: condominium
+                              usageTypeAdditionalProperty: let
+                      - applicantId: 321d8ab3-6b30-4882-a7af-da2132a123ab
+                        fiApplicantId: asd23f
+                        applicantType: individual
+                        applicantDetail:
+                          name: 1 additionalproperty
+                          surName: mit mietkosten
+                          address:
+                            streetName: Zürcherstrasse
+                            buildingNumber: '28'
+                            postCode: CH-8600
+                            townName: Dübendorf
+                            country: CH
+                          birthDate: '1991-07-01'
+                          maritalStatus: unmarried
+                          PropertyOwner: 'yes'
+                          USPerson: false
+                          email: silvia.muster@domain.ch
+                          phone: '+41791111111'
+                          gender: female
+                        financialSituation:
+                          income:
+                            - incomeType: employment_gross
+                              amount:
+                                currency: CHF
+                                content: '80000'
+                            - incomeType: employment_net
+                              amount:
+                                currency: CHF
+                                content: '70000'
+                            - incomeType: rental_costs
+                              amount:
+                                currency: CHF
+                                content: '80000'
+                          assets:
+                            - assetType: fungible_investments
+                              amount:
+                                currency: CHF
+                                content: '30000'
+                          additionalProperties:
+                            - nameAdditionalProperty: additionalproperty Sie
+                              valueAdditionalProperty:
+                                currency: CHF
+                                content: '800000'
+                              mortgageAmountAdditionalProperty:
+                                currency: CHF
+                                content: '550001'
+                              propertyTypeAdditionalProperty: condominium
+                              usageTypeAdditionalProperty: let
+                  propertyInformation:
+                    propertyObjectId: 9343dd26-4b54-4808-8978-538f8e869d0e
+                    address:
+                      streetName: Zürcherstrasse
+                      buildingNumber: '28'
+                      postCode: CH-8600
+                      townName: Dübendorf
+                      country: CH
+                    propertyConstructionInformation:
+                      constructionYear: 2010
+                      minergieStandardType: minergie-p-eco
+                      luxusFlag: '0'
+                      constructionQualityType: good-verygood
+                      stateBuildingType: verygood
+                    floorPlan: average
+                    usageType: let
+                    propertyType: condominium
+                    ceilingHight: middle
+                    buildingStandardFloorCoverings: highlevel
+                    buildingStandardKitchen: premium
+                    buildingStandardBathroom: basic
+                    heatEmission:
+                      - floor
+                      - radiator
+                    heatProduction:
+                      - geothermal_probe
+                      - solar_thermal_collector
+                    outsideConstructionZone: false
+                    propertyElements:
+                      numberOfRooms: 5.5
+                      numberOfFamilyBathrooms: 0
+                      numberOfBathWC: 2
+                      numberOfGuestWC: 1
+                      numberOfExternalParking: 0
+                      numberOfSeparateGarages: 0
+                      numberOfExternalSeparateGarages: 0
+                      numberOfAttachedGarages: 1
+                      numberOfUndergroundCarParks: 2
+                    propertyFlatInformation:
+                      numberOfFlats: 9
+                      numberOfFloors: 4
+                      stateApartmentType: medium-good
+                      floor: 0
+                      balconyOrTerraceArea: 20
+                      livingSpace:
+                        livingSpaceInSqm: 120
+                        measurementStandard: nla
+                      multistorey: true
+                      otherFeatures:
+                        - coowned_outdoor_pool
+                        - elevator_in_stairwell
+                      quote: 120
+                      apartmentType: garden_flat
+                      buildingType: multiple_family_house
+                      locationInTheBuildingRating: good
+                    objectPrice:
+                      currency: CHF
+                      content: '1100000'
+                    transferOfOwnershipDate: '2027-04-13'
+                  mortgageType: replacement
+                  replacementType: entire
+                  channelType: direct
+                  tppApplicationId: TPP001
+                  tppAdvisorDetail:
+                    name: Nora
+                    surName: Keller
+                    nameTpp: Swiss Mortgage Compare AG
+                    email: nora.keller@example-tpp.ch
+                    language: de
+                    phone: '+41445550123'
+                    address:
+                      streetName: Europaallee
+                      buildingNumber: '12'
+                      postCode: CH-8004
+                      townName: Zürich
+                      country: CH
+                  replacedTranches:
+                    - replacedTrancheAmount:
+                        currency: CHF
+                        content: '690000'
+                      replacedTrancheExpiry: '2026-10-31'
+                      replacedTrancheIssuer: Bestehende Bank AG
       responses:
         '201':
           $ref: '#/components/responses/standard201'
@@ -378,6 +1459,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyObject'
+              examples:
+                RequiredPropertyInformation:
+                  summary: Get required property information for valuation
+                  x-usecase: Manage a mortgage application
+                  x-req: examples/ManageApplication-2_getApplicationRequiredInformation_RequiredPropertyInformation_req
+                  value:
+                    propertyObjectId: 9343dd26-4b54-4808-8978-538f8e869d0e
+                    propertyElements:
+                      numberOfRooms: 5.5
+                      numberOfFamilyBathrooms: 0
+                      numberOfBathWC: 2
+                      numberOfGuestWC: 1
+                      numberOfExternalParking: 0
+                      numberOfSeparateGarages: 0
+                      numberOfExternalSeparateGarages: 0
+                      numberOfAttachedGarages: 1
+                      numberOfUndergroundCarParks: 2
+                    propertyFlatInformation:
+                      numberOfFlats: 9
+                      numberOfFloors: 4
+                      stateApartmentType: medium-good
+                      floor: 0
+                      balconyOrTerraceArea: 20
+                      livingSpace:
+                        livingSpaceInSqm: 120
+                        measurementStandard: nla
+                      multistorey: true
+                      otherFeatures:
+                        - coowned_outdoor_pool
+                        - elevator_in_stairwell
+                      quote: 120
+                      apartmentType: garden_flat
+                      buildingType: multiple_family_house
+                      locationInTheBuildingRating: good
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -745,6 +1860,18 @@ paths:
                   format: uuid
                   description: UUID v4 of the applicant (existing applicant within the current application).
                   example: 576f8de3-6b30-4882-a7af-da2132a456cf
+            examples:
+              AddApplicationDocument:
+                summary: Add a document for a specific application
+                x-usecase: Manage a mortgage application
+                x-req: examples/ManageApplication-3_addApplicationDocument_AddApplicationDocument_req
+                value:
+                  documentType: salary_statement
+                  fileContent: JVBERi0xLjQKJcfs...
+                  name: salary_statement_maria_meier_2026_04
+                  type: application/pdf
+                  size: 184231
+                  applicantId: 576f8de3-6b30-4882-a7af-da2132a456cf
       responses:
         '201':
           $ref: '#/components/responses/standard201'
@@ -843,6 +1970,14 @@ paths:
                       - rejected
                       - pending
                     example: pending
+              examples:
+                ApplicationStatus:
+                  summary: Get the current status of an application
+                  x-usecase: Manage a mortgage application
+                  x-req: examples/ManageApplication-1_getApplicationStatus_ApplicationStatus_req
+                  value:
+                    status: pending
+                    detail: Waiting for salary statement and pension fund confirmation.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -878,6 +2013,97 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/FinancingRequest'
+            examples:
+              NewMortgageFinancingRequest:
+                summary: Place a financing request for a new mortgage application
+                x-usecase: Get offers for new mortgage applications
+                x-req: examples/Offers-1_addApplicationFinancingRequest_NewMortgageFinancingRequest_req
+                value:
+                  applicationId: 1f8d61e8-50c4-4db2-8715-0c7f5dfc8f01
+                  amount:
+                    currency: CHF
+                    content: '885000'
+                  requestOfferType: binding
+                  publicCertDate: '2026-08-15'
+                  tranches:
+                    - trancheId: 216f5f85-1a31-4f13-afbb-ec02fb3e4d01
+                      productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                      payOutDate: '2026-09-30'
+                      amount:
+                        currency: CHF
+                        content: '400000'
+                    - trancheId: 30bd7266-5fd3-4219-a831-beb6360b02ae
+                      productId: f98a7426-6ca4-451b-9c26-3efb46be042e
+                      payOutDate: '2026-09-30'
+                      amount:
+                        currency: CHF
+                        content: '485000'
+                  usedAssets:
+                    - assetType: cash
+                      amount:
+                        currency: CHF
+                        content: '140000'
+                      usageType: withdraw
+                      applicantId: 576f8de3-6b30-4882-a7af-da2132a456cf
+                    - assetType: third_pillar
+                      amount:
+                        currency: CHF
+                        content: '60000'
+                      usageType: withdraw
+                      applicantId: 576f8de3-6b30-4882-a7af-da2132a456cf
+                    - assetType: pension_fund
+                      amount:
+                        currency: CHF
+                        content: '95000'
+                      usageType: pledged
+                      applicantId: 321d8ab3-6b30-4882-a7af-da2132a123ab
+              ReplacementFinancingRequest:
+                summary: Place a financing request for a replacement application
+                x-usecase: Transfer Mortgage Bank-to-Bank
+                x-req: examples/TransferMortgage-2_addApplicationFinancingRequest_ReplacementFinancingRequest_req
+                value:
+                  applicationId: 6f88656f-57f3-4a1a-9648-8718f92fb1e2
+                  amount:
+                    currency: CHF
+                    content: '780000'
+                  requestOfferType: binding
+                  tranches:
+                    - trancheId: c12fbf5d-d342-49e2-8122-0fed0e1b4262
+                      productId: f98a7426-6ca4-451b-9c26-3efb46be042e
+                      payOutDate: '2026-06-30'
+                      amount:
+                        currency: CHF
+                        content: '780000'
+                  usedAssets:
+                    - assetType: third_pillar_fund_3a
+                      amount:
+                        currency: CHF
+                        content: '85000'
+                      usageType: pledged
+                      applicantId: 576f8de3-6b30-4882-a7af-da2132a456cf
+              TPPFinancingRequest:
+                summary: Place a financing request through a TPP platform
+                x-usecase: Transfer via TPP Platform
+                x-req: examples/TransferMortgageTPP-2_addApplicationFinancingRequest_TPPFinancingRequest_req
+                value:
+                  applicationId: 7650e0c9-8508-4896-94de-65fd8e85f92a
+                  amount:
+                    currency: CHF
+                    content: '690000'
+                  requestOfferType: indicative
+                  tranches:
+                    - trancheId: f18b1ed3-750e-421e-a89b-60d3c0c7d90f
+                      productId: c1029198-43d3-46c8-8d35-912d44ec2713
+                      payOutDate: '2026-10-31'
+                      amount:
+                        currency: CHF
+                        content: '300000'
+                    - trancheId: f3626ac3-0494-4e53-9c97-6ea3b11057fd
+                      productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                      payOutDate: '2026-10-31'
+                      amount:
+                        currency: CHF
+                        content: '390000'
       responses:
         '201':
           $ref: '#/components/responses/standard201'
@@ -1023,6 +2249,75 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Offer'
+              examples:
+                ListBindingOffers:
+                  summary: List binding offers for a financing request
+                  x-usecase: Get offers for new mortgage applications
+                  x-req: examples/Offers-2_listApplicationFinancingRequestOffers_ListBindingOffers_req
+                  value:
+                    offerList:
+                      - offerId: 0fdc4dc8-7b85-42d4-8fd6-6e15c4170a7a
+                        financingRequestId: 8c23ac06-3123-4f09-a668-83c52e8c7a77
+                        totalAmount:
+                          currency: CHF
+                          content: '885000'
+                        validTo: '2026-07-15'
+                        offerType: binding
+                        offerItems:
+                          - offerItemId: 89eb0b42-878a-46c4-a113-73cf9b60b5b1
+                            trancheId: 216f5f85-1a31-4f13-afbb-ec02fb3e4d01
+                            product:
+                              productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                              interestRateType: fixed
+                              names:
+                                - language: de
+                                  description: Festhypothek 5 Jahre
+                                - language: en
+                                  description: Fixed-rate mortgage 5 years
+                              productVariations:
+                                - duration: 5
+                            conditions:
+                              - conditionId: 52b0d93a-0c02-4981-a6fa-5d35dc9f1d55
+                                productIdRef: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                                duration: 5
+                                maturityDate: '2031-06-30'
+                                amortization: 12000
+                                amountRange:
+                                  minimumAmount:
+                                    currency: CHF
+                                    content: '100000'
+                                  maximumAmount:
+                                    currency: CHF
+                                    content: '2000000'
+                                interest:
+                                  interestRate: '1.82'
+                          - offerItemId: 7c47d76f-e463-4a2f-b2eb-f9c9ad7b5b66
+                            trancheId: 30bd7266-5fd3-4219-a831-beb6360b02ae
+                            product:
+                              productId: f98a7426-6ca4-451b-9c26-3efb46be042e
+                              interestRateType: fixed
+                              names:
+                                - language: de
+                                  description: Festhypothek 10 Jahre
+                                - language: en
+                                  description: Fixed-rate mortgage 10 years
+                              productVariations:
+                                - duration: 10
+                            conditions:
+                              - conditionId: 907a913c-b4d5-43d7-b0a3-15ecdfc73dd2
+                                productIdRef: f98a7426-6ca4-451b-9c26-3efb46be042e
+                                duration: 10
+                                maturityDate: '2036-06-30'
+                                amortization: 10000
+                                amountRange:
+                                  minimumAmount:
+                                    currency: CHF
+                                    content: '100000'
+                                  maximumAmount:
+                                    currency: CHF
+                                    content: '2000000'
+                                interest:
+                                  interestRate: '2.05'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1066,6 +2361,143 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
+              examples:
+                NewMortgageOffer:
+                  summary: Get the details of a specific offer
+                  x-usecase: Get offers for new mortgage applications
+                  x-req: examples/Offers-3_getApplicationFinancingRequestOffer_NewMortgageOffer_req
+                  value:
+                    offer:
+                      offerId: 0fdc4dc8-7b85-42d4-8fd6-6e15c4170a7a
+                      financingRequestId: 8c23ac06-3123-4f09-a668-83c52e8c7a77
+                      totalAmount:
+                        currency: CHF
+                        content: '885000'
+                      validTo: '2026-07-15'
+                      offerType: binding
+                      offerItems:
+                        - offerItemId: 89eb0b42-878a-46c4-a113-73cf9b60b5b1
+                          trancheId: 216f5f85-1a31-4f13-afbb-ec02fb3e4d01
+                          product:
+                            productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                            interestRateType: fixed
+                            names:
+                              - language: de
+                                description: Festhypothek 5 Jahre
+                              - language: en
+                                description: Fixed-rate mortgage 5 years
+                            productVariations:
+                              - duration: 5
+                          conditions:
+                            - conditionId: 52b0d93a-0c02-4981-a6fa-5d35dc9f1d55
+                              productIdRef: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                              duration: 5
+                              maturityDate: '2031-06-30'
+                              amortization: 12000
+                              amountRange:
+                                minimumAmount:
+                                  currency: CHF
+                                  content: '100000'
+                                maximumAmount:
+                                  currency: CHF
+                                  content: '2000000'
+                              interest:
+                                interestRate: '1.82'
+                        - offerItemId: 7c47d76f-e463-4a2f-b2eb-f9c9ad7b5b66
+                          trancheId: 30bd7266-5fd3-4219-a831-beb6360b02ae
+                          product:
+                            productId: f98a7426-6ca4-451b-9c26-3efb46be042e
+                            interestRateType: fixed
+                            names:
+                              - language: de
+                                description: Festhypothek 10 Jahre
+                              - language: en
+                                description: Fixed-rate mortgage 10 years
+                            productVariations:
+                              - duration: 10
+                          conditions:
+                            - conditionId: 907a913c-b4d5-43d7-b0a3-15ecdfc73dd2
+                              productIdRef: f98a7426-6ca4-451b-9c26-3efb46be042e
+                              duration: 10
+                              maturityDate: '2036-06-30'
+                              amortization: 10000
+                              amountRange:
+                                minimumAmount:
+                                  currency: CHF
+                                  content: '100000'
+                                maximumAmount:
+                                  currency: CHF
+                                  content: '2000000'
+                              interest:
+                                interestRate: '2.05'
+                TPPOffer:
+                  summary: Get the offer returned to the TPP platform
+                  x-usecase: Transfer via TPP Platform
+                  x-req: examples/TransferMortgageTPP-3_getApplicationFinancingRequestOffer_TPPOffer_req
+                  value:
+                    offer:
+                      offerId: b8ed4d9e-c90d-4cc5-8b92-7d6f5d2b9431
+                      financingRequestId: 0c0bb5c9-9ec2-4205-841e-85a91c14eb71
+                      totalAmount:
+                        currency: CHF
+                        content: '690000'
+                      validTo: '2026-07-15'
+                      offerType: indicative
+                      offerItems:
+                        - offerItemId: 89eb0b42-878a-46c4-a113-73cf9b60b5b1
+                          trancheId: 216f5f85-1a31-4f13-afbb-ec02fb3e4d01
+                          product:
+                            productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                            interestRateType: fixed
+                            names:
+                              - language: de
+                                description: Festhypothek 5 Jahre
+                              - language: en
+                                description: Fixed-rate mortgage 5 years
+                            productVariations:
+                              - duration: 5
+                          conditions:
+                            - conditionId: 52b0d93a-0c02-4981-a6fa-5d35dc9f1d55
+                              productIdRef: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                              duration: 5
+                              maturityDate: '2031-06-30'
+                              amortization: 12000
+                              amountRange:
+                                minimumAmount:
+                                  currency: CHF
+                                  content: '100000'
+                                maximumAmount:
+                                  currency: CHF
+                                  content: '2000000'
+                              interest:
+                                interestRate: '1.82'
+                        - offerItemId: 7c47d76f-e463-4a2f-b2eb-f9c9ad7b5b66
+                          trancheId: 30bd7266-5fd3-4219-a831-beb6360b02ae
+                          product:
+                            productId: f98a7426-6ca4-451b-9c26-3efb46be042e
+                            interestRateType: fixed
+                            names:
+                              - language: de
+                                description: Festhypothek 10 Jahre
+                              - language: en
+                                description: Fixed-rate mortgage 10 years
+                            productVariations:
+                              - duration: 10
+                          conditions:
+                            - conditionId: 907a913c-b4d5-43d7-b0a3-15ecdfc73dd2
+                              productIdRef: f98a7426-6ca4-451b-9c26-3efb46be042e
+                              duration: 10
+                              maturityDate: '2036-06-30'
+                              amortization: 10000
+                              amountRange:
+                                minimumAmount:
+                                  currency: CHF
+                                  content: '100000'
+                                maximumAmount:
+                                  currency: CHF
+                                  content: '2000000'
+                              interest:
+                                interestRate: '2.05'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1157,6 +2589,18 @@ paths:
                     type: string
                     format: uuid
                     example: 550e8400-e29b-41d4-a716-446655440000
+              examples:
+                AdditionalInformationRequired:
+                  summary: List additional information required due to risk change
+                  x-usecase: Prolongation risk change
+                  x-req: examples/ProlongationChange-1_listApplicationFinancingRequestOfferRequiredInformation_AdditionalInformationRequired_req
+                  value:
+                    offerId: 32f4a0c0-63a2-4ff5-94e2-6226f987c998
+                    documents:
+                      - salary_statement
+                      - tax_statement
+                      - pension_fund_statement
+                      - property_valuation
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1193,6 +2637,39 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Order'
+            examples:
+              NewMortgageOrder:
+                summary: Place a new order for a new mortgage
+                x-usecase: Place and manage mortgage orders
+                x-req: examples/Orders-1_addOrder_NewMortgageOrder_req
+                value:
+                  offerId: 0fdc4dc8-7b85-42d4-8fd6-6e15c4170a7a
+                  applicationId: 1f8d61e8-50c4-4db2-8715-0c7f5dfc8f01
+                  remark: Customer accepted the binding offer after all documents were verified.
+              ProlongationOrder:
+                summary: Place a prolongation order without material risk change
+                x-usecase: Prolongation no risk change
+                x-req: examples/ProlongationNoChange-1_addOrder_ProlongationOrder_req
+                value:
+                  offerId: 32f4a0c0-63a2-4ff5-94e2-6226f987c998
+                  mortgageId: 6a41f44e-04de-40c6-88b7-1343cf83c51a
+                  remark: Customer selected the five-year fixed-rate prolongation offer without material risk changes.
+              ReplacementOrder:
+                summary: Place an order for a replacement mortgage
+                x-usecase: Transfer Mortgage Bank-to-Bank
+                x-req: examples/TransferMortgage-3_addOrder_ReplacementOrder_req
+                value:
+                  offerId: 7d47c0f6-1d16-428e-b2d3-6e5d90ab13e8
+                  applicationId: 6f88656f-57f3-4a1a-9648-8718f92fb1e2
+                  remark: Order placed for full replacement of mortgage currently held at Alte Kantonalbank.
+              TPPOrder:
+                summary: Place an order through a TPP platform
+                x-usecase: Transfer via TPP Platform
+                x-req: examples/TransferMortgageTPP-4_addOrder_TPPOrder_req
+                value:
+                  offerId: b8ed4d9e-c90d-4cc5-8b92-7d6f5d2b9431
+                  applicationId: 7650e0c9-8508-4896-94de-65fd8e85f92a
+                  remark: TPP confirms customer decision and requested completion date 2026-10-31.
       responses:
         '201':
           $ref: '#/components/responses/standard201'
@@ -1237,6 +2714,17 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Order'
+              examples:
+                OrderDetails:
+                  summary: Get the details of a specific placed order
+                  x-usecase: Place and manage mortgage orders
+                  x-req: examples/Orders-2_getOrder_OrderDetails_req
+                  value:
+                    offer:
+                      orderId: 46764333-6e9b-44c3-a65d-38d3e527d604
+                      offerId: 0fdc4dc8-7b85-42d4-8fd6-6e15c4170a7a
+                      applicationId: 1f8d61e8-50c4-4db2-8715-0c7f5dfc8f01
+                      remark: Customer accepted the binding offer after all documents were verified.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1288,6 +2776,28 @@ paths:
                       - rejected
                       - pending
                     example: pending
+              examples:
+                OrderStatus:
+                  summary: Get the current status of an order
+                  x-usecase: Place and manage mortgage orders
+                  x-req: examples/Orders-3_getOrderStatus_OrderStatus_req
+                  value:
+                    status: accepted
+                    detail: Order accepted and mortgage contract generation started.
+                ProlongationAccepted:
+                  summary: Get accepted prolongation order status
+                  x-usecase: Prolongation no risk change
+                  x-req: examples/ProlongationNoChange-2_getOrderStatus_ProlongationAccepted_req
+                  value:
+                    status: accepted
+                    detail: Expiring tranche replaced by the selected fixed-rate mortgage.
+                ProlongationPendingRiskChange:
+                  summary: Get pending prolongation order status due to risk change
+                  x-usecase: Prolongation risk change
+                  x-req: examples/ProlongationChange-2_getOrderStatus_ProlongationPendingRiskChange_req
+                  value:
+                    status: pending
+                    detail: Additional affordability and loan-to-value checks are required before prolongation can be completed.
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1379,6 +2889,75 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Offer'
+              examples:
+                ListExpiringMortgageOffers:
+                  summary: List current offers for an expiring mortgage
+                  x-usecase: Show current offers for my expiring mortgages
+                  x-req: examples/ShowOffers-1_listOffers_ListExpiringMortgageOffers_req
+                  value:
+                    offerList:
+                      - offerId: 32f4a0c0-63a2-4ff5-94e2-6226f987c998
+                        financingRequestId: 11111111-2222-4333-8444-555555555555
+                        totalAmount:
+                          currency: CHF
+                          content: '520000'
+                        validTo: '2026-07-15'
+                        offerType: binding
+                        offerItems:
+                          - offerItemId: 89eb0b42-878a-46c4-a113-73cf9b60b5b1
+                            trancheId: 216f5f85-1a31-4f13-afbb-ec02fb3e4d01
+                            product:
+                              productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                              interestRateType: fixed
+                              names:
+                                - language: de
+                                  description: Festhypothek 5 Jahre
+                                - language: en
+                                  description: Fixed-rate mortgage 5 years
+                              productVariations:
+                                - duration: 5
+                            conditions:
+                              - conditionId: 52b0d93a-0c02-4981-a6fa-5d35dc9f1d55
+                                productIdRef: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                                duration: 5
+                                maturityDate: '2031-06-30'
+                                amortization: 12000
+                                amountRange:
+                                  minimumAmount:
+                                    currency: CHF
+                                    content: '100000'
+                                  maximumAmount:
+                                    currency: CHF
+                                    content: '2000000'
+                                interest:
+                                  interestRate: '1.82'
+                          - offerItemId: 7c47d76f-e463-4a2f-b2eb-f9c9ad7b5b66
+                            trancheId: 30bd7266-5fd3-4219-a831-beb6360b02ae
+                            product:
+                              productId: f98a7426-6ca4-451b-9c26-3efb46be042e
+                              interestRateType: fixed
+                              names:
+                                - language: de
+                                  description: Festhypothek 10 Jahre
+                                - language: en
+                                  description: Fixed-rate mortgage 10 years
+                              productVariations:
+                                - duration: 10
+                            conditions:
+                              - conditionId: 907a913c-b4d5-43d7-b0a3-15ecdfc73dd2
+                                productIdRef: f98a7426-6ca4-451b-9c26-3efb46be042e
+                                duration: 10
+                                maturityDate: '2036-06-30'
+                                amortization: 10000
+                                amountRange:
+                                  minimumAmount:
+                                    currency: CHF
+                                    content: '100000'
+                                  maximumAmount:
+                                    currency: CHF
+                                    content: '2000000'
+                                interest:
+                                  interestRate: '2.05'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1421,6 +3000,75 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
+              examples:
+                ExpiringMortgageOffer:
+                  summary: Get a specific prolongation offer
+                  x-usecase: Show current offers for my expiring mortgages
+                  x-req: examples/ShowOffers-2_getOffer_ExpiringMortgageOffer_req
+                  value:
+                    offer:
+                      offerId: 32f4a0c0-63a2-4ff5-94e2-6226f987c998
+                      financingRequestId: 11111111-2222-4333-8444-555555555555
+                      totalAmount:
+                        currency: CHF
+                        content: '520000'
+                      validTo: '2026-07-15'
+                      offerType: binding
+                      offerItems:
+                        - offerItemId: 89eb0b42-878a-46c4-a113-73cf9b60b5b1
+                          trancheId: 216f5f85-1a31-4f13-afbb-ec02fb3e4d01
+                          product:
+                            productId: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                            interestRateType: fixed
+                            names:
+                              - language: de
+                                description: Festhypothek 5 Jahre
+                              - language: en
+                                description: Fixed-rate mortgage 5 years
+                            productVariations:
+                              - duration: 5
+                          conditions:
+                            - conditionId: 52b0d93a-0c02-4981-a6fa-5d35dc9f1d55
+                              productIdRef: a14f3e61-1d45-4d80-8f87-bc4c6e8b61f2
+                              duration: 5
+                              maturityDate: '2031-06-30'
+                              amortization: 12000
+                              amountRange:
+                                minimumAmount:
+                                  currency: CHF
+                                  content: '100000'
+                                maximumAmount:
+                                  currency: CHF
+                                  content: '2000000'
+                              interest:
+                                interestRate: '1.82'
+                        - offerItemId: 7c47d76f-e463-4a2f-b2eb-f9c9ad7b5b66
+                          trancheId: 30bd7266-5fd3-4219-a831-beb6360b02ae
+                          product:
+                            productId: f98a7426-6ca4-451b-9c26-3efb46be042e
+                            interestRateType: fixed
+                            names:
+                              - language: de
+                                description: Festhypothek 10 Jahre
+                              - language: en
+                                description: Fixed-rate mortgage 10 years
+                            productVariations:
+                              - duration: 10
+                          conditions:
+                            - conditionId: 907a913c-b4d5-43d7-b0a3-15ecdfc73dd2
+                              productIdRef: f98a7426-6ca4-451b-9c26-3efb46be042e
+                              duration: 10
+                              maturityDate: '2036-06-30'
+                              amortization: 10000
+                              amountRange:
+                                minimumAmount:
+                                  currency: CHF
+                                  content: '100000'
+                                maximumAmount:
+                                  currency: CHF
+                                  content: '2000000'
+                              interest:
+                                interestRate: '2.05'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
