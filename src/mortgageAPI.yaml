@@ -372,8 +372,8 @@ paths:
               PlaceNewMortgageApplication:
                 summary: Place a new mortgage application
                 x-usecase: Place a new mortgage application
-                x-req: examples/NewApplication-1_createApplication_place_new_mortgage_application_req
-                externalValue: ./examples/NewApplication-1_createApplication_place_new_mortgage_application_req.json
+                x-req: examples/NewApplication-1_createApplication_PlaceNewMortgageApplication_req
+                externalValue: ./examples/NewApplication-1_createApplication_PlaceNewMortgageApplication_req.json
               ReplacementApplication:
                 summary: Place a replacement application for a bank-to-bank transfer
                 x-usecase: Transfer Mortgage Bank-to-Bank
