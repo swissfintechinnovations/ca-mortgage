@@ -6,14 +6,7 @@ required:
   - productId
 properties:
   interestRateType:
-    type: string
-    description: type of interest rate.
-    example: libor
-    enum:
-      - variable
-      - libor
-      - saron
-      - fixed
+    $ref: ./generic/InterestRateType.yaml
   names:
     type: array
     description: name of mortgage product.

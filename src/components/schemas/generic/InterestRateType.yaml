@@ -1,0 +1,9 @@
+title: Interest rate type
+description: The type of interest rate.
+type: string
+enum:
+  - variable
+  - libor
+  - saron
+  - fixed
+example: libor

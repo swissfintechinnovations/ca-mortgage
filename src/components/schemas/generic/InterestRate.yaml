@@ -1,0 +1,8 @@
+title: Interest rate
+description: |
+  Interest rate expressed as a decimal fraction. 2.45% is sent as 0.0245.
+type: number
+format: double
+minimum: 0
+maximum: 1
+example: 0.5

@@ -1,0 +1,6 @@
+title: Duration
+description: The duration in years.
+type: integer
+minimum: 0
+maximum: 25
+example: 5

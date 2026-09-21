@@ -1,0 +1,9 @@
+title: SARON period
+description: The SARON period.
+type: string
+enum:
+  - 1m
+  - 3m
+  - 6m
+  - 12m
+example: 3m
