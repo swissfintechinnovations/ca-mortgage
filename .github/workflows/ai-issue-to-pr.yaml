@@ -299,6 +299,9 @@ jobs:
           fi
 
           RESULT=$(jq -c '[.. | objects | select(.type? == "result")] | last // empty' "$EXECUTION_FILE")
+          if [[ "$(printf '%s' "$RESULT" | jq -r '.is_error // false')" == "true" ]]; then
+            echo "::error::Claude run failed: $(printf '%s' "$RESULT" | jq -r '.result // "no message"')"
+          fi
           if [[ -z "$RESULT" ]]; then
             echo "No result entry found in the execution log."
             exit 0
