@@ -12,7 +12,7 @@ name: 'SFTI Issue to PR (AI agent workflow)'
 # Commits are authored by the creator of the issue and carry @sfti-agent as co-author,
 # which makes AI generated changes recognisable.
 #
-# Required repository secret: ANTHROPIC_FEDERATION_RULE_ID_CA_<REPO>, ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID and ANTHROPIC_WORKSPACE_ID
+# Required repository variables: ANTHROPIC_FEDERATION_RULE_ID_CA_<REPO>, ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID and ANTHROPIC_WORKSPACE_ID
 # Optional repository variable: AI_TRIGGER_USERS (comma separated GitHub logins)
 
 on:
@@ -188,7 +188,7 @@ jobs:
         id: claude
         uses: anthropics/claude-code-action@v1
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # allows the agent to use the gh CLI, Do NOT use personal access tokens, due to prompt injection leaks 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # allows the agent to use the gh CLI, Do NOT use personal access tokens, due to prompt injection leaks
         with:
           anthropic_federation_rule_id: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID_CA_MORTGAGE }}
           anthropic_organization_id: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
