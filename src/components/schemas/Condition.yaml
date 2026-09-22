@@ -21,11 +21,7 @@ properties:
     format: uuid
     example: ef737eb0-c0a7-4f44-bdeb-32ba9bd99327
   duration:
-    type: integer
-    description: The duration in years.
-    minimum: 0
-    maximum: 25
-    example: 5
+    $ref: ./generic/Duration.yaml
   interest:
     $ref: ./Interest.yaml
   maturityDate:

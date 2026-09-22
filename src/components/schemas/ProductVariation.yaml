@@ -2,24 +2,9 @@ description: Product variation details.
 type: object
 properties:
   duration:
-    type: integer
-    description: The duration in years.
-    minimum: 0
-    maximum: 25
-    example: 5
+    $ref: ./generic/Duration.yaml
   rate:
-    type: number
-    format: double
+    $ref: ./generic/InterestRate.yaml
     description: The interest rate.
-    minimum: 0
-    maximum: 1
-    example: 0.5
   saronperiod:
-    type: string
-    description: The saron period.
-    example: 3m
-    enum:
-      - 1m
-      - 3m
-      - 6m
-      - 12m
+    $ref: ./generic/SaronPeriod.yaml
