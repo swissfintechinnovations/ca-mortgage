@@ -1,0 +1,11 @@
+operationId: deleteApplicationDocument
+description: |
+  Delete the selected document of the application.
+  The `documentId` of any entry in the `documentList` array can be used as the `documentId` path parameter.
+  The `applicationId` is taken from the path of the request.
+  The expression below addresses the first entry; it applies to every entry alike.
+
+  Example: `DELETE /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/documents/7f648f12-fd45-4930-6543-456ef5671c37`
+parameters:
+  applicationId: $request.path.applicationId
+  documentId: $response.body#/documentList/0/documentId

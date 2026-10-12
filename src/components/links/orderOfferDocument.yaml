@@ -1,0 +1,8 @@
+operationId: getOfferDocument
+description: |
+  Document of the selected offer.
+  The `offer.offerId` returned in the response can be used as the `offerId` path parameter.
+
+  Example: `GET /mortgages/offers/4bf92636-14a0-4511-98e2-acfde576e644/document`
+parameters:
+  offerId: $response.body#/offer/offerId

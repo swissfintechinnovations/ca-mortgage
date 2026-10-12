@@ -1,0 +1,8 @@
+operationId: addApplicationFinancingRequest
+description: |
+  Place a new financing request for the application.
+  The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+  Example: `POST /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests`
+parameters:
+  applicationId: $response.body#/application/applicationId

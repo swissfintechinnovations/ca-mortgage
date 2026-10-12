@@ -1,0 +1,9 @@
+operationId: getMortgageCase
+description: |
+  Details of the selected mortgage case.
+  The `caseId` of any entry in the `caseList` array can be used as the `caseId` path parameter.
+  The expression below addresses the first entry; it applies to every entry alike.
+
+  Example: `GET /mortgage-cases/4bf92636-14a0-4511-98e2-acfde576e644`
+parameters:
+  caseId: $response.body#/caseList/0/caseId

@@ -1,0 +1,8 @@
+operationId: deleteApplication
+description: |
+  Cancel and remove the application.
+  The `id` returned in the response can be used as the `applicationId` path parameter.
+
+  Example: `DELETE /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+parameters:
+  applicationId: $response.body#/id

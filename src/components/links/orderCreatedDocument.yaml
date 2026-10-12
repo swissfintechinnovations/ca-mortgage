@@ -1,0 +1,8 @@
+operationId: getOrderDocument
+description: |
+  Document of the order.
+  The `id` returned in the response can be used as the `orderId` path parameter.
+
+  Example: `GET /mortgages/orders/4bf92636-14a0-4511-98e2-acfde576e644/document`
+parameters:
+  orderId: $response.body#/id

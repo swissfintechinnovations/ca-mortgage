@@ -1,0 +1,13 @@
+operationId: listApplicationFinancingRequestOfferRequiredInformation
+description: |
+  Documents and information required by the FI to process the selected offer.
+  The `offerId` of any entry in the `offerList` array can be used as the `offerId` path parameter.
+  The `applicationId` and `financingRequestId` are taken from the path of the request.
+  The expression below addresses the first entry; it applies to every entry alike.
+
+  Example: `GET`
+  `/mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644/offers/4bf92636-14a0-4511-98e2-acfde576e644/required-information`
+parameters:
+  applicationId: $request.path.applicationId
+  financingRequestId: $request.path.financingRequestId
+  offerId: $response.body#/offerList/0/offerId

@@ -1,0 +1,10 @@
+operationId: getApplicationFinancingRequest
+description: |
+  Details of the financing request.
+  The `offer.financingRequestId` returned in the response can be used as the `financingRequestId` path parameter.
+  The `applicationId` is taken from the path of the request.
+
+  Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644`
+parameters:
+  applicationId: $request.path.applicationId
+  financingRequestId: $response.body#/offer/financingRequestId

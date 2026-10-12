@@ -1,0 +1,8 @@
+operationId: getApplicationDocuments
+description: |
+  Documents submitted for the application.
+  The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+  Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/documents`
+parameters:
+  applicationId: $response.body#/application/applicationId

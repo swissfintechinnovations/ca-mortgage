@@ -1,0 +1,9 @@
+operationId: listProductConditions
+description: |
+  General conditions of the selected mortgage product.
+  The `productId` of any entry in the `productList` array can be used as the `productId` path parameter.
+  The expression below addresses the first entry; it applies to every entry alike.
+
+  Example: `GET /mortgages/products/4bf92636-14a0-4511-98e2-acfde576e644/conditions`
+parameters:
+  productId: $response.body#/productList/0/productId

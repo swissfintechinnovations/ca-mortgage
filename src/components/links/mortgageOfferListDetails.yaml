@@ -1,0 +1,11 @@
+operationId: getOffer
+description: |
+  Details of the selected prolongation offer.
+  The `offerId` of any entry in the `offerList` array can be used as the `offerId` path parameter.
+  The `mortgageId` is taken from the path of the request.
+  The expression below addresses the first entry; it applies to every entry alike.
+
+  Example: `GET /mortgages/4bf92636-14a0-4511-98e2-acfde576e644/offers/4bf92636-14a0-4511-98e2-acfde576e644`
+parameters:
+  mortgageId: $request.path.mortgageId
+  offerId: $response.body#/offerList/0/offerId

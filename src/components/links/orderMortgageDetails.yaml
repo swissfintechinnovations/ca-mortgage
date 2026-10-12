@@ -1,0 +1,9 @@
+operationId: getMortgage
+description: |
+  Details of the selected mortgage.
+  The `offer.mortgageId` returned in the response can be used as the `mortgageId` path parameter.
+  Only applicable if the order refers to an existing mortgage (prolongation).
+
+  Example: `GET /mortgages/4bf92636-14a0-4511-98e2-acfde576e644`
+parameters:
+  mortgageId: $response.body#/offer/mortgageId

@@ -1,0 +1,9 @@
+operationId: getApplication
+description: |
+  Details of the application.
+  The `offer.applicationId` returned in the response can be used as the `applicationId` path parameter.
+  Only applicable if the order refers to an application (new mortgage).
+
+  Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+parameters:
+  applicationId: $response.body#/offer/applicationId

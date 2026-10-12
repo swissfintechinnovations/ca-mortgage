@@ -1,0 +1,9 @@
+operationId: listOffers
+description: |
+  Offers for the prolongation of the selected mortgage.
+  The `mortgageId` of any entry in the `mortgageList` array can be used as the `mortgageId` path parameter.
+  The expression below addresses the first entry; it applies to every entry alike.
+
+  Example: `GET /mortgages/4bf92636-14a0-4511-98e2-acfde576e644/offers`
+parameters:
+  mortgageId: $response.body#/mortgageList/0/mortgageId

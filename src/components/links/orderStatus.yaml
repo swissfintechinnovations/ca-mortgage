@@ -1,0 +1,8 @@
+operationId: getOrderStatus
+description: |
+  Current status of the order.
+  The `offer.orderId` returned in the response can be used as the `orderId` path parameter.
+
+  Example: `GET /mortgages/orders/4bf92636-14a0-4511-98e2-acfde576e644/status`
+parameters:
+  orderId: $response.body#/offer/orderId

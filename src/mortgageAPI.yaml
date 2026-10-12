@@ -72,6 +72,11 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/MortgageCase.yaml
+          links:
+            caseDetails:
+              $ref: ./components/links/caseListDetails.yaml
+            applicationDetails:
+              $ref: ./components/links/caseListApplicationDetails.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -113,6 +118,9 @@ paths:
                 properties:
                   Case:
                     $ref: ./components/schemas/MortgageCase.yaml
+          links:
+            applicationDetails:
+              $ref: ./components/links/caseApplicationDetails.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -162,6 +170,13 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/Mortgage.yaml
+          links:
+            mortgageDetails:
+              $ref: ./components/links/mortgageListDetails.yaml
+            mortgageOffers:
+              $ref: ./components/links/mortgageListOffers.yaml
+            productConditions:
+              $ref: ./components/links/mortgageListProductConditions.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -203,6 +218,11 @@ paths:
                 properties:
                   Mortgage:
                     $ref: ./components/schemas/Mortgage.yaml
+          links:
+            mortgageOffers:
+              $ref: ./components/links/mortgageOffers.yaml
+            productConditions:
+              $ref: ./components/links/mortgageProductConditions.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -253,6 +273,9 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/Product.yaml
+          links:
+            productConditions:
+              $ref: ./components/links/productListConditions.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -340,7 +363,44 @@ paths:
               $ref: ./components/schemas/Application.yaml
       responses:
         '201':
-          $ref: ./components/responses/standard201.yaml
+          description: created.
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/CommonResourceCreatedResponse.yaml
+          headers:
+            location:
+              schema:
+                type: string
+                format: uri
+                description: |
+                  In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
+                  retrieve a representation of the new product.
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+          links:
+            applicationDetails:
+              $ref: ./components/links/applicationCreatedDetails.yaml
+            applicationUpdate:
+              $ref: ./components/links/applicationCreatedUpdate.yaml
+            applicationDelete:
+              $ref: ./components/links/applicationCreatedDelete.yaml
+            applicationStatus:
+              $ref: ./components/links/applicationCreatedStatus.yaml
+            applicationDocuments:
+              $ref: ./components/links/applicationCreatedDocuments.yaml
+            applicationDocumentAdd:
+              $ref: ./components/links/applicationCreatedDocumentAdd.yaml
+            applicationSwissrets:
+              $ref: ./components/links/applicationCreatedSwissrets.yaml
+            applicationSwissretsAdd:
+              $ref: ./components/links/applicationCreatedSwissretsAdd.yaml
+            applicationSwissretsUpdate:
+              $ref: ./components/links/applicationCreatedSwissretsUpdate.yaml
+            financingRequestAdd:
+              $ref: ./components/links/applicationCreatedFinancingRequestAdd.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -419,6 +479,25 @@ paths:
                 properties:
                   application:
                     $ref: ./components/schemas/Application.yaml
+          links:
+            applicationUpdate:
+              $ref: ./components/links/applicationUpdate.yaml
+            applicationDelete:
+              $ref: ./components/links/applicationDelete.yaml
+            applicationStatus:
+              $ref: ./components/links/applicationStatus.yaml
+            applicationDocuments:
+              $ref: ./components/links/applicationDocuments.yaml
+            applicationDocumentAdd:
+              $ref: ./components/links/applicationDocumentAdd.yaml
+            applicationSwissrets:
+              $ref: ./components/links/applicationSwissrets.yaml
+            applicationSwissretsAdd:
+              $ref: ./components/links/applicationSwissretsAdd.yaml
+            applicationSwissretsUpdate:
+              $ref: ./components/links/applicationSwissretsUpdate.yaml
+            financingRequestAdd:
+              $ref: ./components/links/applicationFinancingRequestAdd.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -678,6 +757,9 @@ paths:
             application/json:
               schema:
                 $ref: ./components/schemas/DocumentUpload.yaml
+          links:
+            documentDelete:
+              $ref: ./components/links/documentListDelete.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -747,7 +829,26 @@ paths:
                   example: 576f8de3-6b30-4882-a7af-da2132a456cf
       responses:
         '201':
-          $ref: ./components/responses/standard201.yaml
+          description: created.
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/CommonResourceCreatedResponse.yaml
+          headers:
+            location:
+              schema:
+                type: string
+                format: uri
+                description: |
+                  In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
+                  retrieve a representation of the new product.
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+          links:
+            documentDelete:
+              $ref: ./components/links/documentCreatedDelete.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -880,7 +981,30 @@ paths:
               $ref: ./components/schemas/FinancingRequest.yaml
       responses:
         '201':
-          $ref: ./components/responses/standard201.yaml
+          description: created.
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/CommonResourceCreatedResponse.yaml
+          headers:
+            location:
+              schema:
+                type: string
+                format: uri
+                description: |
+                  In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
+                  retrieve a representation of the new product.
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+          links:
+            financingRequestDetails:
+              $ref: ./components/links/financingRequestCreatedDetails.yaml
+            financingRequestRequiredInformation:
+              $ref: ./components/links/financingRequestCreatedRequiredInformation.yaml
+            financingRequestOffers:
+              $ref: ./components/links/financingRequestCreatedOffers.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -929,6 +1053,11 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/DocumentType.yaml
+          links:
+            financingRequestDetails:
+              $ref: ./components/links/requiredInformationFinancingRequestDetails.yaml
+            financingRequestOffers:
+              $ref: ./components/links/requiredInformationFinancingRequestOffers.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -979,6 +1108,13 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/FinancingRequest.yaml
+          links:
+            financingRequestRequiredInformation:
+              $ref: ./components/links/financingRequestListRequiredInformation.yaml
+            financingRequestOffers:
+              $ref: ./components/links/financingRequestListOffers.yaml
+            applicationDetails:
+              $ref: ./components/links/financingRequestListApplicationDetails.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1023,6 +1159,15 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/Offer.yaml
+          links:
+            offerDetails:
+              $ref: ./components/links/offerListDetails.yaml
+            offerRequiredInformation:
+              $ref: ./components/links/offerListRequiredInformation.yaml
+            offerDocument:
+              $ref: ./components/links/offerListDocument.yaml
+            financingRequestDetails:
+              $ref: ./components/links/offerListFinancingRequestDetails.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1066,6 +1211,13 @@ paths:
                 properties:
                   offer:
                     $ref: ./components/schemas/Offer.yaml
+          links:
+            offerRequiredInformation:
+              $ref: ./components/links/offerRequiredInformation.yaml
+            offerDocument:
+              $ref: ./components/links/offerDocument.yaml
+            financingRequestDetails:
+              $ref: ./components/links/offerFinancingRequestDetails.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1157,6 +1309,11 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/DocumentType.yaml
+          links:
+            offerDetails:
+              $ref: ./components/links/requiredInformationOfferDetails.yaml
+            offerDocument:
+              $ref: ./components/links/requiredInformationOfferDocument.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1195,7 +1352,30 @@ paths:
               $ref: ./components/schemas/Order.yaml
       responses:
         '201':
-          $ref: ./components/responses/standard201.yaml
+          description: created.
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/CommonResourceCreatedResponse.yaml
+          headers:
+            location:
+              schema:
+                type: string
+                format: uri
+                description: |
+                  In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
+                  retrieve a representation of the new product.
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+          links:
+            orderDetails:
+              $ref: ./components/links/orderCreatedDetails.yaml
+            orderStatus:
+              $ref: ./components/links/orderCreatedStatus.yaml
+            orderDocument:
+              $ref: ./components/links/orderCreatedDocument.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1237,6 +1417,19 @@ paths:
                 properties:
                   offer:
                     $ref: ./components/schemas/Order.yaml
+          links:
+            orderStatus:
+              $ref: ./components/links/orderStatus.yaml
+            orderDocument:
+              $ref: ./components/links/orderDocument.yaml
+            applicationDetails:
+              $ref: ./components/links/orderApplicationDetails.yaml
+            mortgageDetails:
+              $ref: ./components/links/orderMortgageDetails.yaml
+            mortgageOfferDetails:
+              $ref: ./components/links/orderMortgageOfferDetails.yaml
+            offerDocument:
+              $ref: ./components/links/orderOfferDocument.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1379,6 +1572,11 @@ paths:
                     type: array
                     items:
                       $ref: ./components/schemas/Offer.yaml
+          links:
+            mortgageOfferDetails:
+              $ref: ./components/links/mortgageOfferListDetails.yaml
+            offerDocument:
+              $ref: ./components/links/offerListDocument.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -1421,6 +1619,9 @@ paths:
                 properties:
                   offer:
                     $ref: ./components/schemas/Offer.yaml
+          links:
+            offerDocument:
+              $ref: ./components/links/offerDocument.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':

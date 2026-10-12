@@ -1,0 +1,11 @@
+operationId: listApplicationFinancingRequestOffers
+description: |
+  Binding offers for the financing request.
+  The `financingRequestId` of any entry in the `offerList` array can be used as the `financingRequestId` path parameter.
+  The `applicationId` is taken from the path of the request.
+  The expression below addresses the first entry; it applies to every entry alike.
+
+  Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644/offers`
+parameters:
+  applicationId: $request.path.applicationId
+  financingRequestId: $response.body#/offerList/0/financingRequestId
