@@ -72,6 +72,11 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/MortgageCase'
+          links:
+            caseDetails:
+              $ref: '#/components/links/caseListDetails'
+            applicationDetails:
+              $ref: '#/components/links/caseListApplicationDetails'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -113,6 +118,9 @@ paths:
                 properties:
                   Case:
                     $ref: '#/components/schemas/MortgageCase'
+          links:
+            applicationDetails:
+              $ref: '#/components/links/caseApplicationDetails'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -162,6 +170,13 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Mortgage'
+          links:
+            mortgageDetails:
+              $ref: '#/components/links/mortgageListDetails'
+            mortgageOffers:
+              $ref: '#/components/links/mortgageListOffers'
+            productConditions:
+              $ref: '#/components/links/mortgageListProductConditions'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -203,6 +218,11 @@ paths:
                 properties:
                   Mortgage:
                     $ref: '#/components/schemas/Mortgage'
+          links:
+            mortgageOffers:
+              $ref: '#/components/links/mortgageOffers'
+            productConditions:
+              $ref: '#/components/links/mortgageProductConditions'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -253,6 +273,9 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Product'
+          links:
+            productConditions:
+              $ref: '#/components/links/productListConditions'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -340,7 +363,44 @@ paths:
               $ref: '#/components/schemas/Application'
       responses:
         '201':
-          $ref: '#/components/responses/standard201'
+          description: created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResourceCreatedResponse'
+          headers:
+            location:
+              schema:
+                description: |
+                  In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
+                  retrieve a representation of the new product.
+                type: string
+                format: uri
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+          links:
+            applicationDetails:
+              $ref: '#/components/links/applicationCreatedDetails'
+            applicationUpdate:
+              $ref: '#/components/links/applicationCreatedUpdate'
+            applicationDelete:
+              $ref: '#/components/links/applicationCreatedDelete'
+            applicationStatus:
+              $ref: '#/components/links/applicationCreatedStatus'
+            applicationDocuments:
+              $ref: '#/components/links/applicationCreatedDocuments'
+            applicationDocumentAdd:
+              $ref: '#/components/links/applicationCreatedDocumentAdd'
+            applicationSwissrets:
+              $ref: '#/components/links/applicationCreatedSwissrets'
+            applicationSwissretsAdd:
+              $ref: '#/components/links/applicationCreatedSwissretsAdd'
+            applicationSwissretsUpdate:
+              $ref: '#/components/links/applicationCreatedSwissretsUpdate'
+            financingRequestAdd:
+              $ref: '#/components/links/applicationCreatedFinancingRequestAdd'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -419,6 +479,25 @@ paths:
                 properties:
                   application:
                     $ref: '#/components/schemas/Application'
+          links:
+            applicationUpdate:
+              $ref: '#/components/links/applicationUpdate'
+            applicationDelete:
+              $ref: '#/components/links/applicationDelete'
+            applicationStatus:
+              $ref: '#/components/links/applicationStatus'
+            applicationDocuments:
+              $ref: '#/components/links/applicationDocuments'
+            applicationDocumentAdd:
+              $ref: '#/components/links/applicationDocumentAdd'
+            applicationSwissrets:
+              $ref: '#/components/links/applicationSwissrets'
+            applicationSwissretsAdd:
+              $ref: '#/components/links/applicationSwissretsAdd'
+            applicationSwissretsUpdate:
+              $ref: '#/components/links/applicationSwissretsUpdate'
+            financingRequestAdd:
+              $ref: '#/components/links/applicationFinancingRequestAdd'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -678,6 +757,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentUpload'
+          links:
+            documentDelete:
+              $ref: '#/components/links/documentListDelete'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -747,7 +829,26 @@ paths:
                   example: 576f8de3-6b30-4882-a7af-da2132a456cf
       responses:
         '201':
-          $ref: '#/components/responses/standard201'
+          description: created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResourceCreatedResponse'
+          headers:
+            location:
+              schema:
+                description: |
+                  In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
+                  retrieve a representation of the new product.
+                type: string
+                format: uri
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+          links:
+            documentDelete:
+              $ref: '#/components/links/documentCreatedDelete'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -880,7 +981,30 @@ paths:
               $ref: '#/components/schemas/FinancingRequest'
       responses:
         '201':
-          $ref: '#/components/responses/standard201'
+          description: created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResourceCreatedResponse'
+          headers:
+            location:
+              schema:
+                description: |
+                  In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
+                  retrieve a representation of the new product.
+                type: string
+                format: uri
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+          links:
+            financingRequestDetails:
+              $ref: '#/components/links/financingRequestCreatedDetails'
+            financingRequestRequiredInformation:
+              $ref: '#/components/links/financingRequestCreatedRequiredInformation'
+            financingRequestOffers:
+              $ref: '#/components/links/financingRequestCreatedOffers'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -929,6 +1053,11 @@ paths:
                     type: string
                     format: uuid
                     example: 550e8400-e29b-41d4-a716-446655440000
+          links:
+            financingRequestDetails:
+              $ref: '#/components/links/requiredInformationFinancingRequestDetails'
+            financingRequestOffers:
+              $ref: '#/components/links/requiredInformationFinancingRequestOffers'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -979,6 +1108,13 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/FinancingRequest'
+          links:
+            financingRequestRequiredInformation:
+              $ref: '#/components/links/financingRequestListRequiredInformation'
+            financingRequestOffers:
+              $ref: '#/components/links/financingRequestListOffers'
+            applicationDetails:
+              $ref: '#/components/links/financingRequestListApplicationDetails'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1023,6 +1159,15 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Offer'
+          links:
+            offerDetails:
+              $ref: '#/components/links/offerListDetails'
+            offerRequiredInformation:
+              $ref: '#/components/links/offerListRequiredInformation'
+            offerDocument:
+              $ref: '#/components/links/offerListDocument'
+            financingRequestDetails:
+              $ref: '#/components/links/offerListFinancingRequestDetails'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1066,6 +1211,13 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
+          links:
+            offerRequiredInformation:
+              $ref: '#/components/links/offerRequiredInformation'
+            offerDocument:
+              $ref: '#/components/links/offerDocument'
+            financingRequestDetails:
+              $ref: '#/components/links/offerFinancingRequestDetails'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1157,6 +1309,11 @@ paths:
                     type: string
                     format: uuid
                     example: 550e8400-e29b-41d4-a716-446655440000
+          links:
+            offerDetails:
+              $ref: '#/components/links/requiredInformationOfferDetails'
+            offerDocument:
+              $ref: '#/components/links/requiredInformationOfferDocument'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1195,7 +1352,30 @@ paths:
               $ref: '#/components/schemas/Order'
       responses:
         '201':
-          $ref: '#/components/responses/standard201'
+          description: created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResourceCreatedResponse'
+          headers:
+            location:
+              schema:
+                description: |
+                  In the location header of the response you will find the URI of the newly created resource. With a GET call to this address you can
+                  retrieve a representation of the new product.
+                type: string
+                format: uri
+            X-Correlation-ID:
+              schema:
+                type: string
+              description: Reflects the ID (set by the caller) from the request.
+          links:
+            orderDetails:
+              $ref: '#/components/links/orderCreatedDetails'
+            orderStatus:
+              $ref: '#/components/links/orderCreatedStatus'
+            orderDocument:
+              $ref: '#/components/links/orderCreatedDocument'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1237,6 +1417,19 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Order'
+          links:
+            orderStatus:
+              $ref: '#/components/links/orderStatus'
+            orderDocument:
+              $ref: '#/components/links/orderDocument'
+            applicationDetails:
+              $ref: '#/components/links/orderApplicationDetails'
+            mortgageDetails:
+              $ref: '#/components/links/orderMortgageDetails'
+            mortgageOfferDetails:
+              $ref: '#/components/links/orderMortgageOfferDetails'
+            offerDocument:
+              $ref: '#/components/links/orderOfferDocument'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1379,6 +1572,11 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Offer'
+          links:
+            mortgageOfferDetails:
+              $ref: '#/components/links/mortgageOfferListDetails'
+            offerDocument:
+              $ref: '#/components/links/offerListDocument'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -1421,6 +1619,9 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
+          links:
+            offerDocument:
+              $ref: '#/components/links/offerDocument'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -3616,3 +3817,579 @@ components:
           scopes:
             read: Grants read access
             write: Grants write access
+  links:
+    applicationCreatedDelete:
+      operationId: deleteApplication
+      description: |
+        Cancel and remove the application.
+        The `id` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `DELETE /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $response.body#/id
+    applicationCreatedDetails:
+      operationId: getApplication
+      description: |
+        Details of the application.
+        The `id` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $response.body#/id
+    applicationCreatedDocumentAdd:
+      operationId: addApplicationDocument
+      description: |
+        Add a document to the application.
+        The `id` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `POST /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/documents`
+      parameters:
+        applicationId: $response.body#/id
+    applicationCreatedDocuments:
+      operationId: getApplicationDocuments
+      description: |
+        Documents submitted for the application.
+        The `id` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/documents`
+      parameters:
+        applicationId: $response.body#/id
+    applicationCreatedFinancingRequestAdd:
+      operationId: addApplicationFinancingRequest
+      description: |
+        Place a new financing request for the application.
+        The `id` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `POST /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests`
+      parameters:
+        applicationId: $response.body#/id
+    applicationCreatedStatus:
+      operationId: getApplicationStatus
+      description: |
+        Current status of the application.
+        The `id` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/status`
+      parameters:
+        applicationId: $response.body#/id
+    applicationCreatedSwissrets:
+      operationId: getApplicationInSwissrets
+      description: |
+        Property details of the application in SwissRETS format.
+        The `id` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/swissrets`
+      parameters:
+        applicationId: $response.body#/id
+    applicationCreatedSwissretsAdd:
+      operationId: addApplicationInSwissrets
+      description: |
+        Add property details in SwissRETS format to the application.
+        The `id` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `POST /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/swissrets`
+      parameters:
+        applicationId: $response.body#/id
+    applicationCreatedSwissretsUpdate:
+      operationId: updateApplicationInSwissrets
+      description: |
+        Update the property details in SwissRETS format of the application.
+        The `id` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `PUT /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/swissrets`
+      parameters:
+        applicationId: $response.body#/id
+    applicationCreatedUpdate:
+      operationId: updateApplication
+      description: |
+        Update the details of the application.
+        The `id` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `PUT /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $response.body#/id
+    applicationDelete:
+      operationId: deleteApplication
+      description: |
+        Cancel and remove the application.
+        The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `DELETE /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $response.body#/application/applicationId
+    applicationDocumentAdd:
+      operationId: addApplicationDocument
+      description: |
+        Add a document to the application.
+        The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `POST /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/documents`
+      parameters:
+        applicationId: $response.body#/application/applicationId
+    applicationDocuments:
+      operationId: getApplicationDocuments
+      description: |
+        Documents submitted for the application.
+        The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/documents`
+      parameters:
+        applicationId: $response.body#/application/applicationId
+    applicationFinancingRequestAdd:
+      operationId: addApplicationFinancingRequest
+      description: |
+        Place a new financing request for the application.
+        The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `POST /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests`
+      parameters:
+        applicationId: $response.body#/application/applicationId
+    applicationStatus:
+      operationId: getApplicationStatus
+      description: |
+        Current status of the application.
+        The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/status`
+      parameters:
+        applicationId: $response.body#/application/applicationId
+    applicationSwissrets:
+      operationId: getApplicationInSwissrets
+      description: |
+        Property details of the application in SwissRETS format.
+        The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/swissrets`
+      parameters:
+        applicationId: $response.body#/application/applicationId
+    applicationSwissretsAdd:
+      operationId: addApplicationInSwissrets
+      description: |
+        Add property details in SwissRETS format to the application.
+        The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `POST /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/swissrets`
+      parameters:
+        applicationId: $response.body#/application/applicationId
+    applicationSwissretsUpdate:
+      operationId: updateApplicationInSwissrets
+      description: |
+        Update the property details in SwissRETS format of the application.
+        The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `PUT /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/swissrets`
+      parameters:
+        applicationId: $response.body#/application/applicationId
+    applicationUpdate:
+      operationId: updateApplication
+      description: |
+        Update the details of the application.
+        The `application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `PUT /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $response.body#/application/applicationId
+    caseApplicationDetails:
+      operationId: getApplication
+      description: |
+        Details of the application.
+        The `Case.application.applicationId` returned in the response can be used as the `applicationId` path parameter.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $response.body#/Case/application/applicationId
+    caseListApplicationDetails:
+      operationId: getApplication
+      description: |
+        Details of the application.
+        The `application.applicationId` of any entry in the `caseList` array can be used as the `applicationId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $response.body#/caseList/0/application/applicationId
+    caseListDetails:
+      operationId: getMortgageCase
+      description: |
+        Details of the selected mortgage case.
+        The `caseId` of any entry in the `caseList` array can be used as the `caseId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgage-cases/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        caseId: $response.body#/caseList/0/caseId
+    documentCreatedDelete:
+      operationId: deleteApplicationDocument
+      description: |
+        Delete the selected document of the application.
+        The `id` returned in the response can be used as the `documentId` path parameter.
+        The `applicationId` is taken from the path of the request.
+
+        Example: `DELETE /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/documents/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $request.path.applicationId
+        documentId: $response.body#/id
+    documentListDelete:
+      operationId: deleteApplicationDocument
+      description: |
+        Delete the selected document of the application.
+        The `documentId` of any entry in the `documentList` array can be used as the `documentId` path parameter.
+        The `applicationId` is taken from the path of the request.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `DELETE /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/documents/7f648f12-fd45-4930-6543-456ef5671c37`
+      parameters:
+        applicationId: $request.path.applicationId
+        documentId: $response.body#/documentList/0/documentId
+    financingRequestCreatedDetails:
+      operationId: getApplicationFinancingRequest
+      description: |
+        Details of the financing request.
+        The `id` returned in the response can be used as the `financingRequestId` path parameter.
+        The `applicationId` is taken from the path of the request.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $response.body#/id
+    financingRequestCreatedOffers:
+      operationId: listApplicationFinancingRequestOffers
+      description: |
+        Binding offers for the financing request.
+        The `id` returned in the response can be used as the `financingRequestId` path parameter.
+        The `applicationId` is taken from the path of the request.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644/offers`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $response.body#/id
+    financingRequestCreatedRequiredInformation:
+      operationId: listApplicationFinancingRequestRequiredInformation
+      description: |
+        Documents and information required by the FI to process the financing request.
+        The `id` returned in the response can be used as the `financingRequestId` path parameter.
+        The `applicationId` is taken from the path of the request.
+
+        Example: `GET`
+        `/mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644/required-information`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $response.body#/id
+    financingRequestListApplicationDetails:
+      operationId: getApplication
+      description: |
+        Details of the application.
+        The `applicationId` of any entry in the `offerList` array can be used as the `applicationId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $response.body#/offerList/0/applicationId
+    financingRequestListOffers:
+      operationId: listApplicationFinancingRequestOffers
+      description: |
+        Binding offers for the financing request.
+        The `financingRequestId` of any entry in the `offerList` array can be used as the `financingRequestId` path parameter.
+        The `applicationId` is taken from the path of the request.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644/offers`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $response.body#/offerList/0/financingRequestId
+    financingRequestListRequiredInformation:
+      operationId: listApplicationFinancingRequestRequiredInformation
+      description: |
+        Documents and information required by the FI to process the financing request.
+        The `financingRequestId` of any entry in the `offerList` array can be used as the `financingRequestId` path parameter.
+        The `applicationId` is taken from the path of the request.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET`
+        `/mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644/required-information`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $response.body#/offerList/0/financingRequestId
+    mortgageListDetails:
+      operationId: getMortgage
+      description: |
+        Details of the selected mortgage.
+        The `mortgageId` of any entry in the `mortgageList` array can be used as the `mortgageId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgages/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        mortgageId: $response.body#/mortgageList/0/mortgageId
+    mortgageListOffers:
+      operationId: listOffers
+      description: |
+        Offers for the prolongation of the selected mortgage.
+        The `mortgageId` of any entry in the `mortgageList` array can be used as the `mortgageId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgages/4bf92636-14a0-4511-98e2-acfde576e644/offers`
+      parameters:
+        mortgageId: $response.body#/mortgageList/0/mortgageId
+    mortgageListProductConditions:
+      operationId: listProductConditions
+      description: |
+        General conditions of the selected mortgage product.
+        The `product.productId` of any entry in the `mortgageList` array can be used as the `productId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgages/products/4bf92636-14a0-4511-98e2-acfde576e644/conditions`
+      parameters:
+        productId: $response.body#/mortgageList/0/product/productId
+    mortgageOfferListDetails:
+      operationId: getOffer
+      description: |
+        Details of the selected prolongation offer.
+        The `offerId` of any entry in the `offerList` array can be used as the `offerId` path parameter.
+        The `mortgageId` is taken from the path of the request.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgages/4bf92636-14a0-4511-98e2-acfde576e644/offers/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        mortgageId: $request.path.mortgageId
+        offerId: $response.body#/offerList/0/offerId
+    mortgageOffers:
+      operationId: listOffers
+      description: |
+        Offers for the prolongation of the selected mortgage.
+        The `Mortgage.mortgageId` returned in the response can be used as the `mortgageId` path parameter.
+
+        Example: `GET /mortgages/4bf92636-14a0-4511-98e2-acfde576e644/offers`
+      parameters:
+        mortgageId: $response.body#/Mortgage/mortgageId
+    mortgageProductConditions:
+      operationId: listProductConditions
+      description: |
+        General conditions of the selected mortgage product.
+        The `Mortgage.product.productId` returned in the response can be used as the `productId` path parameter.
+
+        Example: `GET /mortgages/products/4bf92636-14a0-4511-98e2-acfde576e644/conditions`
+      parameters:
+        productId: $response.body#/Mortgage/product/productId
+    offerDocument:
+      operationId: getOfferDocument
+      description: |
+        Document of the selected offer.
+        The `offer.offerId` returned in the response can be used as the `offerId` path parameter.
+
+        Example: `GET /mortgages/offers/4bf92636-14a0-4511-98e2-acfde576e644/document`
+      parameters:
+        offerId: $response.body#/offer/offerId
+    offerFinancingRequestDetails:
+      operationId: getApplicationFinancingRequest
+      description: |
+        Details of the financing request.
+        The `offer.financingRequestId` returned in the response can be used as the `financingRequestId` path parameter.
+        The `applicationId` is taken from the path of the request.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $response.body#/offer/financingRequestId
+    offerListDetails:
+      operationId: getApplicationFinancingRequestOffer
+      description: |
+        Details of the selected offer.
+        The `offerId` of any entry in the `offerList` array can be used as the `offerId` path parameter.
+        The `applicationId` and `financingRequestId` are taken from the path of the request.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET`
+        `/mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644/offers/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $request.path.financingRequestId
+        offerId: $response.body#/offerList/0/offerId
+    offerListDocument:
+      operationId: getOfferDocument
+      description: |
+        Document of the selected offer.
+        The `offerId` of any entry in the `offerList` array can be used as the `offerId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgages/offers/4bf92636-14a0-4511-98e2-acfde576e644/document`
+      parameters:
+        offerId: $response.body#/offerList/0/offerId
+    offerListFinancingRequestDetails:
+      operationId: getApplicationFinancingRequest
+      description: |
+        Details of the financing request.
+        The `financingRequestId` of any entry in the `offerList` array can be used as the `financingRequestId` path parameter.
+        The `applicationId` is taken from the path of the request.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $response.body#/offerList/0/financingRequestId
+    offerListRequiredInformation:
+      operationId: listApplicationFinancingRequestOfferRequiredInformation
+      description: |
+        Documents and information required by the FI to process the selected offer.
+        The `offerId` of any entry in the `offerList` array can be used as the `offerId` path parameter.
+        The `applicationId` and `financingRequestId` are taken from the path of the request.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET`
+        `/mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644/offers/4bf92636-14a0-4511-98e2-acfde576e644/required-information`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $request.path.financingRequestId
+        offerId: $response.body#/offerList/0/offerId
+    offerRequiredInformation:
+      operationId: listApplicationFinancingRequestOfferRequiredInformation
+      description: |
+        Documents and information required by the FI to process the selected offer.
+        The `offer.offerId` returned in the response can be used as the `offerId` path parameter.
+        The `applicationId` and `financingRequestId` are taken from the path of the request.
+
+        Example: `GET`
+        `/mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644/offers/4bf92636-14a0-4511-98e2-acfde576e644/required-information`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $request.path.financingRequestId
+        offerId: $response.body#/offer/offerId
+    orderApplicationDetails:
+      operationId: getApplication
+      description: |
+        Details of the application.
+        The `offer.applicationId` returned in the response can be used as the `applicationId` path parameter.
+        Only applicable if the order refers to an application (new mortgage).
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        applicationId: $response.body#/offer/applicationId
+    orderCreatedDetails:
+      operationId: getOrder
+      description: |
+        Details of the order.
+        The `id` returned in the response can be used as the `orderId` path parameter.
+
+        Example: `GET /mortgages/orders/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        orderId: $response.body#/id
+    orderCreatedDocument:
+      operationId: getOrderDocument
+      description: |
+        Document of the order.
+        The `id` returned in the response can be used as the `orderId` path parameter.
+
+        Example: `GET /mortgages/orders/4bf92636-14a0-4511-98e2-acfde576e644/document`
+      parameters:
+        orderId: $response.body#/id
+    orderCreatedStatus:
+      operationId: getOrderStatus
+      description: |
+        Current status of the order.
+        The `id` returned in the response can be used as the `orderId` path parameter.
+
+        Example: `GET /mortgages/orders/4bf92636-14a0-4511-98e2-acfde576e644/status`
+      parameters:
+        orderId: $response.body#/id
+    orderDocument:
+      operationId: getOrderDocument
+      description: |
+        Document of the order.
+        The `offer.orderId` returned in the response can be used as the `orderId` path parameter.
+
+        Example: `GET /mortgages/orders/4bf92636-14a0-4511-98e2-acfde576e644/document`
+      parameters:
+        orderId: $response.body#/offer/orderId
+    orderMortgageDetails:
+      operationId: getMortgage
+      description: |
+        Details of the selected mortgage.
+        The `offer.mortgageId` returned in the response can be used as the `mortgageId` path parameter.
+        Only applicable if the order refers to an existing mortgage (prolongation).
+
+        Example: `GET /mortgages/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        mortgageId: $response.body#/offer/mortgageId
+    orderMortgageOfferDetails:
+      operationId: getOffer
+      description: |
+        Details of the selected prolongation offer.
+        The `offer.mortgageId` returned in the response can be used as the `mortgageId` path parameter.
+        The `offer.offerId` returned in the response can be used as the `offerId` path parameter.
+        Only applicable if the order refers to an existing mortgage (prolongation).
+
+        Example: `GET /mortgages/4bf92636-14a0-4511-98e2-acfde576e644/offers/4bf92636-14a0-4511-98e2-acfde576e644`
+      parameters:
+        mortgageId: $response.body#/offer/mortgageId
+        offerId: $response.body#/offer/offerId
+    orderOfferDocument:
+      operationId: getOfferDocument
+      description: |
+        Document of the selected offer.
+        The `offer.offerId` returned in the response can be used as the `offerId` path parameter.
+
+        Example: `GET /mortgages/offers/4bf92636-14a0-4511-98e2-acfde576e644/document`
+      parameters:
+        offerId: $response.body#/offer/offerId
+    orderStatus:
+      operationId: getOrderStatus
+      description: |
+        Current status of the order.
+        The `offer.orderId` returned in the response can be used as the `orderId` path parameter.
+
+        Example: `GET /mortgages/orders/4bf92636-14a0-4511-98e2-acfde576e644/status`
+      parameters:
+        orderId: $response.body#/offer/orderId
+    productListConditions:
+      operationId: listProductConditions
+      description: |
+        General conditions of the selected mortgage product.
+        The `productId` of any entry in the `productList` array can be used as the `productId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /mortgages/products/4bf92636-14a0-4511-98e2-acfde576e644/conditions`
+      parameters:
+        productId: $response.body#/productList/0/productId
+    requiredInformationFinancingRequestDetails:
+      operationId: getApplicationFinancingRequest
+      description: |
+        Details of the financing request.
+        The `financingRequestId` returned in the response can be used as the `financingRequestId` path parameter.
+        The `applicationId` is taken from the path of the request.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/550e8400-e29b-41d4-a716-446655440000`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $response.body#/financingRequestId
+    requiredInformationFinancingRequestOffers:
+      operationId: listApplicationFinancingRequestOffers
+      description: |
+        Binding offers for the financing request.
+        The `financingRequestId` returned in the response can be used as the `financingRequestId` path parameter.
+        The `applicationId` is taken from the path of the request.
+
+        Example: `GET /mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/550e8400-e29b-41d4-a716-446655440000/offers`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $response.body#/financingRequestId
+    requiredInformationOfferDetails:
+      operationId: getApplicationFinancingRequestOffer
+      description: |
+        Details of the selected offer.
+        The `offerId` returned in the response can be used as the `offerId` path parameter.
+        The `applicationId` and `financingRequestId` are taken from the path of the request.
+
+        Example: `GET`
+        `/mortgages/applications/4bf92636-14a0-4511-98e2-acfde576e644/financing-requests/4bf92636-14a0-4511-98e2-acfde576e644/offers/550e8400-e29b-41d4-a716-446655440000`
+      parameters:
+        applicationId: $request.path.applicationId
+        financingRequestId: $request.path.financingRequestId
+        offerId: $response.body#/offerId
+    requiredInformationOfferDocument:
+      operationId: getOfferDocument
+      description: |
+        Document of the selected offer.
+        The `offerId` returned in the response can be used as the `offerId` path parameter.
+
+        Example: `GET /mortgages/offers/550e8400-e29b-41d4-a716-446655440000/document`
+      parameters:
+        offerId: $response.body#/offerId
